@@ -2,23 +2,32 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.css">
-<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-<script src="http://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.js"></script>
+<link rel="stylesheet" href="libs/jquery_mobile/jquery.mobile-1.4.4.min.css">
+<link rel="stylesheet" href="libs/car/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="libs/car/car.css">
+<script src="libs/jquery/jquery-1.11.1.min.js"></script>
+<script src="libs/jquery_mobile/jquery.mobile-1.4.4.min.js"></script>
 </head>
 <body>
 
 <div data-role="page">
   <div data-role="header">
-    <h1>Welcome To My Homepage</h1>
+    <h1>Willkommen</h1>
   </div>
 
   <div data-role="main" class="ui-content">
-    <p>I Am Now A Mobile Developer!!</p>
+    <ul data-role="listview" data-inset="true">
+    	<li><a data-ajax="false" href="communities.html" class="ui-btn fa fa-group">Gemeinschaften</a></li>
+    	<li><a data-ajax="false" href="car.html" class="ui-btn fa fa-automobile">Fahrzeug</a></li>
+    </ul>
+    <ul data-role="listview" data-inset="true">
+    	<li><a data-ajax="false" href="profile.html" class="ui-btn fa fa-user">Profil</a></li>
+    	<li><a data-ajax="false" href="options.html" class="ui-btn fa fa-gears">Einstellungen</a></li>
+    	<li><a href="#logout" class="ui-btn fa fa-power-off">Logout</a></li>
+    </ul>
   </div>
 
   <div data-role="footer">
-    <h1>Footer Text</h1>
   </div>
 </div> 
 
