@@ -153,3 +153,20 @@ html body .ui-group-theme-a .ui-btn.btn-red {
 	border-color: lightcoral;
 	text-shadow: whitesmoke;
 }
+
+.ui-grid-a > * > img{
+	width: 100%;
+	height: auto;
+	padding-bottom: 25px;
+}
+.imgCaption{
+	width: 100%;
+	text-align: center;
+	margin-top: -20px;
+}
+.ui-grid-a > div.ui-grid-divider,
+.ui-grid-b > div.ui-grid-divider,
+.ui-grid-c > div.ui-grid-divider {
+	margin: 1%;
+	width: 48%;
+}
