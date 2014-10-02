@@ -75,7 +75,11 @@ html body div.ui-slider-track.ui-body-a .ui-btn-active {
 	font-family: fontawesome;
 }
 
-.ui-grid-a > .ui-block-a {
+.fa.fa-facebook-square {
+	color: #3b5998;
+}
+
+.ui-grid-a > .ui-block-a > label {
 	padding-top: 12px;
 	padding-right: 15px;
 	text-align: right;
@@ -93,10 +97,6 @@ html body div.ui-slider-track.ui-body-a .ui-btn-active {
 	display: block;
 }
 
-.ui-grid-a > .ui-block-b {
-	padding-top: 12px;
-}
-
 .btn-group > .ui-block-a {
 	padding-right: 0px;
 	margin: 0px;
@@ -109,14 +109,47 @@ html body div.ui-slider-track.ui-body-a .ui-btn-active {
 	margin: 0px;
 }
 
-.btn-group > .ui-block-a > .ui-btn {
+.ui-grid-a.btn-group > .ui-block-a > .ui-btn {
 	border-radius: 10px 0 0 10px;
 }
 
-.btn-group > .ui-block-b > .ui-btn {
+.ui-grid-a.btn-group > .ui-block-b > .ui-btn {
 	border-radius: 0 10px 10px 0;
+}
+
+.ui-grid-a.btn-group > .ui-block-a > .ui-btn,
+.ui-grid-a.btn-group > .ui-block-b > .ui-btn {
+	width: 100%;
 }
 
 .ui-btn.btn-small {
 	font-size: 14px;
+}
+
+.ui-grid-c > .ui-block-c,
+.ui-grid-c > .ui-block-d {
+	margin-left: 5px;
+}
+
+.ui-grid-a > .ui-block-a > .ui-btn,
+.ui-grid-a > .ui-block-b > .ui-btn {
+	padding-left: 0px;
+	padding-right: 0px;
+	margin-left: 0px;
+	margin-right: 0px;
+	width: 98%;
+	border-radius: 10px;
+}
+
+.ui-page-theme-a .ui-btn.btn-green,
+html body .ui-group-theme-a .ui-btn.btn-green {
+	background-color: lightgreen;
+	border-color: lightgreen;
+}
+
+.ui-page-theme-a .ui-btn.btn-red,
+html body .ui-group-theme-a .ui-btn.btn-red {
+	background-color: lightcoral;
+	border-color: lightcoral;
+	text-shadow: whitesmoke;
 }
