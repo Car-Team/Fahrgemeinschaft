@@ -1,3 +1,63 @@
+html body .ui-page-theme-a {
+	color: whitesmoke;
+	text-shadow: none;
+}
+
+.ui-page-theme-a {
+	background-color: #77F;
+}
+
+.ui-bar-a,
+.ui-page-theme-a .ui-bar-inherit,
+html .ui-bar-a .ui-bar-inherit,
+html .ui-body-a .ui-bar-inherit,
+html body .ui-group-theme-a .ui-bar-inherit {
+	background-color: #77F;
+	border: none;
+	text-shadow: 0 1px 0 #333;
+	color: whitesmoke;
+}
+
+.ui-page-theme-a .ui-bar-inherit.ui-flipswitch.ui-shadow-inset.ui-corner-all {
+	background-color: whitesmoke;
+	color: black;
+	text-shadow: none;
+}
+
+.ui-page-theme-a .ui-flipswitch-on.ui-btn {
+	background-color: #4B4;
+}
+
+.ui-page-theme-a .ui-bar-inherit.ui-flipswitch.ui-flipswitch-active > .ui-flipswitch-on.ui-btn {
+	background-color: #B44;
+}
+
+.ui-page-theme-a .ui-btn.ui-btn-active,
+html .ui-bar-a .ui-btn.ui-btn-active,
+html .ui-body-a .ui-btn.ui-btn-active,
+html body .ui-group-theme-a .ui-btn.ui-btn-active,
+html head+body .ui-btn.ui-btn-a.ui-btn-active,
+.ui-page-theme-a .ui-checkbox-on:after,
+html .ui-bar-a .ui-checkbox-on:after,
+html .ui-body-a .ui-checkbox-on:after,
+html body .ui-group-theme-a .ui-checkbox-on:after,
+.ui-btn.ui-checkbox-on.ui-btn-a:after,
+.ui-page-theme-a .ui-flipswitch-active,
+html .ui-bar-a .ui-flipswitch-active,
+html .ui-body-a .ui-flipswitch-active,
+html body .ui-group-theme-a .ui-flipswitch-active,
+html body .ui-flipswitch.ui-bar-a.ui-flipswitch-active,
+.ui-page-theme-a .ui-slider-track .ui-btn-active,
+html .ui-bar-a .ui-slider-track .ui-btn-active,
+html .ui-body-a .ui-slider-track .ui-btn-active,
+html body .ui-group-theme-a .ui-slider-track .ui-btn-active,
+html body div.ui-slider-track.ui-body-a .ui-btn-active {
+	background-color: #AAF;
+	border-color: #AAF;
+	text-shadow: 0 1px 0 #333;
+	color: whitesmoke;
+}
+
 .fa {
 	line-height: 1.3;
 	font-family: sans-serif;
@@ -6,4 +66,10 @@
 .fa:before {
 	padding-right: 10px;
 	font-family: fontawesome;
+}
+
+.ui-grid-a > .ui-block-a {
+	padding-top: 12px;
+	padding-right: 15px;
+	text-align: right;
 }
