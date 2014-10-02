@@ -25,11 +25,11 @@ html body .ui-group-theme-a .ui-bar-inherit {
 }
 
 .ui-page-theme-a .ui-flipswitch-on.ui-btn {
-	background-color: #4B4;
+	background-color: #B44;
 }
 
 .ui-page-theme-a .ui-bar-inherit.ui-flipswitch.ui-flipswitch-active > .ui-flipswitch-on.ui-btn {
-	background-color: #B44;
+	background-color: #4B4;
 }
 
 .ui-page-theme-a .ui-btn.ui-btn-active,
@@ -72,4 +72,16 @@ html body div.ui-slider-track.ui-body-a .ui-btn-active {
 	padding-top: 12px;
 	padding-right: 15px;
 	text-align: right;
+}
+
+.btn-only-icon {
+	border-radius: 30px;
+}
+
+.btn-only-icon:before {
+	padding-right: 0px;
+}
+
+div[data-role="header"] > .ui-btn {
+
 }
