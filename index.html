@@ -11,25 +11,29 @@
 <body>
 
 <div data-role="page">
-  <div data-role="header">
-    <h1>Willkommen</h1>
-  </div>
-
   <div data-role="main" class="ui-content">
-    <ul data-role="listview" data-inset="true">
-    	<li><a data-ajax="false" href="communities.html" class="ui-btn fa fa-group">Gemeinschaften</a></li>
-    	<li><a data-ajax="false" href="car.html" class="ui-btn fa fa-automobile">Fahrzeug</a></li>
-    </ul>
-    <ul data-role="listview" data-inset="true">
-    	<li><a data-ajax="false" href="profile.html" class="ui-btn fa fa-user">Profil</a></li>
-    	<li><a data-ajax="false" href="options.html" class="ui-btn fa fa-gears">Einstellungen</a></li>
-    	<li><a href="#logout" class="ui-btn fa fa-power-off">Logout</a></li>
-    </ul>
-  </div>
+ 	<center>
+		<img src="media/img/logo.png" width="60%" style="max-width:400px">
+	
+		<div style="max-width:800px">
+			<form>
+	    	<input id="nameInput" placeholder="Benutzername" type="text">
+		   	<input id="pwInput" placeholder="Passwort" type="password">
+			</form>
 
-  <div data-role="footer">
+			<ul data-role="listview" data-inset="true" data-filter="false" data-theme="a" data-content-theme="a">
+		    <li><a href="menu.html">Anmelden</a></li>
+		   </ul>
+
+		  <div class="ui-grid-a btn-group">
+  			<div class="ui-block-a"><a href="#" class="ui-btn btn-small fa fa-pencil" style="text-align:center">Registrieren</a></div>
+  			<div class="ui-block-b"><a href="#" class="ui-btn btn-small fa fa-facebook" style="text-align:center">Facebook</a></div>
+			</div>
+
+		</div>
+	</center>
   </div>
-</div> 
+</div>
 
 </body>
 </html>
