@@ -176,3 +176,13 @@ html body .ui-group-theme-a .ui-btn.btn-red {
 	text-shadow: whitesmoke;
 	color: black;
 }
+
+.ui-li-desc {
+font-size: 12px;
+font-weight: normal;
+display: block;
+margin: -.5em 0 .6em;
+text-overflow: ellipsis;
+overflow: hidden;
+white-space: normal;
+}

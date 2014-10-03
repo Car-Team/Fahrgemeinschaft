@@ -10,9 +10,11 @@
 
 <script>
 	$(function() { 		
-		var bodywidth = document.getElementById("description").offsetWidth
+		
+		//alert(bodywidth);//alert(document.getElementById("page").offsetWidth)
 		$("#profile_picture").on("click", function() {
-			//alert(bodywidth);//alert(document.getElementById("page").offsetWidth)
+			var bodywidth = document.getElementById("description").offsetWidth
+			//alert('body '+ bodywidth +' -> img '+ document.getElementById("block_a").offsetWidth);	
 			if (document.getElementById("block_a").offsetWidth<(bodywidth/100)*90) {
 			    $("#block_a").css({ // resize the image     			
 	     			'width': 'calc(98%)'
@@ -25,7 +27,8 @@
 
 		});
 
-		$("#profile_picture_label").on("click", function() {			
+		$("#profile_picture_label").on("click", function() {
+			var bodywidth = document.getElementById("description").offsetWidth			
 			//$("#profile_picture").css({ // resize the image
      		//	height: '800px',
      		//	width: '800px'
@@ -42,6 +45,7 @@
 		});
 	});
 </script>
+
 
 </head>
 <body>
@@ -62,18 +66,61 @@
     </div>
     <div class="ui-block-b" style="width:60%">
 		<div class="ui-grid-solo" style="text-align:left">
-			<div class="ui-block-a"><label class="fa fa-user"><b>Dimitri Kumalla (22)</b></label></div>		    
-		    <div class="ui-block-a"><label class="fa fa-at">A.Hubert92@gmx.net</label></div>
+			<div class="ui-block-a"><label class="fa fa-user"><b>Dimitri Kumalla (32)</b></label></div>		    
+		    <div class="ui-block-a"><label class="fa fa-at">D.Kumalla82@gmx.net</label></div>
 		    <div class="ui-block-a"><label class="fa fa-phone-square">0172 144 85 93</label></div>
 		    <div class="ui-block-a"><label class="fa fa-car">Audi Q5 (KI LO 913)</label></div>
-		    
+		<!--<div class="ui-block-a">
+				<ul data-role="listview" data-inset="true">
+		   		    <li><label class="fa fa-user"><b>Dimitri Kumalla (22)</b></label></li>	  
+				    <li><label class="fa fa-at">A.Hubert92@gmx.net</label></li>
+				    <li><label class="fa fa-phone-square">0172 144 85 93</label></li>
+				    <li><label class="fa fa-car">Audi Q5 (KI LO 913)</label></li>
+				 </ul>   
+			</div>-->
 		</div>
 	</div>
 </div>
-<div class="ui-grid-solo description">
+<div class="ui-grid-solo" id="description">
     <!-- <div class="ui-block-a"><input type="button" value="More"></div>-->
-    <div class="ui-block-a" style="text-align:left" id="description"><label><h3>Beschreibung:</h3> Russen sind ein ostslawisches Volk mit etwa 137 Millionen Angehoerigen, davon ca. 115 Millionen in Russland, etwa 17 Millionen in den anderen Folgestaaten der Sowjetunion und etwa sechs Millionen in weiteren Staaten. Sie bilden die groesste ethnische Gruppe in Europa. Die nationale Sprache der Russen ist Russisch, die vorherrschende und traditionelle Religion ist das russisch-orthodoxe Christentum.</label></div>    
+    <ul data-role="listview" data-inset="true">
+	    <li>
+
+	   		 <div class="ui-block-a" style="white-space:normal" ><label><h3>Beschreibung:</h3> Russen sind ein ostslawisches Volk mit etwa 137 Millionen Angehoerigen, davon ca. 115 Millionen in Russland, etwa 17 Millionen in den anderen Folgestaaten der Sowjetunion und etwa sechs Millionen in weiteren Staaten. Sie bilden die groesste ethnische Gruppe in Europa. Die nationale Sprache der Russen ist Russisch, die vorherrschende und traditionelle Religion ist das russisch-orthodoxe Christentum.</label></div>    
+
+		</li>	
+	</ul>
+
+ 	<div class="ui-block-a" style="text-align:center"><label><h3>Pinnwand:</h3></label></div>  
+
+    <ul data-role="listview" data-inset="true">
+	    <li data-role="list-divider">Freitag, 03.10.2014 <span class="ui-li-count">2</span></li>
+	    <li><a href="index.html">
+	    <h2>Simon Weber</h2>
+	    <p><strong>Gemeinschaft: WAK</strong></p>
+	    <label style="white-space:normal">Lern mal Autofahren!!!!</label>
+	        <p class="ui-li-aside"><strong>6:24</strong>PM</p>
+	    </a></li>
+	    <li><a href="index.html">
+	    <h2>Franz Clausen</h2>
+	    <p><strong>Gemeinschaft: NorwestLotto Schleswig-Holstein</strong></p>
+	    <label style="white-space:normal">Der Mekong-Riesenwels (Pangasianodon gigas) ist die groesste Art der Familie der Haiwelse (Pangasiidae) und einer der groessten Suesswasserfische der Welt. Er kommt ausschliesslich im Mekong vor und gilt durch Ueber­fischung und Verlust des Lebens­raums als vom Aussterben bedroht. In Suedost­asien wird er als Flagg­schiffart eingesetzt, um die Notwendigkeit des Schutzes großer Fische im Mekong zu vermitteln.</label>
+	        <p class="ui-li-aside"><strong>9:18</strong>AM</p>
+	    </a></li>
+	    <li data-role="list-divider">Mittwoch, 01.10.2014 <span class="ui-li-count">1</span></li>
+	    <li><a href="index.html">
+	    <h2>Hugo Walker</h2>
+	    <p><strong>Gemeinschaft: WAK</strong></p>
+	    <label style="white-space:normal">Na man!</label>
+	        <p class="ui-li-aside"><strong>4:48</strong>PM</p>
+	    </a></li>
+	</ul>
+
+	<div class="ui-block-a" style="text-align:center"><label>Copyright 2014</label></div>  
+
 </div>
+
+
 
   <div data-role="footer">
   </div>
