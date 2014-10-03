@@ -170,12 +170,3 @@ html body .ui-group-theme-a .ui-btn.btn-red {
 	margin: 1%;
 	
 }
-
-
-img {
-    height: auto;
-    max-width: 100%;
-}
-img.expanded {
-    max-width: none;
-}
