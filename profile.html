@@ -10,10 +10,19 @@
 
 <script>
 	$(function() { 		
+		var bodywidth = document.getElementById("description").offsetWidth
 		$("#profile_picture").on("click", function() {
-			$("#block_a").css({ // resize the image     			
-     			'width': 'calc(98%)'
-		    });
+			//alert(bodywidth);//alert(document.getElementById("page").offsetWidth)
+			if (document.getElementById("block_a").offsetWidth<(bodywidth/100)*90) {
+			    $("#block_a").css({ // resize the image     			
+	     			'width': 'calc(98%)'
+			   	});
+			} else {
+			   $("#block_a").css({ // resize the image     			
+	     			'width': 'calc(38%)'
+			   	});
+			}
+
 		});
 
 		$("#profile_picture_label").on("click", function() {			
@@ -21,10 +30,15 @@
      		//	height: '800px',
      		//	width: '800px'
 		    //});			
-			$("#block_a").css({ // resize the image     			
-     			'width': 'calc(98%)'
-		    });
-			//  alert("jo");	
+			if (document.getElementById("block_a").offsetWidth<(bodywidth/100)*90) {
+			    $("#block_a").css({ // resize the image     			
+	     			'width': 'calc(98%)'
+			   	});
+			} else {
+			   $("#block_a").css({ // resize the image     			
+	     			'width': 'calc(38%)'
+			   	});
+			}
 		});
 	});
 </script>
@@ -41,7 +55,6 @@
   <div data-role="main" class="ui-content">
   </div>
 
-
 <div class="ui-grid-a">
     <div class="ui-block-a ui-grid-divider" style="width:38%" id="block_a"> 
     	<img id="profile_picture" src="https://www.tripwell.com/assets/static/images/unknown_user.png">
@@ -57,11 +70,10 @@
 		</div>
 	</div>
 </div>
-<div class="ui-grid-solo">
+<div class="ui-grid-solo description">
     <!-- <div class="ui-block-a"><input type="button" value="More"></div>-->
-    <div class="ui-block-a" style="text-align:left"><label><h3>Beschreibung:</h3> Russen sind ein ostslawisches Volk mit etwa 137 Millionen Angehoerigen, davon ca. 115 Millionen in Russland, etwa 17 Millionen in den anderen Folgestaaten der Sowjetunion und etwa sechs Millionen in weiteren Staaten. Sie bilden die groesste ethnische Gruppe in Europa. Die nationale Sprache der Russen ist Russisch, die vorherrschende und traditionelle Religion ist das russisch-orthodoxe Christentum.</label></div>    
+    <div class="ui-block-a" style="text-align:left" id="description"><label><h3>Beschreibung:</h3> Russen sind ein ostslawisches Volk mit etwa 137 Millionen Angehoerigen, davon ca. 115 Millionen in Russland, etwa 17 Millionen in den anderen Folgestaaten der Sowjetunion und etwa sechs Millionen in weiteren Staaten. Sie bilden die groesste ethnische Gruppe in Europa. Die nationale Sprache der Russen ist Russisch, die vorherrschende und traditionelle Religion ist das russisch-orthodoxe Christentum.</label></div>    
 </div>
-
 
   <div data-role="footer">
   </div>
