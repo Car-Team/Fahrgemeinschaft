@@ -8,7 +8,26 @@
 <script src="libs/jquery/jquery-1.11.1.min.js"></script>
 <script src="libs/jquery_mobile/jquery.mobile-1.4.4.min.js"></script>
 
+<script>
+	$(function() { 		
+		$("#profile_picture").on("click", function() {
+			$("#block_a").css({ // resize the image     			
+     			'width': 'calc(98%)'
+		    });
+		});
 
+		$("#profile_picture_label").on("click", function() {			
+			//$("#profile_picture").css({ // resize the image
+     		//	height: '800px',
+     		//	width: '800px'
+		    //});			
+			$("#block_a").css({ // resize the image     			
+     			'width': 'calc(98%)'
+		    });
+			//  alert("jo");	
+		});
+	});
+</script>
 
 </head>
 <body>
@@ -24,16 +43,17 @@
 
 
 <div class="ui-grid-a">
-    <div class="ui-block-a ui-grid-divider">
-    	<img id="Logo" src="https://www.tripwell.com/assets/static/images/unknown_user.png">
-    	<div class="imgCaption">Profilbild</div>
+    <div class="ui-block-a ui-grid-divider" style="width:38%" id="block_a"> 
+    	<img id="profile_picture" src="https://www.tripwell.com/assets/static/images/unknown_user.png">
+    	<div class="imgCaption" id="profile_picture_label"> <label class="fa fa-arrows-alt">Profilbild</label></div>
     </div>
-    <div class="ui-block-b">
+    <div class="ui-block-b" style="width:60%">
 		<div class="ui-grid-solo" style="text-align:left">
-			<div class="ui-block-a"><label><h3>Dimitri Kumalla (22)</h3></label></div>
-		    <div class="ui-block-a"><label class="fa fa-automobile">Audi Q5 (KI LO 913)</label></div>
-		    <div class="ui-block-a"><label class="fa fa-at">Assi.Hubert92@gmx.net</label></div>
+			<div class="ui-block-a"><label class="fa fa-user"><b>Dimitri Kumalla (22)</b></label></div>		    
+		    <div class="ui-block-a"><label class="fa fa-at">A.Hubert92@gmx.net</label></div>
 		    <div class="ui-block-a"><label class="fa fa-phone-square">0172 144 85 93</label></div>
+		    <div class="ui-block-a"><label class="fa fa-car">Audi Q5 (KI LO 913)</label></div>
+		    
 		</div>
 	</div>
 </div>
