@@ -15,13 +15,19 @@
 		$("#profile_picture").on("click", function() {
 			var bodywidth = document.getElementById("description").offsetWidth
 			//alert('body '+ bodywidth +' -> img '+ document.getElementById("block_a").offsetWidth);	
-			if (document.getElementById("block_a").offsetWidth<(bodywidth/100)*90) {
-			    $("#block_a").css({ // resize the image     			
+			if (document.getElementById("profile_block_a").offsetWidth<(bodywidth/100)*90) {
+			    $("#profile_block_a").css({ // resize the image     			
 	     			'width': 'calc(98%)'
 			   	});
+			   	$("#profile_block_b").css({ // resize the image     			
+	     			'width': 'calc(100%)'
+			   	});
 			} else {
-			   $("#block_a").css({ // resize the image     			
+			   $("#profile_block_a").css({ // resize the image     			
 	     			'width': 'calc(38%)'
+			   	});
+			   $("#profile_block_b").css({ // resize the image     			
+	     			'width': 'calc(60%)'
 			   	});
 			}
 
@@ -33,13 +39,19 @@
      		//	height: '800px',
      		//	width: '800px'
 		    //});			
-			if (document.getElementById("block_a").offsetWidth<(bodywidth/100)*90) {
-			    $("#block_a").css({ // resize the image     			
+			if (document.getElementById("profile_block_a").offsetWidth<(bodywidth/100)*90) {
+			    $("#profile_block_a").css({ // resize the image     			
 	     			'width': 'calc(98%)'
 			   	});
+			   	$("#profile_block_b").css({ // resize the image     			
+	     			'width': 'calc(100%)'
+			   	});
 			} else {
-			   $("#block_a").css({ // resize the image     			
+			   $("#profile_block_a").css({ // resize the image     			
 	     			'width': 'calc(38%)'
+			   	});
+			   $("#profile_block_b").css({ // resize the image     			
+	     			'width': 'calc(60%)'
 			   	});
 			}
 		});
@@ -60,33 +72,35 @@
   </div>
 
 <div class="ui-grid-a">
-    <div class="ui-block-a ui-grid-divider" style="width:38%" id="block_a"> 
-    	<img id="profile_picture" src="https://www.tripwell.com/assets/static/images/unknown_user.png">
+    <div class="ui-block-a ui-grid-divider" style="width:38%" id="profile_block_a"> 
+    	<img id="profile_picture" src="http://www.sprachschach.de/wp-content/uploads/2014/05/Bewerbungsfoto-2-128x128.jpg"><!--https://www.tripwell.com/assets/static/images/unknown_user.png">-->
     	<div class="imgCaption" id="profile_picture_label"> <label class="fa fa-arrows-alt">Profilbild</label></div>
     </div>
-    <div class="ui-block-b" style="width:60%">
-		<div class="ui-grid-solo" style="text-align:left">
-			<div class="ui-block-a"><label class="fa fa-user"><b>Dimitri Kumalla (32)</b></label></div>		    
+    <div class="ui-block-b" style="width:60%" id="profile_block_b">
+		<div class="ui-grid-solo" style="text-align:center">
+
+			<!--<div class="ui-block-a"><label class="fa fa-user"><b>Dimitri Kumalla (32)</b></label></div>  
 		    <div class="ui-block-a"><label class="fa fa-at">D.Kumalla82@gmx.net</label></div>
 		    <div class="ui-block-a"><label class="fa fa-phone-square">0172 144 85 93</label></div>
-		    <div class="ui-block-a"><label class="fa fa-car">Audi Q5 (KI LO 913)</label></div>
-		<!--<div class="ui-block-a">
+		    <div class="ui-block-a"><label class="fa fa-car">Audi Q5 (KI LO 913)</label></div>-->
+		<div class="ui-block-a">
 				<ul data-role="listview" data-inset="true">
-		   		    <li><label class="fa fa-user"><b>Dimitri Kumalla (22)</b></label></li>	  
-				    <li><label class="fa fa-at">A.Hubert92@gmx.net</label></li>
+		   		    <li><label class="fa fa-user"><b>Kate Kumalla (32)</b></label></li>	  
+				    <li><label class="fa fa-at">K.Kumalla82@gmx.net</label></li>
 				    <li><label class="fa fa-phone-square">0172 144 85 93</label></li>
-				    <li><label class="fa fa-car">Audi Q5 (KI LO 913)</label></li>
+				    <li><a href="car.html"><label class="fa fa-car">Audi Q5 (KI LO 913)</label></a></li>
 				 </ul>   
-			</div>-->
+			</div>
 		</div>
 	</div>
 </div>
 <div class="ui-grid-solo" id="description">
     <!-- <div class="ui-block-a"><input type="button" value="More"></div>-->
+    <div class="ui-block-a" style="text-align:center"><label> </label></div>  
+
     <ul data-role="listview" data-inset="true">
 	    <li>
-
-	   		 <div class="ui-block-a" style="white-space:normal" ><label><h3>Beschreibung:</h3> Russen sind ein ostslawisches Volk mit etwa 137 Millionen Angehoerigen, davon ca. 115 Millionen in Russland, etwa 17 Millionen in den anderen Folgestaaten der Sowjetunion und etwa sechs Millionen in weiteren Staaten. Sie bilden die groesste ethnische Gruppe in Europa. Die nationale Sprache der Russen ist Russisch, die vorherrschende und traditionelle Religion ist das russisch-orthodoxe Christentum.</label></div>    
+	   		 <div class="ui-block-a" style="white-space:normal" ><label><h3>Beschreibung:</h3> Russen sind ein ostslawisches Volk mit etwa 137 Millionen Angehoerigen, davon ca. 115 Millionen in Russland, etwa 17 Millionen in den anderen Folgestaaten der Sowjetunion und etwa sechs Millionen in weiteren Staaten. Sie bilden die groesste ethnische Gruppe in Europa. Die nationale Sprache der Russen ist Russisch, die vorherrschende und traditionelle Religion ist das russisch-orthodoxe Christentum.</label></div>  
 
 		</li>	
 	</ul>

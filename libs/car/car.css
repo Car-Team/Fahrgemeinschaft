@@ -159,11 +159,14 @@ html body .ui-group-theme-a .ui-btn.btn-red {
 	height: auto;
 	padding-bottom: 25px;
 }
+
 .imgCaption{
 	width: 100%;
 	text-align: center;
-	margin-top: -20px;
+	height: auto;
+	margin-top: -10px;
 }
+
 .ui-grid-a > div.ui-grid-divider,
 .ui-grid-b > div.ui-grid-divider,
 .ui-grid-c > div.ui-grid-divider {
@@ -175,6 +178,12 @@ html body .ui-group-theme-a .ui-btn.btn-red {
 	border-color: black;
 	text-shadow: whitesmoke;
 	color: black;
+}
+
+.imgProfile{
+	width: 100%;
+	height: auto;
+	padding-bottom: 25px;
 }
 
 .ui-li-desc {
