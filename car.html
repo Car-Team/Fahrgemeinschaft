@@ -7,62 +7,12 @@
 <link rel="stylesheet" href="libs/car/car.css">
 <script src="libs/jquery/jquery-1.11.1.min.js"></script>
 <script src="libs/jquery_mobile/jquery.mobile-1.4.4.min.js"></script>
-
-<script>
-	$(function() { 		
-		
-		//alert(bodywidth);//alert(document.getElementById("page").offsetWidth)
-		$("#profile_picture").on("click", function() {
-			var bodywidth = document.getElementById("description").offsetWidth
-			//alert('body '+ bodywidth +' -> img '+ document.getElementById("block_a").offsetWidth);	
-			if (document.getElementById("profile_block_a").offsetWidth<(bodywidth/100)*90) {
-			    $("#profile_block_a").css({ // resize the image     			
-	     			'width': 'calc(98%)'
-			   	});
-			   	$("#profile_block_b").css({ // resize the image     			
-	     			'width': 'calc(100%)'
-			   	});
-			} else {
-			   $("#profile_block_a").css({ // resize the image     			
-	     			'width': 'calc(38%)'
-			   	});
-			   $("#profile_block_b").css({ // resize the image     			
-	     			'width': 'calc(60%)'
-			   	});
-			}
-
-		});
-
-		$("#profile_picture_label").on("click", function() {
-			var bodywidth = document.getElementById("description").offsetWidth			
-			//$("#profile_picture").css({ // resize the image
-     		//	height: '800px',
-     		//	width: '800px'
-		    //});			
-			if (document.getElementById("profile_block_a").offsetWidth<(bodywidth/100)*90) {
-			    $("#profile_block_a").css({ // resize the image     			
-	     			'width': 'calc(98%)'
-			   	});
-			   	$("#profile_block_b").css({ // resize the image     			
-	     			'width': 'calc(100%)'
-			   	});
-			} else {
-			   $("#profile_block_a").css({ // resize the image     			
-	     			'width': 'calc(38%)'
-			   	});
-			   $("#profile_block_b").css({ // resize the image     			
-	     			'width': 'calc(60%)'
-			   	});
-			}
-		});
-	});
-</script>
-
-
+<script src="car.js"></script> 
 </head>
 <body>
 
 <div data-role="page">
+
   <div data-role="header">
     <h1>Fahrzeug</h1>
     <a href="menu.html" data-transition="slide" data-direction="reverse" class="ui-btn btn-only-icon fa fa-arrow-left"></a>
@@ -72,18 +22,13 @@
   </div>
 
 <div class="ui-grid-a">
-    <div class="ui-block-a ui-grid-divider" style="width:38%" id="profile_block_a"> 
-    	<img id="profile_picture" src="http://www.iamaudi.com/img/Audi_Q5_White_Rad_1.jpg"><!--https://www.tripwell.com/assets/static/images/unknown_user.png">-->
-    	<div class="imgCaption" id="profile_picture_label"> <label class="fa fa-arrows-alt">Fahrzeug Bild</label></div>
+    <div class="ui-block-a ui-grid-divider" style="width:38%" id="car_block_a"> 
+    	<img id="car_picture" src="http://www.iamaudi.com/img/Audi_Q5_White_Rad_1.jpg"><!--https://www.tripwell.com/assets/static/images/unknown_user.png">-->
+    	<div class="imgCaption" id="car_picture_label"> <label class="fa fa-arrows-alt">Fahrzeug Bild</label></div>
     </div>
-    <div class="ui-block-b" style="width:60%" id="profile_block_b">
+    <div class="ui-block-b" style="width:60%" id="car_block_b">
 		<div class="ui-grid-solo" style="text-align:center">
-
-			<!--<div class="ui-block-a"><label class="fa fa-user"><b>Dimitri Kumalla (32)</b></label></div>  
-		    <div class="ui-block-a"><label class="fa fa-at">D.Kumalla82@gmx.net</label></div>
-		    <div class="ui-block-a"><label class="fa fa-phone-square">0172 144 85 93</label></div>
-		    <div class="ui-block-a"><label class="fa fa-car">Audi Q5 (KI LO 913)</label></div>-->
-		<div class="ui-block-a">
+			<div class="ui-block-a">
 				<ul data-role="listview" data-inset="true">
 		   		    <li><label class="fa fa-car"><b>Audi Q5 - Weiss</b></label></li>
 		   		     <li><label class="fa fa-clock-o">Baujahr 2013</label></li>	  

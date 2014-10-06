@@ -7,62 +7,12 @@
 <link rel="stylesheet" href="libs/car/car.css">
 <script src="libs/jquery/jquery-1.11.1.min.js"></script>
 <script src="libs/jquery_mobile/jquery.mobile-1.4.4.min.js"></script>
-
-<script>
-	$(function() { 		
-		
-		//alert(bodywidth);//alert(document.getElementById("page").offsetWidth)
-		$("#profile_picture").on("click", function() {
-			var bodywidth = document.getElementById("description").offsetWidth
-			//alert('body '+ bodywidth +' -> img '+ document.getElementById("block_a").offsetWidth);	
-			if (document.getElementById("profile_block_a").offsetWidth<(bodywidth/100)*90) {
-			    $("#profile_block_a").css({ // resize the image     			
-	     			'width': 'calc(98%)'
-			   	});
-			   	$("#profile_block_b").css({ // resize the image     			
-	     			'width': 'calc(100%)'
-			   	});
-			} else {
-			   $("#profile_block_a").css({ // resize the image     			
-	     			'width': 'calc(38%)'
-			   	});
-			   $("#profile_block_b").css({ // resize the image     			
-	     			'width': 'calc(60%)'
-			   	});
-			}
-
-		});
-
-		$("#profile_picture_label").on("click", function() {
-			var bodywidth = document.getElementById("description").offsetWidth			
-			//$("#profile_picture").css({ // resize the image
-     		//	height: '800px',
-     		//	width: '800px'
-		    //});			
-			if (document.getElementById("profile_block_a").offsetWidth<(bodywidth/100)*90) {
-			    $("#profile_block_a").css({ // resize the image     			
-	     			'width': 'calc(98%)'
-			   	});
-			   	$("#profile_block_b").css({ // resize the image     			
-	     			'width': 'calc(100%)'
-			   	});
-			} else {
-			   $("#profile_block_a").css({ // resize the image     			
-	     			'width': 'calc(38%)'
-			   	});
-			   $("#profile_block_b").css({ // resize the image     			
-	     			'width': 'calc(60%)'
-			   	});
-			}
-		});
-	});
-</script>
-
-
+<script src="car.js"></script> 
 </head>
 <body>
 
 <div data-role="page">
+
   <div data-role="header">
     <h1>Profil</h1>
     <a href="menu.html" data-transition="slide" data-direction="reverse" class="ui-btn btn-only-icon fa fa-arrow-left"></a>
