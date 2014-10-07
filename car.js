@@ -1,5 +1,4 @@
-$(document).ready(function() {
-	$(window).load( function() {
+ $(document).on('pagebeforeshow', '#profile', function(){ 
 	//$(document).on('page:load', ready)
 		//alert("Hello world!");
 		//alert(bodywidth);//alert(document.getElementById("page").offsetWidth)
@@ -21,15 +20,12 @@ $(document).ready(function() {
 	     			'width': 'calc(60%)'
 			   	});
 			}
-
 		});
+	
+
 
 		$("#profile_picture_label").on("click", function() {
 			var bodywidth = document.getElementById("description").offsetWidth			
-			//$("#profile_picture").css({ // resize the image
-     		//	height: '800px',
-     		//	width: '800px'
-		    //});			
 			if (document.getElementById("profile_block_a").offsetWidth<(bodywidth/100)*70) {
 			    $("#profile_block_a").css({ // resize the image     			
 	     			'width': 'calc(98%)'
@@ -47,8 +43,11 @@ $(document).ready(function() {
 			}
 		});
 
+});
 
 
+
+$(document).on('pagebeforeshow', '#car', function(){ 
 		$("#car_picture").on("click", function() {
 			var bodywidth = document.getElementById("description").offsetWidth
 			//alert('body '+ (bodywidth/100)*70 +' -> img '+ document.getElementById("car_block_a").offsetWidth);				
@@ -67,9 +66,7 @@ $(document).ready(function() {
 	     			'width': 'calc(60%)'
 			   	});
 			}
-
 		});
-
 		$("#car_picture_label").on("click", function() {
 			var bodywidth = document.getElementById("description").offsetWidth			
 			//$("#profile_picture").css({ // resize the image
@@ -92,5 +89,4 @@ $(document).ready(function() {
 			   	});
 			}
 		});
-	});
 });

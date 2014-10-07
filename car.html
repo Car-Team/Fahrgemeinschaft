@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1" charset="utf-8">
 <link rel="stylesheet" href="libs/jquery_mobile/jquery.mobile-1.4.4.min.css">
 <link rel="stylesheet" href="libs/car/font-awesome/css/font-awesome.min.css">
 <link rel="stylesheet" href="libs/car/car.css">
@@ -11,7 +11,7 @@
 </head>
 <body>
 
-<div data-role="page">
+<div data-role="page" id="car">
 
   <div data-role="header">
     <h1>Fahrzeug</h1>
@@ -30,10 +30,10 @@
 		<div class="ui-grid-solo" style="text-align:center">
 			<div class="ui-block-a">
 				<ul data-role="listview" data-inset="true">
-		   		    <li><label class="fa fa-car"><b>Audi Q5 - Weiss</b></label></li>
+		   		    <li><label class="fa fa-car"><b>Audi Q5 - Weiß</b></label></li>
 		   		     <li><label class="fa fa-clock-o">Baujahr 2013</label></li>	  
 				    <li><label class="fa fa-globe">KI LO 913</label></li>
-				    <li><a href="profile.html"><label class="fa fa-user">Kate Kumalla</label></a></li>
+				    <li><a href="profile.html" data-transition="slide"><label class="fa fa-user">Kate Kumalla</label></a></li>
 				   
 				 </ul>   
 			</div>
@@ -55,6 +55,5 @@
   <div data-role="footer">
   </div>
 </div> 
-
 </body>
 </html>
