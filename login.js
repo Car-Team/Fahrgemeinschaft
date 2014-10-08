@@ -13,7 +13,7 @@ $(document).ready(function() {
 		
 		$.ajax({
 			type: "POST",
-			url: "test.php",
+			url: "login.php",
 			data: loginData,
 			dataType: "json",
 			success:	function(loginResult) {
