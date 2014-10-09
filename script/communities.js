@@ -3,22 +3,13 @@ $(document).on('pagebeforeshow', '#communities', function(){
 	var ul = document.getElementById("communityList");
 	var userID = 1;
 
-	var postData = {
-		'userID' : userID,
-	}
-
-
 	$.ajax({
-			type: "POST",
-			//url: "carteam.lvps87-230-14-183.dedicated.hosteurope.de/communities.php",
-			url: "php/communities.php",
-			data: postData,
+			type: "GET",
+			url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/communities.php",
+			dataType: 'jsonp',
+			data: 'userID='+userID,
 			success:	function(resultData) {
-							    						    						
-alert(resultData);
-							var list = $.parseJSON(resultData);
-							$.each(list, function(key, value){
-
+							$.each(resultData, function(key, value){
 									var li = document.createElement("li");
 									var a = document.createElement("a");
 									a.setAttribute("class", "ui-btn ui-btn-icon-right ui-icon-carat-r");
@@ -27,9 +18,7 @@ alert(resultData);
 									a.appendChild(document.createTextNode(value['name']));
 									li.appendChild(a);
 									ul.appendChild(li);
-
 							});
-
 
 						},
 		});

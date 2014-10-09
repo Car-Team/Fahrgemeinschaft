@@ -1,5 +1,5 @@
 <?php
-$userID = $_POST['userID'];
+$userID = $_GET['userID'];
 
 
 $db = mysqli_connect("87.230.14.183", "car", "car", "car");
@@ -21,5 +21,5 @@ while($row = $result->fetch_assoc()){
 }
 
 mysqli_close($db);
-exit(json_encode($resultData));	
+echo  $_GET['callback'].'('.json_encode($resultData) .')';
 ?>
