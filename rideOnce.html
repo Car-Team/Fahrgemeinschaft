@@ -5,8 +5,12 @@
 <link rel="stylesheet" href="libs/jquery_mobile/jquery.mobile-1.4.4.min.css"> -->
 <link rel="stylesheet" href="libs/car/font-awesome/css/font-awesome.min.css">
 <link rel="stylesheet" href="libs/car/car.css">
+<link rel="stylesheet" href="libs/datepicker/jquery.mobile.datepicker.theme.css" />
+<link rel="stylesheet" href="libs/datepicker/jquery.mobile.datepicker.css" />
 <script src="libs/jquery/jquery-1.11.1.min.js"></script>
 <script src="libs/jquery_mobile/jquery.mobile-1.4.4.min.js"></script>
+<script src="libs/jqueryUi/datepicker.js"></script>
+<script src="libs/datepicker/jquery.mobile.datepicker.js"></script>
 
  <script>
   $(function() {
@@ -18,75 +22,31 @@
 
 <div data-role="page">
   <div data-role="header">
-    <h1>Fahrteigenschaften</h1>
+    <h1>Angaben zur Fahrt</h1>
   </div>
 
   <div data-role="main" class="ui-content">
     <div class="ui-grid-a">
-      <div class="ui-block-a"><label>Datum:</label></div>
-      <div class="ui-block-b"><label><input type="text" id="datepicker"></label></div>
-      <div class="ui-block-a"><label>Abfahrtszeit:</label></div>
-      <div class="ui-block-b"><label></label>
+    	<label>
+        <input name="rideOnce" id="rideOnce" type="radio">einmalige Fahrt</label>
+	    <label for="rideMulti">regelm&auml;&szlig;ige Fahrt</label>
+	    <input name="rideMulti" id="rideMulti" class="custom" type="radio"></label>
 
-        <div class="ui-grid-a">
-            <div class="ui-block-a">
-              <select name="select-hour" id="select-hour" data-native-menu="false" style="width: 20px;">
-                <option value="1">0</option>
-                <option value="2">1</option>
-                <option value="3">2</option>
-                <option value="4">3</option>
-                <option value="5">4</option>
-                <option value="6">5</option>
-                <option value="7">6</option>
-                <option value="8">7</option>
-                <option value="9">8</option>
-                <option value="10">9</option>
-                <option value="11">10</option>
-                <option value="12">11</option>
-                <option value="13">12</option>
-                <option value="14">13</option>
-                <option value="15">14</option>
-                <option value="16">15</option>
-                <option value="17">16</option>
-                <option value="18">17</option>
-                <option value="19">18</option>
-                <option value="20">19</option>
-                <option value="21">20</option>
-                <option value="22">21</option>
-                <option value="23">22</option>
-                <option value="24">23</option>
-              </select> h :
-            </div> 
-            <div class="ui-block-b"> 
-              <select name="select-minute" id="select-minute" data-native-menu="false">
-                <option value="1">0</option>
-                <option value="2">5</option>
-                <option value="3">10</option>
-                <option value="4">15</option>
-                <option value="5">20</option>
-                <option value="6">25</option>
-                <option value="7">30</option>
-                <option value="8">35</option>
-                <option value="9">40</option>
-                <option value="10">45</option>
-                <option value="11">50</option>
-                <option value="12">55</option>
-              </select>
-              min
-            </div>
-        </div>
-
-      </div>
-      <div class="ui-block-a"><label>Start:</label></div>
-      <div class="ui-block-b"><label><input type="text" id="departure"></label></div>
-      <div class="ui-block-a"><label>Ziel:</label></div>
-      <div class="ui-block-b"><label><input type="text" id="destination" value="Kiel"></label></div>
-      <div class="ui-block-a"><label>Pl&auml;tze:</label></div>
-      <div class="ui-block-b"><input name="slider-2" id="slider-2" data-highlight="true" min="1" max="7" value="3" type="range"></div>
-      <div class="ui-block-a"><label>Fahrzeug:</label></div>
-      <div class="ui-block-b"><label><input type="text" id="car"></label></div>
-      <div class="ui-block-a"><label>Infos zur Fahrt:</label></div>
-      <div class="ui-block-b"><textarea name="info" id="info" class="min-textarea"></textarea></div>
+        <div class="ui-block-a"><label>Datum:</label></div>
+        <div class="ui-block-b"><label><input type="text" data-role="date" id="datepicker"></label></div>
+        <div class="ui-block-b"><label></label></div>
+        <div class="ui-block-a"><label>Abfahrtszeit:</label></div>
+        <div class="ui-block-b"><input type="time" name="departureTime"></div>
+        <div class="ui-block-a"><label>Start:</label></div>
+        <div class="ui-block-b"><label><input type="text" id="departure"></label></div>
+        <div class="ui-block-a"><label>Ziel:</label></div>
+        <div class="ui-block-b"><label><input type="text" id="destination" value="Kiel"></label></div>
+        <div class="ui-block-a"><label>freie Pl&auml;tze:</label></div>
+        <div class="ui-block-b"><input name="slider-2" id="slider-2" data-highlight="true" min="1" max="7" value="3" type="range"></div>
+        <div class="ui-block-a"><label>Fahrzeug:</label></div>
+        <div class="ui-block-b"><label><input type="text" id="car"></label></div>
+        <div class="ui-block-a"><label>Infos zur Fahrt:</label></div>
+        <div class="ui-block-b"><textarea name="info" id="info" class="min-textarea"></textarea></div>
     </div>
     <a href="#" class="ui-btn">Weiter</a>
   </div>
