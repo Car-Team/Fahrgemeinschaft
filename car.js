@@ -4,7 +4,7 @@
 		//alert(bodywidth);//alert(document.getElementById("page").offsetWidth)
 
 		
-		alert($(window).width())
+		//alert($(window).width())
 		if($(window).width()<450){
 			 $("#profile_block_a").css({ // resize the image     			
 	     			'width': 'calc(98%)'
@@ -70,7 +70,7 @@
 
 $(document).on('pagebeforeshow', '#car', function(){ 
 
-		alert($(window).width())
+		//alert($(window).width())
 		if($(window).width()<450){
 
 			$("#car_block_a").css({ // resize the image     			
