@@ -20,7 +20,7 @@ $(document).ready(function() {
 			dataType: "json",
 			success:	function(loginResult) {
 							if(loginResult.successful){
-								sessionStorage.setItem("userdata", JSON.stringify({id: loginResult.id, name: loginResult.name, email: loginResult.email, picid: loginResult.picid, carid: loginResult.carid}));
+								sessionStorage.setItem("userdata", JSON.stringify({id: loginResult.id, name: loginResult.name, email: loginResult.email, tel: loginResult.tel, picid: loginResult.picID, carid: loginResult.carID}));
 								$.mobile.changePage("menu.html");
 							}else {
 								alert("Falscher Benutzername oder falsches Passwort!");

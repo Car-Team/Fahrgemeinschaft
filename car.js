@@ -1,10 +1,5 @@
  $(document).on('pagebeforeshow', '#profile', function(){ 
-	//$(document).on('page:load', ready)
-		//alert("Hello world!");
-		//alert(bodywidth);//alert(document.getElementById("page").offsetWidth)
 
-		
-		//alert($(window).width())
 		if($(window).width()<450){
 			 $("#profile_block_a").css({ // resize the image     			
 	     			'width': 'calc(98%)'
@@ -24,6 +19,9 @@
 
 
 		$("#profile_picture").on("click", function() {
+		//	$("#namefield").set("value",(JSON.parse(sessionStorage.getItem('userdata')).name));
+		//alert(JSON.parse(sessionStorage.getItem('userdata')).name);
+			//document.getElementById("namefield").InnerHTML = (JSON.parse(sessionStorage.getItem('userdata')).name)
 			var bodywidth = document.getElementById("description").offsetWidth
 			//alert('body '+ (bodywidth/100)*70 +' -> img '+ document.getElementById("profile_block_a").offsetWidth)	
 			if (document.getElementById("profile_block_a").offsetWidth<(bodywidth/100)*70) {

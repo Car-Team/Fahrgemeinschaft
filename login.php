@@ -22,7 +22,7 @@ if($successful) {
         'successful'    => $successful,
 		'id'			=> $resultData['ID'],
         'name'          => $resultData['Name'],
-        'eMail'			=> $resultData['Email'],
+        'email'			=> $resultData['Email'],
         'tel'			=> $resultData['Tel'],      
         'picID'			=> $resultData['PicID'],
 		'carID'			=> $resultData['CarID']
