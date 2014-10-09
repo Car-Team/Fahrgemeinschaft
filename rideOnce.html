@@ -25,12 +25,14 @@
 
   <div data-role="main" class="ui-content">
     <div class="ui-grid-a">
-      <div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Datum:</div></div>
-      <div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:200px"><input type="text" id="datepicker"></div></div>
-      <div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Abfahrtszeit:</div></div>
-      <div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:120px">
-        <div class="ui-field-contain" style="width:90px">
-            <select name="select-hour" id="select-hour" data-native-menu="false">
+      <div class="ui-block-a"><label>Datum:</label></div>
+      <div class="ui-block-b"><label><input type="text" id="datepicker"></label></div>
+      <div class="ui-block-a"><label>Abfahrtszeit:</label></div>
+      <div class="ui-block-b"><label></label>
+
+        <div class="ui-grid-a">
+            <div class="ui-block-a">
+              <select name="select-hour" id="select-hour" data-native-menu="false">
                 <option value="1">0</option>
                 <option value="2">1</option>
                 <option value="3">2</option>
@@ -55,9 +57,10 @@
                 <option value="22">21</option>
                 <option value="23">22</option>
                 <option value="24">23</option>
-            </select> 
-            : 
-            <select name="select-minute" id="select-minute" data-native-menu="false">
+              </select>
+            </div> 
+            <div class="ui-block-b"> 
+              <select name="select-minute" id="select-minute" data-native-menu="false">
                 <option value="1">0</option>
                 <option value="2">5</option>
                 <option value="3">10</option>
@@ -70,19 +73,21 @@
                 <option value="10">45</option>
                 <option value="11">50</option>
                 <option value="12">55</option>
-            </select>
+              </select>
+            </div>
         </div>
-      </div></div>
-      <div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Start:</div></div>
-      <div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px"><input type="text" id="departure"></div></div>
-      <div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Ziel:</div></div>
-      <div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px"><input type="text" id="destination"></div></div>
-      <div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px Salign="left" ">Pl&auml;tze:</div></div>
-      <div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px"><input name="slider-2" id="slider-2" data-highlight="true" min="1" max="7" value="3" type="range"></div></div>
-      <div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Fahrzeug:</div></div>
-      <div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px"><input type="text" id="car"></div></div>
-      <div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Infos zur Fahrt:</div></div>
-      <div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px"><textarea name="info" id="info" ></textarea></div></div>
+
+      </div>
+      <div class="ui-block-a"><label>Start:</label></div>
+      <div class="ui-block-b"><label><input type="text" id="departure"></label></div>
+      <div class="ui-block-a"><label>Ziel:</label></div>
+      <div class="ui-block-b"><label><input type="text" id="destination"></label></div>
+      <div class="ui-block-a"><label>Pl&auml;tze:</label></div>
+      <div class="ui-block-b"><input name="slider-2" id="slider-2" data-highlight="true" min="1" max="7" value="3" type="range"></div>
+      <div class="ui-block-a"><label>Fahrzeug:</label></div>
+      <div class="ui-block-b"><label><input type="text" id="car"></label></div>
+      <div class="ui-block-a"><label>Infos zur Fahrt:</label></div>
+      <div class="ui-block-b"><textarea name="info" id="info" ></textarea></div>
     </div>
     <a href="#" class="ui-btn">Weiter</a>
   </div>

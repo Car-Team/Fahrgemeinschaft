@@ -1,6 +1,5 @@
 html body div[data-role="page"] > div {
 	max-width: 800px;
-	text-align: -webkit-center;
 	display: block;
 	margin: auto;
 }
