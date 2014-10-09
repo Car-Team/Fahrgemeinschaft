@@ -33,25 +33,25 @@
 		   		    <li><label id="carmodelfield" class="fa fa-car"><b>
 						<script type="text/javascript">
         					var myDiv1 = document.getElementById("carmodelfield");
-        					myDiv1.innerHTML = JSON.parse(sessionStorage.getItem('userdata')).modelName;
+        					myDiv1.innerHTML = JSON.parse(localStorage.getItem('userdata')).modelName;
        				    </script>
 		   		    </b></label></li>
 		   		     <li><label id="caryearfield" class="fa fa-clock-o">
 		   		   		 <script type="text/javascript">
         					var myDiv2 = document.getElementById("caryearfield");
-        					myDiv2.innerHTML = JSON.parse(sessionStorage.getItem('userdata')).constructionYear;
+        					myDiv2.innerHTML = JSON.parse(localStorage.getItem('userdata')).constructionYear;
        				    </script>
        				    </label></li>	  
 				    <li><label id="carlicenseplate" class="fa fa-globe">
 				     	<script type="text/javascript">
         					var myDiv3 = document.getElementById("carlicenseplate");
-        					myDiv3.innerHTML = JSON.parse(sessionStorage.getItem('userdata')).licensePlate;
+        					myDiv3.innerHTML = JSON.parse(localStorage.getItem('userdata')).licensePlate;
        				    </script>
 				    </label></li>
 				    <li><a href="profile.html" data-transition="slide"><label id="carnamefield" class="fa fa-user">
 					<script type="text/javascript">
         					var myDiv1 = document.getElementById("carnamefield");
-        					myDiv1.innerHTML = JSON.parse(sessionStorage.getItem('userdata')).name;
+        					myDiv1.innerHTML = JSON.parse(localStorage.getItem('userdata')).name;
        				    </script>
 				    </label></a></li>
 				   
