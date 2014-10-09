@@ -72,7 +72,12 @@
 
     <ul data-role="listview" data-inset="true">
 	    <li>
-	   		 <div class="ui-block-a" style="white-space:normal" ><label><h3>Beschreibung:</h3> Russen sind ein ostslawisches Volk mit etwa 137 Millionen Angehoerigen, davon ca. 115 Millionen in Russland, etwa 17 Millionen in den anderen Folgestaaten der Sowjetunion und etwa sechs Millionen in weiteren Staaten. Sie bilden die groesste ethnische Gruppe in Europa. Die nationale Sprache der Russen ist Russisch, die vorherrschende und traditionelle Religion ist das russisch-orthodoxe Christentum.</label></div>  
+	   		 <div id="userdescription" class="ui-block-a" style="white-space:normal" ><label> 
+              <script type="text/javascript">
+                  var myDiv5 = document.getElementById("userdescription");
+                  myDiv5.innerHTML = "<h3>Beschreibung</h3>" + JSON.parse(localStorage.getItem('userdata')).descriptionUser;
+              </script>
+         </label></div>  
 
 		</li>	
 	</ul>

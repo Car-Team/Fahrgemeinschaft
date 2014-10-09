@@ -1,5 +1,5 @@
  $(document).on('pagebeforeshow', '#profile', function(){ 
-		if($(window).width()<450){
+		if($(window).width()<430){
 			 $("#profile_block_a").css({ // resize the image     			
 	     			'width': 'calc(98%)'
 			   	});
@@ -66,7 +66,7 @@
 
 $(document).on('pagebeforeshow', '#car', function() {
 		//alert($(window).width())
-		if($(window).width()<450){
+		if($(window).width()<430){
 				$("#car_block_a").css({ // resize the image     			
 	     			'width': 'calc(98%)'
 			   	});
@@ -81,14 +81,6 @@ $(document).on('pagebeforeshow', '#car', function() {
 	     			'width': 'calc(60%)'
 			   	});
 		}
-
-
-
-
-
-
-
-
 
 		$("#car_picture").on("click", function(e3) {
 			var bodywidth = $(window).width();//document.getElementById("description").offsetWidth

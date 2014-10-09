@@ -50,8 +50,8 @@
 				    </label></li>
 				    <li><a href="profile.html" data-transition="slide"><label id="carnamefield" class="fa fa-user">
 					<script type="text/javascript">
-        					var myDiv1 = document.getElementById("carnamefield");
-        					myDiv1.innerHTML = JSON.parse(localStorage.getItem('userdata')).name;
+        					var myDiv4= document.getElementById("carnamefield");
+        					myDiv4.innerHTML = JSON.parse(localStorage.getItem('userdata')).name;
        				    </script>
 				    </label></a></li>
 				   
@@ -66,7 +66,12 @@
 
     <ul data-role="listview" data-inset="true">
 	    <li>
-	   		 <div class="ui-block-a" style="white-space:normal" ><label><h3>Beschreibung:</h3> Der Audi Q5 ist ein Sport-Utility-Vehicle der Audi AG, das im November 2008 auf den Markt gekommen ist. Er wird in Ingolstadt, Changchun (Volksrepublik China) und Aurangabad (Indien) hergestellt und baut, wie auch der A4 B8 und der A5, auf Audis modularem Laengsbaukasten (MLB) auf. Der Q5 wurde erstmals auf der Messe Auto China Beijing im April 2008 vorgestellt.</label></div>  
+	   		 <div id="cardescription" class="ui-block-a" style="white-space:normal" ><label> 
+              <script type="text/javascript">
+                  var myDiv5 = document.getElementById("cardescription");
+                  myDiv5.innerHTML = "<h3>Beschreibung</h3>" + JSON.parse(localStorage.getItem('userdata')).descriptionCar;
+              </script>
+         </label></div>  
 
 		</li>	
 	</ul> 	

@@ -40,11 +40,13 @@ if($successful) {
         'tel'			=> $resultData[5],//Tel
         'picID'			=> $resultData[6],//PicID
 		'carID'			=> $resultData[7],//CarID
-		'modelName'			=> $resultData[9],//ModelName
-		'licensePlate'		=> $resultData[10],//LicensePlate
-		'seats'				=> $resultData[11],//Seats
-		'constructionYear'	=> $resultData[12],//ConstructionYear
-		'carPicID'				=> $resultData[13]//PicID
+		'descriptionUser'	=> $resultData[8],//CarID
+		'modelName'			=> $resultData[10],//ModelName
+		'licensePlate'		=> $resultData[11],//LicensePlate
+		'seats'				=> $resultData[12],//Seats
+		'constructionYear'	=> $resultData[13],//ConstructionYear
+		'carPicID'			=> $resultData[14],//PicID
+		'descriptionCar'	=> $resultData[15]//PicID
 	//	'car'			=> $car,
 	);
 	exit(json_encode($loginResult));
