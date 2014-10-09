@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="libs/jquery_mobile/jquery.mobile-1.4.4.min.css"> -->
+<link rel="stylesheet" href="libs/car/font-awesome/css/font-awesome.min.css">
+<!--<link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">-->
+<link rel="stylesheet" href="libs/car/car.css">
+<script src="libs/jquery/jquery-1.11.1.min.js"></script>
+<script src="libs/jquery_mobile/jquery.mobile-1.4.4.min.js"></script>
+<script src="json/mobile-datepicker-wrapper.jquery.json"></script>
+<script src="js/datepicker.js"></script>
+ <script>
+  $(function() {
+  $( ".date-input-css" ).datepicker();
+  });
+</script>
+</head>
+<body>
+
+<div data-role="page">
+  <div data-role="header">
+    <h1>Fahrteigenschaften</h1>
+  </div>
+
+  <div data-role="main" class="ui-content">
+    <div class="ui-grid-a">
+      <div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Datum:</div></div>
+      <div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:200px"><input type="text" id="datepicker"></div></div>
+      <div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Abfahrtszeit:</div></div>
+      <div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:120px">
+        <div class="ui-field-contain" style="width:90px">
+            <select name="select-hour" id="select-hour" data-native-menu="false">
+                <option value="1">0</option>
+                <option value="2">1</option>
+                <option value="3">2</option>
+                <option value="4">3</option>
+                <option value="5">4</option>
+                <option value="6">5</option>
+                <option value="7">6</option>
+                <option value="8">7</option>
+                <option value="9">8</option>
+                <option value="10">9</option>
+                <option value="11">10</option>
+                <option value="12">11</option>
+                <option value="13">12</option>
+                <option value="14">13</option>
+                <option value="15">14</option>
+                <option value="16">15</option>
+                <option value="17">16</option>
+                <option value="18">17</option>
+                <option value="19">18</option>
+                <option value="20">19</option>
+                <option value="21">20</option>
+                <option value="22">21</option>
+                <option value="23">22</option>
+                <option value="24">23</option>
+            </select> 
+            : 
+            <select name="select-minute" id="select-minute" data-native-menu="false">
+                <option value="1">0</option>
+                <option value="2">5</option>
+                <option value="3">10</option>
+                <option value="4">15</option>
+                <option value="5">20</option>
+                <option value="6">25</option>
+                <option value="7">30</option>
+                <option value="8">35</option>
+                <option value="9">40</option>
+                <option value="10">45</option>
+                <option value="11">50</option>
+                <option value="12">55</option>
+            </select>
+        </div>
+      </div></div>
+      <div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Start:</div></div>
+      <div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px"><input type="text" id="departure"></div></div>
+      <div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Ziel:</div></div>
+      <div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px"><input type="text" id="destination"></div></div>
+      <div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px Salign="left" ">Pl&auml;tze:</div></div>
+      <div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px"><input name="slider-2" id="slider-2" data-highlight="true" min="1" max="7" value="3" type="range"></div></div>
+      <div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Fahrzeug:</div></div>
+      <div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px"><input type="text" id="car"></div></div>
+      <div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Infos zur Fahrt:</div></div>
+      <div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px"><textarea name="info" id="info" ></textarea></div></div>
+    </div>
+    <a href="#" class="ui-btn">Weiter</a>
+  </div>
+
+  <div data-role="footer">
+  </div>
+</div> 
+
+</body>
+</html>
