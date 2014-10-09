@@ -9,9 +9,20 @@
 <script src="libs/jquery_mobile/jquery.mobile-1.4.4.min.js"></script>
 <script src="car.js"></script> 
 <script src="login.js"></script>
+<script type="text/javascript" src="facebookAPI.js"></script>
 </head>
 <body>
 
+    <script src="http://connect.facebook.net/de_DE/all.js"></script>
+    <script>
+      FB.init({
+        appId  : '566575780137093', // Anwendungs ID
+        status : true, // Login Status prüfen
+        cookie : true, // Cookies nutzen
+        xfbml  : true  // XFBML parsen
+      });
+    </script>
+    
 <div data-role="page">
   <div data-role="main" class="ui-content">
  	<center>
@@ -27,11 +38,12 @@
 		    <li><a id="login" class="ui-btn btn-green" style="text-align:center">Anmelden</a></li>
 		  </ul>
 
-		  <div class="ui-grid-a btn-group">
+		<div class="ui-grid-a btn-group">
   			<div class="ui-block-a"><a href="register.html" data-transition="slide" class="ui-btn btn-small fa fa-pencil" style="text-align:center">Registrieren</a></div>
-  			<div class="ui-block-b"><a href="#" class="ui-btn btn-small fa fa-facebook-square" style="text-align:center">Facebook</a></div>
-			</div>
-
+  			<div class="ui-block-b">
+  				<a id="fb-login" class="ui-btn btn-small fa fa-facebook-square" style="text-align:center">Facebook</a>
+  			</div>
+		</div>
 		</div>
 	</center>
   </div>
