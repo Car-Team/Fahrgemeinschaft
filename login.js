@@ -27,7 +27,10 @@ $(document).ready(function() {
 									tel: loginResult.tel, 
 									picid: loginResult.picID, 
 									carid: loginResult.carID,
-									modelName: loginResult.modelName}));
+									modelName: loginResult.modelName,
+									licensePlate: loginResult.licensePlate,
+									seats: loginResult.seats,
+									constructionYear: loginResult.constructionYear}));
 								$.mobile.changePage("menu.html");
 							}else {
 								alert("Falscher Benutzername oder falsches Passwort!");
