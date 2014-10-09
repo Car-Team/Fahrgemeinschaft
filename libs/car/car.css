@@ -214,3 +214,7 @@ html body .ui-group-theme-a .ui-btn.btn-red {
 ul[data-role="listview"] > li[data-role="list-divider"] {
 	background-color: #579;
 }
+
+.min-textarea {
+	min-height: 100px;
+}
