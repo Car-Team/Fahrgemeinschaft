@@ -4,8 +4,10 @@ $(document).ready(function() {
 		var loginPw = $('#pwInput').val();
 			
 		var loginData = {
+			'dbuser' : 'car',
+			'dbpw' : 'car',
 			'loginName' : loginName,
-			'loginPw' : loginPw,
+			'loginPw' : loginPw
 		}
 
 		if(loginName == '' || loginPw == '')
@@ -17,10 +19,12 @@ $(document).ready(function() {
 			data: loginData,
 			dataType: "json",
 			success:	function(loginResult) {
-							if(loginResult.successful)
+							if(loginResult.successful){
+								sessionStorage.setItem("userdata", JSON.stringify({id: loginResult.id, name: loginResult.name, email: loginResult.email, picid: loginResult.picid, carid: loginResult.carid}));
 								$.mobile.changePage("menu.html");
-							else
+							}else {
 								alert("Falscher Benutzername oder falsches Passwort!");
+							}
 						},
 		});
 	});

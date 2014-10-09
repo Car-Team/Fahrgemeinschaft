@@ -1,8 +1,10 @@
 <?php
+$dbuser = $_POST['dbuser'];
+$dbpw = $_POST['dbpw'];
 $loginName = $_POST['loginName'];
 $loginPw = $_POST['loginPw'];
 
-$db = mysqli_connect("87.230.14.183", "car", "car", "car");
+$db = mysqli_connect("87.230.14.183", $dbuser, $dbpw, "car");
 if(!$db)
 {
   exit("Verbindungsfehler: ".mysqli_connect_error());
@@ -18,6 +20,7 @@ if($successful) {
 	
 	$loginResult = array(
         'successful'    => $successful,
+		'id'			=> $resultData['ID'],
         'name'          => $resultData['Name'],
         'eMail'			=> $resultData['Email'],
         'tel'			=> $resultData['Tel'],      
