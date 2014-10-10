@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1" charset="utf-8">
+<link rel="stylesheet" href="libs/jquery_mobile/jquery.mobile-1.4.4.min.css">
+<link rel="stylesheet" href="libs/car/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="libs/car/car.css">
+<script src="libs/jquery/jquery-1.11.1.min.js"></script>
+<script src="libs/jquery_mobile/jquery.mobile-1.4.4.min.js"></script>
+<script src="signup.js"></script>
+</head>
+<body>
+
+<div id="signup" data-role="page">
+	<div data-role="header">
+		<h1 style="overflow:visible; text-overflow:inherit">Registrierung</h1>
+		<a href="index.html" data-transition="slide" data-direction="reverse" class="ui-btn btn-only-icon fa fa-arrow-left"></a>
+	</div>
+
+	<div data-role="main" class="ui-content">
+		<form>
+			<input id="emailInput" placeholder="E-Mail" type="text">
+			<input id="nameInput" placeholder="Benutzername" type="text">
+			<input id="pwInput" placeholder="Passwort" type="password">
+			<input id="pwConfirmInput" placeholder="Passwort wiederholen" type="password">
+		</form>
+
+		<div class="ui-grid-a">
+			<div class="ui-block-a">
+				<a href="index.html" data-transition="slide" class="ui-btn fa fa-times" style="text-align:center">Abbrechen</a>
+			</div>
+			<div id="signupButton" class="ui-block-b">
+				<a data-transition="slide" class="ui-btn btn-green fa fa-check" style="text-align:center" onClick="signup();">Registrieren</a>
+			</div>
+		</div>
+	</div>
+
+	<div data-role="footer">
+	</div>
+
+</div> 
+
+
+</body>
+</html>

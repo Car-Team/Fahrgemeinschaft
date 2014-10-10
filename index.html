@@ -12,29 +12,28 @@
 </head>
 <body>
 
-<div data-role="page">
-  <div data-role="main" class="ui-content">
- 	<center>
-		<img src="media/img/logo.png" width="60%" style="max-width:400px">
+<div id = "index" data-role="page">
+	<div id = "content" data-role="main" class="ui-content">
+		<center>
+			<img src="media/img/logo.png" width="60%" style="max-width:400px">
 	
-		<div>
-			<form>
-	    	<input id="nameInput" placeholder="Benutzername" type="text">
-		   	<input id="pwInput" placeholder="Passwort" type="password">
-			</form>
+			<div>
+				<form>
+					<input id="nameInput" placeholder="Benutzername" type="text">
+					<input id="pwInput" placeholder="Passwort" type="password">
+				</form>
 
-			<ul data-role="listview" data-inset="true" data-filter="false" data-theme="a" data-content-theme="a">
-		    <li><a id="login" class="ui-btn btn-green" style="text-align:center">Anmelden</a></li>
-		  </ul>
+				<ul data-role="listview" data-inset="true" data-filter="false" data-theme="a" data-content-theme="a">
+					<li><a id="login" class="ui-btn btn-green" style="text-align:center" onClick="login();">Anmelden</a></li>
+				</ul>
 
-		  <div class="ui-grid-a btn-group">
-  			<div class="ui-block-a"><a href="register.html" data-transition="slide" class="ui-btn btn-small fa fa-pencil" style="text-align:center">Registrieren</a></div>
-  			<div class="ui-block-b"><a href="#" class="ui-btn btn-small fa fa-facebook-square" style="text-align:center">Facebook</a></div>
+				<div class="ui-grid-a btn-group">
+					<div class="ui-block-a"><a href="signup.html" data-transition="slide" class="ui-btn btn-small fa fa-pencil" style="text-align:center">Registrieren</a></div>
+					<div class="ui-block-b"><a href="#" class="ui-btn btn-small fa fa-facebook-square" style="text-align:center">Facebook</a></div>
+				</div>
 			</div>
-
-		</div>
-	</center>
-  </div>
+		</center>
+	</div>
 </div>
 
 </body>
