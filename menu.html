@@ -8,8 +8,23 @@
 <script src="libs/jquery/jquery-1.11.1.min.js"></script>
 <script src="libs/jquery_mobile/jquery.mobile-1.4.4.min.js"></script>
 <script src="car.js"></script> 
+<script src="login.js"></script>
+<!--<<<<<<< HEAD-->
+=======
+<script type="text/javascript" src="facebookAPI.js"></script>
+<!-->>>>>>> 554302d609c933adb078d113d50baab7fca98370-->
 </head>
 <body>
+
+    <script src="http://connect.facebook.net/de_DE/all.js"></script>
+    <script>
+      FB.init({
+        appId  : '566575780137093', // Anwendungs ID
+        status : true, // Login Status prüfen
+        cookie : true, // Cookies nutzen
+        xfbml  : true  // XFBML parsen
+      });
+    </script>
 
 <div data-role="page">
   <div data-role="header">
@@ -19,13 +34,13 @@
   <div data-role="main" class="ui-content">
     <ul data-role="listview" data-inset="true">
     	<li><a href="communities.html" data-transition="slide" class="ui-btn fa fa-group">Gemeinschaften</a></li>
-      <li><a href="createARide.html" data-transition="slide" class="ui-btn fa fa-car">Fahrt anbieten</a></li>
-    	<li><a href="car.html" data-transition="slide" class="ui-btn fa fa-automobile">Fahrzeug</a></li>
+      <li><a href="createARide.html" data-transition="slide" class="ui-btn fa fa-car">Fahrt anbieten</a></li>    	
     </ul>
     <ul data-role="listview" data-inset="true">
     	<li><a href="profile.html" data-transition="slide" class="ui-btn fa fa-user">Profil</a></li>
+      <li><a href="car.html" data-transition="slide" class="ui-btn fa fa-automobile">Fahrzeug</a></li>
     	<li><a href="options.html" data-transition="slide" class="ui-btn fa fa-gears">Einstellungen</a></li>
-    	<li><a href="index.html" class="ui-btn btn-red fa fa-power-off">Logout</a></li>
+    	<li><a href="index.html" class="ui-btn btn-red fa fa-power-off" id="fb-logout">Logout</a></li>
     </ul>
   </div>
 

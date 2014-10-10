@@ -9,14 +9,15 @@
 <script src="libs/jquery_mobile/jquery.mobile-1.4.4.min.js"></script>
 <script src="car.js"></script> 
 <script src="login.js"></script>
+<script type="text/javascript" src="facebookAPI.js"></script>
+<script src="script/communities.js"></script> 
 </head>
 <body>
 
-<div id = "index" data-role="page">
-	<div id = "content" data-role="main" class="ui-content">
-		<center>
-			<img src="media/img/logo.png" width="60%" style="max-width:400px">
-	
+<div data-role="page" id="index">
+  <div data-role="main" class="ui-content">
+ 	<center>
+		<img src="media/img/logo.png" width="60%" style="max-width:400px">
 			<div>
 				<form>
 					<input id="nameInput" placeholder="Benutzername" type="text">
@@ -27,13 +28,15 @@
 					<li><a id="login" class="ui-btn btn-green" style="text-align:center" onClick="login();">Anmelden</a></li>
 				</ul>
 
-				<div class="ui-grid-a btn-group">
-					<div class="ui-block-a"><a href="signup.html" data-transition="slide" class="ui-btn btn-small fa fa-pencil" style="text-align:center">Registrieren</a></div>
-					<div class="ui-block-b"><a href="#" class="ui-btn btn-small fa fa-facebook-square" style="text-align:center">Facebook</a></div>
-				</div>
-			</div>
-		</center>
-	</div>
+		<div class="ui-grid-a btn-group">
+  			<div class="ui-block-a"><a href="register.html" data-transition="slide" class="ui-btn btn-small fa fa-pencil" style="text-align:center">Registrieren</a></div>
+  			<div class="ui-block-b">
+  				<a id="fb-login" class="ui-btn btn-small fa fa-facebook-square" style="text-align:center">Facebook</a>
+  			</div>
+		</div>
+		</div>
+	</center>
+  </div>
 </div>
 
 </body>

@@ -30,10 +30,30 @@
 		<div class="ui-grid-solo" style="text-align:center">
 			<div class="ui-block-a">
 				<ul data-role="listview" data-inset="true">
-		   		    <li><label class="fa fa-car"><b>Audi Q5 - Weiß</b></label></li>
-		   		     <li><label class="fa fa-clock-o">Baujahr 2013</label></li>	  
-				    <li><label class="fa fa-globe">KI LO 913</label></li>
-				    <li><a href="profile.html" data-transition="slide"><label class="fa fa-user">Kate Kumalla</label></a></li>
+		   		    <li><label id="carmodelfield" class="fa fa-car"><b>
+						<script type="text/javascript">
+        					var myDiv1 = document.getElementById("carmodelfield");
+        					myDiv1.innerHTML = JSON.parse(localStorage.getItem('userdata')).modelName;
+       				    </script>
+		   		    </b></label></li>
+		   		     <li><label id="caryearfield" class="fa fa-clock-o">
+		   		   		 <script type="text/javascript">
+        					var myDiv2 = document.getElementById("caryearfield");
+        					myDiv2.innerHTML = JSON.parse(localStorage.getItem('userdata')).constructionYear;
+       				    </script>
+       				    </label></li>	  
+				    <li><label id="carlicenseplate" class="fa fa-globe">
+				     	<script type="text/javascript">
+        					var myDiv3 = document.getElementById("carlicenseplate");
+        					myDiv3.innerHTML = JSON.parse(localStorage.getItem('userdata')).licensePlate;
+       				    </script>
+				    </label></li>
+				    <li><a href="profile.html" data-transition="slide"><label id="carnamefield" class="fa fa-user">
+					<script type="text/javascript">
+        					var myDiv4= document.getElementById("carnamefield");
+        					myDiv4.innerHTML = JSON.parse(localStorage.getItem('userdata')).name;
+       				    </script>
+				    </label></a></li>
 				   
 				 </ul>   
 			</div>
@@ -46,7 +66,12 @@
 
     <ul data-role="listview" data-inset="true">
 	    <li>
-	   		 <div class="ui-block-a" style="white-space:normal" ><label><h3>Beschreibung:</h3> Der Audi Q5 ist ein Sport-Utility-Vehicle der Audi AG, das im November 2008 auf den Markt gekommen ist. Er wird in Ingolstadt, Changchun (Volksrepublik China) und Aurangabad (Indien) hergestellt und baut, wie auch der A4 B8 und der A5, auf Audis modularem Laengsbaukasten (MLB) auf. Der Q5 wurde erstmals auf der Messe Auto China Beijing im April 2008 vorgestellt.</label></div>  
+	   		 <div id="cardescription" class="ui-block-a" style="white-space:normal" ><label> 
+              <script type="text/javascript">
+                  var myDiv5 = document.getElementById("cardescription");
+                  myDiv5.innerHTML = "<h3>Beschreibung</h3>" + JSON.parse(localStorage.getItem('userdata')).descriptionCar;
+              </script>
+         </label></div>  
 
 		</li>	
 	</ul> 	
