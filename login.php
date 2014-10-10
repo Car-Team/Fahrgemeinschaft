@@ -10,7 +10,7 @@ if(!$db)
   exit("Verbindungsfehler: ".mysqli_connect_error());
 }
 
-$sqlQuery = "SELECT * FROM User u LEFT JOIN Cars c ON CarID = c.ID WHERE LoginName =  '".$loginName."' AND LoginPW =  '".$loginPw."'";
+$sqlQuery = "SELECT * FROM Users u LEFT JOIN Cars c ON CarID = c.ID WHERE LoginName =  '".$loginName."' AND LoginPW =  '".$loginPw."'";
 
 //$sqlQuery = "SELECT * FROM User WHERE LoginName =  '".$loginName."' AND LoginPW =  '".$loginPw."'";
 
