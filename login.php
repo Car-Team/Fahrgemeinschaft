@@ -33,13 +33,14 @@ if($successful) {
 	*/
 	
 	$loginResult = array(
-        'successful'    => $successful,
-		'id'			=> $resultData[0],//ID
-        'name'          => $resultData[3],//Name
-        'email'			=> $resultData[4],//Email
-        'tel'			=> $resultData[5],//Tel
-        'picID'			=> $resultData[6],//PicID
-		'carID'			=> $resultData[7],//CarID
+        'successful'   		=> $successful,
+		'id'				=> $resultData[0],//ID
+		'loginname'     	=> $resultData[1],//Name
+        'name'         		=> $resultData[3],//Name
+        'email'				=> $resultData[4],//Email
+        'tel'				=> $resultData[5],//Tel
+        'picID'				=> $resultData[6],//PicID
+		'carID'				=> $resultData[7],//CarID
 		'descriptionUser'	=> $resultData[8],//CarID
 		'modelName'			=> $resultData[10],//ModelName
 		'licensePlate'		=> $resultData[11],//LicensePlate

@@ -1,4 +1,4 @@
- $(document).on('pagebeforeshow', '#profile', function(){ 
+ $(document).on('pageinit', '#profile', function(){ 
 		if($(window).width()<430){
 			 $("#profile_block_a").css({ // resize the image     			
 	     			'width': 'calc(98%)'
@@ -64,7 +64,7 @@
 
 });
 
-$(document).on('pagebeforeshow', '#car', function() {
+$(document).on('pageinit', '#car', function() {
 		//alert($(window).width())
 		if($(window).width()<430){
 				$("#car_block_a").css({ // resize the image     			
