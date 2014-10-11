@@ -11,107 +11,98 @@
 <script src="login.js"></script>
 </head>
 <body>
-
 <div data-role="page" id="profile">
-
   <div data-role="header">
     <h1>Profil</h1>
     <a href="menu.html" data-transition="slide" data-direction="reverse" class="ui-btn btn-only-icon fa fa-arrow-left"></a>
   </div>
-
-  <div data-role="main" class="ui-content">
-  </div>
-
-<div class="ui-grid-a">
-    <div class="ui-block-a ui-grid-divider" style="width:38%" id="profile_block_a"> 
-    	<img id="profile_picture" src="http://www.sprachschach.de/wp-content/uploads/2014/05/Bewerbungsfoto-2-128x128.jpg">
-    	<!--http://wallpaperscraft.com/image/25142/256x256.jpg-->    	
-    	<div class="imgCaption" id="profile_picture_label"> <label class="fa fa-arrows-alt">Profilbild</label></div>
-    </div>
-    <div class="ui-block-b" style="width:60%" id="profile_block_b">
-		<div class="ui-grid-solo" style="text-align:center">
-
-			<!--<div class="ui-block-a"><label class="fa fa-user"><b>Dimitri Kumalla (32)</b></label></div>  
-		    <div class="ui-block-a"><label class="fa fa-at">D.Kumalla82@gmx.net</label></div>
-		    <div class="ui-block-a"><label class="fa fa-phone-square">0172 144 85 93</label></div>
-		    <div class="ui-block-a"><label class="fa fa-car">Audi Q5 (KI LO 913)</label></div>-->
-		<div class="ui-block-a">
-				<ul data-role="listview" data-inset="true">
-		   		    <li><label id="namefield" class="fa fa-user"><b>
-		   		        <script type="text/javascript">
-        					var myDiv1 = document.getElementById("namefield");
-        					myDiv1.innerHTML = JSON.parse(localStorage.getItem('userdata')).name;
-       				    </script>
-		   		    </b></label></li>	  
-				    <li><label id="emailfield" class="fa fa-at">
-				  		<script type="text/javascript">
-        					var myDiv2 = document.getElementById("emailfield");
-        					myDiv2.innerHTML = JSON.parse(localStorage.getItem('userdata')).email;
-       				    </script>
-				    </label></li>
-				    <li><label id="telfield" class="fa fa-phone-square">
-				  		<script type="text/javascript">
-        					var myDiv3 = document.getElementById("telfield");
-        					myDiv3.innerHTML = JSON.parse(localStorage.getItem('userdata')).tel;
-       				    </script>
-				    </label></li>
-				    <li><a href="car.html" data-transition="slide"><label id="carfield" class="fa fa-car">
-				  		<script type="text/javascript">
-        					var myDiv4 = document.getElementById("carfield");
-        					myDiv4.innerHTML = JSON.parse(localStorage.getItem('userdata')).modelName;
-       				    </script>
-				    </label></a></li>
-				 </ul>   
+  <div data-role="main" class="ui-content"></div>
+	<div class="ui-grid-a">
+	    <div class="ui-block-a ui-grid-divider" style="width:38%" id="profile_block_a"> 
+	    	<img id="profile_picture" src="http://www.sprachschach.de/wp-content/uploads/2014/05/Bewerbungsfoto-2-128x128.jpg">
+	    	<!--http://wallpaperscraft.com/image/25142/256x256.jpg-->    	
+	    	<div class="imgCaption" id="profile_picture_label"> <label class="fa fa-arrows-alt">Profilbild</label></div>
+	    </div>
+	    <div class="ui-block-b" style="width:60%" id="profile_block_b">
+			<div class="ui-grid-solo" style="text-align:center">
+				<!--<div class="ui-block-a"><label class="fa fa-user"><b>Dimitri Kumalla (32)</b></label></div>  
+			    <div class="ui-block-a"><label class="fa fa-at">D.Kumalla82@gmx.net</label></div>
+			    <div class="ui-block-a"><label class="fa fa-phone-square">0172 144 85 93</label></div>
+			    <div class="ui-block-a"><label class="fa fa-car">Audi Q5 (KI LO 913)</label></div>-->
+			<div class="ui-block-a">
+					<ul data-role="listview" data-inset="true">
+			   		    <li><label id="namefield" class="fa fa-user"><b>
+			   		        <script type="text/javascript">
+	        					var myDiv1 = document.getElementById("namefield");
+	        					myDiv1.innerHTML = JSON.parse(localStorage.getItem('userdata')).name;
+	       				    </script>
+			   		    </b></label></li>	  
+					    <li><label id="emailfield" class="fa fa-at">
+					  		<script type="text/javascript">
+	        					var myDiv2 = document.getElementById("emailfield");
+	        					myDiv2.innerHTML = JSON.parse(localStorage.getItem('userdata')).email;
+	       				    </script>
+					    </label></li>
+					    <li><label id="telfield" class="fa fa-phone-square">
+					  		<script type="text/javascript">
+	        					var myDiv3 = document.getElementById("telfield");
+	        					myDiv3.innerHTML = JSON.parse(localStorage.getItem('userdata')).tel;
+	       				    </script>
+					    </label></li>
+					    <li><a href="car.html" data-transition="slide"><label id="carfield" class="fa fa-car">
+					  		<script type="text/javascript">
+	        					var myDiv4 = document.getElementById("carfield");
+	        					myDiv4.innerHTML = JSON.parse(localStorage.getItem('userdata')).modelName;
+	       				    </script>
+					    </label></a></li>
+					 </ul>   
+				</div>
 			</div>
 		</div>
 	</div>
+
+	<div class="ui-grid-solo" id="description">
+	    <!-- <div class="ui-block-a"><input type="button" value="More"></div>-->
+	    
+	    <ul data-role="listview" data-inset="true">
+		    <li>
+		   		 <div id="userdescription" class="ui-block-a" style="white-space:normal"><label> 
+	              <script type="text/javascript">
+	                  var myDiv5 = document.getElementById("userdescription");
+	                  myDiv5.innerHTML = "<h3>Beschreibung</h3>" + JSON.parse(localStorage.getItem('userdata')).descriptionUser;
+	              </script>
+	         	</label></div>  
+			</li>	
+		</ul>
+		
+	 	<div class="ui-block-a" style="text-align:center"><label><h3>Pinnwand:</h3></label></div>  
+	 	<div id="wallHeader"></div>
+	    <ul data-role="listview" data-inset="true">
+		    <li data-role="list-divider">Freitag, 03.10.2014 <span class="ui-li-count">2</span></li>
+		    <li><a href="index.html">
+		    <h2>Simon Weber</h2>
+		    <p><strong>Gemeinschaft: WAK</strong></p>
+		    <label style="white-space:normal">Lern mal Autofahren!!!!</label>
+		        <p class="ui-li-aside"><strong>6:24</strong>PM</p>
+		    </a></li>
+		    <li><a href="index.html">
+		    <h2>Franz Clausen</h2>
+		    <p><strong>Gemeinschaft: NorwestLotto Schleswig-Holstein</strong></p>
+		    <label style="white-space:normal">Der Mekong-Riesenwels (Pangasianodon gigas) ist die groesste Art der Familie der Haiwelse (Pangasiidae) und einer der groessten Suesswasserfische der Welt. Er kommt ausschliesslich im Mekong vor und gilt durch Ueber­fischung und Verlust des Lebens­raums als vom Aussterben bedroht. In Suedost­asien wird er als Flagg­schiffart eingesetzt, um die Notwendigkeit des Schutzes großer Fische im Mekong zu vermitteln.</label>
+		        <p class="ui-li-aside"><strong>9:18</strong>AM</p>
+		    </a></li>
+		    <li data-role="list-divider">Mittwoch, 01.10.2014 <span class="ui-li-count">1</span></li>
+		    <li><a href="index.html">
+		    <h2>Hugo Walker</h2>
+		    <p><strong>Gemeinschaft: WAK</strong></p>
+		    <label style="white-space:normal">Na man!</label>
+		        <p class="ui-li-aside"><strong>4:48</strong>PM</p>
+		    </a></li>
+		</ul>
+	</div>
+<!--</div>-->
+<div data-role="footer">
 </div>
-<div class="ui-grid-solo" id="description">
-    <!-- <div class="ui-block-a"><input type="button" value="More"></div>-->
-    <div class="ui-block-a" style="text-align:center"><label> </label></div>  
-
-    <ul data-role="listview" data-inset="true">
-	    <li>
-	   		 <div id="userdescription" class="ui-block-a" style="white-space:normal" ><label> 
-              <script type="text/javascript">
-                  var myDiv5 = document.getElementById("userdescription");
-                  myDiv5.innerHTML = "<h3>Beschreibung</h3>" + JSON.parse(localStorage.getItem('userdata')).descriptionUser;
-              </script>
-         </label></div>  
-
-		</li>	
-	</ul>
-
- 	<div class="ui-block-a" style="text-align:center"><label><h3>Pinnwand:</h3></label></div>  
-
-    <ul data-role="listview" data-inset="true">
-	    <li data-role="list-divider">Freitag, 03.10.2014 <span class="ui-li-count">2</span></li>
-	    <li><a href="index.html">
-	    <h2>Simon Weber</h2>
-	    <p><strong>Gemeinschaft: WAK</strong></p>
-	    <label style="white-space:normal">Lern mal Autofahren!!!!</label>
-	        <p class="ui-li-aside"><strong>6:24</strong>PM</p>
-	    </a></li>
-	    <li><a href="index.html">
-	    <h2>Franz Clausen</h2>
-	    <p><strong>Gemeinschaft: NorwestLotto Schleswig-Holstein</strong></p>
-	    <label style="white-space:normal">Der Mekong-Riesenwels (Pangasianodon gigas) ist die groesste Art der Familie der Haiwelse (Pangasiidae) und einer der groessten Suesswasserfische der Welt. Er kommt ausschliesslich im Mekong vor und gilt durch Ueber­fischung und Verlust des Lebens­raums als vom Aussterben bedroht. In Suedost­asien wird er als Flagg­schiffart eingesetzt, um die Notwendigkeit des Schutzes großer Fische im Mekong zu vermitteln.</label>
-	        <p class="ui-li-aside"><strong>9:18</strong>AM</p>
-	    </a></li>
-	    <li data-role="list-divider">Mittwoch, 01.10.2014 <span class="ui-li-count">1</span></li>
-	    <li><a href="index.html">
-	    <h2>Hugo Walker</h2>
-	    <p><strong>Gemeinschaft: WAK</strong></p>
-	    <label style="white-space:normal">Na man!</label>
-	        <p class="ui-li-aside"><strong>4:48</strong>PM</p>
-	    </a></li>
-	</ul>
 </div>
-
-
-
-  <div data-role="footer">
-  </div>
-</div> 
 </body>
 </html>

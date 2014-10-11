@@ -21,62 +21,62 @@
   <div data-role="main" class="ui-content">
   </div>
 
-<div class="ui-grid-a">
-    <div class="ui-block-a ui-grid-divider" style="width:38%" id="car_block_a"> 
-    	<img id="car_picture" src="http://www.iamaudi.com/img/Audi_Q5_White_Rad_1.jpg"><!--https://www.tripwell.com/assets/static/images/unknown_user.png">-->
-    	<div class="imgCaption" id="car_picture_label"> <label class="fa fa-arrows-alt">Fahrzeug Bild</label></div>
+    <div class="ui-grid-a">
+        <div class="ui-block-a ui-grid-divider" style="width:38%" id="car_block_a"> 
+        	<img id="car_picture" src="http://www.iamaudi.com/img/Audi_Q5_White_Rad_1.jpg"><!--https://www.tripwell.com/assets/static/images/unknown_user.png">-->
+        	<div class="imgCaption" id="car_picture_label"> <label class="fa fa-arrows-alt">Fahrzeug Bild</label></div>
+        </div>
+        <div class="ui-block-b" style="width:60%" id="car_block_b">
+    		<div class="ui-grid-solo" style="text-align:center">
+    			<div class="ui-block-a">
+    				<ul data-role="listview" data-inset="true">
+    		   		    <li><label id="carmodelfield" class="fa fa-car"><b>
+    						<script type="text/javascript">
+            					var myDiv1 = document.getElementById("carmodelfield");
+            					myDiv1.innerHTML = JSON.parse(localStorage.getItem('userdata')).modelName;
+           				    </script>
+    		   		    </b></label></li>
+    		   		     <li><label id="caryearfield" class="fa fa-clock-o">
+    		   		   		 <script type="text/javascript">
+            					var myDiv2 = document.getElementById("caryearfield");
+            					myDiv2.innerHTML = JSON.parse(localStorage.getItem('userdata')).constructionYear;
+           				    </script>
+           				    </label></li>	  
+    				    <li><label id="carlicenseplate" class="fa fa-globe">
+    				     	<script type="text/javascript">
+            					var myDiv3 = document.getElementById("carlicenseplate");
+            					myDiv3.innerHTML = JSON.parse(localStorage.getItem('userdata')).licensePlate;
+           				    </script>
+    				    </label></li>
+    				    <li><a href="profile.html" data-transition="slide"><label id="carnamefield" class="fa fa-user">
+    					<script type="text/javascript">
+            					var myDiv4= document.getElementById("carnamefield");
+            					myDiv4.innerHTML = JSON.parse(localStorage.getItem('userdata')).name;
+           				    </script>
+    				    </label></a></li>
+    				   
+    				 </ul>   
+    			</div>
+    		</div>
+    	</div>
     </div>
-    <div class="ui-block-b" style="width:60%" id="car_block_b">
-		<div class="ui-grid-solo" style="text-align:center">
-			<div class="ui-block-a">
-				<ul data-role="listview" data-inset="true">
-		   		    <li><label id="carmodelfield" class="fa fa-car"><b>
-						<script type="text/javascript">
-        					var myDiv1 = document.getElementById("carmodelfield");
-        					myDiv1.innerHTML = JSON.parse(localStorage.getItem('userdata')).modelName;
-       				    </script>
-		   		    </b></label></li>
-		   		     <li><label id="caryearfield" class="fa fa-clock-o">
-		   		   		 <script type="text/javascript">
-        					var myDiv2 = document.getElementById("caryearfield");
-        					myDiv2.innerHTML = JSON.parse(localStorage.getItem('userdata')).constructionYear;
-       				    </script>
-       				    </label></li>	  
-				    <li><label id="carlicenseplate" class="fa fa-globe">
-				     	<script type="text/javascript">
-        					var myDiv3 = document.getElementById("carlicenseplate");
-        					myDiv3.innerHTML = JSON.parse(localStorage.getItem('userdata')).licensePlate;
-       				    </script>
-				    </label></li>
-				    <li><a href="profile.html" data-transition="slide"><label id="carnamefield" class="fa fa-user">
-					<script type="text/javascript">
-        					var myDiv4= document.getElementById("carnamefield");
-        					myDiv4.innerHTML = JSON.parse(localStorage.getItem('userdata')).name;
-       				    </script>
-				    </label></a></li>
-				   
-				 </ul>   
-			</div>
-		</div>
-	</div>
-</div>
-<div class="ui-grid-solo" id="description">
-    <!-- <div class="ui-block-a"><input type="button" value="More"></div>-->
-    <div class="ui-block-a" style="text-align:center"><label> </label></div>  
+    <div class="ui-grid-solo" id="description">
+        <!-- <div class="ui-block-a"><input type="button" value="More"></div>-->
+        <div class="ui-block-a" style="text-align:center"><label> </label></div>  
 
-    <ul data-role="listview" data-inset="true">
-	    <li>
-	   		 <div id="cardescription" class="ui-block-a" style="white-space:normal" ><label> 
-              <script type="text/javascript">
-                  var myDiv5 = document.getElementById("cardescription");
-                  myDiv5.innerHTML = "<h3>Beschreibung</h3>" + JSON.parse(localStorage.getItem('userdata')).descriptionCar;
-              </script>
-         </label></div>  
+        <ul data-role="listview" data-inset="true">
+    	    <li>
+    	   		 <div id="cardescription" class="ui-block-a" style="white-space:normal" ><label> 
+                  <script type="text/javascript">
+                      var myDiv5 = document.getElementById("cardescription");
+                      myDiv5.innerHTML = "<h3>Beschreibung</h3>" + JSON.parse(localStorage.getItem('userdata')).descriptionCar;
+                  </script>
+             </label></div>  
 
-		</li>	
-	</ul> 	
-</div>
-
+    		</li>	
+    	</ul> 	
+    </div>
+  </div>
   <div data-role="footer">
   </div>
 </div> 

@@ -1,4 +1,41 @@
- $(document).on('pageinit', '#profile', function(){ 
+ ///////////////////////////////////////////PROFILE.HTML///////////////////////////////////////////////
+  $(document).on('pageinit', '#profile', function(){ 
+ 		//////////////////////////////CONNECT TO DB TO GET THE WALL / "PINNWAND EINTRAEGE"////////////////////////
+		var userLoggedInDataloginName = JSON.parse(localStorage.getItem('userdata')).loginname;
+		var userLoggedInDataloginID = JSON.parse(localStorage.getItem('userdata')).id;	
+		var myWallEntries;	
+		var userLoggedInData = {
+			'loginName' : userLoggedInDataloginName,
+			'loginID' : userLoggedInDataloginID
+		}
+		$.ajax({
+			type: "POST",
+			url: "wall.php",
+			data: userLoggedInData,
+			dataType: "json",			
+			success:	function(wallentries) {	
+				//alert(json[0].Textinput);
+				var i = 0;
+				var text = "Einträge auf der Pinnwand - live gelesen aus der DB:\n\n";
+				myWallEntries=wallentries;
+				for (;myWallEntries[i];) {
+    				text += myWallEntries[i].Sender + ": " + myWallEntries[i].Textinput + "\n";
+    				i++;
+				}
+				//alert(text)
+				/////////////////////////////////////////////////////////////////////////////////////////////////////
+				var j = 0;
+			   	var outputtext ="Einträge auf der Pinnwand - live gelesen aus der DB:\n\n<ul>";// = "<li data-role='list-divider'>Freitag, 03.10.2014 <span class='ui-li-count'>2</span></li>";
+				for (;myWallEntries[j];) {		        // Create the list item:
+				       outputtext += "<li>" + myWallEntries[j].Sender + ": " + myWallEntries[j].Textinput + "</li>";
+				       j++;
+				}		
+				outputtext +="</ul>";			//alert(outputtext);
+				document.getElementById("wallHeader").innerHTML = outputtext;
+				/////////////////////////////////////////////////////////////////////////////////////////////////////
+			},
+		});	
+		////////////////////////////////////////AUTO RESIZE IMAGE///////////////////////////////////////////////
 		if($(window).width()<430){
 			 $("#profile_block_a").css({ // resize the image     			
 	     			'width': 'calc(98%)'
@@ -15,6 +52,7 @@
 	     			'width': 'calc(60%)'
 			   	});
 			}
+		///////////////////////////////////////////ON_CLICK EVENTS///////////////////////////////////////////////
 		$("#profile_picture").on("click", function(e1) {
 			var bodywidth = $(window).width();//document.getElementById("description").offsetWidth
 			if(bodywidth>800){bodywidth=800}
@@ -63,8 +101,9 @@
 		});
 
 });
-
+///////////////////////////////////////////CAR.HTML///////////////////////////////////////////////
 $(document).on('pageinit', '#car', function() {
+		///////////////////////////////////////////ON_CLICK EVENTS///////////////////////////////////////////////
 		//alert($(window).width())
 		if($(window).width()<430){
 				$("#car_block_a").css({ // resize the image     			
