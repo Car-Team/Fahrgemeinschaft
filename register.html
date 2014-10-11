@@ -8,7 +8,9 @@
 <script src="libs/jquery/jquery-1.11.1.min.js"></script>
 <script src="libs/jquery_mobile/jquery.mobile-1.4.4.min.js"></script>
 <script src="car.js"></script> 
-<script src="login.js"></script>
+
+<script src="script/login.js"></script>
+<script src="script/signup.js"></script>
 </head>
 <body>
 
@@ -23,14 +25,14 @@
       <input id="nameInput" placeholder="Vor- und Nachname" type="text">
       <input id="emailInput" placeholder="E-Mail" type="text">
       <input id="telInput" placeholder="Telefonnummer" type="text">
-      <input id="nameInput" placeholder="Benutzername (Nickname)" type="text">      
+      <input id="usernameInput" placeholder="Benutzername (Nickname)" type="text">      
       <input id="pwInput" placeholder="Passwort" type="password">
       <input id="pwConfirmInput" placeholder="Passwort wiederholen" type="password">
     </form>
 
     <div class="ui-grid-a">
       <div class="ui-block-a"><a href="index.html" data-transition="slide" class="ui-btn fa fa-times" style="text-align:center">Abbrechen</a></div>
-      <div class="ui-block-b"><a href="menu.html" data-transition="slide" class="ui-btn btn-green fa fa-check" style="text-align:center">Registrieren</a></div>
+      <div class="ui-block-b"><a data-transition="slide" class="ui-btn btn-green fa fa-check" style="text-align:center" onClick="signup();">Registrieren</a></div>
     </div>
   </div>
 

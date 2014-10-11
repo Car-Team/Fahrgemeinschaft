@@ -12,7 +12,7 @@ function login() {
 		
 	$.ajax({
 		type: "POST",
-		url: "login.php",
+		url: "php/login.php",
 		data: loginData,
 		dataType: "json",
 		success:	function(loginResult) {
