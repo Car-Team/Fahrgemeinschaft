@@ -23,15 +23,28 @@
     				i++;
 				}
 				//alert(text)
-				/////////////////////////////////////////////////////////////////////////////////////////////////////
+				/////////////////////////////////////////////////////////////////////////////////////////////////////				
+			    //	var outputtext ="Einträge auf der Pinnwand - live gelesen aus der DB:";// = "<li data-role='list-divider'>Freitag, 03.10.2014 <span class='ui-li-count'>2</span></li>";
+				//var outputtext = "<ul data-role='listview' data-inset='true'>";
+				//outputtext += "<li data-role='list-divider'>Freitag, 03.10.2014 <span class='ui-li-count'>2</span></li>";
+				////var outputtext="";
 				var j = 0;
-			   	var outputtext ="Einträge auf der Pinnwand - live gelesen aus der DB:\n\n<ul>";// = "<li data-role='list-divider'>Freitag, 03.10.2014 <span class='ui-li-count'>2</span></li>";
 				for (;myWallEntries[j];) {		        // Create the list item:
-				       outputtext += "<li>" + myWallEntries[j].Sender + ": " + myWallEntries[j].Textinput + "</li>";
+				       //outputtext += "<li>" +  "(" + myWallEntries[j].Timestamp+ ") " + myWallEntries[j].Sender + ": " + myWallEntries[j].Textinput + "</li>";
+				       $("#ulWallHeader").append(
+				      	$("<li data-role='list-divider'>").append(
+				       	 (myWallEntries[j].Timestamp).substring(0,11)+"<span class='ui-li-count'>"+myWallEntries.length+"</span>"
+				       )).listview("refresh");
+
+
+				       $("#ulWallHeader").append(
+				       	$("<li>").append(
+					       	 "<h2>"+myWallEntries[j].Sender + "</h2>" +
+					       	 "<label style='white-space:normal'>" + myWallEntries[j].Textinput + "</label>"+
+					       	  "<p class='ui-li-aside'><strong>"+ (myWallEntries[j].Timestamp).substring(11,16) + "</strong></p>"
+				       	)).listview("refresh");
 				       j++;
 				}		
-				outputtext +="</ul>";			//alert(outputtext);
-				document.getElementById("wallHeader").innerHTML = outputtext;
 				/////////////////////////////////////////////////////////////////////////////////////////////////////
 			},
 		});	
