@@ -1,5 +1,22 @@
  ///////////////////////////////////////////PROFILE.HTML///////////////////////////////////////////////
   $(document).on('pageinit', '#profile', function(){ 
+ 		////////////////////////////////////////AUTO RESIZE IMAGE///////////////////////////////////////////////
+		if($(window).width()<430){
+			 $("#profile_block_a").css({ // resize the image     			
+	     			'width': 'calc(98%)'
+			   	});
+			   	$("#profile_block_b").css({ // resize the image     			
+	     			'width': 'calc(100%)'
+			   	});
+		}
+		 else {
+			   $("#profile_block_a").css({ // resize the image     			
+	     			'width': 'calc(38%)'
+			   	});
+			   $("#profile_block_b").css({ // resize the image     			
+	     			'width': 'calc(60%)'
+			   	});
+			}
  		//////////////////////////////CONNECT TO DB TO GET THE WALL / "PINNWAND EINTRAEGE"////////////////////////
 		var userLoggedInDataloginName = JSON.parse(localStorage.getItem('userdata')).loginname;
 		var userLoggedInDataloginID = JSON.parse(localStorage.getItem('userdata')).id;	
@@ -48,23 +65,7 @@
 				/////////////////////////////////////////////////////////////////////////////////////////////////////
 			},
 		});	
-		////////////////////////////////////////AUTO RESIZE IMAGE///////////////////////////////////////////////
-		if($(window).width()<430){
-			 $("#profile_block_a").css({ // resize the image     			
-	     			'width': 'calc(98%)'
-			   	});
-			   	$("#profile_block_b").css({ // resize the image     			
-	     			'width': 'calc(100%)'
-			   	});
-		}
-		 else {
-			   $("#profile_block_a").css({ // resize the image     			
-	     			'width': 'calc(38%)'
-			   	});
-			   $("#profile_block_b").css({ // resize the image     			
-	     			'width': 'calc(60%)'
-			   	});
-			}
+
 		///////////////////////////////////////////ON_CLICK EVENTS///////////////////////////////////////////////
 		$("#profile_picture").on("click", function(e1) {
 			var bodywidth = $(window).width();//document.getElementById("description").offsetWidth
