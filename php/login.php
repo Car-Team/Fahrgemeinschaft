@@ -33,7 +33,8 @@ if($successful) {
 		'seats'				=> $resultData[12],//Seats
 		'constructionYear'	=> $resultData[13],//ConstructionYear
 		'carPicID'			=> $resultData[14],//PicID
-		'descriptionCar'	=> $resultData[15]//PicID
+		'descriptionCar'	=> $resultData[15],//PicID
+		'colourCar'			=> $resultData[16]//PicID
 	);
 	exit(json_encode($loginResult));
 } else {

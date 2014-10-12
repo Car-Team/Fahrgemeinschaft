@@ -30,7 +30,8 @@ function login() {
 								licensePlate: loginResult.licensePlate,
 								seats: loginResult.seats,
 								constructionYear: loginResult.constructionYear,
-								descriptionCar: loginResult.descriptionCar}));
+								descriptionCar: loginResult.descriptionCar,
+								colourCar: loginResult.colourCar}));
 							window.document.location.href = "menu.html";
 						}else {
 							alert("Falscher Benutzername oder falsches Passwort!");

@@ -33,13 +33,13 @@
     		   		    <li><label id="carmodelfield" class="fa fa-car"><b>
     						<script type="text/javascript">
             					var myDiv1 = document.getElementById("carmodelfield");
-            					myDiv1.innerHTML = JSON.parse(localStorage.getItem('userdata')).modelName;
+            					myDiv1.innerHTML = JSON.parse(localStorage.getItem('userdata')).modelName +  " ("+JSON.parse(localStorage.getItem('userdata')).colourCar+")";
            				    </script>
     		   		    </b></label></li>
     		   		     <li><label id="caryearfield" class="fa fa-clock-o">
     		   		   		 <script type="text/javascript">
             					var myDiv2 = document.getElementById("caryearfield");
-            					myDiv2.innerHTML = JSON.parse(localStorage.getItem('userdata')).constructionYear;
+            					myDiv2.innerHTML = "Bauhjahr " + JSON.parse(localStorage.getItem('userdata')).constructionYear;
            				    </script>
            				    </label></li>	  
     				    <li><label id="carlicenseplate" class="fa fa-globe">
@@ -51,7 +51,7 @@
                  <li><label id="carseats" class="fa fa-users">
                   <script type="text/javascript">
                       var myDiv3 = document.getElementById("carseats");
-                      myDiv3.innerHTML = JSON.parse(localStorage.getItem('userdata')).seats;
+                      myDiv3.innerHTML = JSON.parse(localStorage.getItem('userdata')).seats + " Sitze";
                       </script>
                 </label></li>
     				    <li><a href="profile.html" data-transition="slide"><label id="carnamefield" class="fa fa-user">
