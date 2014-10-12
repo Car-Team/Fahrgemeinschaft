@@ -3,6 +3,7 @@ $loginName = $_POST['loginName'];
 $loginPw = $_POST['loginPw'];
 
 $db = mysqli_connect("87.230.14.183", "car", "car", "car");
+mysqli_query($db, "SET NAMES 'utf8'");
 if(!$db)
 {
   exit("Verbindungsfehler: ".mysqli_connect_error());

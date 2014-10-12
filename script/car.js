@@ -10,7 +10,7 @@
 		}
 		$.ajax({
 			type: "POST",
-			url: "wall.php",
+			url: "php/wall.php",
 			data: userLoggedInData,
 			dataType: "json",			
 			success:	function(wallentries) {	

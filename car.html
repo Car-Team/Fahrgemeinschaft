@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="libs/car/car.css">
 <script src="libs/jquery/jquery-1.11.1.min.js"></script>
 <script src="libs/jquery_mobile/jquery.mobile-1.4.4.min.js"></script>
-<script src="car.js"></script> 
+<script src="script/car.js"></script> 
 </head>
 <body>
 
@@ -48,6 +48,12 @@
             					myDiv3.innerHTML = JSON.parse(localStorage.getItem('userdata')).licensePlate;
            				    </script>
     				    </label></li>
+                 <li><label id="carseats" class="fa fa-users">
+                  <script type="text/javascript">
+                      var myDiv3 = document.getElementById("carseats");
+                      myDiv3.innerHTML = JSON.parse(localStorage.getItem('userdata')).seats;
+                      </script>
+                </label></li>
     				    <li><a href="profile.html" data-transition="slide"><label id="carnamefield" class="fa fa-user">
     					<script type="text/javascript">
             					var myDiv4= document.getElementById("carnamefield");
