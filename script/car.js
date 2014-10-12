@@ -35,10 +35,10 @@
 				var i = 0;
 				var text = "Einträge auf der Pinnwand - live gelesen aus der DB:\n\n";
 				myWallEntries=wallentries;
-				for (;myWallEntries[i];) {
-    				text += myWallEntries[i].Sender + ": " + myWallEntries[i].Textinput + "\n";
-    				i++;
-				}
+				//for (;myWallEntries[i];) {
+    			//	text += myWallEntries[i].Sender + ": " + myWallEntries[i].Textinput + "\n";
+    			//	i++;
+				//}
 				//alert(text)
 				/////////////////////////////////////////////////////////////////////////////////////////////////////				
 			    //	var outputtext ="Einträge auf der Pinnwand - live gelesen aus der DB:";// = "<li data-role='list-divider'>Freitag, 03.10.2014 <span class='ui-li-count'>2</span></li>";
@@ -48,9 +48,10 @@
 				var j = 0;
 				for (;myWallEntries[j];) {		        // Create the list item:
 				       //outputtext += "<li>" +  "(" + myWallEntries[j].Timestamp+ ") " + myWallEntries[j].Sender + ": " + myWallEntries[j].Textinput + "</li>";
+				       var date = (myWallEntries[j].Timestamp).substring(0,11);
 				       $("#ulWallHeader").append(
 				      	$("<li data-role='list-divider'>").append(
-				       	 (myWallEntries[j].Timestamp).substring(0,11)+"<span class='ui-li-count'>"+myWallEntries.length+"</span>"
+				       	 date.substring(8,10)+"."+date.substring(5,7)+"."+date.substring(0,4)+"<span class='ui-li-count'>"+myWallEntries.length+"</span>"
 				       )).listview("refresh");
 
 
