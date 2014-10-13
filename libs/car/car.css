@@ -25,7 +25,7 @@ background: -ms-linear-gradient(top,  #dee5f0 0%,#b9c6dd 100%);
 background: linear-gradient(to bottom,  #dee5f0 0%,#b9c6dd 100%);
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dee5f0', endColorstr='#b9c6dd',GradientType=0 );
 
-	color: black;
+	color: #363636;
 	text-shadow: none;
 }
 
