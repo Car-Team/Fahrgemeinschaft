@@ -8,18 +8,30 @@
 <script src="libs/jquery/jquery-1.11.1.min.js"></script>
 <script src="libs/jquery_mobile/jquery.mobile-1.4.4.min.js"></script>
 <script src="script/car.js"></script> 
-<script type="text/javascript" src="facebookAPI.js"></script>
 <script src="script/communities.js"></script> 
-
 <script src="script/login.js"></script>
 <script src="script/signup.js"></script>
+<script type="text/javascript" src="script/facebookAPI.js"></script>
+<link href='http://fonts.googleapis.com/css?family=Alfa+Slab One' rel='stylesheet' type='text/css'>
 </head>
 <body>
+
+    <script src="http://connect.facebook.net/de_DE/all.js"></script>
+    <script>
+      FB.init({
+        appId  : '566575780137093', // Anwendungs ID
+        status : true, // Login Status prüfen
+        cookie : true, // Cookies nutzen
+        xfbml  : true  // XFBML parsen
+      });
+    </script>
 
 <div data-role="page" id="index">
   <div data-role="main" class="ui-content">
  	<center>
-		<img src="media/img/logo.png" width="60%" style="max-width:400px">
+		<img src="media/img/logo_rand_complete.svg" width="60%" style="max-width:400px">
+		
+		 <p class="threeDeeFont">fahrgemeinschaft</p>
 			<div>
 				<form>
 					<input id="nameInput" placeholder="Benutzername" type="text">
@@ -27,11 +39,14 @@
 				</form>
 
 				<ul data-role="listview" data-inset="true" data-filter="false" data-theme="a" data-content-theme="a">
-					<li><a id="login" class="ui-btn btn-green" style="text-align:center" onClick="login();">Anmelden</a></li>
+					<li>
+						<a id="login" class="ui-btn btn-green" style="text-align:center" onClick="login();">Anmelden</a>
+					</li>
 				</ul>
 
 		<div class="ui-grid-a btn-group">
-  			<div class="ui-block-a"><a href="register.html" data-transition="slide" class="ui-btn btn-small fa fa-pencil" style="text-align:center">Registrieren</a></div>
+  			<div class="ui-block-a">
+  				<a href="register.html" data-transition="slide" class="ui-btn btn-small fa fa-pencil" style="text-align:center">Registrieren</a></div>
   			<div class="ui-block-b">
   				<a id="fb-login" class="ui-btn btn-small fa fa-facebook-square" style="text-align:center">Facebook</a>
   			</div>

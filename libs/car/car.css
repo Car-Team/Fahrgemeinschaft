@@ -218,3 +218,27 @@ ul[data-role="listview"] > li[data-role="list-divider"] {
 .min-textarea {
 	min-height: 100px;
 }
+
+.fontStyleLogIn {
+	font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+	color: #5F61BF;
+	font-size: 250%;
+	padding: 0;
+	font-weight: bold;
+	text-transform: lowercase;
+	text-shadow: 7px 7px 3px #A1A1A1;
+}
+.threeDeeFont {
+	margin-top: 0px;
+	font-family: Alfa Slab One ;
+	line-height: 1em;
+	color: #2f24d4;
+	font-size: 250%;
+	text-shadow:0px 0px 0 rgb(21,10,186),1px 1px 0 rgb(15,4,180),
+	2px 2px 0 rgb(8,-3,173),3px 3px 0 rgb(1,-10,166),4px 4px 0 rgb(-5,-16,160),
+	5px 5px 0 rgb(-12,-23,153),6px 6px 0 rgb(-19,-30,146),7px 7px 0 rgb(-25,-36,140),
+	8px 8px 0 rgb(-32,-43,133),9px 9px 0 rgb(-39,-50,126),10px 10px 0 rgb(-45,-56,120),
+	11px 11px 0 rgb(-52,-63,113), 12px 12px 0 rgb(-59,-70,106),
+	13px 13px 12px rgba(0,0,0,0.3),13px 13px 1px rgba(0,0,0,0.5),
+	0px 0px 12px rgba(0,0,0,.2);
+}
