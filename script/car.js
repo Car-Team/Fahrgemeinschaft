@@ -69,7 +69,7 @@
 				       					var date2 = (myCommentEntries[i].Timestamp).substring(0,11);
 				       						 $("#ulWallHeader").append(
 										       	$("<li>").append(
-											       	 "<h2>"+ "Kommentar von: "+myCommentEntries[i].name+"</h2>" +
+											       	 "<h2>"+ myCommentEntries[i].name+"</h2>" +
 											       	 "<div align='justify'><label style='white-space:normal'>"+myCommentEntries[i].Textinput + "</label></div>"
 											       	  +"<p class='ui-li-aside'><strong>"+ date2.substring(8,10)+"."+date2.substring(5,7)+"."+date2.substring(0,4)+" - "+(myCommentEntries[i].Timestamp).substring(11,16)+  "</strong></p>"
 										     )).listview("refresh");
