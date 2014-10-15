@@ -20,47 +20,68 @@
  		//////////////////////////////CONNECT TO DB TO GET THE WALL / "PINNWAND EINTRAEGE"////////////////////////
 		var userLoggedInDataloginName = JSON.parse(localStorage.getItem('userdata')).loginname;
 		var userLoggedInDataloginID = JSON.parse(localStorage.getItem('userdata')).id;	
-		var myWallEntries;	
+		var myWallEntries;
+		var myCommentEntries;	
 		var userLoggedInData = {
 			'loginName' : userLoggedInDataloginName,
 			'loginID' : userLoggedInDataloginID
 		}
+				/////////////////////////////////////////////////////////////////////////////////////////////////////
+				$.ajax({
+							type: "POST",
+							url: "php/comments.php",
+							data: userLoggedInData,
+							dataType: "json",			
+							success:	function(commententries) {	
+								
+								myCommentEntries=commententries;
+
+						},
+				});	
+				/////////////////////////////////////////////////////////////////////////////////////////////////////
 		$.ajax({
 			type: "POST",
 			url: "php/wall.php",
 			data: userLoggedInData,
 			dataType: "json",			
 			success:	function(wallentries) {	
-				//alert(json[0].Textinput);
 				var i = 0;
-				var text = "Einträge auf der Pinnwand - live gelesen aus der DB:\n\n";
 				myWallEntries=wallentries;
-				//for (;myWallEntries[i];) {
-    			//	text += myWallEntries[i].Sender + ": " + myWallEntries[i].Textinput + "\n";
-    			//	i++;
-				//}
-				//alert(text)
-				/////////////////////////////////////////////////////////////////////////////////////////////////////				
-			    //	var outputtext ="Einträge auf der Pinnwand - live gelesen aus der DB:";// = "<li data-role='list-divider'>Freitag, 03.10.2014 <span class='ui-li-count'>2</span></li>";
-				//var outputtext = "<ul data-role='listview' data-inset='true'>";
-				//outputtext += "<li data-role='list-divider'>Freitag, 03.10.2014 <span class='ui-li-count'>2</span></li>";
-				////var outputtext="";
 				var j = 0;
 				for (;myWallEntries[j];) {		        // Create the list item:
-				       //outputtext += "<li>" +  "(" + myWallEntries[j].Timestamp+ ") " + myWallEntries[j].Sender + ": " + myWallEntries[j].Textinput + "</li>";
+
 				       var date = (myWallEntries[j].Timestamp).substring(0,11);
 				       $("#ulWallHeader").append(
 				      	$("<li data-role='list-divider'>").append(
-				       	 myWallEntries[j].Sender+"<span class='ui-li-count'>"+date.substring(8,10)+"."+date.substring(5,7)+"."+date.substring(0,4)+" - "+(myWallEntries[j].Timestamp).substring(11,16)+"</span>" //myWallEntries.length+
+				       	 myWallEntries[j].name+"<span class='ui-li-count'>"+date.substring(8,10)+"."+date.substring(5,7)+"."+date.substring(0,4)+" - "+(myWallEntries[j].Timestamp).substring(11,16)+"</span>" //myWallEntries.length+
 				       )).listview("refresh");
-
 
 				       $("#ulWallHeader").append(
 				       	$("<li>").append(
 					       	 //"<h2>"+myWallEntries[j].Sender + "</h2>" +
-					       	 "<label style='white-space:normal'>" + myWallEntries[j].Textinput + "</label>"
+					       	 "<div align='justify'><label style='white-space:normal'>" + myWallEntries[j].Textinput + "</label></div>"
 					       	 // +"<p class='ui-li-aside'><strong>"+ (myWallEntries[j].Timestamp).substring(11,16) + "</strong></p>"
 				       	)).listview("refresh");
+
+				       			i=0;
+								for (;myCommentEntries[i];) {
+				       				if(myWallEntries[j].ID == myCommentEntries[i].WallID){
+				       					var date2 = (myCommentEntries[i].Timestamp).substring(0,11);
+				       						 $("#ulWallHeader").append(
+										       	$("<li>").append(
+											       	 "<h2>"+ myCommentEntries[i].name+"</h2>" +
+											       	 "<div align='justify'><label style='white-space:normal'>"+myCommentEntries[i].Textinput + "</label></div>"
+											       	  +"<p class='ui-li-aside'><strong>"+ date2.substring(8,10)+"."+date2.substring(5,7)+"."+date2.substring(0,4)+" - "+(myCommentEntries[i].Timestamp).substring(11,16)+  "</strong></p>"
+										     )).listview("refresh");
+				       				}
+				       			  i++;
+								}
+
+
+
+
+
+
 				       j++;
 				}		
 				/////////////////////////////////////////////////////////////////////////////////////////////////////
