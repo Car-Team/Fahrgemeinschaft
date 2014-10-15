@@ -51,15 +51,15 @@
 				       var date = (myWallEntries[j].Timestamp).substring(0,11);
 				       $("#ulWallHeader").append(
 				      	$("<li data-role='list-divider'>").append(
-				       	 date.substring(8,10)+"."+date.substring(5,7)+"."+date.substring(0,4)+"<span class='ui-li-count'>"+myWallEntries.length+"</span>"
+				       	 myWallEntries[j].Sender+"<span class='ui-li-count'>"+date.substring(8,10)+"."+date.substring(5,7)+"."+date.substring(0,4)+" - "+(myWallEntries[j].Timestamp).substring(11,16)+"</span>" //myWallEntries.length+
 				       )).listview("refresh");
 
 
 				       $("#ulWallHeader").append(
 				       	$("<li>").append(
-					       	 "<h2>"+myWallEntries[j].Sender + "</h2>" +
-					       	 "<label style='white-space:normal'>" + myWallEntries[j].Textinput + "</label>"+
-					       	  "<p class='ui-li-aside'><strong>"+ (myWallEntries[j].Timestamp).substring(11,16) + "</strong></p>"
+					       	 //"<h2>"+myWallEntries[j].Sender + "</h2>" +
+					       	 "<label style='white-space:normal'>" + myWallEntries[j].Textinput + "</label>"
+					       	 // +"<p class='ui-li-aside'><strong>"+ (myWallEntries[j].Timestamp).substring(11,16) + "</strong></p>"
 				       	)).listview("refresh");
 				       j++;
 				}		
