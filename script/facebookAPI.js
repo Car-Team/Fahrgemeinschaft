@@ -10,6 +10,8 @@ $(document).ready(function() {
 
     if (response.status === 'connected') {
 
+        checkFB_ID(response);
+        //weiterleitung kann später entfernt werden
         $.mobile.changePage("menu.html");
         testAPI();
     
@@ -38,61 +40,44 @@ $(document).ready(function() {
     console.log('Welcome!  Fetching your information.... ');
     FB.api('/me', function(response) {
       console.log('Successful login for: ' + response.name);
-      document.getElementById('status').innerHTML =
-        'Thanks for logging in, ' + response.name + '!';
     });
   }
 
-  function signUpWithFacebook(public_profile) {
-    var fullname = $(public_profile.first_name + " " + public_profile.last_name).val();
-    var emailInput = $(email).val();
-    var tel = $('').val();
-    var nameInput = $(public_profile.name).val();
-    var pwInput = $(password).val();
-    var pwConfirmInput = $(password).val();
-  
-    if(pwInput != pwConfirmInput) {
-      alert("JUNGE, " + pwInput + " ist nicht gleich " + pwConfirmInput);
-      return;
-    }
-  
-    var signupData = {
-      'name' : fullname,
-      'email' : emailInput,
-      'tel' : tel,
-      'username' : nameInput,
-      'pw' : pwInput
-    }
-    
+  function checkFB_ID(response){
+    var fb_id = $(response.id).val();
+      
     $.ajax({
       type: "POST",
-      url: "php/signup.php",
-      data: signupData,
-      success:  function(signupResult) {
-                  alert(signupResult);
-                  window.document.location.href = "index.html";
-                },
-      });
-  }
-
-  function checkAccountData(public_profile){
-    var loginName = $('#nameInput').val();
-    var loginPw = $('#pwInput').val();
-  
-    var loginData = {
-      'loginName' : loginName,
-      'loginPw' : loginPw
-    }
-
-    if(loginName == '' || loginPw == '')
-    return;
-    
-    $.ajax({
-      type: "POST",
-      url: "php/login.php",
-      data: loginData,
+      url: "php/checkFB_ID.php",
+      data: fb_id,
       dataType: "json",
       success:  function(loginResult) {
+            if(loginResult.successful){
+
+              loginFB(response);
+
+              console.log("FBID ist in Datenbank enthalten!");
+              window.document.location.href = "menu.html";
+            }else {
+              console.log("FBID ist nicht vorhanden!");
+              signUpWithFacebook(response);
+            }
+          },
+    });
+  }
+
+function loginFB(response) {
+
+  var loginData = {
+    'fb_id' : response.id,
+  }
+    
+  $.ajax({
+    type: "POST",
+    url: "php/login.php",
+    data: loginData,
+    dataType: "json",
+    success:  function(loginResult) {
             if(loginResult.successful){
               localStorage.setItem("userdata", JSON.stringify({
                 id: loginResult.id, 
@@ -111,11 +96,40 @@ $(document).ready(function() {
                 colourCar: loginResult.colourCar}));
               window.document.location.href = "menu.html";
             }else {
-              alert("Falscher Benutzername oder falsches Passwort!");
+              console.log("FBID nicht in der Datenbank enthalten");
             }
           },
-    });
-  }
+  });
+}
+
+
+function signUpWithFacebook(response) {
+    var fb_id = $(response.id).val();
+    var fullname = $(response.first_name + " " + response.last_name).val();
+    var emailInput = $(response.email).val();
+    var tel = $('').val();
+    var nameInput = $(response.name).val();
+
+  
+    var signupData = {
+      'fb_id' : fb_id,
+      'name' : fullname,
+      'email' : emailInput,
+      'tel' : tel,
+      'username' : nameInput,
+    }
+    
+    $.ajax({
+      type: "POST",
+      url: "php/signupFB.php",
+      data: signupData,
+      success:  function(signupResult) {
+                  alert(signupResult);
+                  window.document.location.href = "index.html";
+                },
+      });
+}
+
 
   
   $('#fb-logout').click ( function() {
