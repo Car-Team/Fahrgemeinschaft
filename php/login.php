@@ -28,13 +28,13 @@ if($successful) {
         'picID'				=> $resultData[6],//PicID
 		'carID'				=> $resultData[7],//CarID
 		'descriptionUser'	=> $resultData[8],//CarID
-		'modelName'			=> $resultData[10],//ModelName
-		'licensePlate'		=> $resultData[11],//LicensePlate
-		'seats'				=> $resultData[12],//Seats
-		'constructionYear'	=> $resultData[13],//ConstructionYear
-		'carPicID'			=> $resultData[14],//PicID
-		'descriptionCar'	=> $resultData[15],//PicID
-		'colourCar'			=> $resultData[16]//PicID
+		'modelName'			=> $resultData[11],//ModelName
+		'licensePlate'		=> $resultData[12],//LicensePlate
+		'seats'				=> $resultData[13],//Seats
+		'constructionYear'	=> $resultData[14],//ConstructionYear
+		'carPicID'			=> $resultData[15],//PicID
+		'descriptionCar'	=> $resultData[16],//PicID
+		'colourCar'			=> $resultData[17]//PicID
 	);
 	exit(json_encode($loginResult));
 } else {
