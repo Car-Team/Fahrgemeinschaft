@@ -1,6 +1,6 @@
 $( document ).on( "pageinit", "#communities", function( event ) {
 	//var id = JSON.parse(sessionStorage.getItem("userdata")).id;
-alert("fff");
+
 	var ul = document.getElementById("communityList");
 	var userID = 1;
 
