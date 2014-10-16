@@ -39,7 +39,6 @@ function createCommunity() {
 			'communityName' : communityName,
 			'userID' : 1
 		};
-		alert(requestData['communityName']);
 		databaseRequest(requestData);
 	}
 
@@ -60,7 +59,12 @@ function databaseRequest(requestData){
 						        fillCommunitiyList(resultData);
 						        break;
 						    case "createCommunity":
-						    	alert("Fahrgemeinschaft erstellt!");
+						    	if(resultData){
+						    		alert(requestData['communityName'] + " erstellt!");
+						    		$.mobile.changePage("communities.html");
+						    	}else {
+						    		alert("Fahrgemeinschaft konnte unter dem Namen " + requestData['communityName'] + " nicht erstellt werden!");
+						    	}
 						    	break;
 						} 
 					},
