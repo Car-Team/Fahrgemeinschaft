@@ -12,18 +12,39 @@
 </head>
 <body>
 
-<div data-role="page">
+<div data-role="page" id="community">
   <div data-role="header">
-    <h1 style="overflow:visible; text-overflow:inherit">Fahrgemeinschaft beitreten</h1>
+    <h1 style="overflow:visible; text-overflow:inherit">communityName</h1>
     <a href="communities.html" data-transition="slide" data-direction="reverse" class="ui-btn btn-only-icon fa fa-arrow-left"></a>
   </div>
 
   <div data-role="main" class="ui-content">
-	<form>
-	     <label for="search-1">Fahrgemeinschafts-ID:</label>
-	     <input type="search" name="search-1" id="search-1" value="">
-	</form>
-	<button class="ui-btn ui-corner-all">Suche</button>
+      <h3>Mitglieder:</h3>
+    <div style="padding:10px">
+            <ul data-role="listview" data-split-icon="delete" data-split-theme="a">
+                <li>
+                    <a href="#">
+                      <img src="media/img/bengel1.jpg">
+                      Schrimptyp
+                    </a>
+                    <a href="#" data-rel="dialog" data-transition="slideup">Aus Fahrgemeinschaft entfernen</a>
+                </li>
+                <li>
+                    <a href="#">
+                      <img src="media/img/bengel2.jpg">
+                      Hongh Bengeli
+                    </a>
+                    <a href="#" data-rel="dialog" data-transition="slideup">Aus Fahrgemeinschaft entfernen</a>
+                </li>
+                <li>
+                    <a href="#">
+                      <img src="media/img/bengel3.jpg">
+                      Benglo Wuo
+                    </a>
+                    <a href="#" data-rel="dialog" data-transition="slideup">Aus Fahrgemeinschaft entfernen</a>
+                </li>
+            </ul>
+    </div>
   </div>
 
   <div data-role="footer">

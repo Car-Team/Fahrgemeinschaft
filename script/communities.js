@@ -19,12 +19,33 @@ function fillCommunitiyList(resultData){
 		var a = document.createElement("a");
 		a.setAttribute("class", "ui-btn ui-btn-icon-right ui-icon-carat-r");
 		a.setAttribute("data-transition","slide");
-		a.setAttribute("href", value['community_id']);
+		// a.setAttribute("href", "community.html");
+		// a.onClick($.mobile.changePage("community.html"));
+		// a.setAttribute("communityID", value['community_id']);
+		a.setAttribute("id", value['communityI_id']);
 		a.appendChild(document.createTextNode(value['name']));
 		li.appendChild(a);
 		ul.appendChild(li);
+
+		// $(value['communityI_id']).on('click', function() {
+  //   		alert(value['name']);
+		// });
+
+		$(ul).on( "click",{name: value['community_id']},  greet );
+
 	});
 };
+
+function greet( event ) {
+alert( "Hello " + event.data.name );
+}
+///////////////////////////////////////////////////////////////////////////// community.html
+$( document ).on( "pageinit", "#community", function( event ) {
+	var communityID = $.url(document.location).param("communityID");
+	// alert(communityID);
+
+
+});
 
 ///////////////////////////////////////////////////////////////////////////// community_create.html
 function createCommunity() {
