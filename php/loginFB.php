@@ -1,5 +1,5 @@
 <?php
-$fb_id = $_POST['fb_id'];
+$fbid = $_POST['fbid'];
 
 $db = mysqli_connect("87.230.14.183", "car", "car", "car");
 mysqli_query($db, "SET NAMES 'utf8'");
@@ -8,7 +8,7 @@ if(!$db)
   exit("Verbindungsfehler: ".mysqli_connect_error());
 }
 
-$sqlQuery = "SELECT * FROM Users u LEFT JOIN Cars c ON CarID = c.ID WHERE u.FBID = '$fb_id'";
+$sqlQuery = "SELECT * FROM Users u LEFT JOIN Cars c ON CarID = c.ID WHERE u.FBID = '$fbid'";
 
 $result = mysqli_query($db, $sqlQuery);
 $rows = $result->num_rows;
@@ -20,24 +20,24 @@ if($successful) {
 	$loginResult = array(
         'successful'   		=> $successful,
 		'id'				=> $resultData[0],//ID
-		'loginname'     	=> $resultData[1],//Name
-        'name'         		=> $resultData[3],//Name
-        'email'				=> $resultData[4],//Email
-        'tel'				=> $resultData[5],//Tel
-        'picID'				=> $resultData[6],//PicID
-		'carID'				=> $resultData[7],//CarID
-		'descriptionUser'	=> $resultData[8],//Description
-		'fb_id'				=> $resultData[9],//FBID
-		'modelName'			=> $resultData[11],//ModelName
-		'licensePlate'		=> $resultData[12],//LicensePlate
-		'seats'				=> $resultData[13],//Seats
-		'constructionYear'	=> $resultData[14],//ConstructionYear
-		'carPicID'			=> $resultData[15],//PicID
-		'descriptionCar'	=> $resultData[16],//PicID
-		'colourCar'			=> $resultData[17]//PicID
+        'name'         		=> $resultData[2],//Name
+        'email'				=> $resultData[3],//Email
+        'tel'				=> $resultData[4],//Tel
+        'picID'				=> $resultData[5],//PicID
+		'carID'				=> $resultData[6],//CarID
+		'descriptionUser'	=> $resultData[7],//Description
+		'fb_id'				=> $resultData[8],//FBID
+		'modelName'			=> $resultData[10],//ModelName
+		'licensePlate'		=> $resultData[11],//LicensePlate
+		'seats'				=> $resultData[12],//Seats
+		'constructionYear'	=> $resultData[13],//ConstructionYear
+		'carPicID'			=> $resultData[14],//PicID
+		'descriptionCar'	=> $resultData[15],//PicID
+		'colourCar'			=> $resultData[16]//PicID
 	);
 	exit(json_encode($loginResult));
 } else {
 	exit(json_encode(array('successful' => false)));
+
 }
 ?>

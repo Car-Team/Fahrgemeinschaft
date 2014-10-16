@@ -1,7 +1,5 @@
 $(document).ready(function() {
 
-    var fb_id;
-    var fb_name;
     var fb_connected;
 
   // Load the SDK asynchronously
@@ -38,12 +36,10 @@ $(document).ready(function() {
     // Daten aus FB auslesen
   function getUserData() {
     FB.api('/me', function(response) {
-      fb_id = $(response.id);
-      fb_name = $(response.name);
       console.log('FBID: ' + response.id);
       console.log('Name: ' + response.name);
 
-      checkFB_ID();
+      checkFB_ID(response);
     });
   }
 
@@ -70,22 +66,22 @@ $(document).ready(function() {
 
   
   // Überprüfen ob FBID in Datenbank vorhanden ist
-  function checkFB_ID(){
+  function checkFB_ID(fbResponse){
    
     console.log('FBID überprüfen');
 
-    var fb_id_data = {
-      'fb_id' : fb_id
+    var fbid_data = {
+      'fbid' : fbResponse.id
     }
 
     $.ajax({
       type: "POST",
       url: "php/loginFB.php",
-      data: fb_id_data,
+      data: fbid_data,
       dataType: "json",
       success:  function(loginResult) {
               if(loginResult.successful){
-              localStorage.setItem("userdata", JSON.stringify({
+                localStorage.setItem("userdata", JSON.stringify({
                 id: loginResult.id, 
                 loginname: loginResult.loginname,
                 name: loginResult.name, 
@@ -103,23 +99,23 @@ $(document).ready(function() {
                 colourCar: loginResult.colourCar}));
 
                 console.log("FBID ist in Datenbank enthalten und Benutzerdaten sind geladen!");
-
+                console.log(localStorage);
                 $.mobile.changePage("menu.html");
               }else {
                 console.log("FBID ist nicht vorhanden und Account wird angelegt!");
 
-                signUpWithFacebook();
+                signUpWithFacebook(fbResponse);
               }
           },
     });
   }
 
   //Mit Facebook Daten Account anlegen
-  function signUpWithFacebook() {
+  function signUpWithFacebook(fbResponse) {
   
     var signupData = {
-      'fb_id' : fb_id,
-      'name' : fb_name,
+      'fb_id' : fbResponse.id,
+      'name' : fbResponse.name
     }
     
     $.ajax({

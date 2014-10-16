@@ -25,6 +25,7 @@ function login() {
 								picid: loginResult.picID, 
 								carid: loginResult.carID,
 								descriptionUser: loginResult.descriptionUser,
+								fb_id: loginResult.fb_id,
 								modelName: loginResult.modelName,
 								licensePlate: loginResult.licensePlate,
 								seats: loginResult.seats,
