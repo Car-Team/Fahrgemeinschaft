@@ -52,7 +52,7 @@
 
 				       var date = (myWallEntries[j].Timestamp).substring(0,11);
 				       $("#ulWallHeader").append(
-				      	$("<li data-role='list-divider'>").append(
+				      	$("<li data-role='list-divider'>").append(				      		
 				       	 myWallEntries[j].name+"<span class='ui-li-count'>"+date.substring(8,10)+"."+date.substring(5,7)+"."+date.substring(0,4)+" - "+(myWallEntries[j].Timestamp).substring(11,16)+"</span>" //myWallEntries.length+
 				       )).listview("refresh");
 
@@ -69,11 +69,12 @@
 				       					var date2 = (myCommentEntries[i].Timestamp).substring(0,11);
 				       						 $("#ulWallHeader").append(
 										       	$("<li>").append(
+										       		"<img src='http://st.depositphotos.com/1003368/1944/i/950/depositphotos_19448249-business-woman-in-glasses.jpg'>"+
 											       	 "<h2>"+ myCommentEntries[i].name+"</h2>" +
 											       	 "<div align='justify'><label style='white-space:normal'>"+myCommentEntries[i].Textinput + "</label></div>"
-											       	  +"<p class='ui-li-aside'><strong>"+ date2.substring(8,10)+"."+date2.substring(5,7)+"."+date2.substring(0,4)+" - "+(myCommentEntries[i].Timestamp).substring(11,16)+  "</strong></p>"
+											       	  +"<span class='ui-li-count'><strong>"+ date2.substring(8,10)+"."+date2.substring(5,7)+"."+date2.substring(0,4)+" - "+(myCommentEntries[i].Timestamp).substring(11,16)+  "</strong></span>"
 										     )).listview("refresh");
-				       				}
+				       				} //class='commentWall'
 				       			  i++;
 								}
 
