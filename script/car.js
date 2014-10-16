@@ -59,7 +59,7 @@
 				       $("#ulWallHeader").append(
 				       	$("<li style='min-height:60px'>").append(
 					       	 //"<h2>"+myWallEntries[j].Sender + "</h2>" +
-					       	 "<div class='commentPicFrameWall'><img class='wallpic' src='http://st.depositphotos.com/1003368/1944/i/950/depositphotos_19448249-business-woman-in-glasses.jpg'></div>"+
+					       	 "<div class='commentPicFrameWall'><img class='wallpic' src='http://newtroy.integra-technologies.co.uk/static/images/unknown_user.png'></div>"+
 							"<div style='margin-left:90px'>"+
 					       	 "<div align='justify'><label style='white-space:normal'>" + myWallEntries[j].Textinput + "</label></div></div>"
 					       	 // +"<p class='ui-li-aside'><strong>"+ (myWallEntries[j].Timestamp).substring(11,16) + "</strong></p>"
@@ -71,7 +71,7 @@
 				       					var date2 = (myCommentEntries[i].Timestamp).substring(0,11);
 				       						 $("#ulWallHeader").append(
 										       	$("<li style='border-color: #ACACAC; border-left:0px; border-right:0px; background-color:#CDCDCD; min-height:90px; margin-left:30px'>").append(
-										       		"<div class='commentPicFrameWall' style='margin-top:30px;'><img class='wallpic' src='http://st.depositphotos.com/1003368/1944/i/950/depositphotos_19448249-business-woman-in-glasses.jpg'></div>"+
+										       		"<div class='commentPicFrameWall' style='margin-top:30px;'><img class='wallpic' src='http://newtroy.integra-technologies.co.uk/static/images/unknown_user.png'></div>"+
 											       	 "<h2 style='position: absolute;left: 7;top: 0;'>"+ myCommentEntries[i].name+"</h2>"+
 											       	 "<div style='margin-top:31px; margin-left:83px'><div align='justify'>" +
 											       	 "<label style='white-space:normal'>"+myCommentEntries[i].Textinput + "</label></div></div>"
