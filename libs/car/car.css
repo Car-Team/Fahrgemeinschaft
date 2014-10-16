@@ -242,3 +242,17 @@ ul[data-role="listview"] > li[data-role="list-divider"] {
 	13px 13px 12px rgba(0,0,0,0.3),13px 13px 1px rgba(0,0,0,0.5),
 	0px 0px 12px rgba(0,0,0,.2);
 }
+
+.commentWall {
+    border-style: solid;
+    border-width: 8px;
+    color: #5F61BF;
+}
+.wallpic {
+   float:left;
+   width:auto;
+   height:80px;
+   overflow:hidden;
+   background-size: cover; 
+   background-position: 50%
+}
