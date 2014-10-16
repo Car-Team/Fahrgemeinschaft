@@ -1,7 +1,7 @@
 <?php
 $loginID = $_POST['loginID'];
 $text = $_POST['text'];
-mysqli_query($db, "SET NAMES 'utf8'");
+
 $db = mysqli_connect("87.230.14.183", "car", "car", "car");
 if(!$db)
 {

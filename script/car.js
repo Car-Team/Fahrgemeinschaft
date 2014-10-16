@@ -1,4 +1,4 @@
- 
+//////////////////////////////////////////////////////////////////// FUNCTIONS /////////////////////////////////////////////////////////// 
 function postTW() {
 	var text = $('#postText').val();
 	var loginID = JSON.parse(localStorage.getItem('userdata')).id;	
@@ -22,7 +22,7 @@ function postTW() {
 		});
 	}
 }
- ///////////////////////////////////////////PROFILE.HTML///////////////////////////////////////////////
+ //+++++++++++++++++++++++++++/////////////////////////////////////////PROFILE.HTML///////////////////////////////////////////+++++++++++++++++++++++++++++//
   $(document).on('pageinit', '#profile', function(){ 
  		////////////////////////////////////////AUTO RESIZE IMAGE///////////////////////////////////////////////
 		if($(window).width()<430){
@@ -41,6 +41,18 @@ function postTW() {
 	     			'width': 'calc(60%)'
 			   	});
 			}
+		////////////////////////////////////////FILL PROFILE DATA///////////////////////////////////////////////
+			var myDiv1 = document.getElementById("namefield");
+	        myDiv1.innerHTML = JSON.parse(localStorage.getItem('userdata')).name;	       				   
+	        var myDiv2 = document.getElementById("emailfield");
+	        myDiv2.innerHTML = JSON.parse(localStorage.getItem('userdata')).email;	       				    
+	        var myDiv3 = document.getElementById("telfield");
+	        myDiv3.innerHTML = JSON.parse(localStorage.getItem('userdata')).tel;	       				    
+	        var myDiv4 = document.getElementById("carfield");
+	        myDiv4.innerHTML = JSON.parse(localStorage.getItem('userdata')).modelName;
+	        var myDiv5 = document.getElementById("userdescription");
+	        myDiv5.innerHTML = "<h3>Beschreibung</h3>" + JSON.parse(localStorage.getItem('userdata')).descriptionUser;
+
  		//////////////////////////////CONNECT TO DB TO GET THE WALL / "PINNWAND EINTRAEGE"////////////////////////
 		//var userLoggedInDataloginName = JSON.parse(localStorage.getItem('userdata')).loginname;
 		var userLoggedInDataloginID = JSON.parse(localStorage.getItem('userdata')).id;	
@@ -56,9 +68,9 @@ function postTW() {
 							url: "php/comments.php",
 							data: userLoggedInData,
 							dataType: "json",			
-							success:	function(commententries) {	
-								
-								myCommentEntries=commententries;
+							success:	function(commententries) {									
+									myCommentEntries=commententries;
+									//////////////////////////////////////////////////////
 									$.ajax({
 										type: "POST",
 										url: "php/wall.php",
@@ -77,56 +89,43 @@ function postTW() {
 											       )).listview("refresh");
 
 											       $("#ulWallHeader").append(
-											       	$("<li style='min-height:60px'>").append(
+											       	$("<li style='min-height:61px'>").append(
 												       	 //"<h2>"+myWallEntries[j].Sender + "</h2>" +
 												       	"<div class='commentPicFrameWall'><img class='wallpic' src='http://newtroy.integra-technologies.co.uk/static/images/unknown_user.png'></div>"+
-														"<div style='margin-left:90px'>"+
+														"<div style='margin-left:75px'>"+
 												       		"<div align='justify'>"+
 												       	 		"<label style='white-space:normal'>" + myWallEntries[j].Textinput + "</label>"+
 												       		"</div>"+
 												       	"</div>"
 												       	 // +"<p class='ui-li-aside'><strong>"+ (myWallEntries[j].Timestamp).substring(11,16) + "</strong></p>"
 											       	)).listview("refresh");
-
-
 														i=0;	
-											       		for (;myCommentEntries[i];) {
-																
-											       										
+											       		for (;myCommentEntries[i];) {	
 											       				if(myWallEntries[j].ID == myCommentEntries[i].WallID){
 											       					var date2 = (myCommentEntries[i].Timestamp).substring(0,11);
 											       						 $("#ulWallHeader").append(
-																	       	$("<li style='border-color: #ACACAC; border-left:0px; border-right:0px; background-color:#E0E0E0; min-height:90px; margin-left:30px'>").append(
+																	       	$("<li style='border-color: #D8D8D8 ; border-left:0px; border-right:0px; background-color:#E8E8E8 ; min-height:90px; margin-left:30px'>").append(
 																	       		"<div class='commentPicFrameWall' style='margin-top:30px;'>"+
 																	       			"<img class='wallpic' src='http://newtroy.integra-technologies.co.uk/static/images/unknown_user.png'></img>"+
 																	       		"</div>"+
-																		       	"<h2 style='position: absolute;left: 7;top: 0;'>"+ myCommentEntries[i].name+"</h2>"+
-																		       	"<div style='margin-top:31px; margin-left:83px'><div align='justify'>" +
+																		       	"<h2 style='position: absolute; left:7; top:0;'>"+ myCommentEntries[i].name+"</h2>"+
+																		       	"<div style='margin-top:31px; margin-left:75px'><div align='justify'>" +
 																		       		"<label style='white-space:normal'>"+myCommentEntries[i].Textinput + "</label>"+
 																		       	"</div>"+											       	
 																		       	"<span class='ui-li-count dateComment'>"+ date2.substring(8,10)+"."+date2.substring(5,7)+"."+date2.substring(0,4)+" - "+(myCommentEntries[i].Timestamp).substring(11,16)+  "</span>"
-																	     
 																	     )).listview("refresh");
 											       				} //class='commentWall'
 											       			  i++;
 															}
-
-
-
-
-
-
 											       j++;
 											}		
 											
 										},
 									});	
-
-
+ 									/////////////////////////////////////
 						},
 				});	
 				/////////////////////////////////////////////////////////////////////////////////////////////////////
-
 		///////////////////////////////////////////ON_CLICK EVENTS///////////////////////////////////////////////
 		$("#profile_picture").on("click", function(e1) {
 			var bodywidth = $(window).width();//document.getElementById("description").offsetWidth
@@ -176,10 +175,20 @@ function postTW() {
 		});
 
 });
-///////////////////////////////////////////CAR.HTML///////////////////////////////////////////////
-$(document).on('pageinit', '#car', function() {
-		///////////////////////////////////////////ON_CLICK EVENTS///////////////////////////////////////////////
-		//alert($(window).width())
+
+
+
+
+
+
+
+
+
+
+//+++++++++++++++++++++++++++++++////////////////////////////////////////CAR.HTML/////////////////////////////////////////////++++++++++++++++++++++++++++++//
+$(document).on('pageinit', '#car', function() {	
+		
+		////////////////////////////////////////AUTO RESIZE IMAGE///////////////////////////////////////////////
 		if($(window).width()<430){
 				$("#car_block_a").css({ // resize the image     			
 	     			'width': 'calc(98%)'
@@ -195,7 +204,20 @@ $(document).on('pageinit', '#car', function() {
 	     			'width': 'calc(60%)'
 			   	});
 		}
-
+		///////////////////////////////////////Paste Car Content//////////////////////////////////////////////////////////////////
+		var myDiv1 = document.getElementById("carmodelfield");
+        myDiv1.innerHTML = JSON.parse(localStorage.getItem('userdata')).modelName +  " ("+JSON.parse(localStorage.getItem('userdata')).colourCar+")";
+        var myDiv2 = document.getElementById("caryearfield");
+        myDiv2.innerHTML = "Baujahr " + JSON.parse(localStorage.getItem('userdata')).constructionYear;
+        var myDiv3 = document.getElementById("carlicenseplate");
+        myDiv3.innerHTML = JSON.parse(localStorage.getItem('userdata')).licensePlate;
+        var myDiv4 = document.getElementById("carseats");
+        myDiv4.innerHTML = JSON.parse(localStorage.getItem('userdata')).seats + " Sitze";
+        var myDiv5= document.getElementById("carnamefield");
+        myDiv5.innerHTML = JSON.parse(localStorage.getItem('userdata')).name;
+        var myDiv6 = document.getElementById("cardescription");
+        myDiv6.innerHTML = "<h3>Beschreibung</h3>" + JSON.parse(localStorage.getItem('userdata')).descriptionCar;
+		///////////////////////////////////////////ON_CLICK EVENTS///////////////////////////////////////////////
 		$("#car_picture").on("click", function(e3) {
 			var bodywidth = $(window).width();//document.getElementById("description").offsetWidth
 			if(bodywidth>800){bodywidth=800}
