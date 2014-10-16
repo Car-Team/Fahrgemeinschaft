@@ -1,3 +1,28 @@
+ 
+function postTW() {
+	var text = $('#postText').val();
+	var loginID = JSON.parse(localStorage.getItem('userdata')).id;	
+	
+	if(1 != 1) {
+		alert("JUNGE");
+		return;
+	}
+	
+	var postData = {
+		'text' : text,
+		'loginID' : loginID,
+	}
+		
+	$.ajax({
+		type: "POST",
+		url: "php/postToWall.php",
+		data: postData,
+		success:	function(postResult) {
+						alert(postResult);
+						window.location.href=window.location.href
+					},
+	});
+}
  ///////////////////////////////////////////PROFILE.HTML///////////////////////////////////////////////
   $(document).on('pageinit', '#profile', function(){ 
  		////////////////////////////////////////AUTO RESIZE IMAGE///////////////////////////////////////////////
@@ -35,62 +60,73 @@
 							success:	function(commententries) {	
 								
 								myCommentEntries=commententries;
+									$.ajax({
+										type: "POST",
+										url: "php/wall.php",
+										data: userLoggedInData,
+										dataType: "json",			
+										success:	function(wallentries) {	
+											var i = 0;
+											myWallEntries=wallentries;
+											var j = 0;
+											for (;myWallEntries[j];) {		        // Create the list item:
+
+											       var date = (myWallEntries[j].Timestamp).substring(0,11);
+											       $("#ulWallHeader").append(
+											      	$("<li data-role='list-divider'>").append(				      		
+											       	 myWallEntries[j].name+"<span class='ui-li-count'>"+date.substring(8,10)+"."+date.substring(5,7)+"."+date.substring(0,4)+" - "+(myWallEntries[j].Timestamp).substring(11,16)+"</span>" //myWallEntries.length+
+											       )).listview("refresh");
+
+											       $("#ulWallHeader").append(
+											       	$("<li style='min-height:60px'>").append(
+												       	 //"<h2>"+myWallEntries[j].Sender + "</h2>" +
+												       	"<div class='commentPicFrameWall'><img class='wallpic' src='http://newtroy.integra-technologies.co.uk/static/images/unknown_user.png'></div>"+
+														"<div style='margin-left:90px'>"+
+												       		"<div align='justify'>"+
+												       	 		"<label style='white-space:normal'>" + myWallEntries[j].Textinput + "</label>"+
+												       		"</div>"+
+												       	"</div>"
+												       	 // +"<p class='ui-li-aside'><strong>"+ (myWallEntries[j].Timestamp).substring(11,16) + "</strong></p>"
+											       	)).listview("refresh");
+
+
+														i=0;	
+											       		for (;myCommentEntries[i];) {
+																
+											       										
+											       				if(myWallEntries[j].ID == myCommentEntries[i].WallID){
+											       					var date2 = (myCommentEntries[i].Timestamp).substring(0,11);
+											       						 $("#ulWallHeader").append(
+																	       	$("<li style='border-color: #ACACAC; border-left:0px; border-right:0px; background-color:#E0E0E0; min-height:90px; margin-left:30px'>").append(
+																	       		"<div class='commentPicFrameWall' style='margin-top:30px;'>"+
+																	       			"<img class='wallpic' src='http://newtroy.integra-technologies.co.uk/static/images/unknown_user.png'></img>"+
+																	       		"</div>"+
+																		       	"<h2 style='position: absolute;left: 7;top: 0;'>"+ myCommentEntries[i].name+"</h2>"+
+																		       	"<div style='margin-top:31px; margin-left:83px'><div align='justify'>" +
+																		       		"<label style='white-space:normal'>"+myCommentEntries[i].Textinput + "</label>"+
+																		       	"</div>"+											       	
+																		       	"<span class='ui-li-count dateComment'>"+ date2.substring(8,10)+"."+date2.substring(5,7)+"."+date2.substring(0,4)+" - "+(myCommentEntries[i].Timestamp).substring(11,16)+  "</span>"
+																	     
+																	     )).listview("refresh");
+											       				} //class='commentWall'
+											       			  i++;
+															}
+
+
+
+
+
+
+											       j++;
+											}		
+											
+										},
+									});	
+
 
 						},
 				});	
 				/////////////////////////////////////////////////////////////////////////////////////////////////////
-		$.ajax({
-			type: "POST",
-			url: "php/wall.php",
-			data: userLoggedInData,
-			dataType: "json",			
-			success:	function(wallentries) {	
-				var i = 0;
-				myWallEntries=wallentries;
-				var j = 0;
-				for (;myWallEntries[j];) {		        // Create the list item:
-
-				       var date = (myWallEntries[j].Timestamp).substring(0,11);
-				       $("#ulWallHeader").append(
-				      	$("<li data-role='list-divider'>").append(				      		
-				       	 myWallEntries[j].name+"<span class='ui-li-count'>"+date.substring(8,10)+"."+date.substring(5,7)+"."+date.substring(0,4)+" - "+(myWallEntries[j].Timestamp).substring(11,16)+"</span>" //myWallEntries.length+
-				       )).listview("refresh");
-
-				       $("#ulWallHeader").append(
-				       	$("<li style='min-height:60px'>").append(
-					       	 //"<h2>"+myWallEntries[j].Sender + "</h2>" +
-					       	 "<div class='commentPicFrameWall'><img class='wallpic' src='http://newtroy.integra-technologies.co.uk/static/images/unknown_user.png'></div>"+
-							"<div style='margin-left:90px'>"+
-					       	 "<div align='justify'><label style='white-space:normal'>" + myWallEntries[j].Textinput + "</label></div></div>"
-					       	 // +"<p class='ui-li-aside'><strong>"+ (myWallEntries[j].Timestamp).substring(11,16) + "</strong></p>"
-				       	)).listview("refresh");
-
-				       			i=0;
-								for (;myCommentEntries[i];) {
-				       				if(myWallEntries[j].ID == myCommentEntries[i].WallID){
-				       					var date2 = (myCommentEntries[i].Timestamp).substring(0,11);
-				       						 $("#ulWallHeader").append(
-										       	$("<li style='border-color: #ACACAC; border-left:0px; border-right:0px; background-color:#E0E0E0; min-height:90px; margin-left:30px'>").append(
-										       		"<div class='commentPicFrameWall' style='margin-top:30px;'><img class='wallpic' src='http://newtroy.integra-technologies.co.uk/static/images/unknown_user.png'></div>"+
-											       	 "<h2 style='position: absolute;left: 7;top: 0;'>"+ myCommentEntries[i].name+"</h2>"+
-											       	 "<div style='margin-top:31px; margin-left:83px'><div align='justify'>" +
-											       	 "<label style='white-space:normal'>"+myCommentEntries[i].Textinput + "</label></div></div>"
-											       	  +"<span class='ui-li-count dateComment'>"+ date2.substring(8,10)+"."+date2.substring(5,7)+"."+date2.substring(0,4)+" - "+(myCommentEntries[i].Timestamp).substring(11,16)+  "</span>"
-										     )).listview("refresh");
-				       				} //class='commentWall'
-				       			  i++;
-								}
-
-
-
-
-
-
-				       j++;
-				}		
-				/////////////////////////////////////////////////////////////////////////////////////////////////////
-			},
-		});	
 
 		///////////////////////////////////////////ON_CLICK EVENTS///////////////////////////////////////////////
 		$("#profile_picture").on("click", function(e1) {
