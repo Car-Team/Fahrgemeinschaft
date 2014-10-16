@@ -1,6 +1,5 @@
 <?php
-$userID = $_GET['userID'];
-
+$action = $_GET['action'];
 
 $db = mysqli_connect("87.230.14.183", "car", "car", "car");
 if(!$db)
@@ -8,11 +7,27 @@ if(!$db)
   exit("Verbindungsfehler: ".mysqli_connect_error());
 }
 
-$sqlQuery = "SELECT communities.community_id, community.name
-			FROM communities
-			INNER JOIN community
-			ON communities.community_id=community.ID
-			WHERE communities.user_id = ".$userID;
+switch ($action) {
+    case "getCommunities":
+		$userID = $_GET['userID'];
+
+		$sqlQuery = "SELECT Communities.community_id, Community.name
+					FROM Communities
+					INNER JOIN Community
+					ON Communities.community_id=Community.ID
+					WHERE Communities.user_id = $userID";
+        break;
+    case "createCommunity":
+   		$userID = mysqli_real_escape_string($db, $_GET['userID']);
+    	$communityName = mysqli_real_escape_string($db, $_GET['communityName']);
+    	// $userID = $_GET['userID'];
+    	// $communityName = $_GET['communityName'];
+
+		$sqlQuery = "INSERT INTO Community (creator_id, name)
+					VALUES ('".$userID."', '".$communityName."')";
+    	break;
+}
+
 
 $result = mysqli_query($db, $sqlQuery);
 
