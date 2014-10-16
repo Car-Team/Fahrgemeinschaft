@@ -1,6 +1,8 @@
 $(document).ready(function() {
 
-    var fb_connected;
+  //if(JSON.parse(localStorage.getItem('userdata')) != undefined) {
+  //  $.mobile.changePage("menu.html");
+  //}
 
   // Load the SDK asynchronously
   (function(d, s, id) {
@@ -133,34 +135,21 @@ $(document).ready(function() {
   $('#fb-logout').click ( function() {
 
     //get Userdata
-    //  localStorage.getItem("userdata", JSON.stringify({
-    //              id: loginResult.id, 
-    //              loginname: loginResult.loginname,
-    //              name: loginResult.name, 
-    //              email: loginResult.email, 
-    //              tel: loginResult.tel, 
-    //              picid: loginResult.picID, 
-    //              carid: loginResult.carID,
-    //              descriptionUser: loginResult.descriptionUser,
-    //              fb_id: loginResult.fb_id,
-    //              modelName: loginResult.modelName,
-    //              licensePlate: loginResult.licensePlate,
-    //              seats: loginResult.seats,
-    //              constructionYear: loginResult.constructionYear,
-    //              descriptionCar: loginResult.descriptionCar,
-    //              colourCar: loginResult.colourCar}));
-
+    var fbUserId = JSON.parse(localStorage.getItem('userdata')).fb_id;
+    
     //check if fb_acc 
-    //   if(fb_id != null) {
+    if(fbUserId == "" || fbUserId == null) {
+
+      $.mobile.changePage("index.html");
+
+      } else {
 
       FB.logout(function(response) {
         console.log('Benutzer ist ausgeloggt');
         $.mobile.changePage("index.html");
        });
-
-    //  } else {
-       $.mobile.changePage("index.html");
-    //}   
+      window.localStorage.clear();
+    }   
   });
 
 });
