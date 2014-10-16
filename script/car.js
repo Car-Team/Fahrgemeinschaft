@@ -70,7 +70,7 @@
 				       				if(myWallEntries[j].ID == myCommentEntries[i].WallID){
 				       					var date2 = (myCommentEntries[i].Timestamp).substring(0,11);
 				       						 $("#ulWallHeader").append(
-										       	$("<li style='border-color: #ACACAC; border-left:0px; border-right:0px; background-color:#CDCDCD; min-height:90px; margin-left:30px'>").append(
+										       	$("<li style='border-color: #ACACAC; border-left:0px; border-right:0px; background-color:#E0E0E0; min-height:90px; margin-left:30px'>").append(
 										       		"<div class='commentPicFrameWall' style='margin-top:30px;'><img class='wallpic' src='http://newtroy.integra-technologies.co.uk/static/images/unknown_user.png'></div>"+
 											       	 "<h2 style='position: absolute;left: 7;top: 0;'>"+ myCommentEntries[i].name+"</h2>"+
 											       	 "<div style='margin-top:31px; margin-left:83px'><div align='justify'>" +
