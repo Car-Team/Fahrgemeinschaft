@@ -10,7 +10,7 @@ $(document).ready(function() {
 
     if (response.status === 'connected') {
 
-        checkFB_ID(response);
+        //checkFB_ID(response);
         //weiterleitung kann später entfernt werden
         $.mobile.changePage("menu.html");
         testAPI();
@@ -48,7 +48,7 @@ $(document).ready(function() {
       
     $.ajax({
       type: "POST",
-      url: "php/checkFB_ID.php",
+      url: "php/checkFBID.php",
       data: fb_id,
       dataType: "json",
       success:  function(loginResult) {
