@@ -1,13 +1,13 @@
 function login() {
-	var loginName = $('#nameInput').val();
-	var loginPw = $('#pwInput').val();
+	var email = $('#nameInput').val();
+	var pw = $('#pwInput').val();
 	
 	var loginData = {
-		'loginName' : loginName,
-		'loginPw' : loginPw
+		'email' : email,
+		'pw' : pw
 	}
 
-	if(loginName == '' || loginPw == '')
+	if(email == '' || pw == '')
 	return;
 		
 	$.ajax({

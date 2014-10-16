@@ -25,7 +25,7 @@ function signup() {
 		data: signupData,
 		success:	function(signupResult) {
 						alert(signupResult);
-						window.document.location.href = "index.html";
+						$.mobile.changePage("index.html");
 					},
 	});
 }
