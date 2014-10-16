@@ -8,7 +8,7 @@ if(!$db)
   exit("Verbindungsfehler: ".mysqli_connect_error());
 }
 
-$sqlQuery = "SELECT * FROM Users u LEFT JOIN Cars c ON CarID = c.ID WHERE FBID = '$fb_id'";
+$sqlQuery = "SELECT * FROM Users u LEFT JOIN Cars c ON CarID = c.ID WHERE u.FBID = '$fb_id'";
 
 $result = mysqli_query($db, $sqlQuery);
 $rows = $result->num_rows;
@@ -26,7 +26,8 @@ if($successful) {
         'tel'				=> $resultData[5],//Tel
         'picID'				=> $resultData[6],//PicID
 		'carID'				=> $resultData[7],//CarID
-		'descriptionUser'	=> $resultData[8],//CarID
+		'descriptionUser'	=> $resultData[8],//Description
+		'fb_id'				=> $resultData[9],//FBID
 		'modelName'			=> $resultData[11],//ModelName
 		'licensePlate'		=> $resultData[12],//LicensePlate
 		'seats'				=> $resultData[13],//Seats
