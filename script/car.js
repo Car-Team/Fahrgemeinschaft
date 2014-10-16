@@ -18,12 +18,12 @@
 			   	});
 			}
  		//////////////////////////////CONNECT TO DB TO GET THE WALL / "PINNWAND EINTRAEGE"////////////////////////
-		var userLoggedInDataloginName = JSON.parse(localStorage.getItem('userdata')).loginname;
+		//var userLoggedInDataloginName = JSON.parse(localStorage.getItem('userdata')).loginname;
 		var userLoggedInDataloginID = JSON.parse(localStorage.getItem('userdata')).id;	
 		var myWallEntries;
 		var myCommentEntries;	
 		var userLoggedInData = {
-			'loginName' : userLoggedInDataloginName,
+			//'loginName' : userLoggedInDataloginName,
 			'loginID' : userLoggedInDataloginID
 		}
 				/////////////////////////////////////////////////////////////////////////////////////////////////////

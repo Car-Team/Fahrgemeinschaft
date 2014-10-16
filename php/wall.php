@@ -1,7 +1,6 @@
 <?php
 	$loginID = $_POST['loginID'];
-	$loginName = $_POST['loginName'];
-
+	
 	$db = mysqli_connect("87.230.14.183", "car", "car", "car");
 	mysqli_query($db, "SET NAMES 'utf8'");
 	$sqlQuery = "SELECT w.ID, w.ReceiverID, w.SenderID, w.Textinput, w.Timestamp, u.name FROM Walls w, Users u WHERE w.ReceiverID = '$loginID' AND w.SenderID = u.ID ORDER BY w.Timestamp DESC";
