@@ -9,7 +9,7 @@ if(!$db)
 {
   exit("Verbindungsfehler: ".mysqli_connect_error());
 }
-
+mysqli_query($db, "SET NAMES 'utf8'");
 $sqlQuery = "INSERT INTO `Users`(`LoginPW`, `Name`, `Email`, `Tel`, `PicID`, `CarID`) VALUES ('$pw','$name','$email','$tel',0,0);";
 mysqli_query($db, $sqlQuery);
 

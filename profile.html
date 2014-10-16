@@ -25,10 +25,6 @@
 	    </div>
 	    <div class="ui-block-b" style="width:60%" id="profile_block_b">
 			<div class="ui-grid-solo" style="text-align:center">
-				<!--<div class="ui-block-a"><label class="fa fa-user"><b>Dimitri Kumalla (32)</b></label></div>  
-			    <div class="ui-block-a"><label class="fa fa-at">D.Kumalla82@gmx.net</label></div>
-			    <div class="ui-block-a"><label class="fa fa-phone-square">0172 144 85 93</label></div>
-			    <div class="ui-block-a"><label class="fa fa-car">Audi Q5 (KI LO 913)</label></div>-->
 			<div class="ui-block-a">
 					<ul data-role="listview" data-inset="true">
 			   		    <li><label id="namefield" class="fa fa-user"><b>
@@ -62,7 +58,6 @@
 	</div>
 
 	<div class="ui-grid-solo" id="description">
-	    <!-- <div class="ui-block-a"><input type="button" value="More"></div>-->
 	    <div class="ui-block-a" style="text-align:center"><label> </label></div>  
 	    <ul data-role="listview" data-inset="true">
 		    <li>
@@ -73,56 +68,24 @@
 	              </script>
 	         	</label></div>  
 			</li>	
-		</ul>
-		
+		</ul>		
 		 
-	 	<div style="text-align:center"><label> </label></div>
-	 		
-		 	<div style="text-align:center"><label><h3>Pinnwand</h3></label></div>
-			
-			<div style="text-align:center"><label> </label></div>  
-			<ul align="justify" data-role='listview' data-inset='true'>
-
+	 	<div style="text-align:center"><label> </label></div>	 		
+		<div style="text-align:center"><label><h3>Pinnwand</h3></label></div>			
+		<div style="text-align:center"><label> </label></div>  
+		<ul align="justify" data-role='listview' data-inset='true'>
 		 		<li>
 		 			<form>
-		   				<!--<label for="textarea-1">Nachricht posten:</label>-->
-		   				<h3>Neuer Pinnwandeintrag:</h3>
-		    			<textarea id="postText" style="color='#ACACAC'" name="textarea-1"></textarea>
-		    			<!--<button style="Color:white; Background-Color:#6d88b7; text-shadow: none;" class="ui-btn">Absenden</button>-->
-		    			<a id="postToWall" class="ui-btn btn-small fa fa-send" style="text-align:center" onClick="postTW();">Posten</a>
+				   				<h3>Neuer Pinnwandeintrag:</h3>
+				    			<textarea id="postText" style="color='#ACACAC'" name="textarea-1"></textarea>
+				    			<!--<button style="Color:white; Background-Color:#6d88b7; text-shadow: none;" class="ui-btn">Absenden</button>-->
+				    			<div style="margin-right:34px"><a id="postToWall" class="ui-btn ui-corner-all fa fa-send-o" style="text-align:center; Color:white; Background-Color:#6d88b7; text-shadow: none; width:100%" onClick="postTW();">Posten</a></div>
 					</form>
+					<!--<a id="postToWall" class="ui-btn fa fa-send" style="text-align:center;" onClick="postTW();">Posten</a>-->
 				</li>
-	 		</ul>
-
-	 	  
-	 	<div style="text-align:center"><label> </label></div>  
-
-	 		<ul id="ulWallHeader" align="justify" data-role='listview' data-inset='true'></ul>
-		 		
-		 	
-	 	<!--
-	    <ul data-role="listview" data-inset="true">
-		    <li data-role="list-divider">Freitag, 03.10.2014 <span class="ui-li-count">2</span></li>
-		    <li><a href="index.html">
-		    <h2>Simon Weber</h2>
-		    <p><strong>Gemeinschaft: WAK</strong></p>
-		    <label style="white-space:normal">Lern mal Autofahren!!!!</label>
-		        <p class="ui-li-aside"><strong>6:24</strong>PM</p>
-		    </a></li>
-		    <li><a href="index.html">
-		    <h2>Franz Clausen</h2>
-		    <p><strong>Gemeinschaft: NorwestLotto Schleswig-Holstein</strong></p>
-		    <label style="white-space:normal">Der Mekong-Riesenwels (Pangasianodon gigas) ist die groesste Art der Familie der Haiwelse (Pangasiidae) und einer der groessten Suesswasserfische der Welt. Er kommt ausschliesslich im Mekong vor und gilt durch Ueber­fischung und Verlust des Lebens­raums als vom Aussterben bedroht. In Suedost­asien wird er als Flagg­schiffart eingesetzt, um die Notwendigkeit des Schutzes großer Fische im Mekong zu vermitteln.</label>
-		        <p class="ui-li-aside"><strong>9:18</strong>AM</p>
-		    </a></li>
-		    <li data-role="list-divider">Mittwoch, 01.10.2014 <span class="ui-li-count">1</span></li>
-		    <li><a href="index.html">
-		    <h2>Hugo Walker</h2>
-		    <p><strong>Gemeinschaft: WAK</strong></p>
-		    <label style="white-space:normal">Na man!</label>
-		        <p class="ui-li-aside"><strong>4:48</strong>PM</p>
-		    </a></li>
-		</ul>-->
+	 		</ul>	 	  
+	 	<div style="text-align:center"><label> </label></div> 
+	 	<ul id="ulWallHeader" align="justify" data-role='listview' data-inset='true'></ul>
 	</div>
 <!--</div>-->
 <div data-role="footer">

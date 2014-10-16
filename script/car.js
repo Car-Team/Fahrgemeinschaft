@@ -3,25 +3,24 @@ function postTW() {
 	var text = $('#postText').val();
 	var loginID = JSON.parse(localStorage.getItem('userdata')).id;	
 	
-	if(1 != 1) {
-		alert("JUNGE");
-		return;
+	if(text.length==0) {
+		alert("JUNGE, gib wenigstens 1 Gottverdammtes Zeichen ein!");	
+	}else{	
+		var postData = {
+			'text' : text,
+			'loginID' : loginID,
+		}
+			
+		$.ajax({
+			type: "POST",
+			url: "php/postToWall.php",
+			data: postData,
+			success:	function(postResult) {
+							//alert(postResult);
+							window.location.href=window.location.href
+						},
+		});
 	}
-	
-	var postData = {
-		'text' : text,
-		'loginID' : loginID,
-	}
-		
-	$.ajax({
-		type: "POST",
-		url: "php/postToWall.php",
-		data: postData,
-		success:	function(postResult) {
-						alert(postResult);
-						window.location.href=window.location.href
-					},
-	});
 }
  ///////////////////////////////////////////PROFILE.HTML///////////////////////////////////////////////
   $(document).on('pageinit', '#profile', function(){ 
