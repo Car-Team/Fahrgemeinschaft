@@ -11,6 +11,10 @@ $( document ).on( "pageinit", "#communities", function( event ) {
 
 });
 
+function openCommunity( event ) {
+	$.mobile.changePage("community.html", {data:{param1:'value1'}});
+}
+
 ///////////// Fill community list
 function fillCommunitiyList(resultData){
 	var ul = document.getElementById("communityList");
@@ -27,23 +31,21 @@ function fillCommunitiyList(resultData){
 		li.appendChild(a);
 		ul.appendChild(li);
 
-		// $(value['communityI_id']).on('click', function() {
-  //   		alert(value['name']);
-		// });
-
-		$(ul).on( "click",{name: value['community_id']},  greet );
+		$(a).on("click",{name: value['community_id']},  openCommunity);
 
 	});
 };
 
-function greet( event ) {
-alert( "Hello " + event.data.name );
-}
 ///////////////////////////////////////////////////////////////////////////// community.html
 $( document ).on( "pageinit", "#community", function( event ) {
-	var communityID = $.url(document.location).param("communityID");
+	// var communityID = $.url(document.location).param("communityID");
 	// alert(communityID);
 
+			var url = $.url(document.location);
+
+            var data = url.param("value1");
+
+            alert(data);
 
 });
 
