@@ -40,7 +40,13 @@
 			$sqlQuery = "COMMIT";
 			$resultData = mysqli_query($db, $sqlQuery);
 	    	break;
-	}
+	    case "loadCommunity":
+	    	$communityID = mysqli_real_escape_string($db, $_GET['communityID']);
+	    	$sqlQuery = "SELECT name FROM Community WHERE ID = '".$communityID."'";
+	    	$result = mysqli_query($db, $sqlQuery);
+	    	$resultData = $result->fetch_assoc();
+	    	break;
+	};
 
 	mysqli_close($db);
 	echo  $_GET['callback'].'('.json_encode($resultData) .')';
