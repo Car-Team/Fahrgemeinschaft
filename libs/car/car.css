@@ -253,8 +253,8 @@ ul[data-role="listview"] > li[data-role="list-divider"] {
 	left:0;
 	width:80px;
     height:80px;
-    margin-left:8px;
-    margin-top:1px;
+    margin-left:12px;
+    margin-top:8px;
 }
 
 .wallpic {

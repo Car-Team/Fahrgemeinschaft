@@ -88,9 +88,11 @@ function postTW() {
 											       	 myWallEntries[j].name+"<span class='ui-li-count'>"+date.substring(8,10)+"."+date.substring(5,7)+" - "+(myWallEntries[j].Timestamp).substring(11,16)+"</span>" //myWallEntries.length+
 											       )).listview("refresh");
 
-											       var wImgSrc="http://newtroy.integra-technologies.co.uk/static/images/unknown_user.png" //"http://us.cdn282.fansshare.com/photos/kateupton/kate-upton-terry-richardson-outtakes-jpeg-model-302939606.jpg"
+											       //var wImgSrc="http://images.fotocommunity.de/bilder/natur/tiere/pfau-hochformat-357029dc-d282-4a87-a9d3-01e9ec2600e8.jpg" 
+											       var wImgSrc="http://newtroy.integra-technologies.co.uk/static/images/unknown_user.png" 
+											       //var wImgSrc="http://us.cdn282.fansshare.com/photos/kateupton/kate-upton-terry-richardson-outtakes-jpeg-model-302939606.jpg"
 											       $("#ulWallHeader").append(
-											       	$("<li style='min-height:61px'>").append(
+											       	$("<li style='min-height:66px'>").append(
 												       	"<div class='commentPicFrameWall'>"+
 												       		"<img id='wPic"+myWallEntries[j].ID+"' class='wallpic' src='"+wImgSrc+"'></img>"+
 												       	"</div>"+
@@ -100,20 +102,29 @@ function postTW() {
 											       	)).listview("refresh");
 
 											       	var imgHeight = $("#wPic"+myWallEntries[j].ID).height() 
-											       	var textMarginTop = imgHeight;											       						
-											       	$("#wTextDiv"+myWallEntries[j].ID).css({ // resize the image     			
+											       	var textMarginTop = imgHeight+6;	
+											       	
+											       	if(imgHeight>10){											       									       						
+												       	$("#wTextDiv"+myWallEntries[j].ID).css({ // resize the image     			
+			     												"margin-top": textMarginTop+"px"
+					  									});
+											       	}else{
+											       		textMarginTop=86;											       		
+											       		$("#wTextDiv"+myWallEntries[j].ID).css({ // resize the image     			
 		     												"margin-top": textMarginTop+"px"
-				  									});
-
+				  										});	
+											       	}
 
 
 														i=0;	
 											       		for (;myCommentEntries[i];) {	
 											       				if(myWallEntries[j].ID == myCommentEntries[i].WallID){
 											       					var date2 = (myCommentEntries[i].Timestamp).substring(0,11);
-											       						var cImgSrc ="http://st.depositphotos.com/1003368/1944/i/950/depositphotos_19448249-business-woman-in-glasses.jpg"									       					
+											       						var cImgSrc ="http://st.depositphotos.com/1003368/1944/i/950/depositphotos_19448249-business-woman-in-glasses.jpg"	
+											       						//var cImgSrc ="http://newtroy.integra-technologies.co.uk/static/images/unknown_user.png" 
+											       						//var cImgSrc ="http://images.fotocommunity.de/bilder/natur/tiere/pfau-hochformat-357029dc-d282-4a87-a9d3-01e9ec2600e8.jpg"								       					
 											       						$("#ulWallHeader").append(
-																	       	$("<li style='border-color: #D8D8D8 ; border-left:0px; border-right:0px; background-color:#E8E8E8 ; min-height:90px; margin-left:30px'>").append(
+																	       	$("<li style='border-color: #D8D8D8 ; border-left:0px; border-right:0px; background-color:#E8E8E8 ; min-height:94px; margin-left:30px'>").append(
 																	       		"<div class='commentPicFrameWall' style='margin-top:30px;'>"+
 																	       			"<img id='cPic"+myCommentEntries[i].ID+"' class='wallpic' src='"+cImgSrc+"'></img>"+
 																	       		"</div>"+
@@ -126,11 +137,18 @@ function postTW() {
 																		       )).listview("refresh");
 
 											       						var imgHeight = $("#cPic"+myCommentEntries[i].ID).height() 
-											       						var textMarginTop = imgHeight + 25;
+											       						var textMarginTop = imgHeight + 26;
 											       						//alert(textMarginTop);
+			  														if(imgHeight>10){											       									       						
+												     					 $("#cTextDiv"+myCommentEntries[i].ID).css({ // resize the image     			
+		     																"margin-top": textMarginTop+"px"
+				  														});
+											       					}else{
+											       						textMarginTop=84+26;											       		
 											       						$("#cTextDiv"+myCommentEntries[i].ID).css({ // resize the image     			
 		     																"margin-top": textMarginTop+"px"
 				  														});
+											       					}
 
 											       						 
 											       				} //class='commentWall'
