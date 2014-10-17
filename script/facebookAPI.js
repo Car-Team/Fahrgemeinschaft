@@ -51,18 +51,16 @@ $(document).ready(function() {
 
     if (response.status == 'connected') {
       
-      console.log("You`re connected with Facebook");
+      console.log("Sie sind mit Facebook verbunden.");
       getUserData();
     
     } else if (response.status === 'not_authorized') {
       
-        document.getElementById('status').innerHTML = 'Please log ' +
-        'into this app.';
+        console.log('Nicht authorisierter User, bitte in richtigen Account einloggen.');
     
     } else {
      
-        document.getElementById('status').innerHTML = 'Please log ' +
-        'into Facebook.';
+        console.log('Unbekannter User, bitte einloggen');
     }
   }
 
@@ -149,6 +147,7 @@ $(document).ready(function() {
         $.mobile.changePage("index.html");
        });
       window.localStorage.clear();
+      console.log('localStorage gelöscht')
     }   
   });
 
