@@ -62,7 +62,7 @@ function postTW() {
 			//'loginName' : userLoggedInDataloginName,
 			'loginID' : userLoggedInDataloginID
 		}
-				/////////////////////////////////////////////////////////////////////////////////////////////////////
+				
 				$.ajax({
 							type: "POST",
 							url: "php/comments.php",
@@ -84,36 +84,55 @@ function postTW() {
 
 											       var date = (myWallEntries[j].Timestamp).substring(0,11);
 											       $("#ulWallHeader").append(
-											      	$("<li data-role='list-divider'>").append(				      		
-											       	 myWallEntries[j].name+"<span class='ui-li-count'>"+date.substring(8,10)+"."+date.substring(5,7)+"."+date.substring(0,4)+" - "+(myWallEntries[j].Timestamp).substring(11,16)+"</span>" //myWallEntries.length+
+											      	$("<li data-role='list-divider' style='font-size:1.1em'>").append(			//+"."+date.substring(0,4)	      		
+											       	 myWallEntries[j].name+"<span class='ui-li-count'>"+date.substring(8,10)+"."+date.substring(5,7)+" - "+(myWallEntries[j].Timestamp).substring(11,16)+"</span>" //myWallEntries.length+
 											       )).listview("refresh");
 
+											       var wImgSrc="http://newtroy.integra-technologies.co.uk/static/images/unknown_user.png" //"http://us.cdn282.fansshare.com/photos/kateupton/kate-upton-terry-richardson-outtakes-jpeg-model-302939606.jpg"
 											       $("#ulWallHeader").append(
 											       	$("<li style='min-height:61px'>").append(
-												       	 //"<h2>"+myWallEntries[j].Sender + "</h2>" +
-												       	"<div class='commentPicFrameWall'><img class='wallpic' src='http://newtroy.integra-technologies.co.uk/static/images/unknown_user.png'></div>"+
-														"<div style='margin-left:75px'>"+
-												       		"<div align='justify'>"+
-												       	 		"<label style='white-space:normal'>" + myWallEntries[j].Textinput + "</label>"+
-												       		"</div>"+
+												       	"<div class='commentPicFrameWall'>"+
+												       		"<img id='wPic"+myWallEntries[j].ID+"' class='wallpic' src='"+wImgSrc+"'></img>"+
+												       	"</div>"+
+														"<div id='wTextDiv"+myWallEntries[j].ID+"' style='margin-top:75px' align='justify'>"+												       		
+												       	 		"<label style='white-space:normal'>" + myWallEntries[j].Textinput + "</label>"+												       		
 												       	"</div>"
-												       	 // +"<p class='ui-li-aside'><strong>"+ (myWallEntries[j].Timestamp).substring(11,16) + "</strong></p>"
 											       	)).listview("refresh");
+
+											       	var imgHeight = $("#wPic"+myWallEntries[j].ID).height() 
+											       	var textMarginTop = imgHeight;											       						
+											       	$("#wTextDiv"+myWallEntries[j].ID).css({ // resize the image     			
+		     												"margin-top": textMarginTop+"px"
+				  									});
+
+
+
 														i=0;	
 											       		for (;myCommentEntries[i];) {	
 											       				if(myWallEntries[j].ID == myCommentEntries[i].WallID){
 											       					var date2 = (myCommentEntries[i].Timestamp).substring(0,11);
-											       						 $("#ulWallHeader").append(
+											       						var cImgSrc ="http://st.depositphotos.com/1003368/1944/i/950/depositphotos_19448249-business-woman-in-glasses.jpg"									       					
+											       						$("#ulWallHeader").append(
 																	       	$("<li style='border-color: #D8D8D8 ; border-left:0px; border-right:0px; background-color:#E8E8E8 ; min-height:90px; margin-left:30px'>").append(
 																	       		"<div class='commentPicFrameWall' style='margin-top:30px;'>"+
-																	       			"<img class='wallpic' src='http://newtroy.integra-technologies.co.uk/static/images/unknown_user.png'></img>"+
+																	       			"<img id='cPic"+myCommentEntries[i].ID+"' class='wallpic' src='"+cImgSrc+"'></img>"+
 																	       		"</div>"+
-																		       	"<h2 style='position: absolute; left:7; top:0;'>"+ myCommentEntries[i].name+"</h2>"+
-																		       	"<div style='margin-top:31px; margin-left:75px'><div align='justify'>" +
+																	       		"<h2 style='position: absolute; left:7; top:0;'>"+ myCommentEntries[i].name+"</h2>"+
+																		       	"<div id='cTextDiv"+myCommentEntries[i].ID+"' style='margin-top:105px'><div align='justify'>" +
 																		       		"<label style='white-space:normal'>"+myCommentEntries[i].Textinput + "</label>"+
-																		       	"</div>"+											       	
-																		       	"<span class='ui-li-count dateComment'>"+ date2.substring(8,10)+"."+date2.substring(5,7)+"."+date2.substring(0,4)+" - "+(myCommentEntries[i].Timestamp).substring(11,16)+  "</span>"
-																	     )).listview("refresh");
+																		       	"</div>"+			//+"."+date2.substring(0,4)								       	
+																		       	"<span class='ui-li-count dateComment'>"+ date2.substring(8,10)+"."+date2.substring(5,7)+" - "+(myCommentEntries[i].Timestamp).substring(11,16)+  "</span>"
+																	       
+																		       )).listview("refresh");
+
+											       						var imgHeight = $("#cPic"+myCommentEntries[i].ID).height() 
+											       						var textMarginTop = imgHeight + 25;
+											       						//alert(textMarginTop);
+											       						$("#cTextDiv"+myCommentEntries[i].ID).css({ // resize the image     			
+		     																"margin-top": textMarginTop+"px"
+				  														});
+
+											       						 
 											       				} //class='commentWall'
 											       			  i++;
 															}
@@ -124,8 +143,7 @@ function postTW() {
 									});	
  									/////////////////////////////////////
 						},
-				});	
-				/////////////////////////////////////////////////////////////////////////////////////////////////////
+				});					
 		///////////////////////////////////////////ON_CLICK EVENTS///////////////////////////////////////////////
 		$("#profile_picture").on("click", function(e1) {
 			var bodywidth = $(window).width();//document.getElementById("description").offsetWidth
