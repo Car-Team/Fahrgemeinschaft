@@ -24,7 +24,7 @@ function postTW() {
 }
 
 function timeDifference(date1,date2) {
-        var difference = date1 - (date2-7197000);
+        var difference = date1 - (date2);//-7200000
         var daysDifference = Math.floor(difference/1000/60/60/24);
         difference -= daysDifference*1000*60*60*24
         var hoursDifference = Math.floor(difference/1000/60/60);
@@ -114,7 +114,7 @@ function timeDifference(date1,date2) {
 
 											        var date = (myWallEntries[j].Timestamp).substring(0,11);		
 
-											        var date1=new Date().getTime();											       
+											        var date1=new Date().getTime() - (new Date().getTimezoneOffset() * 60000);										       
 													var dateb2= myWallEntries[j].Timestamp;
 													var date2 = new Date(dateb2.replace(' ', 'T')).getTime();
 											        //alert(date2+"\n"+date1);
