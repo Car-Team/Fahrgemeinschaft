@@ -24,7 +24,7 @@ function postTW() {
 }
 
 function timeDifference(date1,date2) {
-        var difference = date1 - (date2);//-7200000
+        var difference = date1 - (date2)+10000;//-7200000
         var daysDifference = Math.floor(difference/1000/60/60/24);
         difference -= daysDifference*1000*60*60*24
         var hoursDifference = Math.floor(difference/1000/60/60);
@@ -46,7 +46,7 @@ function timeDifference(date1,date2) {
         	return "vor "+minutesDifference+ " Minuten";
         }
         if(secondsDifference>0){
-        	return "vor "+secondsDifference + "Sekunden";
+        	return "vor "+secondsDifference + " Sekunden";
         }
     	var answer = 'vor ' + daysDifference + ' Tagen ' + hoursDifference + ' Stunden ' + minutesDifference + ' Minuten ' + secondsDifference + ' Sekunden ';
     return answer;
@@ -114,7 +114,7 @@ function timeDifference(date1,date2) {
 
 											        var date = (myWallEntries[j].Timestamp).substring(0,11);		
 
-											        var date1=new Date().getTime() - (new Date().getTimezoneOffset() * 60000);										       
+											        var date1=new Date().getTime()- (new Date().getTimezoneOffset() * 60000);										       
 													var dateb2= myWallEntries[j].Timestamp;
 													var date2 = new Date(dateb2.replace(' ', 'T')).getTime();
 											        //alert(date2+"\n"+date1);
@@ -173,6 +173,7 @@ function timeDifference(date1,date2) {
 											       		for (;myCommentEntries[i];) {	
 											       				if(myWallEntries[j].ID == myCommentEntries[i].WallID){
 											       					var cdate = (myCommentEntries[i].Timestamp).substring(0,11);
+
 											       					var cdate1=new Date().getTime() - (new Date().getTimezoneOffset() * 60000);												       
 																	var cdateb2= myCommentEntries[i].Timestamp;
 																	var cdate2 = new Date(cdateb2.replace(' ', 'T')).getTime();
