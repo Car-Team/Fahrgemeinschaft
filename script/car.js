@@ -22,6 +22,35 @@ function postTW() {
 		});
 	}
 }
+
+function timeDifference(date1,date2) {
+        var difference = date1 - (date2-7197000);
+        var daysDifference = Math.floor(difference/1000/60/60/24);
+        difference -= daysDifference*1000*60*60*24
+        var hoursDifference = Math.floor(difference/1000/60/60);
+        difference -= hoursDifference*1000*60*60
+        var minutesDifference = Math.floor(difference/1000/60);
+        difference -= minutesDifference*1000*60
+        var secondsDifference = Math.floor(difference/1000);
+
+        if(daysDifference>0){
+        	if(daysDifference==1){return "vor "+daysDifference+ " Tag";}
+        	return "vor "+daysDifference+ " Tagen";
+        }
+        if(hoursDifference>0){
+        	if(hoursDifference==1){return "vor "+hoursDifference+" Stunde";}
+        	return "vor "+hoursDifference+" Stunden";
+        }
+        if(minutesDifference>0){
+        	if(minutesDifference==1){return "vor "+minutesDifference+ " Minute";}
+        	return "vor "+minutesDifference+ " Minuten";
+        }
+        if(secondsDifference>0){
+        	return "vor "+secondsDifference + "Sekunden";
+        }
+    	var answer = 'vor ' + daysDifference + ' Tagen ' + hoursDifference + ' Stunden ' + minutesDifference + ' Minuten ' + secondsDifference + ' Sekunden ';
+    return answer;
+     }
  //+++++++++++++++++++++++++++/////////////////////////////////////////PROFILE.HTML///////////////////////////////////////////+++++++++++++++++++++++++++++//
   $(document).on('pageinit', '#profile', function(){ 
  		////////////////////////////////////////AUTO RESIZE IMAGE///////////////////////////////////////////////
@@ -82,13 +111,22 @@ function postTW() {
 											var j = 0;
 											for (;myWallEntries[j];) {		        // Create the list item:
 
-											       var date = (myWallEntries[j].Timestamp).substring(0,11);
+
+											        var date = (myWallEntries[j].Timestamp).substring(0,11);		
+
+											        var date1=new Date().getTime();											       
+													var dateb2= myWallEntries[j].Timestamp;
+													var date2 = new Date(dateb2.replace(' ', 'T')).getTime();
+											        //alert(date2+"\n"+date1);
+											     
 											       $("#ulWallHeader").append(
 											      	$("<li data-role='list-divider' style='font-size:1.1em'>").append(			//+"."+date.substring(0,4)	      		
 											       	 myWallEntries[j].name+"<span class='ui-li-count'>"+date.substring(8,10)+"."+date.substring(5,7)+" - "+(myWallEntries[j].Timestamp).substring(11,16)+"</span>" //myWallEntries.length+
 											       )).listview("refresh");
 
 											       //var wImgSrc="http://images.fotocommunity.de/bilder/natur/tiere/pfau-hochformat-357029dc-d282-4a87-a9d3-01e9ec2600e8.jpg" 
+											       //var wImgSrc="http://st.depositphotos.com/1003368/1944/i/950/depositphotos_19448249-business-woman-in-glasses.jpg";
+											       //var wImgSrc ="http://us.123rf.com/400wm/400/400/malopes/malopes0901/malopes090100089/4185805-schone-fr-hling-landschaft-mit-gras-und-sky--hochformat.jpg"
 											       var wImgSrc="http://newtroy.integra-technologies.co.uk/static/images/unknown_user.png" 
 											       //var wImgSrc="http://us.cdn282.fansshare.com/photos/kateupton/kate-upton-terry-richardson-outtakes-jpeg-model-302939606.jpg"
 											       $("#ulWallHeader").append(
@@ -96,7 +134,10 @@ function postTW() {
 												       	"<div class='commentPicFrameWall'>"+
 												       		"<img id='wPic"+myWallEntries[j].ID+"' class='wallpic' src='"+wImgSrc+"'></img>"+
 												       	"</div>"+
-														"<div id='wTextDiv"+myWallEntries[j].ID+"' style='margin-top:75px' align='justify'>"+												       		
+												       	"<div id='wTimeDiv"+myWallEntries[j].ID+"' style='position: absolute; margin-left:90px; margin-top:4px'>"+
+												       		"<label class='timeGone'>"+timeDifference(date1,date2)+"</label>"+
+												       	"</div>"+
+														"<div id='wTextDiv"+myWallEntries[j].ID+"' style='margin-top:75px' align='justify'>"+																										       		
 												       	 		"<label style='white-space:normal'>" + myWallEntries[j].Textinput + "</label>"+												       		
 												       	"</div>"
 											       	)).listview("refresh");
@@ -114,25 +155,45 @@ function postTW() {
 		     												"margin-top": textMarginTop+"px"
 				  										});	
 											       	}
-
+											       	var imgWidth = $("#wPic"+myWallEntries[j].ID).width() 
+											       	var textMarginLeft = Math.round(imgWidth+10);
+											       						//alert(textMarginLeft);
+			  										if(imgWidth>10){											       									       						
+												     	 $("#wTimeDiv"+myWallEntries[j].ID).css({ // resize the image     			
+		     												"margin-left": textMarginLeft+"px"
+				  										});
+											       	}else{
+											       		textMarginLeft=84;											       		
+											       		$("#wTimeDiv"+myWallEntries[j].ID).css({ // resize the image     			
+		     												"margin-left": textMarginLeft+"px"
+				  										});
+											       	}
 
 														i=0;	
 											       		for (;myCommentEntries[i];) {	
 											       				if(myWallEntries[j].ID == myCommentEntries[i].WallID){
-											       					var date2 = (myCommentEntries[i].Timestamp).substring(0,11);
-											       						var cImgSrc ="http://st.depositphotos.com/1003368/1944/i/950/depositphotos_19448249-business-woman-in-glasses.jpg"	
-											       						//var cImgSrc ="http://newtroy.integra-technologies.co.uk/static/images/unknown_user.png" 
-											       						//var cImgSrc ="http://images.fotocommunity.de/bilder/natur/tiere/pfau-hochformat-357029dc-d282-4a87-a9d3-01e9ec2600e8.jpg"								       					
+											       					var cdate = (myCommentEntries[i].Timestamp).substring(0,11);
+											       					var cdate1=new Date().getTime();											       
+																	var cdateb2= myCommentEntries[i].Timestamp;
+																	var cdate2 = new Date(cdateb2.replace(' ', 'T')).getTime();
+															        //alert(date2+"\n"+date1);
+
+											       						//var cImgSrc ="http://st.depositphotos.com/1003368/1944/i/950/depositphotos_19448249-business-woman-in-glasses.jpg"	
+											       						var cImgSrc ="http://newtroy.integra-technologies.co.uk/static/images/unknown_user.png" 
+											       						//var cImgSrc ="http://us.123rf.com/400wm/400/400/malopes/malopes0901/malopes090100089/4185805-schone-fr-hling-landschaft-mit-gras-und-sky--hochformat.jpg"								       					
 											       						$("#ulWallHeader").append(
 																	       	$("<li style='border-color: #D8D8D8 ; border-left:0px; border-right:0px; background-color:#E8E8E8 ; min-height:94px; margin-left:30px'>").append(
 																	       		"<div class='commentPicFrameWall' style='margin-top:30px;'>"+
 																	       			"<img id='cPic"+myCommentEntries[i].ID+"' class='wallpic' src='"+cImgSrc+"'></img>"+
 																	       		"</div>"+
 																	       		"<h2 style='position: absolute; left:7; top:0;'>"+ myCommentEntries[i].name+"</h2>"+
-																		       	"<div id='cTextDiv"+myCommentEntries[i].ID+"' style='margin-top:105px'><div align='justify'>" +
+																	       		"<div id='cTimeDiv"+myCommentEntries[i].ID+"' style='position: absolute; margin-left:90px; margin-top:24px;'>"+
+												       								"<label class='timeGone'>"+timeDifference(cdate1,cdate2)+"</label>"+
+												       							"</div>"+
+																		       	"<div id='cTextDiv"+myCommentEntries[i].ID+"' style='margin-top:105px'><div align='justify'>" +	
 																		       		"<label style='white-space:normal'>"+myCommentEntries[i].Textinput + "</label>"+
 																		       	"</div>"+			//+"."+date2.substring(0,4)								       	
-																		       	"<span class='ui-li-count dateComment'>"+ date2.substring(8,10)+"."+date2.substring(5,7)+" - "+(myCommentEntries[i].Timestamp).substring(11,16)+  "</span>"
+																		       	"<span class='ui-li-count commentDate'>"+ cdate.substring(8,10)+"."+cdate.substring(5,7)+" - "+(myCommentEntries[i].Timestamp).substring(11,16)+  "</span>"
 																	       
 																		       )).listview("refresh");
 
@@ -147,6 +208,20 @@ function postTW() {
 											       						textMarginTop=84+26;											       		
 											       						$("#cTextDiv"+myCommentEntries[i].ID).css({ // resize the image     			
 		     																"margin-top": textMarginTop+"px"
+				  														});
+											       					}
+
+											       					var imgWidth = $("#cPic"+myCommentEntries[i].ID).width() 
+											       					var textMarginLeft = Math.round(imgWidth+10);
+											       						//alert(textMarginLeft);
+			  														if(imgWidth>10){											       									       						
+												     					 $("#cTimeDiv"+myCommentEntries[i].ID).css({ // resize the image     			
+		     																"margin-left": textMarginLeft+"px"
+				  														});
+											       					}else{
+											       						textMarginLeft=84;											       		
+											       						$("#cTimeDiv"+myCommentEntries[i].ID).css({ // resize the image     			
+		     																"margin-left": textMarginLeft+"px"
 				  														});
 											       					}
 

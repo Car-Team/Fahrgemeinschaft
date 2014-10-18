@@ -270,7 +270,13 @@ ul[data-role="listview"] > li[data-role="list-divider"] {
 	
 }
 
-.dateComment {
+.ui-mobile label.timeGone, div.ui-controlgroup-label.timeGone {
+	font-size: 0.8em; 
+	font-weight: bold;
+}
+
+.commentDate {
 	position: absolute;
 	top: 16px;
 }
+
