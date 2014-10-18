@@ -173,7 +173,7 @@ function timeDifference(date1,date2) {
 											       		for (;myCommentEntries[i];) {	
 											       				if(myWallEntries[j].ID == myCommentEntries[i].WallID){
 											       					var cdate = (myCommentEntries[i].Timestamp).substring(0,11);
-											       					var cdate1=new Date().getTime();											       
+											       					var cdate1=new Date().getTime() - (new Date().getTimezoneOffset() * 60000);												       
 																	var cdateb2= myCommentEntries[i].Timestamp;
 																	var cdate2 = new Date(cdateb2.replace(' ', 'T')).getTime();
 															        //alert(date2+"\n"+date1);
