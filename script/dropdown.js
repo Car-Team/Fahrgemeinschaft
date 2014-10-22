@@ -4,8 +4,11 @@ $(document).on('pageinit', '#menu', function(){
   });
 
   var menuHandler = function(e) {
-    $('body').trigger('hideOpenMenus');
-    $(this).find('li > ul').show();
+    if($(this).find('li > ul').is(":visible")) {
+      $(this).find('li > ul').hide();
+    } else {
+      $(this).find('li > ul').show();
+    };
     e.stopPropagation();
   };
 
@@ -19,6 +22,5 @@ $(document).on('pageinit', '#menu', function(){
     $('body').trigger('hideOpenMenus');
   });
 
-  $('body').trigger('hideOpenMenus');
   $("ul:jqmData(role='menu')").find('li > ul').hide();
 });
