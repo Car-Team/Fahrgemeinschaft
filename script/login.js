@@ -1,5 +1,5 @@
 function login() {
-	var email = $('#nameInput').val();
+	var email = $('#emailInput').val();
 	var pw = $('#pwInput').val();
 	
 	var loginData = {
@@ -19,7 +19,6 @@ function login() {
 						if(loginResult.successful){
 							localStorage.setItem("userdata", JSON.stringify({
 								id: loginResult.id, 
-								loginname: loginResult.loginname,
 								name: loginResult.name, 
 								email: loginResult.email, 
 								tel: loginResult.tel, 
