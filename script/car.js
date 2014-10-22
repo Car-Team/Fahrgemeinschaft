@@ -1,4 +1,52 @@
 //////////////////////////////////////////////////////////////////// FUNCTIONS /////////////////////////////////////////////////////////// 
+function postProfileChanges() {
+	var nametext = $('#namefieldInput').val();
+	var emailtext = $('#emailfieldInput').val();
+	var teltext = $('#telfieldInput').val();
+	var descriptiontext = $('#userdescriptionInput').val();
+	var loginID = JSON.parse(localStorage.getItem('userdata')).id;	
+	
+
+
+	localStorage.setItem("userdata", JSON.stringify({
+								id: JSON.parse(localStorage.getItem('userdata')).id, 
+								name: nametext, 
+								email: emailtext, 
+								tel: teltext, 
+								picid: JSON.parse(localStorage.getItem('userdata')).picID, 
+								carid: JSON.parse(localStorage.getItem('userdata')).carID,
+								descriptionUser: descriptiontext,
+								fb_id: JSON.parse(localStorage.getItem('userdata')).fb_id,
+								modelName: JSON.parse(localStorage.getItem('userdata')).modelName,
+								licensePlate: JSON.parse(localStorage.getItem('userdata')).licensePlate,
+								seats: JSON.parse(localStorage.getItem('userdata')).seats,
+								constructionYear: JSON.parse(localStorage.getItem('userdata')).constructionYear,
+								descriptionCar: JSON.parse(localStorage.getItem('userdata')).descriptionCar,
+								colourCar: JSON.parse(localStorage.getItem('userdata')).colourCar}));
+
+	if(nametext.length==0) {
+		alert("JUNGE, gib wenigstens 1 Gottverdammtes Zeichen ein!");	
+	}else{	
+		var postData = {
+			'name' : nametext,
+			'email' : emailtext,
+			'tel' : teltext,
+			'description' : descriptiontext,
+			'loginID' : loginID,
+		}
+			
+		$.ajax({
+			type: "POST",
+			url: "php/changeProfile.php",
+			data: postData,
+			success:	function(postResult) {
+							//alert(postResult);
+							window.location.href=window.location.href
+						},
+		});
+	}
+}
+
 function postTW() {
 	var text = $('#postText').val();
 	var loginID = JSON.parse(localStorage.getItem('userdata')).id;	
@@ -51,8 +99,92 @@ function timeDifference(date1,date2) {
     	var answer = 'vor ' + daysDifference + ' Tagen ' + hoursDifference + ' Stunden ' + minutesDifference + ' Minuten ' + secondsDifference + ' Sekunden ';
     return answer;
      }
+
+
+ //+++++++++++++++++++++++++++/////////////////////////////////////////PROFILEEDIT.HTML///////////////////////////////////////////+++++++++++++++++++++++++++++//
+    $(document).on('pageinit', '#profileEdit', function(){   	
+ 		////////////////////////////////////////AUTO RESIZE IMAGE///////////////////////////////////////////////
+		if($(window).width()<430){
+			 $("#profileEdit_block_a").css({ // resize the image     			
+	     			'width': 'calc(98%)'
+			   	});
+			   	$("#profileEdit_block_b").css({ // resize the image     			
+	     			'width': 'calc(100%)'
+			   	});
+		}
+		 else {
+			   $("#profileEdit_block_a").css({ // resize the image     			
+	     			'width': 'calc(38%)'
+			   	});
+			   $("#profileEdit_block_b").css({ // resize the image     			
+	     			'width': 'calc(60%)'
+			   	});
+			}
+		////////////////////////////////////////FILL PROFILE DATA///////////////////////////////////////////////
+			var myDiv1 = document.getElementById("namefieldInput");
+	        myDiv1.value = JSON.parse(localStorage.getItem('userdata')).name;	       				   
+	        var myDiv2 = document.getElementById("emailfieldInput");
+	        myDiv2.value = JSON.parse(localStorage.getItem('userdata')).email;	       				    
+	        var myDiv3 = document.getElementById("telfieldInput");
+	        myDiv3.value = JSON.parse(localStorage.getItem('userdata')).tel;	       				    
+	        var myDiv5 = document.getElementById("userdescriptionInput");
+	        myDiv5.value = JSON.parse(localStorage.getItem('userdata')).descriptionUser;
+
+ 		//////////////////////////////CONNECT TO DB TO GET THE WALL / "PINNWAND EINTRAEGE"////////////////////////
+		//var userLoggedInDataloginName = JSON.parse(localStorage.getItem('userdata')).loginname;
+		var userLoggedInDataloginID = JSON.parse(localStorage.getItem('userdata')).id;	
+	
+
+
+		$("#profileEdit_picture").on("click", function(e3) {
+			var bodywidth = $(window).width();//document.getElementById("description").offsetWidth
+			if(bodywidth>800){bodywidth=800}
+			if(e3.handled !== true) // This will prevent event triggering more then once
+        	{        	
+				if (document.getElementById("profileEdit_block_a").offsetWidth<(bodywidth/100)*80) {
+				    $("#profileEdit_block_a").css({ // resize the image     			
+		     			'width': 'calc(98%)'
+				   	});
+				   	$("#profileEdit_block_b").css({ // resize the image     			
+		     			'width': 'calc(100%)'
+				   	});
+				} else {
+				   $("#profileEdit_block_a").css({ // resize the image     			
+		     			'width': 'calc(38%)'
+				   	});
+				   $("#profileEdit_block_b").css({ // resize the image     			
+		     			'width': 'calc(60%)'
+				   	});
+				}
+			e3.handled = true;
+        	}
+		});
+		$("#profileEdit_picture_label").on("click", function(e4) {
+			var bodywidth = $(window).width();//document.getElementById("description").offsetWidth
+			if(bodywidth>800){bodywidth=800}	
+			if(e4.handled !== true) // This will prevent event triggering more then once
+        	{        		
+				if (document.getElementById("profileEdit_block_a").offsetWidth<(bodywidth/100)*80) {
+				    $("#profileEdit_block_a").css({ // resize the image     			
+		     			'width': 'calc(98%)'
+				   	});
+				   	$("#profileEdit_block_b").css({ // resize the image     			
+		     			'width': 'calc(100%)'
+				   	});
+				} else {
+				   $("#profileEdit_block_a").css({ // resize the image     			
+		     			'width': 'calc(38%)'
+				   	});
+				   $("#profileEdit_block_b").css({ // resize the image     			
+		     			'width': 'calc(60%)'
+				   	});
+				}
+			e4.handled = true;
+        	}
+		});
+	});	
  //+++++++++++++++++++++++++++/////////////////////////////////////////PROFILE.HTML///////////////////////////////////////////+++++++++++++++++++++++++++++//
-  $(document).on('pageinit', '#profile', function(){ 
+  $(document).on('pageinit', '#profile', function(){   	
  		////////////////////////////////////////AUTO RESIZE IMAGE///////////////////////////////////////////////
 		if($(window).width()<430){
 			 $("#profile_block_a").css({ // resize the image     			
