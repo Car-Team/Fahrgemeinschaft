@@ -14,7 +14,7 @@
 </head>
 <body>
 
-<div data-role="page">
+<div id="signup" data-role="page">
   <div data-role="header">
     <h1 style="overflow:visible; text-overflow:inherit">Registrierung</h1>
     <a href="index.html" data-transition="slide" data-direction="reverse" class="ui-btn btn-only-icon fa fa-arrow-left"></a>
@@ -22,11 +22,15 @@
 
   <div data-role="main" class="ui-content">
     <form>
-      <input id="nameInput" placeholder="Vor- und Nachname" type="text">
-      <input id="emailInput" placeholder="E-Mail" type="text">
-      <input id="telInput" placeholder="Telefonnummer" type="text">   
-      <input id="pwInput" placeholder="Passwort" type="password">
-      <input id="pwConfirmInput" placeholder="Passwort wiederholen" type="password">
+		<font color="#FF0000">
+		<input id="nameInput" placeholder="Vor- und Nachname" type="text">
+		Du musst einen Namen angeben.
+		<input id="emailInput" placeholder="E-Mail" type="text">
+		Dies ist keine valide Email-Adresse.
+		<input id="pwInput" placeholder="Passwort" type="password">
+		<input id="pwConfirmInput" placeholder="Passwort wiederholen" type="password">
+		Die Passwörter stimmen nicht überein.
+		</font>
     </form>
 
     <div class="ui-grid-a">

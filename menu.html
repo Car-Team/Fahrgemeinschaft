@@ -14,19 +14,18 @@
 </head>
 <body>
 
-    <script src="http://connect.facebook.net/de_DE/all.js"></script>
-    <script>
-      FB.init({
-        appId  : '566575780137093', // Anwendungs ID
-        status : true, // Login Status prüfen
-        cookie : true, // Cookies nutzen
-        xfbml  : true  // XFBML parsen
-      });
-    </script>
-
-<div data-role="page">
+<div id="menu" data-role="page">
   <div data-role="header">
     <h1>Willkommen</h1>
+    <ul data-role="menu" id="menu-right" class="dropdown-right" style="z-index:1">
+      <li>
+        <span data-role="button"class="ui-btn btn-only-icon dropdown-btn fa fa-gears"></span>
+        <ul data-role="listview" data-inset="true">
+          <li><a href="options.html" data-transition="slide" class="ui-btn">Einstellungen</a></li>
+          <li><a href="index.html" class="ui-btn btn-red" id="fb-logout">Logout</a></li>
+        </ul>
+      </li>
+    </ul>
   </div>
 
   <div data-role="main" class="ui-content">
@@ -37,8 +36,6 @@
     <ul data-role="listview" data-inset="true">
     	<li><a href="profile.html" data-transition="slide" class="ui-btn fa fa-user">Profil</a></li>
       <li><a href="car.html" data-transition="slide" class="ui-btn fa fa-automobile">Fahrzeug</a></li>
-    	<li><a href="options.html" data-transition="slide" class="ui-btn fa fa-gears">Einstellungen</a></li>
-    	<li><a href="index.html" class="ui-btn btn-red fa fa-power-off" id="fb-logout">Logout</a></li>
     </ul>
   </div>
 

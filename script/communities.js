@@ -1,3 +1,6 @@
+///////////// Globale Variable für Community Stuff
+var openCommunityID = 0;
+
 ///////////////////////////////////////////////////////////////////////////// communities.html
 $( document ).on( "pageinit", "#communities", function( event ) {
 	//var id = JSON.parse(sessionStorage.getItem("userdata")).id;
@@ -19,12 +22,32 @@ function fillCommunitiyList(resultData){
 		var a = document.createElement("a");
 		a.setAttribute("class", "ui-btn ui-btn-icon-right ui-icon-carat-r");
 		a.setAttribute("data-transition","slide");
-		a.setAttribute("href", value['community_id']);
 		a.appendChild(document.createTextNode(value['name']));
 		li.appendChild(a);
 		ul.appendChild(li);
+
+		$(a).on("click", function(){
+			openCommunityID = value['community_id'];
+			$.mobile.changePage("community.html");
+									});
+
 	});
 };
+
+///////////////////////////////////////////////////////////////////////////// community.html
+$( document ).on( "pageinit", "#community", function( event ) {
+
+	var requestData = {
+		'action' : "loadCommunity",
+		'communityID' : openCommunityID
+	};	
+	databaseRequest(requestData);
+
+});
+
+function fillCommunityInfo(resultData){
+	$("#lblCommunityName").html(resultData['name']);
+}
 
 ///////////////////////////////////////////////////////////////////////////// community_create.html
 function createCommunity() {
@@ -65,6 +88,9 @@ function databaseRequest(requestData){
 						    	}else {
 						    		alert("Fahrgemeinschaft konnte unter dem Namen " + requestData['communityName'] + " nicht erstellt werden!");
 						    	}
+						    	break;
+						    case "loadCommunity":
+						    	fillCommunityInfo(resultData);
 						    	break;
 						} 
 					},

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1" charset="utf-8">
+<link rel="stylesheet" href="libs/jquery_mobile/jquery.mobile-1.4.4.min.css">
+<link rel="stylesheet" href="libs/car/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="libs/car/car.css">
+<script src="libs/jquery/jquery-1.11.1.min.js"></script>
+<script src="libs/jquery_mobile/jquery.mobile-1.4.4.min.js"></script>
+<script src="script/car.js"></script> 
+<script src="script/login.js"></script>
+</head>
+<body>
+<div data-role="page" id="profileEdit">
+  <div data-role="header">
+    <h1>Profil bearbeiten</h1>
+    <a href="profile.html" data-transition="slide" data-direction="reverse" class="ui-btn btn-only-icon fa fa-arrow-left"></a>
+  </div>
+  <div data-role="main" class="ui-content"></div>
+	<div class="ui-grid-a">
+	    <div class="ui-block-a ui-grid-divider" style="width:38%" id="profileEdit_block_a"> 
+	    	<img id="profileEdit_picture" src="http://st.depositphotos.com/1003368/1944/i/950/depositphotos_19448249-business-woman-in-glasses.jpg">
+	    	<!--http://wallpaperscraft.com/image/25142/256x256.jpg http://www.sprachschach.de/wp-content/uploads/2014/05/Bewerbungsfoto-2-128x128.jpg-->    	
+	    	<div class="imgCaption" id="profileEdit_picture_label"> <label class="fa fa-arrows-alt">Profilbild</label></div>
+	    </div>
+	    <div class="ui-block-b" style="width:60%" id="profileEdit_block_b">
+			<div class="ui-grid-solo" style="text-align:center">
+			<div class="ui-block-a">
+					<ul data-role="listview" data-inset="true">
+			   		    <li><label>Vor- und Nachname:</label><input id="namefieldInput" class="fa fa-user" placeholder="Vor- und Nachname">
+			   		    </input></li>	  
+					    <li><label>E-Mail</label><input id="emailfieldInput" class="fa fa-at" placeholder="E-Mail">
+					    </input></li>
+					    <li><label>Telefonnummer:</label><input id="telfieldInput" class="fa fa-phone-square" placeholder="Telefonnummer">
+					    </input></li>
+
+					 </ul>   
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="ui-grid-solo" id="description">
+	    <div class="ui-block-a" style="text-align:center"><label> </label></div>  
+	    <ul data-role="listview" data-inset="true">
+		    <li>
+		    	<label>Über mich:</label>
+		   		<textarea id="userdescriptionInput" class="ui-block-a" style="white-space:normal">
+	         	</textarea>
+			</li>	
+			<li>
+			<div style="margin-right:34px"><a id="postProfileChange" class="ui-btn ui-corner-all fa fa-save" style="text-align:center; Color:white; Background-Color:#6d88b7; text-shadow: none; width:100%" onClick="postProfileChanges();">Änderungen Speichern</a></div>
+			</li>
+		</ul>		
+		 
+	 	<div style="text-align:center"><label> </label></div>	 		
+
+	</div>
+<!--</div>-->
+<div data-role="footer">
+</div>
+</div>
+</body>
+</html>

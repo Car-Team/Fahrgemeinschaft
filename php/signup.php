@@ -10,6 +10,7 @@ if(!$db)
 }
 
 $sqlQuery = "INSERT INTO `Users`(`LoginPW`, `Name`, `Email`, `PicID`, `CarID`) VALUES ('$pw','$name','$email',0,0);";
+
 mysqli_query($db, $sqlQuery);
 
 exit("Registrierung erfolgreich!");

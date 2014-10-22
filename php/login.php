@@ -27,6 +27,7 @@ if($successful) {
         'picID'				=> $resultData[5],//PicID
 		'carID'				=> $resultData[6],//CarID
 		'descriptionUser'	=> $resultData[7],//CarID
+		'fb_id'				=> $resultData[8],//FBID
 		'modelName'			=> $resultData[10],//ModelName
 		'licensePlate'		=> $resultData[11],//LicensePlate
 		'seats'				=> $resultData[12],//Seats
