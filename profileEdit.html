@@ -27,11 +27,11 @@
 			<div class="ui-grid-solo" style="text-align:center">
 			<div class="ui-block-a">
 					<ul data-role="listview" data-inset="true">
-			   		    <li><input id="namefieldInput" class="fa fa-user" placeholder="Vor- und Nachname">
+			   		    <li><label>Vor- und Nachname:</label><input id="namefieldInput" class="fa fa-user" placeholder="Vor- und Nachname">
 			   		    </input></li>	  
-					    <li><input id="emailfieldInput" class="fa fa-at" placeholder="E-Mail">
+					    <li><label>E-Mail</label><input id="emailfieldInput" class="fa fa-at" placeholder="E-Mail">
 					    </input></li>
-					    <li><input id="telfieldInput" class="fa fa-phone-square" placeholder="Telefonnummer">
+					    <li><label>Telefonnummer:</label><input id="telfieldInput" class="fa fa-phone-square" placeholder="Telefonnummer">
 					    </input></li>
 
 					 </ul>   
@@ -44,11 +44,12 @@
 	    <div class="ui-block-a" style="text-align:center"><label> </label></div>  
 	    <ul data-role="listview" data-inset="true">
 		    <li>
+		    	<label>Über mich:</label>
 		   		<textarea style="color='#ACACAC'" id="userdescriptionInput" placeholder="Über mich">
 	         	</textarea>
 			</li>	
 			<li>
-			<div style="margin-right:34px"><a id="postToWall" class="ui-btn ui-corner-all fa fa-save" style="text-align:center; Color:white; Background-Color:#6d88b7; text-shadow: none; width:100%" onClick="postProfileChanges();">Änderungen Speichern</a></div>
+			<div style="margin-right:34px"><a id="postProfileChange" class="ui-btn ui-corner-all fa fa-save" style="text-align:center; Color:white; Background-Color:#6d88b7; text-shadow: none; width:100%" onClick="postProfileChanges();">Änderungen Speichern</a></div>
 			</li>
 		</ul>		
 		 
