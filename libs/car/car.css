@@ -280,3 +280,73 @@ ul[data-role="listview"] > li[data-role="list-divider"] {
 	top: 16px;
 }
 
+#header ul ul { /* Menu Item List */
+    position: absolute; /* Position absolutely */
+    display: none; /* Hide */
+    z-index:500; /* Ensure visibility over other elements on page */
+    margin-top: 0px; /* Bring menu closer to button; not needed on mobile */
+}
+
+#header ul ul li {
+    width: 150px; /* Fixed width menu items*/
+    display: block; /* JQM makes a inline-blocks... reset it to block */
+}
+
+#header ul ul li a {
+    white-space: normal; /* Stop long menu names from truncating */
+}
+
+#menu-left {
+    float: left;
+    margin-left:0.5em;
+}
+
+#menu-right {
+    float: right;
+    margin-right:0.5em; 
+}
+
+#menu-left ul {
+    margin-left:0.5em;
+}
+
+#menu-right ul {
+    margin-right: 0.5em;
+    right: 0em;
+}
+
+#home .ui-header {
+    height: 75px;
+}
+
+#home .ui-header h1 {
+    font-size: 16pt;
+    margin-bottom:0px;
+}
+
+#txtSpan {
+    position: relative;
+    display: inline-block;
+    top: -5px; /* Doesnt seem possible to vertically center otherwise */
+}
+
+#home .ui-header h2 {
+    font-size: 14pt;
+    margin-top: 0px;
+}
+
+.dropdown-right {
+	position: absolute;
+	top: 40px;
+	right: 0;
+	margin: 0px;
+	list-style-type: none;
+}
+
+.dropdown-right > li > .dropdown-btn {
+	position: absolute;
+	top: -40px;
+	right: 0;
+	margin-top: 2px;
+	margin-bottom: 4px;
+}
