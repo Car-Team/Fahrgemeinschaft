@@ -41,7 +41,7 @@ function postProfileChanges() {
 			data: postData,
 			success:	function(postResult) {
 							//alert(postResult);
-							window.location.href=window.location.href
+							window.location.href="profile.html"
 						},
 		});
 	}
@@ -101,137 +101,16 @@ function timeDifference(date1,date2) {
      }
 
 
- //+++++++++++++++++++++++++++/////////////////////////////////////////PROFILEEDIT.HTML///////////////////////////////////////////+++++++++++++++++++++++++++++//
-    $(document).on('pageinit', '#profileEdit', function(){   	
- 		////////////////////////////////////////AUTO RESIZE IMAGE///////////////////////////////////////////////
-		if($(window).width()<430){
-			 $("#profileEdit_block_a").css({ // resize the image     			
-	     			'width': 'calc(98%)'
-			   	});
-			   	$("#profileEdit_block_b").css({ // resize the image     			
-	     			'width': 'calc(100%)'
-			   	});
-		}
-		 else {
-			   $("#profileEdit_block_a").css({ // resize the image     			
-	     			'width': 'calc(38%)'
-			   	});
-			   $("#profileEdit_block_b").css({ // resize the image     			
-	     			'width': 'calc(60%)'
-			   	});
-			}
-		////////////////////////////////////////FILL PROFILE DATA///////////////////////////////////////////////
-			var myDiv1 = document.getElementById("namefieldInput");
-	        myDiv1.value = JSON.parse(localStorage.getItem('userdata')).name;	       				   
-	        var myDiv2 = document.getElementById("emailfieldInput");
-	        myDiv2.value = JSON.parse(localStorage.getItem('userdata')).email;	       				    
-	        var myDiv3 = document.getElementById("telfieldInput");
-	        myDiv3.value = JSON.parse(localStorage.getItem('userdata')).tel;	       				    
-	        var myDiv5 = document.getElementById("userdescriptionInput");
-	        myDiv5.value = JSON.parse(localStorage.getItem('userdata')).descriptionUser;
-
- 		//////////////////////////////CONNECT TO DB TO GET THE WALL / "PINNWAND EINTRAEGE"////////////////////////
-		//var userLoggedInDataloginName = JSON.parse(localStorage.getItem('userdata')).loginname;
-		var userLoggedInDataloginID = JSON.parse(localStorage.getItem('userdata')).id;	
-	
-
-
-		$("#profileEdit_picture").on("click", function(e3) {
-			var bodywidth = $(window).width();//document.getElementById("description").offsetWidth
-			if(bodywidth>800){bodywidth=800}
-			if(e3.handled !== true) // This will prevent event triggering more then once
-        	{        	
-				if (document.getElementById("profileEdit_block_a").offsetWidth<(bodywidth/100)*80) {
-				    $("#profileEdit_block_a").css({ // resize the image     			
-		     			'width': 'calc(98%)'
-				   	});
-				   	$("#profileEdit_block_b").css({ // resize the image     			
-		     			'width': 'calc(100%)'
-				   	});
-				} else {
-				   $("#profileEdit_block_a").css({ // resize the image     			
-		     			'width': 'calc(38%)'
-				   	});
-				   $("#profileEdit_block_b").css({ // resize the image     			
-		     			'width': 'calc(60%)'
-				   	});
-				}
-			e3.handled = true;
-        	}
-		});
-		$("#profileEdit_picture_label").on("click", function(e4) {
-			var bodywidth = $(window).width();//document.getElementById("description").offsetWidth
-			if(bodywidth>800){bodywidth=800}	
-			if(e4.handled !== true) // This will prevent event triggering more then once
-        	{        		
-				if (document.getElementById("profileEdit_block_a").offsetWidth<(bodywidth/100)*80) {
-				    $("#profileEdit_block_a").css({ // resize the image     			
-		     			'width': 'calc(98%)'
-				   	});
-				   	$("#profileEdit_block_b").css({ // resize the image     			
-		     			'width': 'calc(100%)'
-				   	});
-				} else {
-				   $("#profileEdit_block_a").css({ // resize the image     			
-		     			'width': 'calc(38%)'
-				   	});
-				   $("#profileEdit_block_b").css({ // resize the image     			
-		     			'width': 'calc(60%)'
-				   	});
-				}
-			e4.handled = true;
-        	}
-		});
-	});	
- //+++++++++++++++++++++++++++/////////////////////////////////////////PROFILE.HTML///////////////////////////////////////////+++++++++++++++++++++++++++++//
-  $(document).on('pageinit', '#profile', function(){   	
- 		////////////////////////////////////////AUTO RESIZE IMAGE///////////////////////////////////////////////
-		if($(window).width()<430){
-			 $("#profile_block_a").css({ // resize the image     			
-	     			'width': 'calc(98%)'
-			   	});
-			   	$("#profile_block_b").css({ // resize the image     			
-	     			'width': 'calc(100%)'
-			   	});
-		}
-		 else {
-			   $("#profile_block_a").css({ // resize the image     			
-	     			'width': 'calc(38%)'
-			   	});
-			   $("#profile_block_b").css({ // resize the image     			
-	     			'width': 'calc(60%)'
-			   	});
-			}
-		////////////////////////////////////////FILL PROFILE DATA///////////////////////////////////////////////
-			var myDiv1 = document.getElementById("namefield");
-	        myDiv1.innerHTML = JSON.parse(localStorage.getItem('userdata')).name;	       				   
-	        var myDiv2 = document.getElementById("emailfield");
-	        myDiv2.innerHTML = JSON.parse(localStorage.getItem('userdata')).email;	       				    
-	        var myDiv3 = document.getElementById("telfield");
-	        myDiv3.innerHTML = JSON.parse(localStorage.getItem('userdata')).tel;	       				    
-	        var myDiv4 = document.getElementById("carfield");
-	        myDiv4.innerHTML = JSON.parse(localStorage.getItem('userdata')).modelName;
-	        var myDiv5 = document.getElementById("userdescription");
-	        myDiv5.innerHTML = "<h3>Beschreibung</h3>" + JSON.parse(localStorage.getItem('userdata')).descriptionUser;
-
- 		//////////////////////////////CONNECT TO DB TO GET THE WALL / "PINNWAND EINTRAEGE"////////////////////////
-		//var userLoggedInDataloginName = JSON.parse(localStorage.getItem('userdata')).loginname;
-		var userLoggedInDataloginID = JSON.parse(localStorage.getItem('userdata')).id;	
+	function lookintoWall(myCommentEntries){
+		var userLoggedInDataloginID = JSON.parse(localStorage.getItem('userdata')).id;
 		var myWallEntries;
-		var myCommentEntries;	
+	
 		var userLoggedInData = {
 			//'loginName' : userLoggedInDataloginName,
 			'loginID' : userLoggedInDataloginID
 		}
-				
-				$.ajax({
-							type: "POST",
-							url: "php/comments.php",
-							data: userLoggedInData,
-							dataType: "json",			
-							success:	function(commententries) {									
-									myCommentEntries=commententries;
-									//////////////////////////////////////////////////////
+			
+		//////////////////////////////////////////////////////
 									$.ajax({
 										type: "POST",
 										url: "php/wall.php",
@@ -367,9 +246,150 @@ function timeDifference(date1,date2) {
 											
 										},
 									});	
- 									/////////////////////////////////////
-						},
-				});					
+ 									/////////////////////////////////////	
+	}
+
+ //+++++++++++++++++++++++++++/////////////////////////////////////////PROFILEEDIT.HTML///////////////////////////////////////////+++++++++++++++++++++++++++++//
+    $(document).on('pageinit', '#profileEdit', function(){   	
+ 		////////////////////////////////////////AUTO RESIZE IMAGE///////////////////////////////////////////////
+		if($(window).width()<430){
+			 $("#profileEdit_block_a").css({ // resize the image     			
+	     			'width': 'calc(98%)'
+			   	});
+			   	$("#profileEdit_block_b").css({ // resize the image     			
+	     			'width': 'calc(100%)'
+			   	});
+		}
+		 else {
+			   $("#profileEdit_block_a").css({ // resize the image     			
+	     			'width': 'calc(38%)'
+			   	});
+			   $("#profileEdit_block_b").css({ // resize the image     			
+	     			'width': 'calc(60%)'
+			   	});
+			}
+		////////////////////////////////////////FILL PROFILE DATA///////////////////////////////////////////////
+			var myDiv1 = document.getElementById("namefieldInput");
+	        myDiv1.value = JSON.parse(localStorage.getItem('userdata')).name;	       				   
+	        var myDiv2 = document.getElementById("emailfieldInput");
+	        myDiv2.value = JSON.parse(localStorage.getItem('userdata')).email;	       				    
+	        var myDiv3 = document.getElementById("telfieldInput");
+	        myDiv3.value = JSON.parse(localStorage.getItem('userdata')).tel;	       				    
+	        var myDiv5 = document.getElementById("userdescriptionInput");
+	        myDiv5.value = JSON.parse(localStorage.getItem('userdata')).descriptionUser;
+
+ 		//////////////////////////////CONNECT TO DB TO GET THE WALL / "PINNWAND EINTRAEGE"////////////////////////
+		//var userLoggedInDataloginName = JSON.parse(localStorage.getItem('userdata')).loginname;
+		var userLoggedInDataloginID = JSON.parse(localStorage.getItem('userdata')).id;	
+	
+
+
+		$("#profileEdit_picture").on("click", function(e3) {
+			var bodywidth = $(window).width();//document.getElementById("description").offsetWidth
+			if(bodywidth>800){bodywidth=800}
+			if(e3.handled !== true) // This will prevent event triggering more then once
+        	{        	
+				if (document.getElementById("profileEdit_block_a").offsetWidth<(bodywidth/100)*80) {
+				    $("#profileEdit_block_a").css({ // resize the image     			
+		     			'width': 'calc(98%)'
+				   	});
+				   	$("#profileEdit_block_b").css({ // resize the image     			
+		     			'width': 'calc(100%)'
+				   	});
+				} else {
+				   $("#profileEdit_block_a").css({ // resize the image     			
+		     			'width': 'calc(38%)'
+				   	});
+				   $("#profileEdit_block_b").css({ // resize the image     			
+		     			'width': 'calc(60%)'
+				   	});
+				}
+			e3.handled = true;
+        	}
+		});
+		$("#profileEdit_picture_label").on("click", function(e4) {
+			var bodywidth = $(window).width();//document.getElementById("description").offsetWidth
+			if(bodywidth>800){bodywidth=800}	
+			if(e4.handled !== true) // This will prevent event triggering more then once
+        	{        		
+				if (document.getElementById("profileEdit_block_a").offsetWidth<(bodywidth/100)*80) {
+				    $("#profileEdit_block_a").css({ // resize the image     			
+		     			'width': 'calc(98%)'
+				   	});
+				   	$("#profileEdit_block_b").css({ // resize the image     			
+		     			'width': 'calc(100%)'
+				   	});
+				} else {
+				   $("#profileEdit_block_a").css({ // resize the image     			
+		     			'width': 'calc(38%)'
+				   	});
+				   $("#profileEdit_block_b").css({ // resize the image     			
+		     			'width': 'calc(60%)'
+				   	});
+				}
+			e4.handled = true;
+        	}
+		});
+	});	
+ //+++++++++++++++++++++++++++/////////////////////////////////////////PROFILE.HTML///////////////////////////////////////////+++++++++++++++++++++++++++++//
+  $(document).on('pageinit', '#profile', function(){   	
+ 		////////////////////////////////////////AUTO RESIZE IMAGE///////////////////////////////////////////////
+		if($(window).width()<430){
+			 $("#profile_block_a").css({ // resize the image     			
+	     			'width': 'calc(98%)'
+			   	});
+			   	$("#profile_block_b").css({ // resize the image     			
+	     			'width': 'calc(100%)'
+			   	});
+		}
+		 else {
+			   $("#profile_block_a").css({ // resize the image     			
+	     			'width': 'calc(38%)'
+			   	});
+			   $("#profile_block_b").css({ // resize the image     			
+	     			'width': 'calc(60%)'
+			   	});
+			}
+		////////////////////////////////////////FILL PROFILE DATA///////////////////////////////////////////////
+			var myDiv1 = document.getElementById("namefield");
+	        myDiv1.innerHTML = JSON.parse(localStorage.getItem('userdata')).name;	       				   
+	        var myDiv2 = document.getElementById("emailfield");
+	        myDiv2.innerHTML = JSON.parse(localStorage.getItem('userdata')).email;	       				    
+	        var myDiv3 = document.getElementById("telfield");
+	        myDiv3.innerHTML = JSON.parse(localStorage.getItem('userdata')).tel;	       				    
+	        var myDiv4 = document.getElementById("carfield");
+	        myDiv4.innerHTML = JSON.parse(localStorage.getItem('userdata')).modelName;
+	        var myDiv5 = document.getElementById("userdescription");
+	        myDiv5.innerHTML = "<h3>Beschreibung</h3>" + JSON.parse(localStorage.getItem('userdata')).descriptionUser;
+
+ 		//////////////////////////////CONNECT TO DB TO GET THE WALL / "PINNWAND EINTRAEGE"////////////////////////
+		//var userLoggedInDataloginName = JSON.parse(localStorage.getItem('userdata')).loginname;
+		var userLoggedInDataloginID = JSON.parse(localStorage.getItem('userdata')).id;
+		//alert(userLoggedInDataloginID)	;
+		var myWallEntries;
+		var myCommentEntries;	
+		var userLoggedInData = {
+			//'loginName' : userLoggedInDataloginName,
+			'loginID' : userLoggedInDataloginID
+		}
+				
+				$.ajax({
+							type: "POST",
+							url: "php/comments.php",
+							data: userLoggedInData,
+							dataType: "json",			
+							success:	function(commententries) {									
+									myCommentEntries=commententries;
+									lookintoWall(myCommentEntries);
+									
+							},
+							error:	function() {					
+									myCommentEntries={'ID':0, 'WallID':0, 'ReceiverID':0, 'SenderID':0, 'Textinput':0, 'Timestamp':0, 'name':0} //give empty commentlist into function to avoid errors
+									lookintoWall(myCommentEntries);
+									
+							},
+				});	
+							
 		///////////////////////////////////////////ON_CLICK EVENTS///////////////////////////////////////////////
 		$("#profile_picture").on("click", function(e1) {
 			var bodywidth = $(window).width();//document.getElementById("description").offsetWidth
