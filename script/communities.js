@@ -13,7 +13,6 @@ $( document ).on( "pageinit", "#communities", function( event ) {
 ///////////// Fill community list
 function fillCommunitiyList(resultData){
 	var ul = document.getElementById("communityList");
-	$(ul).empty();
 	$.each(resultData, function(key, value){
 		var li = document.createElement("li");
 		var a = document.createElement("a");
@@ -44,8 +43,9 @@ $( document ).on( "pageinit", "#community", function( event ) {
 function fillCommunityInfo(resultData){
 	$("#lblCommunityName").html(resultData['name']);
 
+
+////////Memberlist
 	var ul = document.getElementById("memberList");
-	$(ul).empty();
 	$.each(resultData['members'], function(key, value){
 		var li = document.createElement("li");
 		var a = document.createElement("a");
@@ -58,6 +58,23 @@ function fillCommunityInfo(resultData){
 			var remove = document.createElement("a");
 			remove.appendChild(document.createTextNode(value['Name'] + " aus der Fahrgemeinschaft entfernen"));
 			li.appendChild(remove);
+		ul.appendChild(li);
+
+		// $(a).on("click", function(){
+		// 	localStorage.setItem('openCommunityID', value['community_id']);
+		// 	$.mobile.changePage("community.html");
+		// 							});
+
+	});
+	$(ul).listview("refresh");
+
+////////InviteList
+	var ul = document.getElementById("inviteList");
+	$.each(resultData['invites'], function(key, value){
+		var li = document.createElement("li");
+		var a = document.createElement("a");
+		a.appendChild(document.createTextNode(value['Email']));
+		li.appendChild(a);
 		ul.appendChild(li);
 
 		// $(a).on("click", function(){

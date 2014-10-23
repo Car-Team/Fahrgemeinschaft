@@ -54,6 +54,15 @@
 	    	while($row = $result->fetch_assoc()){
 				$resultData['members'][] = $row;
 			};
+	    	$sqlQuery = "SELECT Users.Email
+						FROM Invites
+						INNER JOIN Users
+						ON Invites.user_id=Users.ID
+						WHERE community_id = $communityID";
+	    	$result = mysqli_query($db, $sqlQuery);
+	    	while($row = $result->fetch_assoc()){
+				$resultData['invites'][] = $row;
+			};
 	    	break;
 	    case "inviteMember":
 			$inviteMail = mysqli_real_escape_string($db, $_GET['inviteMail']);
