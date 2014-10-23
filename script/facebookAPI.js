@@ -75,10 +75,10 @@ $(document).ready(function() {
     }
 
     $.ajax({
-      type: "POST",
+      type: "GET",
       url: "php/loginFB.php",
       data: fbid_data,
-      dataType: "json",
+      dataType: "jsonp",
       success:  function(loginResult) {
               if(loginResult.successful){
                 localStorage.setItem("userdata", JSON.stringify({
