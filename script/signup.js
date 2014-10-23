@@ -1,12 +1,14 @@
 $(document).on('pageinit','#signup', function() {
 	//validation
 	
-	$("input").change(function(){
-		var val = $(this).val();
-		if(val == ''){
-			$(this).parent().css({"border-color": "red"});
+	$("#nameInput").change(function(){
+		var name = $("#nameInput").val();
+		if(name == ""){
+			$("#nameInput").parent().css({"border-color": "red"});
+			$("#nameInputWarning").show();
 		} else {
-			$(this).parent().css({"border-color": "green"});
+			$("#nameInput").parent().css({"border-color": "green"});
+			$("#nameInputWarning").hide();
 		}
 	});
 	
@@ -14,8 +16,10 @@ $(document).on('pageinit','#signup', function() {
 		var email = $("#emailInput").val();
 		if(email.indexOf("@") == -1){
 			$("#emailInput").parent().css({"border-color": "red"});
+			$("#emailInputWarning").show();
 		} else {
 			$("#emailInput").parent().css({"border-color": "green"});
+			$("#emailInputWarning").hide();
 		}
 	});
 	
@@ -31,9 +35,11 @@ $(document).on('pageinit','#signup', function() {
 		if(pw != pwConfirm){
 			$("#pwInput").parent().css({"border-color": "red"});
 			$("#pwConfirmInput").parent().css({"border-color": "red"});
+			$("#pwInputWarning").show();
 		} else {
 			$("#pwInput").parent().css({"border-color": "green"});
 			$("#pwConfirmInput").parent().css({"border-color": "green"});
+			$("#pwInputWarning").hide();
 		}
 	}
 	
