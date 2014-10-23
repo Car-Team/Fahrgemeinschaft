@@ -45,6 +45,15 @@
 	    	$sqlQuery = "SELECT name FROM Community WHERE ID = '".$communityID."'";
 	    	$result = mysqli_query($db, $sqlQuery);
 	    	$resultData = $result->fetch_assoc();
+	    	$sqlQuery = "SELECT Users.Name, Users.PicID
+						FROM Communities
+						INNER JOIN Users
+						ON Communities.user_id=Users.ID
+						WHERE Communities.community_id = $communityID";
+	    	$result = mysqli_query($db, $sqlQuery);
+	    	while($row = $result->fetch_assoc()){
+				$resultData['members'][] = $row;
+			};
 	    	break;
 	};
 
