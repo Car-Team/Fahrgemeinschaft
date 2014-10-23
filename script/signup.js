@@ -3,23 +3,23 @@ $(document).on('pageinit','#signup', function() {
 	
 	$("#nameInput").change(function(){
 		var name = $("#nameInput").val();
-		if(name == ""){
-			$("#nameInput").parent().css({"border-color": "red"});
-			$("#nameInputWarning").show();
-		} else {
+		if(nameValid(name)){
 			$("#nameInput").parent().css({"border-color": "green"});
 			$("#nameInputWarning").hide();
+		} else {
+			$("#nameInput").parent().css({"border-color": "red"});
+			$("#nameInputWarning").show();
 		}
 	});
 	
 	$("#emailInput").change(function(){
 		var email = $("#emailInput").val();
-		if(email.indexOf("@") == -1){
-			$("#emailInput").parent().css({"border-color": "red"});
-			$("#emailInputWarning").show();
-		} else {
+		if(emailValid(email)){
 			$("#emailInput").parent().css({"border-color": "green"});
 			$("#emailInputWarning").hide();
+		} else {
+			$("#emailInput").parent().css({"border-color": "red"});
+			$("#emailInputWarning").show();
 		}
 	});
 	
@@ -31,15 +31,39 @@ $(document).on('pageinit','#signup', function() {
 		pwTest($("#pwInput").val(), $("#pwConfirmInput").val());
 	});
 	
-	function pwTest(pw, pwConfirm) {
-		if(pw != pwConfirm){
-			$("#pwInput").parent().css({"border-color": "red"});
-			$("#pwConfirmInput").parent().css({"border-color": "red"});
-			$("#pwInputWarning").show();
-		} else {
+	function pwTest(pw, pwConfirm){
+		if(pwValid(pw, pwConfirm)){
 			$("#pwInput").parent().css({"border-color": "green"});
 			$("#pwConfirmInput").parent().css({"border-color": "green"});
 			$("#pwInputWarning").hide();
+		} else {
+			$("#pwInput").parent().css({"border-color": "red"});
+			$("#pwConfirmInput").parent().css({"border-color": "red"});
+			$("#pwInputWarning").show();
+		}
+	}
+	
+	function nameValid(name) {
+		if(name == "") {
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
+	function emailValid(email) {
+		if(email.indexOf("@") == -1) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
+	function pwValid(pw, pwConfirm) {
+		if(pw == "" || pwConfirm == "" || pw != pwConfirm){
+			return false;
+		} else {
+			return true;
 		}
 	}
 	
@@ -47,19 +71,16 @@ $(document).on('pageinit','#signup', function() {
 
 function signup() {
 	var name = $('#nameInput').val();
-	var emailInput = $('#emailInput').val();
-	var pwInput = $('#pwInput').val();
-	var pwConfirmInput = $('#pwConfirmInput').val();
+	var email = $('#emailInput').val();
+	var pw = $('#pwInput').val();
+	var pwConfirm = $('#pwConfirmInput').val();
 	
-	if(pwInput != pwConfirmInput) {
-		alert("JUNGE, " + pwInput + " ist nicht gleich " + pwConfirmInput);
-		return;
-	}
+	var everythingValid = nameValid(name) && emailValid(email) && pwValid(pw, pwConfirm);
 	
 	var signupData = {
 		'name' : name,
-		'email' : emailInput,
-		'pw' : pwInput
+		'email' : email,
+		'pw' : pw
 	}
 		
 	$.ajax({
