@@ -75,7 +75,7 @@ function signup() {
 	var pw = $('#pwInput').val();
 	var pwConfirm = $('#pwConfirmInput').val();
 	
-	var everythingValid = nameValid(name) && emailValid(email) && pwValid(pw, pwConfirm);
+	//var everythingValid = nameValid(name) && emailValid(email) && pwValid(pw, pwConfirm);
 	
 	var signupData = {
 		'name' : name,
