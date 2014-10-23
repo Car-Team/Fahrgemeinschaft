@@ -73,6 +73,38 @@
 						
 			$resultData = mysqli_query($db, $sqlQuery);
 	        break;
+	    case "getInvites":
+			$userID = mysqli_real_escape_string($db, $_GET['userID']);
+
+			$sqlQuery = "SELECT Invites.community_id, Community.name
+						FROM Invites
+						INNER JOIN Community
+						ON Invites.community_id=Community.ID
+						WHERE Invites.user_id = $userID";
+						
+			$result = mysqli_query($db, $sqlQuery);
+
+			while($row = $result->fetch_assoc()){
+				$resultData[] = $row;
+			};
+	        break;
+	    case "acceptInvite":
+	   		$userID = mysqli_real_escape_string($db, $_GET['userID']);
+	    	$communityID = mysqli_real_escape_string($db, $_GET['communityID']);
+
+			$sqlQuery = "START TRANSACTION";
+			$resultData = mysqli_query($db, $sqlQuery);
+			$sqlQuery = "INSERT INTO Communities (user_id, community_id) VALUES('".$userID."', '".$communityID."')";
+			$resultData = mysqli_query($db, $sqlQuery);
+				if(!$resultData)
+					break;
+			$sqlQuery = "DELETE FROM Invites WHERE user_id = '".$userID."' AND community_id = '".$communityID."'";
+			$resultData = mysqli_query($db, $sqlQuery);
+				if(!$resultData)
+					break;
+			$sqlQuery = "COMMIT";
+			$resultData = mysqli_query($db, $sqlQuery);
+	    	break;
 	};
 
 	mysqli_close($db);

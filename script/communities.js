@@ -1,3 +1,69 @@
+///////////////////////////////////////////////////////////////////////////// menu.html
+$( document ).on( "pageinit", "#menu", function( event ) {
+
+	var requestData = {
+		'action' : "getInvites",
+		'userID' : JSON.parse(localStorage.getItem('userdata')).id
+	};
+
+	databaseRequest(requestData);
+
+	$("#popupDialog").on({popupbeforeposition: function(){
+		$("#lblJoinCommunity").html("Einladung zur Fahrgemeinschaft <u>" + localStorage.getItem('inviteCommunityName') + "</u> akzeptieren?");
+	}});
+
+});
+
+///////////// Check if there are invites in list
+function checkInviteListVisibility(){
+	alert(document.getElementById('myInvitesList').getElementsByTagName('li').length);
+	if(document.getElementById('myInvitesList').getElementsByTagName('li').length > 0){
+		$("#myInvites").show();
+	}else{
+		$("#myInvites").hide();	
+	}
+}
+
+///////////// Fill Invitelist
+function fillInviteList(resultData){
+	var ul = document.getElementById("myInvitesList");
+	$.each(resultData, function(key, value){
+		var li = document.createElement("li");
+		var a = document.createElement("a");
+		a.appendChild(document.createTextNode(value['name']));
+		// href="#popupDialog" data-rel="popup" data-position-to="window" data-transition="pop"
+		a.href="#popupDialog";
+		a.setAttribute("data-rel","popup");
+		a.setAttribute("data-position-to", "window");
+		a.setAttribute("data-transition", "pop");
+		li.appendChild(a);
+		ul.appendChild(li);
+
+		$(a).on("click", function(){
+			localStorage.setItem('inviteCommunityID', value['community_id']);
+			localStorage.setItem('inviteCommunityName', value['name']);
+									});
+
+	});
+	$(ul).listview("refresh");
+};
+
+///////////// Accept Invite
+function acceptInvite(){
+	var requestData = {
+		'action' : "acceptInvite",
+		'userID' : JSON.parse(localStorage.getItem('userdata')).id,
+		'communityID' : localStorage.getItem('inviteCommunityID')
+	};
+
+	databaseRequest(requestData);
+};
+
+///////////// Refuse Invite
+function refuseInvite(){
+
+};
+
 ///////////////////////////////////////////////////////////////////////////// communities.html
 $( document ).on( "pageinit", "#communities", function( event ) {
 
@@ -154,6 +220,17 @@ function databaseRequest(requestData){
 						    	}else {
 						    		alert(requestData['inviteMail'] + " konnte nicht eingeladen werden!");
 						    	}
+						    	break;
+						    case "getInvites":
+						    	fillInviteList(resultData);
+						    	break;
+						    case "acceptInvite":
+						    	if(resultData){
+						    		alert("Fahrgemeinschaft beigetreten!");
+						    	}else {
+						    		alert("Error");
+						    	}
+					    		checkInviteListVisibility();
 						    	break;
 						} 
 					},

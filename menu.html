@@ -16,7 +16,7 @@
 
 <div id="menu" data-role="page">
   <div data-role="header">
-    <h1>Willkommen</h1>
+    <h1>drive2gether</h1>
     <ul data-role="menu" id="menu-right" class="dropdown-right" style="z-index:1">
       <li>
         <span data-role="button"class="ui-btn btn-only-icon dropdown-btn fa fa-gears"></span>
@@ -29,15 +29,32 @@
   </div>
 
   <div data-role="main" class="ui-content">
+    <!-- Only if open invites -->
+      <div data-role="collapsible" data-collapsed="true" id="myInvites">
+          <h4>Meine offenen Einladungen</h4>
+          <ul data-role="listview" data-icon="action" id="myInvitesList">
+            <!--Getting filled by JS -->
+              <!-- Invite Popup -->
+                <div data-role="popup" id="popupDialog" data-overlay-theme="b" style="max-width:400px;">
+                    <div data-role="header">
+                    <h1>Einladung</h1>
+                    </div>
+                    <div role="main" class="ui-content" style="text-align: center">
+                      <h3 style="margin:5px" id="lblJoinCommunity">Einladung zu #COMMUNITYNAME aktzeptieren?</h3>
+                      <a href="#" class="ui-btn ui-corner-all" data-rel="back" onclick="acceptInvite();">Annehmen</a>
+                      <a href="#" class="ui-btn ui-corner-all" data-rel="back" onclick="refuseInvite();">Ablehnen</a>
+                    </div>
+                </div>
+          </ul>
+      </div>
     <ul data-role="listview" data-inset="true">
-    	<li><a href="communities.html" data-transition="slide" class="ui-btn fa fa-group">Fahrgemeinschaften</a></li>
-        <li><a href="createARide.html" data-transition="slide" class="ui-btn fa fa-car">Fahrt anbieten</a></li>
-		<li><a href="money.html" data-transition="slide" class="ui-btn fa fa-money">Konto</a></li>   
+    	<li><a href="communities.html" data-transition="slide" class="ui-btn fa fa-group">Meine Fahrgemeinschaften</a></li>
+		  <li><a href="costReport.html" data-transition="slide" class="ui-btn fa fa-money">Meine Abrechnungen</a></li>   
+    	<li><a href="profile.html" data-transition="slide" class="ui-btn fa fa-user">Mein Profil</a></li>
     </ul>
-    <ul data-role="listview" data-inset="true">
-    	<li><a href="profile.html" data-transition="slide" class="ui-btn fa fa-user">Profil</a></li>
+<!--     <ul data-role="listview" data-inset="true">
         <li><a href="car.html" data-transition="slide" class="ui-btn fa fa-automobile">Fahrzeug</a></li>
-    </ul>
+    </ul> -->
   </div>
 
   <div data-role="footer">
