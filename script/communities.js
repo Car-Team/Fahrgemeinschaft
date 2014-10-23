@@ -87,6 +87,25 @@ function createCommunity() {
 
 };
 
+///////////////////////////////////////////////////////////////////////////// community_invite.html
+function inviteMember() {
+
+	var inviteMail = $('#inviteMail').val();
+	var emailCheck = true;
+
+	if(emailCheck){
+		var requestData = {
+			'action' : "inviteMember",
+			'communityID' : localStorage.getItem('openCommunityID'),
+			'inviteMail' : inviteMail
+		};
+		databaseRequest(requestData);
+	}else{
+		alert("Bitte korrekte E-Mail eintragen!");
+	}
+
+};
+
 ///////////////////////////////////////////////////////////////////////////// AJAX REQUEST
 function databaseRequest(requestData){
 	$.ajax({
@@ -110,6 +129,14 @@ function databaseRequest(requestData){
 						    	break;
 						    case "loadCommunity":
 						    	fillCommunityInfo(resultData);
+						    	break;
+						    case "inviteMember":
+						    	if(resultData){
+						    		alert(requestData['inviteMail'] + " eingeladen!");
+						    		$.mobile.changePage("community.html");
+						    	}else {
+						    		alert(requestData['inviteMail'] + " konnte nicht eingeladen werden!");
+						    	}
 						    	break;
 						} 
 					},

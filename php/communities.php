@@ -9,7 +9,7 @@
 
 	switch ($action) {
 	    case "getCommunities":
-			$userID = $_GET['userID'];
+			$userID = mysqli_real_escape_string($db, $_GET['userID']);
 
 			$sqlQuery = "SELECT Communities.community_id, Community.name
 						FROM Communities
@@ -55,6 +55,15 @@
 				$resultData['members'][] = $row;
 			};
 	    	break;
+	    case "inviteMember":
+			$inviteMail = mysqli_real_escape_string($db, $_GET['inviteMail']);
+			$communityID = mysqli_real_escape_string($db, $_GET['communityID']);
+
+			$sqlQuery = "INSERT INTO Invites (user_id, community_id)
+						VALUES ((SELECT ID FROM Users WHERE Email='".$inviteMail."'), '".$communityID."')";
+						
+			$resultData = mysqli_query($db, $sqlQuery);
+	        break;
 	};
 
 	mysqli_close($db);

@@ -14,17 +14,17 @@
 
 <div data-role="page">
   <div data-role="header">
-    <h1 style="overflow:visible; text-overflow:inherit">Fahrgemeinschaft erstellen</h1>
-    <a href="communities.html" data-transition="slide" data-direction="reverse" class="ui-btn btn-only-icon fa fa-arrow-left"></a>
+    <h1 id="lblInviteToCommunity" style="overflow:visible; text-overflow:inherit">Person einladen:</h1>
+    <a href="community.html" data-transition="slide" data-direction="reverse" class="ui-btn btn-only-icon fa fa-arrow-left"></a>
   </div>
 
   <div data-role="main" class="ui-content">
   <br/>
   <form>
-       <input type="text" data-clear-btn="true" placeholder="Name der Fahrgemeinschaft" id="communityName">
+       <input type="text" data-clear-btn="true" placeholder="E-Mail Adresse" id="inviteMail">
   </form>
   <br/>
-	<button class="ui-btn ui-corner-all" onclick="createCommunity();">Erstellen</button>
+	<button class="ui-btn ui-corner-all" onclick="inviteMember();">Einladen</button>
   </div>
 
   <div data-role="footer">
