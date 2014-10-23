@@ -28,7 +28,6 @@ $(document).ready(function() {
   };
 
   $('#fb-login').click ( function() { 
-    alert("einloggen");
     FB.login(function(response) {
       statusChangeCallback(response);
     }, {scope: 'public_profile,email'});
@@ -75,10 +74,10 @@ $(document).ready(function() {
     }
 
     $.ajax({
-      type: "GET",
+      type: "POST",
       url: "php/loginFB.php",
       data: fbid_data,
-      dataType: "jsonp",
+      dataType: "json",
       success:  function(loginResult) {
               if(loginResult.successful){
                 localStorage.setItem("userdata", JSON.stringify({
@@ -146,9 +145,9 @@ $(document).ready(function() {
         console.log('Benutzer ist ausgeloggt');
         $.mobile.changePage("index.html");
        });
+    } 
       window.localStorage.clear();
-      console.log('localStorage gelöscht')
-    }   
+      console.log('localStorage gelöscht'); 
   });
 
 });

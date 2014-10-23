@@ -1,5 +1,5 @@
 <?php
-$fbid = $_GET['fbid'];
+$fbid = $_POST['fbid'];
 
 $db = mysqli_connect("87.230.14.183", "car", "car", "car");
 mysqli_query($db, "SET NAMES 'utf8'");
