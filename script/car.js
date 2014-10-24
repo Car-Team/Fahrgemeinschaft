@@ -43,7 +43,11 @@ function openProfil(){
 }
 
 
-
+function openMyProfil(){
+	var id = JSON.parse(localStorage.getItem('userdata')).id;
+	setProfilIdtoView(id)
+	window.location.href="profile.html"
+}
 //
 //
 //
