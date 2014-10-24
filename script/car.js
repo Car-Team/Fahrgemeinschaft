@@ -48,51 +48,49 @@ function postProfileChanges() {
 }
 
 function postCarChanges() { //FEHLT NOCH!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	var nametext = $('#namefieldInput').val();
-	var emailtext = $('#emailfieldInput').val();
-	var teltext = $('#telfieldInput').val();
-	var descriptiontext = $('#userdescriptionInput').val();
-	var loginID = JSON.parse(localStorage.getItem('userdata')).id;	
-	
-
-
+	var carmodeltext 		= $('#carmodelfieldInput').val();
+	var carcolortext 		= $('#carcolorfieldInput').val();
+	var caryeartext 		= $('#caryearfieldInput').val();
+	var carlicenseplatetext = $('#carlicenseplateInput').val();
+	var carseatstext 		= $('#carseatsInput').val();
+	var cardescriptiontext  = $('#cardescriptionInput').val();
+	var loginID = JSON.parse(localStorage.getItem('userdata')).id;
 	localStorage.setItem("userdata", JSON.stringify({
 								id: JSON.parse(localStorage.getItem('userdata')).id, 
-								name: nametext, 
-								email: emailtext, 
-								tel: teltext, 
+								name: JSON.parse(localStorage.getItem('userdata')).name, 
+								email: JSON.parse(localStorage.getItem('userdata')).email, 
+								tel: JSON.parse(localStorage.getItem('userdata')).tel, 
 								picid: JSON.parse(localStorage.getItem('userdata')).picID, 
 								carid: JSON.parse(localStorage.getItem('userdata')).carID,
-								descriptionUser: descriptiontext,
+								descriptionUser: JSON.parse(localStorage.getItem('userdata')).descriptionUser,
 								fb_id: JSON.parse(localStorage.getItem('userdata')).fb_id,
-								modelName: JSON.parse(localStorage.getItem('userdata')).modelName,
-								licensePlate: JSON.parse(localStorage.getItem('userdata')).licensePlate,
-								seats: JSON.parse(localStorage.getItem('userdata')).seats,
-								constructionYear: JSON.parse(localStorage.getItem('userdata')).constructionYear,
-								descriptionCar: JSON.parse(localStorage.getItem('userdata')).descriptionCar,
-								colourCar: JSON.parse(localStorage.getItem('userdata')).colourCar}));
-
-	if(nametext.length==0) {
-		alert("JUNGE, gib wenigstens 1 Gottverdammtes Zeichen ein!");	
-	}else{	
+								modelName: carmodeltext,
+								licensePlate: carlicenseplatetext,
+								seats: carseatstext,
+								constructionYear: caryeartext,
+								descriptionCar: cardescriptiontext,
+								colourCar: carcolortext}));
+		
 		var postData = {
-			'name' : nametext,
-			'email' : emailtext,
-			'tel' : teltext,
-			'description' : descriptiontext,
+			'carmodel' : carmodeltext,
 			'loginID' : loginID,
+			'carcolor' : carcolortext,
+			'caryear' : caryeartext,
+			'carseats' : carseatstext,
+			'cardescription' : cardescriptiontext,
+			'carlicenseplate' : carlicenseplatetext,
 		}
 			
 		$.ajax({
 			type: "POST",
-			url: "php/changeProfile.php",
+			url: "php/changeCar.php",
 			data: postData,
 			success:	function(postResult) {
 							//alert(postResult);
-							window.location.href="profile.html"
+							window.location.href="car.html"
 						},
 		});
-	}
+	
 }
 
 function postTW() {
