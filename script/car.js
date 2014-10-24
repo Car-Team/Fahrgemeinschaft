@@ -158,13 +158,16 @@ function postCarChanges() {
 //
 function postTW() {
 	var text = $('#postText').val();
-	var loginID = JSON.parse(localStorage.getItem('userdata')).id;		
+	document.getElementById('postText').value ="";
+	var loginID = JSON.parse(localStorage.getItem('userdata')).id;	
+	var viewProfileID = JSON.parse(localStorage.getItem('userdata')).viewProfileId;	
 	if(text.length==0) {
 		alert("JUNGE, gib wenigstens 1 Gottverdammtes Zeichen ein!");	
 	}else{	
 		var postData = {
 			'text' : text,
 			'loginID' : loginID,
+			'viewProfileID' : viewProfileID
 		}
 			
 		$.ajax({
