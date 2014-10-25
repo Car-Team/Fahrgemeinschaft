@@ -1,8 +1,8 @@
 $(document).on('pageinit','#signup', function() {
 	//validation
 	
-	$("#nameInput").change(function(){
-		var name = $("#nameInput").val();
+	$("#nameInputSignUp").change(function(){
+		var name = $("#nameInputSignUp").val();
 		if(nameValid(name)){
 			$("#nameInput").parent().css({"border-color": "green"});
 			$("#nameInputWarning").hide();
@@ -12,33 +12,33 @@ $(document).on('pageinit','#signup', function() {
 		}
 	});
 	
-	$("#emailInput").change(function(){
-		var email = $("#emailInput").val();
+	$("#emailInputSignUp").change(function(){
+		var email = $("#emailInputSignUp").val();
 		if(emailValid(email)){
-			$("#emailInput").parent().css({"border-color": "green"});
+			$("#emailInputSignUp").parent().css({"border-color": "green"});
 			$("#emailInputWarning").hide();
 		} else {
-			$("#emailInput").parent().css({"border-color": "red"});
+			$("#emailInputSignUp").parent().css({"border-color": "red"});
 			$("#emailInputWarning").show();
 		}
 	});
 	
-	$("#pwInput").change(function(){
-		pwTest($("#pwInput").val(), $("#pwConfirmInput").val());
+	$("#pwInputSignUp").change(function(){
+		pwTest($("#pwInputSignUp").val(), $("#pwConfirmInputSignUp").val());
 	});
 	
-	$("#pwConfirmInput").change(function(){
-		pwTest($("#pwInput").val(), $("#pwConfirmInput").val());
+	$("#pwConfirmInputSignUp").change(function(){
+		pwTest($("#pwInputSignUp").val(), $("#pwConfirmInputSignUp").val());
 	});
 	
 	function pwTest(pw, pwConfirm){
 		if(pwValid(pw, pwConfirm)){
-			$("#pwInput").parent().css({"border-color": "green"});
-			$("#pwConfirmInput").parent().css({"border-color": "green"});
+			$("#pwInputSignUp").parent().css({"border-color": "green"});
+			$("#pwConfirmInputSignUp").parent().css({"border-color": "green"});
 			$("#pwInputWarning").hide();
 		} else {
-			$("#pwInput").parent().css({"border-color": "red"});
-			$("#pwConfirmInput").parent().css({"border-color": "red"});
+			$("#pwInputSignUp").parent().css({"border-color": "red"});
+			$("#pwConfirmInputSignUp").parent().css({"border-color": "red"});
 			$("#pwInputWarning").show();
 		}
 	}
@@ -70,10 +70,10 @@ $(document).on('pageinit','#signup', function() {
 });
 
 function signup() {
-	var name = $('#nameInput').val();
-	var email = $('#emailInput').val();
-	var pw = $('#pwInput').val();
-	var pwConfirm = $('#pwConfirmInput').val();
+	var name = $('#nameInputSignUp').val();
+	var email = $('#emailInputSignUp').val();
+	var pw = $('#pwInputSignUp').val();
+	var pwConfirm = $('#pwConfirmInputSignUp').val();
 	
 	//var everythingValid = nameValid(name) && emailValid(email) && pwValid(pw, pwConfirm);
 	
