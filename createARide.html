@@ -12,6 +12,7 @@
 <script src="libs/jqueryUi/datepicker.js"></script>
 <script src="script/car.js"></script> 
 <script src="script/createARide.js"></script>
+<script src="php/createARide.php"></script>
 <script src="libs/datepicker/jquery.mobile.datepicker.js"></script>
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true&language=de"></script>
 
@@ -33,27 +34,27 @@
 	    </form>
 	    <div class="ui-grid-a">
 	    	
-		    	<div class="ui-block-a" id="daysLabel" style="display:none"><label id="dayLabel">An den Tagen:</label></div>
-		        <div class="ui-block-b" id="daysCheckbox" style="display:none">
-		        	<form>
-					    <fieldset data-role="controlgroup">
-					        <input name="checkbox-v-2a" id="checkbox-v-2a" type="checkbox">
-					        <label for="checkbox-v-2a">montags</label>
-					        <input name="checkbox-v-2b" id="checkbox-v-2b" type="checkbox">
-					        <label for="checkbox-v-2b">dienstags</label>
-					        <input name="checkbox-v-2c" id="checkbox-v-2c" type="checkbox">
-					        <label for="checkbox-v-2c">mittwochs</label>
-					        <input name="checkbox-v-2d" id="checkbox-v-2d" type="checkbox">
-					        <label for="checkbox-v-2d">donnerstags</label>
-					        <input name="checkbox-v-2e" id="checkbox-v-2e" type="checkbox">
-					        <label for="checkbox-v-2e">freitags</label>
-					        <input name="checkbox-v-2f" id="checkbox-v-2f" type="checkbox">
-					        <label for="checkbox-v-2f">samstags</label>
-					        <input name="checkbox-v-2g" id="checkbox-v-2g" type="checkbox">
-					        <label for="checkbox-v-2g">sonntags</label>
-					    </fieldset>
-					</form>
-				</div>
+	    	<div class="ui-block-a" id="daysLabel" style="display:none"><label id="dayLabel">An den Tagen:</label></div>
+	        <div class="ui-block-b" id="daysCheckbox" style="display:none">
+	        	<form>
+				    <fieldset data-role="controlgroup">
+				        <input name="checkbox-v-2a" id="checkbox-v-2a" type="checkbox">
+				        <label for="checkbox-v-2a">montags</label>
+				        <input name="checkbox-v-2b" id="checkbox-v-2b" type="checkbox">
+				        <label for="checkbox-v-2b">dienstags</label>
+				        <input name="checkbox-v-2c" id="checkbox-v-2c" type="checkbox">
+				        <label for="checkbox-v-2c">mittwochs</label>
+				        <input name="checkbox-v-2d" id="checkbox-v-2d" type="checkbox">
+				        <label for="checkbox-v-2d">donnerstags</label>
+				        <input name="checkbox-v-2e" id="checkbox-v-2e" type="checkbox">
+				        <label for="checkbox-v-2e">freitags</label>
+				        <input name="checkbox-v-2f" id="checkbox-v-2f" type="checkbox">
+				        <label for="checkbox-v-2f">samstags</label>
+				        <input name="checkbox-v-2g" id="checkbox-v-2g" type="checkbox">
+				        <label for="checkbox-v-2g">sonntags</label>
+				    </fieldset>
+				</form>
+			</div>
 	        
 	        <div class="ui-block-a" id="dateLabel"><label>Datum:</label></div>
 	        <div class="ui-block-b" id="datepickerLabel"><label><input type="text" data-role="date" id="datepicker"></label></div>
@@ -67,14 +68,14 @@
 	        <div class="ui-block-b"><input type="button" onclick="showMap(document.Formular.destination.value)" value="Karte anzeigen"></div>
 	        <div class="ui-block-a"><label>freie Pl&auml;tze:</label></div>
 	        <div class="ui-block-b"><input name="slider-2" id="slider-2" data-highlight="true" min="1" max="7" value="3" type="range"></div>
-	        <div class="ui-block-a"><label>Fahrtpreis in &euro;:</label></div>
-	        <div class="ui-block-b"><label><input type="text" id="price" name="price" value="3"></label></div>
+	        <div class="ui-block-a"><label>Fahrtgesamtkosten in &euro;:</label></div>
+	        <div class="ui-block-b"><label><input type="text" id="price" name="price" value="3,10"></label></div>
 	        <div class="ui-block-a"><label>Fahrzeug:</label></div>
 	        <div class="ui-block-b"><label><input type="text" id="car"></label></div>
 	        <div class="ui-block-a"><label>Infos zur Fahrt:</label></div>
 	        <div class="ui-block-b"><textarea name="info" id="info" class="min-textarea"></textarea></div>
 	    </div>
-	    <a href="#" class="ui-btn">Weiter</a>
+	    <a href="#" class="ui-btn" onclick="saveInDB()">Weiter</a>
 
 	    <!-- MAP IMPLEMENTATION -->
 	    <div id="wrapper">
