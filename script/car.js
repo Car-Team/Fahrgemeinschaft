@@ -4,6 +4,10 @@ function remove(id)
     return (elem=document.getElementById(id)).parentNode.removeChild(elem);
 }
 
+
+function isEmpty(str) {
+    return (!str || 0 === str.length);
+}
 //
 //
 //
@@ -155,6 +159,58 @@ function postCarChanges() {
 		$.ajax({
 			type: "POST",
 			url: "php/changeCar.php",
+			data: postData,
+			success:	function(postResult) {
+							//alert(postResult);
+							window.location.href="car.html"
+						},
+		});
+	
+}
+//
+//
+//
+//
+//
+function postCarAddition() { 
+
+	var carmodeltext 		= $('#carmodelfieldInput').val();
+	var carcolortext 		= $('#carcolorfieldInput').val();
+	var caryeartext 		= $('#caryearfieldInput').val();
+	var carlicenseplatetext = $('#carlicenseplateInput').val();
+	var carseatstext 		= $('#carseatsInput').val();
+	var cardescriptiontext  = $('#cardescriptionInput').val();
+	var loginID = JSON.parse(localStorage.getItem('userdata')).id;
+
+	localStorage.setItem("userdata", JSON.stringify({
+								id: JSON.parse(localStorage.getItem('userdata')).id, 
+								name: JSON.parse(localStorage.getItem('userdata')).name, 
+								email: JSON.parse(localStorage.getItem('userdata')).email, 
+								tel: JSON.parse(localStorage.getItem('userdata')).tel, 
+								picid: JSON.parse(localStorage.getItem('userdata')).picID, 
+								carid: JSON.parse(localStorage.getItem('userdata')).carID,
+								descriptionUser: JSON.parse(localStorage.getItem('userdata')).descriptionUser,
+								fb_id: JSON.parse(localStorage.getItem('userdata')).fb_id,
+								modelName: carmodeltext,
+								licensePlate: carlicenseplatetext,
+								seats: carseatstext,
+								constructionYear: caryeartext,
+								descriptionCar: cardescriptiontext,
+								colourCar: carcolortext,
+								viewProfileId: JSON.parse(localStorage.getItem('userdata')).viewProfileId}));
+		
+		var postData = {
+			'carmodel' : carmodeltext,
+			'loginID' : loginID,
+			'carcolor' : carcolortext,
+			'caryear' : caryeartext,
+			'carseats' : carseatstext,
+			'cardescription' : cardescriptiontext,
+			'carlicenseplate' : carlicenseplatetext,
+		}			
+		$.ajax({
+			type: "POST",
+			url: "php/addCar.php",
 			data: postData,
 			success:	function(postResult) {
 							//alert(postResult);
@@ -497,6 +553,16 @@ function lookintoWall(myCommentEntries){
 	        myDiv3.innerHTML = JSON.parse(localStorage.getItem('userdata')).tel;	       				    
 	        var myDiv4 = document.getElementById("carfield");
 	        myDiv4.innerHTML = JSON.parse(localStorage.getItem('userdata')).modelName;
+
+
+	        if(isEmpty(JSON.parse(localStorage.getItem('userdata')).modelName)==true){
+	        	//alert("Sie haben bisher noch kein Auto angelegt!")
+	        	 myDiv4.innerHTML = "AUTO ANLEGEN";
+	        	 document.getElementById("carLink").href = "carAddNew.html";
+	        }
+
+
+
 	        var myDiv5 = document.getElementById("userdescription");
 	        myDiv5.innerHTML = "<h3>Beschreibung</h3>" + JSON.parse(localStorage.getItem('userdata')).descriptionUser;
 	    }else{
