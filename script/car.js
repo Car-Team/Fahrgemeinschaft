@@ -36,6 +36,7 @@ function setProfilIdtoView(id){
 //
 //
 
+
 function openProfil(){
 	var id = $('#viewProfilIDInput').val();
 	setProfilIdtoView(id)
@@ -53,6 +54,17 @@ function openMyProfil(){
 //
 //
 //
+
+function openCommentInput(id)
+{
+   // alert("kommentiere den eintrag "+id);
+   window.commentIDInput=id;
+}
+
+
+
+
+
 function postProfileChanges() {
 	var nametext = $('#namefieldInput').val();
 	var emailtext = $('#emailfieldInput').val();
@@ -186,6 +198,41 @@ function postTW() {
 //
 //
 //
+function postCO() {
+	 //alert("kommentiere den eintrag "+window.commentIDInput);
+	var text = $('#commentTextToPost').val();
+	document.getElementById('commentTextToPost').value ="";
+	var loginID = JSON.parse(localStorage.getItem('userdata')).id;	
+	var viewProfileID = JSON.parse(localStorage.getItem('userdata')).viewProfileId;	
+	if(text.length==0) {
+		alert("JUNGE, gib wenigstens 1 Gottverdammtes Zeichen ein!");	
+		$( "#popupComment" ).popup( "close" );
+
+	}else{	
+		var postData = {
+			'text' : text,
+			'loginID' : loginID,
+			'viewProfileID' : viewProfileID,
+			'wallID': window.commentIDInput
+		}
+			$( "#popupComment" ).popup( "close" );
+		$.ajax({
+			type: "POST",
+			url: "php/postComment.php",
+			data: postData,
+			success:	function(postResult) {
+							//alert(postResult);
+							
+							window.location.href="profile.html"//window.location.href
+						},
+		});
+	}
+}
+//
+//
+//
+//
+//
 function timeDifference(date1,date2) {
         var difference = date1 - (date2)+10000;//-7200000
         var daysDifference = Math.floor(difference/1000/60/60/24);
@@ -272,9 +319,39 @@ function lookintoWall(myCommentEntries){
 												       	"<div id='wTimeDiv"+myWallEntries[j].ID+"' style='position: absolute; margin-left:90px; margin-top:4px'>"+
 												       		"<label class='timeGone'>"+timeDifference(date1,date2)+"</label>"+
 												       	"</div>"+
-														"<div id='wTextDiv"+myWallEntries[j].ID+"' style='margin-top:75px' align='justify'>"+																										       		
-												       	 		"<label style='white-space:normal'>" + myWallEntries[j].Textinput + "</label>"+												       		
+														"<div id='wTextDiv"+myWallEntries[j].ID+"' style='margin-top:75px' align='justify'>"+
+																																									       		
+												       	 		"<label style='white-space:normal'>" + 
+												       	 			myWallEntries[j].Textinput + 												       	 			
+												       	 		"</label>"+	
+												       	 		"<a href='#popupComment' data-rel='popup' data-position-to='window' class='ui-btn ui-corner-all fa fa-keyboard-o' data-transition='pop' style='Color:white; Background-Color:#6d88b7; text-shadow: none; position: absolute; margin-right:6px; right:8px; top: 2px;' onClick='openCommentInput("+myWallEntries[j].ID+");'>"+	
+												       	 		 "<"+//"ID:"+myWallEntries[j].ID+
+												       	 		"</a>"+		
+												       	 											       		
 												       	"</div>"
+
+
+
+
+												       //	"<a href='#popupComment' data-rel='popup' data-position-to='window' class='ui-btn fa fa-send-o' data-transition='pop'>Kommentieren</a>"+
+												       /*
+														"<div data-role='popup' id='popupComment' data-theme='a' class='ui-corner-all'>"+
+														    "<form>"+
+														        "<div style='padding:10px 20px;'>"+
+														            "<h3>Pinnwandeintrag kommentieren</h3>"+														          
+														            "<input type='text' name='user' id='commenttextv value='' placeholder='Kommentar' data-theme='a'>"+
+														            "<div style='margin-right:34px'><a id='postToWall' class='ui-btn ui-corner-all fa fa-send-o' style='text-align:center; Color:white; Background-Color:#6d88b7; text-shadow: none; width:100%' onClick='postTW();'>Kommentieren</a></div>"+
+														        "</div>"+
+														    "</form>"+
+														"</div>"*/
+
+
+
+
+
+
+
+
 											       	)).listview("refresh");
 
 											       	var imgHeight = $("#wPic"+myWallEntries[j].ID).height() 
