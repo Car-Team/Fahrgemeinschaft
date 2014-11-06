@@ -178,12 +178,12 @@ function postCarChanges() {
 //
 function postCarAddition() { 
 
-	var carmodeltext 		= $('#carmodelfieldInput').val();
-	var carcolortext 		= $('#carcolorfieldInput').val();
-	var caryeartext 		= $('#caryearfieldInput').val();
-	var carlicenseplatetext = $('#carlicenseplateInput').val();
-	var carseatstext 		= $('#carseatsInput').val();
-	var cardescriptiontext  = $('#cardescriptionInput').val();
+	var carmodeltext 		= $('#carmodelfieldInputAdd').val();
+	var carcolortext 		= $('#carcolorfieldInputAdd').val();
+	var caryeartext 		= $('#caryearfieldInputAdd').val();
+	var carlicenseplatetext = $('#carlicenseplateInputAdd').val();
+	var carseatstext 		= $('#carseatsInputAdd').val();
+	var cardescriptiontext  = $('#cardescriptionInputAdd').val();
 	var loginID = JSON.parse(localStorage.getItem('userdata')).id;
 
 	localStorage.setItem("userdata", JSON.stringify({
@@ -191,8 +191,8 @@ function postCarAddition() {
 								name: JSON.parse(localStorage.getItem('userdata')).name, 
 								email: JSON.parse(localStorage.getItem('userdata')).email, 
 								tel: JSON.parse(localStorage.getItem('userdata')).tel, 
-								picid: JSON.parse(localStorage.getItem('userdata')).picID, 
-								carid: JSON.parse(localStorage.getItem('userdata')).carID,
+								picid: JSON.parse(localStorage.getItem('userdata')).picid, 
+								carid: JSON.parse(localStorage.getItem('userdata')).id,
 								descriptionUser: JSON.parse(localStorage.getItem('userdata')).descriptionUser,
 								fb_id: JSON.parse(localStorage.getItem('userdata')).fb_id,
 								modelName: carmodeltext,
@@ -201,6 +201,7 @@ function postCarAddition() {
 								constructionYear: caryeartext,
 								descriptionCar: cardescriptiontext,
 								colourCar: carcolortext,
+								carPicID: "0",
 								viewProfileId: JSON.parse(localStorage.getItem('userdata')).viewProfileId}));
 		
 		var postData = {

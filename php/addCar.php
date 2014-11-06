@@ -16,13 +16,17 @@ if(!$db)
 }
 mysqli_query($db, "SET NAMES 'utf8'");
 $sqlQuery = "INSERT INTO `Cars`(`ID`, `ModelName`, `LicensePlate`, `Seats`, `ConstructionYear`, `Description`, `Colour`) VALUES ('$loginID','$carmodel','$carlicenseplate','$carseats','$caryear','$cardescription','$carcolor')";
+mysqli_query($db, $sqlQuery);
+$sqlQuery2 = "UPDATE `Users` SET `CarID`='$loginID' WHERE `ID`='$loginID'"; //, `Timestamp` //, `Email`='$email', `Tel`='$tel', `Descritpion`='$description'
+mysqli_query($db, $sqlQuery2);
+
 			//"INSERT INTO `Walls`(`ReceiverID`, `SenderID`, `Textinput`) VALUES ('$viewProfileID','$loginID','$text')"; //, `Timestam
 			 //INSERT INTO `Cars`(`ID`, `ModelName`, `LicensePlate`, `Seats`, `ConstructionYear`, `Description`, `Colour`) VALUES ('4','4','4','4','4','4','4')
 
 //"UPDATE `Cars` SET `ModelName`='$carmodel', `LicensePlate`='$carlicenseplate', `Seats`='$carseats', `ConstructionYear`='$caryear', `Description`='$cardescription', `Colour`='$carcolor' WHERE `ID`='$loginID'"; //, `Timestamp` //, `Email`='$email', `Tel`='$tel', `Descritpion`='$description'
 //"INSERT INTO `Walls`(`LoginPW`, `Name`, `Email`, `Tel`, `PicID`, `CarID`) VALUES ('$pw','$name','$email','$tel',0,0);";
 
-mysqli_query($db, $sqlQuery);
+
 
 exit("Post erfolgreich verschickt");
 ?>
