@@ -1,4 +1,4 @@
-$(document).on('pageinit','#signup', function() {
+$(function() {
 	//validation
 	
 	$("#nameInput").change(function(){
