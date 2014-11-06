@@ -31,7 +31,8 @@ function login() {
 								seats: loginResult.seats,
 								constructionYear: loginResult.constructionYear,
 								descriptionCar: loginResult.descriptionCar,
-								colourCar: loginResult.colourCar}));
+								colourCar: loginResult.colourCar,
+								viewProfileId: loginResult.id})); //loginResult.id
 							$.mobile.changePage("menu.html");
 						}else {
 							alert("Falscher Benutzername oder falsches Passwort!");

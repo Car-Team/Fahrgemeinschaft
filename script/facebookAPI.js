@@ -3,6 +3,23 @@ $(document).ready(function() {
   //if(JSON.parse(localStorage.getItem('userdata')) != undefined) {
   //  $.mobile.changePage("menu.html");
   //}
+  // checkConnection();
+
+  // function checkConnection() {
+  //           var networkState = navigator.connection.type;
+
+  //           var states = {};
+  //           states[Connection.UNKNOWN]  = 'Unknown connection';
+  //           states[Connection.ETHERNET] = 'Ethernet connection';
+  //           states[Connection.WIFI]     = 'WiFi connection';
+  //           states[Connection.CELL_2G]  = 'Cell 2G connection';
+  //           states[Connection.CELL_3G]  = 'Cell 3G connection';
+  //           states[Connection.CELL_4G]  = 'Cell 4G connection';
+  //           states[Connection.CELL]     = 'Cell generic connection';
+  //           states[Connection.NONE]     = 'No network connection';
+
+  //           console.log('Connection type: ' + states[networkState]);
+  // }
 
   // Load the SDK asynchronously
   (function(d, s, id) {
@@ -28,7 +45,6 @@ $(document).ready(function() {
   };
 
   $('#fb-login').click ( function() { 
-    alert("einloggen");
     FB.login(function(response) {
       statusChangeCallback(response);
     }, {scope: 'public_profile,email'});
@@ -96,7 +112,8 @@ $(document).ready(function() {
                 seats: loginResult.seats,
                 constructionYear: loginResult.constructionYear,
                 descriptionCar: loginResult.descriptionCar,
-                colourCar: loginResult.colourCar}));
+                colourCar: loginResult.colourCar,
+                viewProfileId: loginResult.id}));
 
                 console.log("FBID ist in Datenbank enthalten und Benutzerdaten sind geladen!");
                 console.log(localStorage);
@@ -146,9 +163,9 @@ $(document).ready(function() {
         console.log('Benutzer ist ausgeloggt');
         $.mobile.changePage("index.html");
        });
+    } 
       window.localStorage.clear();
-      console.log('localStorage gelöscht')
-    }   
+      console.log('localStorage gelöscht'); 
   });
 
 });

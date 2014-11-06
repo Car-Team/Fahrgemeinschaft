@@ -9,7 +9,7 @@
 
 	switch ($action) {
 	    case "getCommunities":
-			$userID = $_GET['userID'];
+			$userID = mysqli_real_escape_string($db, $_GET['userID']);
 
 			$sqlQuery = "SELECT Communities.community_id, Community.name
 						FROM Communities
@@ -45,6 +45,65 @@
 	    	$sqlQuery = "SELECT name FROM Community WHERE ID = '".$communityID."'";
 	    	$result = mysqli_query($db, $sqlQuery);
 	    	$resultData = $result->fetch_assoc();
+	    	$sqlQuery = "SELECT Users.Name, Users.PicID
+						FROM Communities
+						INNER JOIN Users
+						ON Communities.user_id=Users.ID
+						WHERE Communities.community_id = $communityID";
+	    	$result = mysqli_query($db, $sqlQuery);
+	    	while($row = $result->fetch_assoc()){
+				$resultData['members'][] = $row;
+			};
+	    	$sqlQuery = "SELECT Users.Email
+						FROM Invites
+						INNER JOIN Users
+						ON Invites.user_id=Users.ID
+						WHERE community_id = $communityID";
+	    	$result = mysqli_query($db, $sqlQuery);
+	    	while($row = $result->fetch_assoc()){
+				$resultData['invites'][] = $row;
+			};
+	    	break;
+	    case "inviteMember":
+			$inviteMail = mysqli_real_escape_string($db, $_GET['inviteMail']);
+			$communityID = mysqli_real_escape_string($db, $_GET['communityID']);
+
+			$sqlQuery = "INSERT INTO Invites (user_id, community_id)
+						VALUES ((SELECT ID FROM Users WHERE Email='".$inviteMail."'), '".$communityID."')";
+						
+			$resultData = mysqli_query($db, $sqlQuery);
+	        break;
+	    case "getInvites":
+			$userID = mysqli_real_escape_string($db, $_GET['userID']);
+
+			$sqlQuery = "SELECT Invites.community_id, Community.name
+						FROM Invites
+						INNER JOIN Community
+						ON Invites.community_id=Community.ID
+						WHERE Invites.user_id = $userID";
+						
+			$result = mysqli_query($db, $sqlQuery);
+
+			while($row = $result->fetch_assoc()){
+				$resultData[] = $row;
+			};
+	        break;
+	    case "acceptInvite":
+	   		$userID = mysqli_real_escape_string($db, $_GET['userID']);
+	    	$communityID = mysqli_real_escape_string($db, $_GET['communityID']);
+
+			$sqlQuery = "START TRANSACTION";
+			$resultData = mysqli_query($db, $sqlQuery);
+			$sqlQuery = "INSERT INTO Communities (user_id, community_id) VALUES('".$userID."', '".$communityID."')";
+			$resultData = mysqli_query($db, $sqlQuery);
+				if(!$resultData)
+					break;
+			$sqlQuery = "DELETE FROM Invites WHERE user_id = '".$userID."' AND community_id = '".$communityID."'";
+			$resultData = mysqli_query($db, $sqlQuery);
+				if(!$resultData)
+					break;
+			$sqlQuery = "COMMIT";
+			$resultData = mysqli_query($db, $sqlQuery);
 	    	break;
 	};
 

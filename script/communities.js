@@ -1,13 +1,75 @@
-///////////// Globale Variable für Community Stuff
-var openCommunityID = 0;
+///////////////////////////////////////////////////////////////////////////// menu.html
+$( document ).on( "pageinit", "#menu", function( event ) {
+
+	var requestData = {
+		'action' : "getInvites",
+		'userID' : JSON.parse(localStorage.getItem('userdata')).id
+	};
+
+	databaseRequest(requestData);
+
+	$("#popupDialog").on({popupbeforeposition: function(){
+		$("#lblJoinCommunity").html("Einladung zur Fahrgemeinschaft <u>" + localStorage.getItem('inviteCommunityName') + "</u> akzeptieren?");
+	}});
+
+});
+
+///////////// Check if there are invites in list
+function checkInviteListVisibility(){
+	alert(document.getElementById('myInvitesList').getElementsByTagName('li').length);
+	if(document.getElementById('myInvitesList').getElementsByTagName('li').length > 0){
+		$("#myInvites").show();
+	}else{
+		$("#myInvites").hide();	
+	}
+}
+
+///////////// Fill Invitelist
+function fillInviteList(resultData){
+	var ul = document.getElementById("myInvitesList");
+	$.each(resultData, function(key, value){
+		var li = document.createElement("li");
+		var a = document.createElement("a");
+		a.appendChild(document.createTextNode(value['name']));
+		// href="#popupDialog" data-rel="popup" data-position-to="window" data-transition="pop"
+		a.href="#popupDialog";
+		a.setAttribute("data-rel","popup");
+		a.setAttribute("data-position-to", "window");
+		a.setAttribute("data-transition", "pop");
+		li.appendChild(a);
+		ul.appendChild(li);
+
+		$(a).on("click", function(){
+			localStorage.setItem('inviteCommunityID', value['community_id']);
+			localStorage.setItem('inviteCommunityName', value['name']);
+									});
+
+	});
+	$(ul).listview("refresh");
+};
+
+///////////// Accept Invite
+function acceptInvite(){
+	var requestData = {
+		'action' : "acceptInvite",
+		'userID' : JSON.parse(localStorage.getItem('userdata')).id,
+		'communityID' : localStorage.getItem('inviteCommunityID')
+	};
+
+	databaseRequest(requestData);
+};
+
+///////////// Refuse Invite
+function refuseInvite(){
+
+};
 
 ///////////////////////////////////////////////////////////////////////////// communities.html
 $( document ).on( "pageinit", "#communities", function( event ) {
-	//var id = JSON.parse(sessionStorage.getItem("userdata")).id;
 
 	var requestData = {
 		'action' : "getCommunities",
-		'userID' : 1
+		'userID' : JSON.parse(localStorage.getItem('userdata')).id
 	};
 
 	databaseRequest(requestData);
@@ -20,18 +82,17 @@ function fillCommunitiyList(resultData){
 	$.each(resultData, function(key, value){
 		var li = document.createElement("li");
 		var a = document.createElement("a");
-		a.setAttribute("class", "ui-btn ui-btn-icon-right ui-icon-carat-r");
-		a.setAttribute("data-transition","slide");
 		a.appendChild(document.createTextNode(value['name']));
 		li.appendChild(a);
 		ul.appendChild(li);
 
 		$(a).on("click", function(){
-			openCommunityID = value['community_id'];
+			localStorage.setItem('openCommunityID', value['community_id']);
 			$.mobile.changePage("community.html");
 									});
 
 	});
+	$(ul).listview("refresh");
 };
 
 ///////////////////////////////////////////////////////////////////////////// community.html
@@ -39,14 +100,56 @@ $( document ).on( "pageinit", "#community", function( event ) {
 
 	var requestData = {
 		'action' : "loadCommunity",
-		'communityID' : openCommunityID
+		'communityID' : localStorage.getItem('openCommunityID')
 	};	
 	databaseRequest(requestData);
-
 });
 
+///////////// Fill community page with DB values
 function fillCommunityInfo(resultData){
 	$("#lblCommunityName").html(resultData['name']);
+
+
+////////Memberlist
+	var ul = document.getElementById("memberList");
+	$.each(resultData['members'], function(key, value){
+		var li = document.createElement("li");
+		var a = document.createElement("a");
+		var img = document.createElement("img");
+		img.src = "media/img/bengel1.jpg";
+		a.appendChild(img);
+		a.appendChild(document.createTextNode(value['Name']));
+		li.appendChild(a);
+		//Admin prüfung einfügen
+			var remove = document.createElement("a");
+			remove.appendChild(document.createTextNode(value['Name'] + " aus der Fahrgemeinschaft entfernen"));
+			li.appendChild(remove);
+		ul.appendChild(li);
+
+		// $(a).on("click", function(){
+		// 	localStorage.setItem('openCommunityID', value['community_id']);
+		// 	$.mobile.changePage("community.html");
+		// 							});
+
+	});
+	$(ul).listview("refresh");
+
+////////InviteList
+	var ul = document.getElementById("inviteList");
+	$.each(resultData['invites'], function(key, value){
+		var li = document.createElement("li");
+		var a = document.createElement("a");
+		a.appendChild(document.createTextNode(value['Email']));
+		li.appendChild(a);
+		ul.appendChild(li);
+
+		// $(a).on("click", function(){
+		// 	localStorage.setItem('openCommunityID', value['community_id']);
+		// 	$.mobile.changePage("community.html");
+		// 							});
+
+	});
+	$(ul).listview("refresh");
 }
 
 ///////////////////////////////////////////////////////////////////////////// community_create.html
@@ -60,9 +163,28 @@ function createCommunity() {
 		var requestData = {
 			'action' : "createCommunity",
 			'communityName' : communityName,
-			'userID' : 1
+			'userID' : JSON.parse(localStorage.getItem('userdata')).id
 		};
 		databaseRequest(requestData);
+	}
+
+};
+
+///////////////////////////////////////////////////////////////////////////// community_invite.html
+function inviteMember() {
+
+	var inviteMail = $('#inviteMail').val();
+	var emailCheck = true;
+
+	if(emailCheck){
+		var requestData = {
+			'action' : "inviteMember",
+			'communityID' : localStorage.getItem('openCommunityID'),
+			'inviteMail' : inviteMail
+		};
+		databaseRequest(requestData);
+	}else{
+		alert("Bitte korrekte E-Mail eintragen!");
 	}
 
 };
@@ -74,7 +196,6 @@ function databaseRequest(requestData){
 			url: "php/communities.php",
 			// url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/communities.php",
 			dataType: 'jsonp',
-			// data: 'userID='+userID+'&action=getcommunities',
 			data: requestData,
 			success: function(resultData) {
 						switch (requestData['action']) {
@@ -91,6 +212,25 @@ function databaseRequest(requestData){
 						    	break;
 						    case "loadCommunity":
 						    	fillCommunityInfo(resultData);
+						    	break;
+						    case "inviteMember":
+						    	if(resultData){
+						    		alert(requestData['inviteMail'] + " eingeladen!");
+						    		$.mobile.changePage("community.html");
+						    	}else {
+						    		alert(requestData['inviteMail'] + " konnte nicht eingeladen werden!");
+						    	}
+						    	break;
+						    case "getInvites":
+						    	fillInviteList(resultData);
+						    	break;
+						    case "acceptInvite":
+						    	if(resultData){
+						    		alert("Fahrgemeinschaft beigetreten!");
+						    	}else {
+						    		alert("Error");
+						    	}
+					    		checkInviteListVisibility();
 						    	break;
 						} 
 					},

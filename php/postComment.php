@@ -1,5 +1,6 @@
 <?php
 $loginID = $_POST['loginID'];
+$wallID = $_POST['wallID'];
 $viewProfileID = $_POST['viewProfileID'];
 $text = $_POST['text'];
 
@@ -9,7 +10,7 @@ if(!$db)
   exit("Verbindungsfehler: ".mysqli_connect_error());
 }
 mysqli_query($db, "SET NAMES 'utf8'");
-$sqlQuery = "INSERT INTO `Walls`(`ReceiverID`, `SenderID`, `Textinput`) VALUES ('$viewProfileID','$loginID','$text')"; //, `Timestamp`
+$sqlQuery = "INSERT INTO `Comments`(`WallID`, `ReceiverID`, `SenderID`, `Textinput`) VALUES ('$wallID','$viewProfileID','$loginID','$text')"; //, `Timestamp`
 //"INSERT INTO `Walls`(`LoginPW`, `Name`, `Email`, `Tel`, `PicID`, `CarID`) VALUES ('$pw','$name','$email','$tel',0,0);";
 
 mysqli_query($db, $sqlQuery);

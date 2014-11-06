@@ -7,7 +7,8 @@ $(document).ready(function() {
 $(function() {
     $( ".date-input-css" ).datepicker();
 });
-        
+
+// VISINILITY OF RADIO BUTTONS        
 function rideOnceFunc() {
 	document.getElementById('daysLabel').style.display= "none";
 	document.getElementById('daysCheckbox').style.display= "none";
@@ -20,6 +21,62 @@ function rideMultiFunc() {
 	document.getElementById('daysCheckbox').style.display= "block";
 	document.getElementById('dateLabel').style.display = "none";
 	document.getElementById('datepickerLabel').style.display = "none";
+};
+
+
+///////////////////////////////////////////////////////////////////////////// AJAX REQUEST
+function saveInDB(){
+
+	var date = $('#datepicker').val();
+	var time = $('#departureTime').val();
+	var departure = $('#departure').val();
+	var destination = $('#destination').val();
+	var freePlaces = $('#freePlaces').val();
+	var price = $('#price').val();
+	var carName = $('#carName').val();
+	var rideInfos = $('#info').val();
+
+	// VALIDATION
+	var numbers = /[0-9]/;
+	var letters = /[a-zA-Z]/;
+	if (departure.match(numbers) != null){
+		alert("Bitte \u00fcberpr\u00fcfen Sie Ihren Startort!");
+		return;
+	}
+	if (destination.match(numbers) != null){
+		alert("Bitte \u00fcberpr\u00fcfen Sie Ihren Zielort!");
+		return;
+	}
+	if (price.match(letters) != null){
+		alert("Bitte \u00fcberpr\u00fcfen Sie Ihre Preisangabe!");
+		return;
+	}
+
+	// REQUEST ARRAY
+	var requestData = {
+		'date' : date,
+		'time' : time,
+		'departure' : departure,
+		'destination' : destination,
+		'freePlaces' : freePlaces,
+		'price' : price,
+		'carName' : carName,
+		'rideInfos' : rideInfos,
+	};
+	databaseRequest(requestData);
+	
+};
+
+function databaseRequest(requestData){	
+	$.ajax({
+			type: "GET",
+			url: "php/createARide.php",
+			dataType: 'jsonp',
+			data: requestData,
+			success: function(resultData) {
+						alert(resultData);
+					},
+		});
 };
 
 
@@ -61,59 +118,14 @@ function showMap(pDestination) {
 	            }
 	        });
 	}  
-	/*
-	// Define infobox widget
-	function codeAddress() {
-	    var address = destination;
-	     geocoder.geocode( { 'address': address }, function(results, status) {
-	      if (status == google.maps.GeocoderStatus.OK) {
-	        map.setCenter(results[0].geometry.location);
-	        var coordInfoWindow = new google.maps.InfoWindow({
-	        content: "<h2>Route planning</h2><p>Enter your address<br>and press the Start button</p><input id='address' type='textbox' value='' style='border: 1px solid #f0f0f0;-webkit-border-radius: 8px;-moz-border-radius: 8px;border-radius: 8px;'> <input type='button' value='Start' onClick='showRoute();'>",
-	        map: map,
-	        position: results[0].geometry.location
-	        });
-	      } else {
-	        alert("Geocode not available: " + status);
-	      }
-	    });
-	  }
-	*/ 
-	// Automatic geo localisation
-	function codeLatLng() {
-	    if(navigator.geolocation) {
-	        navigator.geolocation.getCurrentPosition(function(position) {
-	            var pos = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
-	 
-	    geocoder.geocode({'latLng': pos}, function(results, status) {
-	 
-	          if (status == google.maps.GeocoderStatus.OK) {
-	            if (results[1]) {
-	            document.getElementById("address").value = results[1].formatted_address;
-	            } else {
-	             // alert("No results found");
-	            }
-	          } else {
-	           // alert("Geocoder failed due to: " + status);
-	          }
-	        });
-	 
-	      }, function() {
-	        //
-	      });
-	    }
-	}
-	
-	// DO NOT CHANGE CODE ABOVE! 
+
 	// Change custom parameters starting from here:
 	var zoom = 13; // map zoom
-	var destination = pDestination; // destination, your address
+	var destination = pDestination; // destination
 	document.getElementById('map_canvas').style.width = document.Formular.width; // map width
 	document.getElementById('map_canvas').style.height = '400px'; // map height
 	initialize();
 	showRoute();
-	//codeAddress();
-	codeLatLng();
 	
 }
 <!-- END OF MAP DEFINITION -->

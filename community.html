@@ -14,37 +14,47 @@
 
 <div data-role="page" id="community">
   <div data-role="header">
-    <h1 style="overflow:visible; text-overflow:inherit" id="lblCommunityName">communityName</h1>
+    <h1 style="overflow:visible; text-overflow:inherit" id="lblCommunityName"></h1>
     <a href="communities.html" data-transition="slide" data-direction="reverse" class="ui-btn btn-only-icon fa fa-arrow-left"></a>
   </div>
 
   <div data-role="main" class="ui-content">
-      <h3>Mitglieder:</h3>
-    <div style="padding:10px">
-            <ul data-role="listview" data-split-icon="delete" data-split-theme="a">
-                <li>
-                    <a href="#">
-                      <img src="media/img/bengel1.jpg">
-                      Schrimptyp
-                    </a>
-                    <a href="#" data-rel="dialog" data-transition="slideup">Aus Fahrgemeinschaft entfernen</a>
-                </li>
-                <li>
-                    <a href="#">
-                      <img src="media/img/bengel2.jpg">
-                      Hongh Bengeli
-                    </a>
-                    <a href="#" data-rel="dialog" data-transition="slideup">Aus Fahrgemeinschaft entfernen</a>
-                </li>
-                <li>
-                    <a href="#">
-                      <img src="media/img/bengel3.jpg">
-                      Benglo Wuo
-                    </a>
-                    <a href="#" data-rel="dialog" data-transition="slideup">Aus Fahrgemeinschaft entfernen</a>
-                </li>
-            </ul>
-    </div>
+    <h3>Mitglieder:</h3>
+      <ul data-role="listview" data-split-icon="delete" data-split-theme="a" data-filter="true" data-filter-placeholder="Person suchen..." data-inset="true" id="memberList">
+          <!--Getting filled by JS -->
+      </ul>
+      <!-- Only if Admin -->
+      <div data-role="collapsible" data-collapsed="true">
+          <h4>Offene Einladungen</h4>
+          <ul data-role="listview" data-icon="delete" id="inviteList">
+            <!--Getting filled by JS -->
+          </ul>
+      </div>
+      <!-- # -->
+      <ul data-role="listview" data-inset="true">
+        <li><a href="community_invite.html">Person einladen</a></li>
+      </ul>
+    <h3>Aktuelle Fahrten:</h3>
+      <ul data-role="listview" data-inset="true">
+          <li>
+              <a href="#">
+                29.09.2019 - Citty Park
+              </a>
+          </li>
+          <li>
+              <a href="#">
+                30.09.2019 - Citty Park
+              </a>
+          </li>
+          <li>
+              <a href="#">
+                31.09.2019 - Citty Park
+              </a>
+          </li>
+      </ul>
+    <ul data-role="listview" data-inset="true">
+      <li><a href="createARide.html">Fahrt erstellen</a></li>
+    </ul>
   </div>
 
   <div data-role="footer">

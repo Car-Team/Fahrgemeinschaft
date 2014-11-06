@@ -15,7 +15,7 @@
   <div data-role="header">
     <h1>Profil</h1>
     <a href="menu.html" data-transition="slide" data-direction="reverse" class="ui-btn btn-only-icon fa fa-arrow-left"></a>
-    <a href="profileEdit.html" data-transition="slide" data-role="button" style="right:4px" class="ui-btn btn-only-icon dropdown-btn fa fa-edit"></a> 
+    <a href="profileEdit.html" id="editButton" data-transition="slide" data-role="button" style="right:4px" class="ui-btn btn-only-icon dropdown-btn fa fa-edit"></a> 
   </div>
   <div data-role="main" class="ui-content"></div>
 	<div class="ui-grid-a">
@@ -34,7 +34,7 @@
 					    </label></li>
 					    <li><label id="telfield" class="fa fa-phone-square">
 					    </label></li>
-					    <li><a href="car.html" data-transition="slide"><label id="carfield" class="fa fa-car">
+					    <li><a href="car.html" id="carLink" data-transition="slide"><label id="carfield" class="fa fa-car">
 					    </label></a></li>
 					 </ul>   
 				</div>
@@ -68,8 +68,26 @@
 	 	<div style="text-align:center"><label> </label></div> 
 	 	<ul id="ulWallHeader" align="justify" data-role='listview' data-inset='true'>
 	 	</ul>
+
+
+		<!--<a href="#popupComment" data-rel="popup" data-position-to="window" class="ui-btn fa fa-send-o" data-transition="pop">Kommentieren</a>-->
+		<div data-role="popup" id="popupComment" data-theme="a" class="ui-corner-all">
+		    <form>
+		        <div style="padding:8px 12px; width:280px">
+		            <h3>Eintrag kommentieren</h3>
+		           <!-- <label for="un" class="ui-hidden-accessible">Username:</label>-->
+		            <textarea type="text" name="user" id="commentTextToPost" value="" placeholder="Kommentar" data-theme="a"></textarea>
+		             <!-- <button type="submit" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-check">kommentieren</button>-->
+		            <div style="margin-right:34px"><a id="postCommentToWall" class="ui-btn ui-corner-all fa fa-send-o" style="text-align:center; Color:white; Background-Color:#6d88b7; text-shadow: none; width:100%" onClick="postCO();">Kommentieren</a></div>
+		        </div>
+		    </form>
+		</div>
+
+
+
 	</div>
 <!--</div>-->
+
 <div data-role="footer">
 </div>
 </div>

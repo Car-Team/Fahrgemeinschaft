@@ -1,12 +1,80 @@
 //////////////////////////////////////////////////////////////////// FUNCTIONS /////////////////////////////////////////////////////////// 
+function remove(id)
+{
+    return (elem=document.getElementById(id)).parentNode.removeChild(elem);
+}
+
+
+function isEmpty(str) {
+    return (!str || 0 === str.length);
+}
+//
+//
+//
+//
+//
+function setProfilIdtoView(id){
+		localStorage.setItem("userdata", JSON.stringify({
+								id: JSON.parse(localStorage.getItem('userdata')).id, 
+								name: JSON.parse(localStorage.getItem('userdata')).name, 
+								email: JSON.parse(localStorage.getItem('userdata')).email, 
+								tel: JSON.parse(localStorage.getItem('userdata')).tel, 
+								picid: JSON.parse(localStorage.getItem('userdata')).picID, 
+								carid: JSON.parse(localStorage.getItem('userdata')).carID,
+								descriptionUser: JSON.parse(localStorage.getItem('userdata')).descriptionUser,
+								fb_id: JSON.parse(localStorage.getItem('userdata')).fb_id,
+								modelName: JSON.parse(localStorage.getItem('userdata')).modelName,
+								licensePlate: JSON.parse(localStorage.getItem('userdata')).licensePlate,
+								seats: JSON.parse(localStorage.getItem('userdata')).seats,
+								constructionYear: JSON.parse(localStorage.getItem('userdata')).constructionYear,
+								descriptionCar: JSON.parse(localStorage.getItem('userdata')).descriptionCar,
+								colourCar: JSON.parse(localStorage.getItem('userdata')).colourCar,
+								viewProfileId: id}));
+}
+
+
+
+//
+//
+//
+//
+//
+
+
+function openProfil(){
+	var id = $('#viewProfilIDInput').val();
+	setProfilIdtoView(id)
+	window.location.href="profile.html"
+}
+
+
+function openMyProfil(){
+	var id = JSON.parse(localStorage.getItem('userdata')).id;
+	setProfilIdtoView(id)
+	window.location.href="profile.html"
+}
+//
+//
+//
+//
+//
+
+function openCommentInput(id)
+{
+   // alert("kommentiere den eintrag "+id);
+   window.commentIDInput=id;
+}
+
+
+
+
+
 function postProfileChanges() {
 	var nametext = $('#namefieldInput').val();
 	var emailtext = $('#emailfieldInput').val();
 	var teltext = $('#telfieldInput').val();
 	var descriptiontext = $('#userdescriptionInput').val();
 	var loginID = JSON.parse(localStorage.getItem('userdata')).id;	
-	
-
 
 	localStorage.setItem("userdata", JSON.stringify({
 								id: JSON.parse(localStorage.getItem('userdata')).id, 
@@ -22,7 +90,8 @@ function postProfileChanges() {
 								seats: JSON.parse(localStorage.getItem('userdata')).seats,
 								constructionYear: JSON.parse(localStorage.getItem('userdata')).constructionYear,
 								descriptionCar: JSON.parse(localStorage.getItem('userdata')).descriptionCar,
-								colourCar: JSON.parse(localStorage.getItem('userdata')).colourCar}));
+								colourCar: JSON.parse(localStorage.getItem('userdata')).colourCar,
+								viewProfileId: JSON.parse(localStorage.getItem('userdata')).viewProfileId}));
 
 	if(nametext.length==0) {
 		alert("JUNGE, gib wenigstens 1 Gottverdammtes Zeichen ein!");	
@@ -47,64 +116,126 @@ function postProfileChanges() {
 	}
 }
 
-function postCarChanges() { //FEHLT NOCH!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	var nametext = $('#namefieldInput').val();
-	var emailtext = $('#emailfieldInput').val();
-	var teltext = $('#telfieldInput').val();
-	var descriptiontext = $('#userdescriptionInput').val();
-	var loginID = JSON.parse(localStorage.getItem('userdata')).id;	
-	
-
+//
+//
+//
+//
+//
+function postCarChanges() { 
+	var carmodeltext 		= $('#carmodelfieldInput').val();
+	var carcolortext 		= $('#carcolorfieldInput').val();
+	var caryeartext 		= $('#caryearfieldInput').val();
+	var carlicenseplatetext = $('#carlicenseplateInput').val();
+	var carseatstext 		= $('#carseatsInput').val();
+	var cardescriptiontext  = $('#cardescriptionInput').val();
+	var loginID = JSON.parse(localStorage.getItem('userdata')).id;
 
 	localStorage.setItem("userdata", JSON.stringify({
 								id: JSON.parse(localStorage.getItem('userdata')).id, 
-								name: nametext, 
-								email: emailtext, 
-								tel: teltext, 
+								name: JSON.parse(localStorage.getItem('userdata')).name, 
+								email: JSON.parse(localStorage.getItem('userdata')).email, 
+								tel: JSON.parse(localStorage.getItem('userdata')).tel, 
 								picid: JSON.parse(localStorage.getItem('userdata')).picID, 
 								carid: JSON.parse(localStorage.getItem('userdata')).carID,
-								descriptionUser: descriptiontext,
+								descriptionUser: JSON.parse(localStorage.getItem('userdata')).descriptionUser,
 								fb_id: JSON.parse(localStorage.getItem('userdata')).fb_id,
-								modelName: JSON.parse(localStorage.getItem('userdata')).modelName,
-								licensePlate: JSON.parse(localStorage.getItem('userdata')).licensePlate,
-								seats: JSON.parse(localStorage.getItem('userdata')).seats,
-								constructionYear: JSON.parse(localStorage.getItem('userdata')).constructionYear,
-								descriptionCar: JSON.parse(localStorage.getItem('userdata')).descriptionCar,
-								colourCar: JSON.parse(localStorage.getItem('userdata')).colourCar}));
-
-	if(nametext.length==0) {
-		alert("JUNGE, gib wenigstens 1 Gottverdammtes Zeichen ein!");	
-	}else{	
+								modelName: carmodeltext,
+								licensePlate: carlicenseplatetext,
+								seats: carseatstext,
+								constructionYear: caryeartext,
+								descriptionCar: cardescriptiontext,
+								colourCar: carcolortext,
+								viewProfileId: JSON.parse(localStorage.getItem('userdata')).viewProfileId}));
+		
 		var postData = {
-			'name' : nametext,
-			'email' : emailtext,
-			'tel' : teltext,
-			'description' : descriptiontext,
+			'carmodel' : carmodeltext,
 			'loginID' : loginID,
-		}
-			
+			'carcolor' : carcolortext,
+			'caryear' : caryeartext,
+			'carseats' : carseatstext,
+			'cardescription' : cardescriptiontext,
+			'carlicenseplate' : carlicenseplatetext,
+		}			
 		$.ajax({
 			type: "POST",
-			url: "php/changeProfile.php",
+			url: "php/changeCar.php",
 			data: postData,
 			success:	function(postResult) {
 							//alert(postResult);
-							window.location.href="profile.html"
+							window.location.href="car.html"
 						},
 		});
-	}
+	
 }
+//
+//
+//
+//
+//
+function postCarAddition() { 
 
+	var carmodeltext 		= $('#carmodelfieldInput').val();
+	var carcolortext 		= $('#carcolorfieldInput').val();
+	var caryeartext 		= $('#caryearfieldInput').val();
+	var carlicenseplatetext = $('#carlicenseplateInput').val();
+	var carseatstext 		= $('#carseatsInput').val();
+	var cardescriptiontext  = $('#cardescriptionInput').val();
+	var loginID = JSON.parse(localStorage.getItem('userdata')).id;
+
+	localStorage.setItem("userdata", JSON.stringify({
+								id: JSON.parse(localStorage.getItem('userdata')).id, 
+								name: JSON.parse(localStorage.getItem('userdata')).name, 
+								email: JSON.parse(localStorage.getItem('userdata')).email, 
+								tel: JSON.parse(localStorage.getItem('userdata')).tel, 
+								picid: JSON.parse(localStorage.getItem('userdata')).picID, 
+								carid: JSON.parse(localStorage.getItem('userdata')).carID,
+								descriptionUser: JSON.parse(localStorage.getItem('userdata')).descriptionUser,
+								fb_id: JSON.parse(localStorage.getItem('userdata')).fb_id,
+								modelName: carmodeltext,
+								licensePlate: carlicenseplatetext,
+								seats: carseatstext,
+								constructionYear: caryeartext,
+								descriptionCar: cardescriptiontext,
+								colourCar: carcolortext,
+								viewProfileId: JSON.parse(localStorage.getItem('userdata')).viewProfileId}));
+		
+		var postData = {
+			'carmodel' : carmodeltext,
+			'loginID' : loginID,
+			'carcolor' : carcolortext,
+			'caryear' : caryeartext,
+			'carseats' : carseatstext,
+			'cardescription' : cardescriptiontext,
+			'carlicenseplate' : carlicenseplatetext,
+		}			
+		$.ajax({
+			type: "POST",
+			url: "php/addCar.php",
+			data: postData,
+			success:	function(postResult) {
+							//alert(postResult);
+							window.location.href="car.html"
+						},
+		});
+	
+}
+//
+//
+//
+//
+//
 function postTW() {
 	var text = $('#postText').val();
+	document.getElementById('postText').value ="";
 	var loginID = JSON.parse(localStorage.getItem('userdata')).id;	
-	
+	var viewProfileID = JSON.parse(localStorage.getItem('userdata')).viewProfileId;	
 	if(text.length==0) {
 		alert("JUNGE, gib wenigstens 1 Gottverdammtes Zeichen ein!");	
 	}else{	
 		var postData = {
 			'text' : text,
 			'loginID' : loginID,
+			'viewProfileID' : viewProfileID
 		}
 			
 		$.ajax({
@@ -118,7 +249,46 @@ function postTW() {
 		});
 	}
 }
+//
+//
+//
+//
+//
+function postCO() {
+	 //alert("kommentiere den eintrag "+window.commentIDInput);
+	var text = $('#commentTextToPost').val();
+	document.getElementById('commentTextToPost').value ="";
+	var loginID = JSON.parse(localStorage.getItem('userdata')).id;	
+	var viewProfileID = JSON.parse(localStorage.getItem('userdata')).viewProfileId;	
+	if(text.length==0) {
+		alert("JUNGE, gib wenigstens 1 Gottverdammtes Zeichen ein!");	
+		$( "#popupComment" ).popup( "close" );
 
+	}else{	
+		var postData = {
+			'text' : text,
+			'loginID' : loginID,
+			'viewProfileID' : viewProfileID,
+			'wallID': window.commentIDInput
+		}
+			$( "#popupComment" ).popup( "close" );
+		$.ajax({
+			type: "POST",
+			url: "php/postComment.php",
+			data: postData,
+			success:	function(postResult) {
+							//alert(postResult);
+							
+							window.location.href="profile.html"//window.location.href
+						},
+		});
+	}
+}
+//
+//
+//
+//
+//
 function timeDifference(date1,date2) {
         var difference = date1 - (date2)+10000;//-7200000
         var daysDifference = Math.floor(difference/1000/60/60/24);
@@ -148,8 +318,12 @@ function timeDifference(date1,date2) {
     return answer;
      }
 
-
-	function lookintoWall(myCommentEntries){
+//
+//
+//
+//
+//
+function lookintoWall(myCommentEntries){
 		var userLoggedInDataloginID = JSON.parse(localStorage.getItem('userdata')).id;
 		var myWallEntries;
 	
@@ -157,12 +331,17 @@ function timeDifference(date1,date2) {
 			//'loginName' : userLoggedInDataloginName,
 			'loginID' : userLoggedInDataloginID
 		}
-			
-		//////////////////////////////////////////////////////
+		var viewProfileID = JSON.parse(localStorage.getItem('userdata')).viewProfileId;
+
+		var viewProfileData = {
+			'viewProfileID' : viewProfileID
+		}
+
+
 									$.ajax({
 										type: "POST",
 										url: "php/wall.php",
-										data: userLoggedInData,
+										data: viewProfileData,
 										dataType: "json",			
 										success:	function(wallentries) {	
 											var i = 0;
@@ -196,9 +375,39 @@ function timeDifference(date1,date2) {
 												       	"<div id='wTimeDiv"+myWallEntries[j].ID+"' style='position: absolute; margin-left:90px; margin-top:4px'>"+
 												       		"<label class='timeGone'>"+timeDifference(date1,date2)+"</label>"+
 												       	"</div>"+
-														"<div id='wTextDiv"+myWallEntries[j].ID+"' style='margin-top:75px' align='justify'>"+																										       		
-												       	 		"<label style='white-space:normal'>" + myWallEntries[j].Textinput + "</label>"+												       		
+														"<div id='wTextDiv"+myWallEntries[j].ID+"' style='margin-top:75px' align='justify'>"+
+																																									       		
+												       	 		"<label style='white-space:normal'>" + 
+												       	 			myWallEntries[j].Textinput + 												       	 			
+												       	 		"</label>"+	
+												       	 		"<a href='#popupComment' data-rel='popup' data-position-to='window' class='ui-btn ui-corner-all fa fa-keyboard-o' data-transition='pop' style='Color:white; Background-Color:#6d88b7; text-shadow: none; position: absolute; margin-right:6px; right:8px; top: 2px;' onClick='openCommentInput("+myWallEntries[j].ID+");'>"+	
+												       	 		 "<"+//"ID:"+myWallEntries[j].ID+
+												       	 		"</a>"+		
+												       	 											       		
 												       	"</div>"
+
+
+
+
+												       //	"<a href='#popupComment' data-rel='popup' data-position-to='window' class='ui-btn fa fa-send-o' data-transition='pop'>Kommentieren</a>"+
+												       /*
+														"<div data-role='popup' id='popupComment' data-theme='a' class='ui-corner-all'>"+
+														    "<form>"+
+														        "<div style='padding:10px 20px;'>"+
+														            "<h3>Pinnwandeintrag kommentieren</h3>"+														          
+														            "<input type='text' name='user' id='commenttextv value='' placeholder='Kommentar' data-theme='a'>"+
+														            "<div style='margin-right:34px'><a id='postToWall' class='ui-btn ui-corner-all fa fa-send-o' style='text-align:center; Color:white; Background-Color:#6d88b7; text-shadow: none; width:100%' onClick='postTW();'>Kommentieren</a></div>"+
+														        "</div>"+
+														    "</form>"+
+														"</div>"*/
+
+
+
+
+
+
+
+
 											       	)).listview("refresh");
 
 											       	var imgHeight = $("#wPic"+myWallEntries[j].ID).height() 
@@ -294,182 +503,16 @@ function timeDifference(date1,date2) {
 											
 										},
 									});	
- 									/////////////////////////////////////	
+ 									
 	}
 
- //+++++++++++++++++++++++++++/////////////////////////////////////////PROFILEEDIT.HTML///////////////////////////////////////////+++++++++++++++++++++++++++++//
-    $(document).on('pageinit', '#profileEdit', function(){   	
- 		////////////////////////////////////////AUTO RESIZE IMAGE///////////////////////////////////////////////
-		if($(window).width()<430){
-			 $("#profileEdit_block_a").css({ // resize the image     			
-	     			'width': 'calc(98%)'
-			   	});
-			   	$("#profileEdit_block_b").css({ // resize the image     			
-	     			'width': 'calc(100%)'
-			   	});
-		}
-		 else {
-			   $("#profileEdit_block_a").css({ // resize the image     			
-	     			'width': 'calc(38%)'
-			   	});
-			   $("#profileEdit_block_b").css({ // resize the image     			
-	     			'width': 'calc(60%)'
-			   	});
-			}
-		////////////////////////////////////////FILL PROFILE DATA///////////////////////////////////////////////
-			var myDiv1 = document.getElementById("namefieldInput");
-	        myDiv1.value = JSON.parse(localStorage.getItem('userdata')).name;	       				   
-	        var myDiv2 = document.getElementById("emailfieldInput");
-	        myDiv2.value = JSON.parse(localStorage.getItem('userdata')).email;	       				    
-	        var myDiv3 = document.getElementById("telfieldInput");
-	        myDiv3.value = JSON.parse(localStorage.getItem('userdata')).tel;	       				    
-	        var myDiv5 = document.getElementById("userdescriptionInput");
-	        myDiv5.value = JSON.parse(localStorage.getItem('userdata')).descriptionUser;
-
-		//var userLoggedInDataloginName = JSON.parse(localStorage.getItem('userdata')).loginname;
-		var userLoggedInDataloginID = JSON.parse(localStorage.getItem('userdata')).id;	
-	
 
 
-		$("#profileEdit_picture").on("click", function(e3) {
-			var bodywidth = $(window).width();//document.getElementById("description").offsetWidth
-			if(bodywidth>800){bodywidth=800}
-			if(e3.handled !== true) // This will prevent event triggering more then once
-        	{        	
-				if (document.getElementById("profileEdit_block_a").offsetWidth<(bodywidth/100)*80) {
-				    $("#profileEdit_block_a").css({ // resize the image     			
-		     			'width': 'calc(98%)'
-				   	});
-				   	$("#profileEdit_block_b").css({ // resize the image     			
-		     			'width': 'calc(100%)'
-				   	});
-				} else {
-				   $("#profileEdit_block_a").css({ // resize the image     			
-		     			'width': 'calc(38%)'
-				   	});
-				   $("#profileEdit_block_b").css({ // resize the image     			
-		     			'width': 'calc(60%)'
-				   	});
-				}
-			e3.handled = true;
-        	}
-		});
-		$("#profileEdit_picture_label").on("click", function(e4) {
-			var bodywidth = $(window).width();//document.getElementById("description").offsetWidth
-			if(bodywidth>800){bodywidth=800}	
-			if(e4.handled !== true) // This will prevent event triggering more then once
-        	{        		
-				if (document.getElementById("profileEdit_block_a").offsetWidth<(bodywidth/100)*80) {
-				    $("#profileEdit_block_a").css({ // resize the image     			
-		     			'width': 'calc(98%)'
-				   	});
-				   	$("#profileEdit_block_b").css({ // resize the image     			
-		     			'width': 'calc(100%)'
-				   	});
-				} else {
-				   $("#profileEdit_block_a").css({ // resize the image     			
-		     			'width': 'calc(38%)'
-				   	});
-				   $("#profileEdit_block_b").css({ // resize the image     			
-		     			'width': 'calc(60%)'
-				   	});
-				}
-			e4.handled = true;
-        	}
-		});
-	});	
-
-
-//+++++++++++++++++++++++++++/////////////////////////////////////////CAREDIT.HTML///////////////////////////////////////////+++++++++++++++++++++++++++++//
-    $(document).on('pageinit', '#carEdit', function(){   	
- 		////////////////////////////////////////AUTO RESIZE IMAGE///////////////////////////////////////////////
-		if($(window).width()<430){
-			 $("#carEdit_block_a").css({ // resize the image     			
-	     			'width': 'calc(98%)'
-			   	});
-			   	$("#carEdit_block_b").css({ // resize the image     			
-	     			'width': 'calc(100%)'
-			   	});
-		}
-		 else {
-			   $("#carEdit_block_a").css({ // resize the image     			
-	     			'width': 'calc(38%)'
-			   	});
-			   $("#carEdit_block_b").css({ // resize the image     			
-	     			'width': 'calc(60%)'
-			   	});
-			}
-		////////////////////////////////////////FILL PROFILE DATA///////////////////////////////////////////////
-			
-
-		var myDiv1 = document.getElementById("carmodelfieldInput");
-        myDiv1.value = JSON.parse(localStorage.getItem('userdata')).modelName; //+  " (
-
-        var myDiv2 = document.getElementById("caryearfieldInput");
-        myDiv2.value = JSON.parse(localStorage.getItem('userdata')).constructionYear;
-        var myDiv3 = document.getElementById("carlicenseplateInput");
-        myDiv3.value = JSON.parse(localStorage.getItem('userdata')).licensePlate;
-        var myDiv4 = document.getElementById("carseatsInput");
-        myDiv4.value = JSON.parse(localStorage.getItem('userdata')).seats;
-
-		var myDiv5 = document.getElementById("carcolorfieldInput");
-		myDiv5.value = JSON.parse(localStorage.getItem('userdata')).colourCar
-
-        var myDiv6 = document.getElementById("cardescriptionInput");
-        myDiv6.value = JSON.parse(localStorage.getItem('userdata')).descriptionCar;
-
-		//var userLoggedInDataloginName = JSON.parse(localStorage.getItem('userdata')).loginname;
-		var userLoggedInDataloginID = JSON.parse(localStorage.getItem('userdata')).id;	
-	
-
-
-		$("#carEdit_picture").on("click", function(e3) {
-			var bodywidth = $(window).width();//document.getElementById("description").offsetWidth
-			if(bodywidth>800){bodywidth=800}
-			if(e3.handled !== true) // This will prevent event triggering more then once
-        	{        	
-				if (document.getElementById("carEdit_block_a").offsetWidth<(bodywidth/100)*80) {
-				    $("#carEdit_block_a").css({ // resize the image     			
-		     			'width': 'calc(98%)'
-				   	});
-				   	$("#carEdit_block_b").css({ // resize the image     			
-		     			'width': 'calc(100%)'
-				   	});
-				} else {
-				   $("#carEdit_block_a").css({ // resize the image     			
-		     			'width': 'calc(38%)'
-				   	});
-				   $("#carEdit_block_b").css({ // resize the image     			
-		     			'width': 'calc(60%)'
-				   	});
-				}
-			e3.handled = true;
-        	}
-		});
-		$("#carEdit_picture_label").on("click", function(e4) {
-			var bodywidth = $(window).width();//document.getElementById("description").offsetWidth
-			if(bodywidth>800){bodywidth=800}	
-			if(e4.handled !== true) // This will prevent event triggering more then once
-        	{        		
-				if (document.getElementById("carEdit_block_a").offsetWidth<(bodywidth/100)*80) {
-				    $("#carEdit_block_a").css({ // resize the image     			
-		     			'width': 'calc(98%)'
-				   	});
-				   	$("#carEdit_block_b").css({ // resize the image     			
-		     			'width': 'calc(100%)'
-				   	});
-				} else {
-				   $("#carEdit_block_a").css({ // resize the image     			
-		     			'width': 'calc(38%)'
-				   	});
-				   $("#carEdit_block_b").css({ // resize the image     			
-		     			'width': 'calc(60%)'
-				   	});
-				}
-			e4.handled = true;
-        	}
-		});
-	});	
+//
+//
+//
+//
+//
  //+++++++++++++++++++++++++++/////////////////////////////////////////PROFILE.HTML///////////////////////////////////////////+++++++++++++++++++++++++++++//
   $(document).on('pageinit', '#profile', function(){   	
  		////////////////////////////////////////AUTO RESIZE IMAGE///////////////////////////////////////////////
@@ -490,6 +533,18 @@ function timeDifference(date1,date2) {
 			   	});
 			}
 		////////////////////////////////////////FILL PROFILE DATA///////////////////////////////////////////////
+		var userLoggedInDataloginID = JSON.parse(localStorage.getItem('userdata')).id;
+		var viewProfileID = JSON.parse(localStorage.getItem('userdata')).viewProfileId;
+		var userLoggedInData = {
+			//'loginName' : userLoggedInDataloginName,
+			'loginID' : userLoggedInDataloginID
+		}
+		var viewProfileData = {
+			'viewProfileID' : viewProfileID
+		}
+
+		//alert(viewProfileID)
+		if(userLoggedInDataloginID===viewProfileID){
 			var myDiv1 = document.getElementById("namefield");
 	        myDiv1.innerHTML = JSON.parse(localStorage.getItem('userdata')).name;	       				   
 	        var myDiv2 = document.getElementById("emailfield");
@@ -498,24 +553,49 @@ function timeDifference(date1,date2) {
 	        myDiv3.innerHTML = JSON.parse(localStorage.getItem('userdata')).tel;	       				    
 	        var myDiv4 = document.getElementById("carfield");
 	        myDiv4.innerHTML = JSON.parse(localStorage.getItem('userdata')).modelName;
+
+
+	        if(isEmpty(JSON.parse(localStorage.getItem('userdata')).modelName)==true){
+	        	//alert("Sie haben bisher noch kein Auto angelegt!")
+	        	 myDiv4.innerHTML = "AUTO ANLEGEN";
+	        	 document.getElementById("carLink").href = "carAddNew.html";
+	        }
+
+
+
 	        var myDiv5 = document.getElementById("userdescription");
 	        myDiv5.innerHTML = "<h3>Beschreibung</h3>" + JSON.parse(localStorage.getItem('userdata')).descriptionUser;
+	    }else{
+	    	remove("editButton");
+	    	$.ajax({
+							type: "POST",
+							url: "php/viewProfile.php",
+							data: viewProfileData,
+							dataType: "json",			
+							success:	function(viewProfileResult) {									
+									var myDiv1 = document.getElementById("namefield");
+							        myDiv1.innerHTML = viewProfileResult.name;	       				   
+							        var myDiv2 = document.getElementById("emailfield");
+							        myDiv2.innerHTML = viewProfileResult.email;	      				    
+							        var myDiv3 = document.getElementById("telfield");
+							        myDiv3.innerHTML = viewProfileResult.tel;		       				    
+							        var myDiv4 = document.getElementById("carfield");
+							        myDiv4.innerHTML = viewProfileResult.modelName;	
+							        var myDiv5 = document.getElementById("userdescription");
+							        myDiv5.innerHTML = "<h3>Beschreibung</h3>" + viewProfileResult.descriptionUser;	
+							},
+				});	
+	    }
 
  		//////////////////////////////CONNECT TO DB TO GET THE WALL / "PINNWAND EINTRAEGE"////////////////////////
-		//var userLoggedInDataloginName = JSON.parse(localStorage.getItem('userdata')).loginname;
-		var userLoggedInDataloginID = JSON.parse(localStorage.getItem('userdata')).id;
 		//alert(userLoggedInDataloginID)	;
 		var myWallEntries;
 		var myCommentEntries;	
-		var userLoggedInData = {
-			//'loginName' : userLoggedInDataloginName,
-			'loginID' : userLoggedInDataloginID
-		}
 				
 				$.ajax({
 							type: "POST",
 							url: "php/comments.php",
-							data: userLoggedInData,
+							data: viewProfileData,
 							dataType: "json",			
 							success:	function(commententries) {									
 									myCommentEntries=commententries;
@@ -528,6 +608,8 @@ function timeDifference(date1,date2) {
 									
 							},
 				});	
+
+
 							
 		///////////////////////////////////////////ON_CLICK EVENTS///////////////////////////////////////////////
 		$("#profile_picture").on("click", function(e1) {
@@ -580,14 +662,11 @@ function timeDifference(date1,date2) {
 });
 
 
-
-
-
-
-
-
-
-
+//
+//
+//
+//
+//
 //+++++++++++++++++++++++++++++++////////////////////////////////////////CAR.HTML/////////////////////////////////////////////++++++++++++++++++++++++++++++//
 $(document).on('pageinit', '#car', function() {	
 		
@@ -608,6 +687,24 @@ $(document).on('pageinit', '#car', function() {
 			   	});
 		}
 		///////////////////////////////////////Paste Car Content//////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+		var userLoggedInDataloginID = JSON.parse(localStorage.getItem('userdata')).id;
+		var viewProfileID = JSON.parse(localStorage.getItem('userdata')).viewProfileId;
+		var userLoggedInData = {
+			//'loginName' : userLoggedInDataloginName,
+			'loginID' : userLoggedInDataloginID
+		}
+		var viewProfileData = {
+			'viewProfileID' : viewProfileID
+		}
+
+		//alert(viewProfileID)
+		if(userLoggedInDataloginID===viewProfileID){
 		var myDiv1 = document.getElementById("carmodelfield");
         myDiv1.innerHTML = JSON.parse(localStorage.getItem('userdata')).modelName +  " ("+JSON.parse(localStorage.getItem('userdata')).colourCar+")";
         var myDiv2 = document.getElementById("caryearfield");
@@ -620,6 +717,33 @@ $(document).on('pageinit', '#car', function() {
         myDiv5.innerHTML = JSON.parse(localStorage.getItem('userdata')).name;
         var myDiv6 = document.getElementById("cardescription");
         myDiv6.innerHTML = "<h3>Beschreibung</h3>" + JSON.parse(localStorage.getItem('userdata')).descriptionCar;
+
+	    }else{
+	    	remove("editButton");
+	    	$.ajax({
+							type: "POST",
+							url: "php/viewProfile.php",
+							data: viewProfileData,
+							dataType: "json",			
+							success:	function(viewProfileResult) {									
+							        var myDiv1 = document.getElementById("carmodelfield");
+							        myDiv1.innerHTML = viewProfileResult.modelName;	
+							        var myDiv2 = document.getElementById("caryearfield");
+							        myDiv2.innerHTML = "Baujahr " + viewProfileResult.constructionYear;	
+							        var myDiv3 = document.getElementById("carlicenseplate");
+							        myDiv3.innerHTML = viewProfileResult.licensePlate;	
+							        var myDiv4 = document.getElementById("carseats");
+							        myDiv4.innerHTML = viewProfileResult.seats;	 + " Sitze";
+							        var myDiv5= document.getElementById("carnamefield");
+							        myDiv5.innerHTML = viewProfileResult.name;	
+							        var myDiv6 = document.getElementById("cardescription");
+							        myDiv6.innerHTML = "<h3>Beschreibung</h3>" + viewProfileResult.descriptionCar;	
+							},
+				});	
+	    }
+
+
+
 		///////////////////////////////////////////ON_CLICK EVENTS///////////////////////////////////////////////
 		$("#car_picture").on("click", function(e3) {
 			var bodywidth = $(window).width();//document.getElementById("description").offsetWidth
@@ -670,3 +794,176 @@ $(document).on('pageinit', '#car', function() {
         	}
 		});
 });
+
+//
+//
+//
+//
+//
+ //+++++++++++++++++++++++++++/////////////////////////////////////////PROFILEEDIT.HTML///////////////////////////////////////////+++++++++++++++++++++++++++++//
+    $(document).on('pageinit', '#profileEdit', function(){   	
+ 		////////////////////////////////////////AUTO RESIZE IMAGE///////////////////////////////////////////////
+		if($(window).width()<430){
+			 $("#profileEdit_block_a").css({ // resize the image     			
+	     			'width': 'calc(98%)'
+			   	});
+			   	$("#profileEdit_block_b").css({ // resize the image     			
+	     			'width': 'calc(100%)'
+			   	});
+		}
+		 else {
+			   $("#profileEdit_block_a").css({ // resize the image     			
+	     			'width': 'calc(38%)'
+			   	});
+			   $("#profileEdit_block_b").css({ // resize the image     			
+	     			'width': 'calc(60%)'
+			   	});
+			}
+		////////////////////////////////////////FILL PROFILE DATA///////////////////////////////////////////////
+			var myDiv1 = document.getElementById("namefieldInput");
+	        myDiv1.value = JSON.parse(localStorage.getItem('userdata')).name;	       				   
+	        var myDiv2 = document.getElementById("emailfieldInput");
+	        myDiv2.value = JSON.parse(localStorage.getItem('userdata')).email;	       				    
+	        var myDiv3 = document.getElementById("telfieldInput");
+	        myDiv3.value = JSON.parse(localStorage.getItem('userdata')).tel;	       				    
+	        var myDiv5 = document.getElementById("userdescriptionInput");
+	        myDiv5.value = JSON.parse(localStorage.getItem('userdata')).descriptionUser;
+	    ///////////////////////////////////RESIZE PICTURE ON CLICK/////////////////////////////////////////////////
+		$("#profileEdit_picture").on("click", function(e3) {
+			var bodywidth = $(window).width();//document.getElementById("description").offsetWidth
+			if(bodywidth>800){bodywidth=800}
+			if(e3.handled !== true) // This will prevent event triggering more then once
+        	{        	
+				if (document.getElementById("profileEdit_block_a").offsetWidth<(bodywidth/100)*80) {
+				    $("#profileEdit_block_a").css({ // resize the image     			
+		     			'width': 'calc(98%)'
+				   	});
+				   	$("#profileEdit_block_b").css({ // resize the image     			
+		     			'width': 'calc(100%)'
+				   	});
+				} else {
+				   $("#profileEdit_block_a").css({ // resize the image     			
+		     			'width': 'calc(38%)'
+				   	});
+				   $("#profileEdit_block_b").css({ // resize the image     			
+		     			'width': 'calc(60%)'
+				   	});
+				}
+			e3.handled = true;
+        	}
+		});
+		$("#profileEdit_picture_label").on("click", function(e4) {
+			var bodywidth = $(window).width();//document.getElementById("description").offsetWidth
+			if(bodywidth>800){bodywidth=800}	
+			if(e4.handled !== true) // This will prevent event triggering more then once
+        	{        		
+				if (document.getElementById("profileEdit_block_a").offsetWidth<(bodywidth/100)*80) {
+				    $("#profileEdit_block_a").css({ // resize the image     			
+		     			'width': 'calc(98%)'
+				   	});
+				   	$("#profileEdit_block_b").css({ // resize the image     			
+		     			'width': 'calc(100%)'
+				   	});
+				} else {
+				   $("#profileEdit_block_a").css({ // resize the image     			
+		     			'width': 'calc(38%)'
+				   	});
+				   $("#profileEdit_block_b").css({ // resize the image     			
+		     			'width': 'calc(60%)'
+				   	});
+				}
+			e4.handled = true;
+        	}
+		});
+	});	
+
+//
+//
+//
+//
+//
+//+++++++++++++++++++++++++++/////////////////////////////////////////CAREDIT.HTML///////////////////////////////////////////+++++++++++++++++++++++++++++//
+    $(document).on('pageinit', '#carEdit', function(){   	
+ 		////////////////////////////////////////AUTO RESIZE IMAGE///////////////////////////////////////////////
+		if($(window).width()<430){
+			 $("#carEdit_block_a").css({ // resize the image     			
+	     			'width': 'calc(98%)'
+			   	});
+			   	$("#carEdit_block_b").css({ // resize the image     			
+	     			'width': 'calc(100%)'
+			   	});
+		}
+		 else {
+			   $("#carEdit_block_a").css({ // resize the image     			
+	     			'width': 'calc(38%)'
+			   	});
+			   $("#carEdit_block_b").css({ // resize the image     			
+	     			'width': 'calc(60%)'
+			   	});
+			}
+		////////////////////////////////////////FILL PROFILE DATA///////////////////////////////////////////////
+		var myDiv1 = document.getElementById("carmodelfieldInput");
+        myDiv1.value = JSON.parse(localStorage.getItem('userdata')).modelName; //+  " (
+
+        var myDiv2 = document.getElementById("caryearfieldInput");
+        myDiv2.value = JSON.parse(localStorage.getItem('userdata')).constructionYear;
+        var myDiv3 = document.getElementById("carlicenseplateInput");
+        myDiv3.value = JSON.parse(localStorage.getItem('userdata')).licensePlate;
+        var myDiv4 = document.getElementById("carseatsInput");
+        myDiv4.value = JSON.parse(localStorage.getItem('userdata')).seats;
+
+		var myDiv5 = document.getElementById("carcolorfieldInput");
+		myDiv5.value = JSON.parse(localStorage.getItem('userdata')).colourCar
+
+        var myDiv6 = document.getElementById("cardescriptionInput");
+        myDiv6.value = JSON.parse(localStorage.getItem('userdata')).descriptionCar;
+		///////////////////////////////////RESIZE PICTURE ON CLICK/////////////////////////////////////////////////
+		$("#carEdit_picture").on("click", function(e3) {
+			var bodywidth = $(window).width();//document.getElementById("description").offsetWidth
+			if(bodywidth>800){bodywidth=800}
+			if(e3.handled !== true) // This will prevent event triggering more then once
+        	{        	
+				if (document.getElementById("carEdit_block_a").offsetWidth<(bodywidth/100)*80) {
+				    $("#carEdit_block_a").css({ // resize the image     			
+		     			'width': 'calc(98%)'
+				   	});
+				   	$("#carEdit_block_b").css({ // resize the image     			
+		     			'width': 'calc(100%)'
+				   	});
+				} else {
+				   $("#carEdit_block_a").css({ // resize the image     			
+		     			'width': 'calc(38%)'
+				   	});
+				   $("#carEdit_block_b").css({ // resize the image     			
+		     			'width': 'calc(60%)'
+				   	});
+				}
+			e3.handled = true;
+        	}
+		});
+		$("#carEdit_picture_label").on("click", function(e4) {
+			var bodywidth = $(window).width();//document.getElementById("description").offsetWidth
+			if(bodywidth>800){bodywidth=800}	
+			if(e4.handled !== true) // This will prevent event triggering more then once
+        	{        		
+				if (document.getElementById("carEdit_block_a").offsetWidth<(bodywidth/100)*80) {
+				    $("#carEdit_block_a").css({ // resize the image     			
+		     			'width': 'calc(98%)'
+				   	});
+				   	$("#carEdit_block_b").css({ // resize the image     			
+		     			'width': 'calc(100%)'
+				   	});
+				} else {
+				   $("#carEdit_block_a").css({ // resize the image     			
+		     			'width': 'calc(38%)'
+				   	});
+				   $("#carEdit_block_b").css({ // resize the image     			
+		     			'width': 'calc(60%)'
+				   	});
+				}
+			e4.handled = true;
+        	}
+		});
+	});	
+
+
