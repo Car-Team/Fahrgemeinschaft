@@ -30,6 +30,7 @@ function login() {
 								licensePlate: loginResult.licensePlate,
 								seats: loginResult.seats,
 								constructionYear: loginResult.constructionYear,
+								carPicID: loginResult.carPicID,
 								descriptionCar: loginResult.descriptionCar,
 								colourCar: loginResult.colourCar,
 								viewProfileId: loginResult.id})); //loginResult.id
