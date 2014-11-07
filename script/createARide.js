@@ -62,22 +62,18 @@ function saveInDB(){
 		'price' : price,
 		'carName' : carName,
 		'rideInfos' : rideInfos,
-	};
-	databaseRequest(requestData);
+	}
 	
-};
-
-function databaseRequest(requestData){	
 	$.ajax({
-			type: "GET",
-			url: "php/createARide.php",
-			dataType: 'jsonp',
-			data: requestData,
-			success: function(resultData) {
-						alert(resultData);
-					},
-		});
-};
+		type: "GET",
+		url: "php/createARide.php",
+		//dataType: 'jsonp',
+		data: requestData,
+		success: function(resultData) {
+			alert(resultData);
+		},
+	});
+}
 
 
 <!-- STARTING MAP DEFINITION -->
