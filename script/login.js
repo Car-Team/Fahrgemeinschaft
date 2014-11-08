@@ -2,14 +2,16 @@ function login() {
 	var email = $('#emailInput').val();
 	var pw = $('#pwInput').val();
 	
+	var hashedPw = CryptoJS.SHA1(pw).toString();
+	
+	if(email == '' || pw == '')
+		return;
+	
 	var loginData = {
 		'email' : email,
-		'pw' : pw
+		'pw' : hashedPw
 	}
 
-	if(email == '' || pw == '')
-	return;
-		
 	$.ajax({
 		type: "POST",
 		url: "php/login.php",

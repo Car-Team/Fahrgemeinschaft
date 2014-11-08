@@ -1,3 +1,5 @@
+
+
 $(function() {
 	//validation
 	
@@ -42,32 +44,31 @@ $(function() {
 			$("#pwInputWarning").show();
 		}
 	}
-	
-	function nameValid(name) {
-		if(name == "") {
-			return false;
-		} else {
-			return true;
-		}
-	}
-	
-	function emailValid(email) {
-		if(email.indexOf("@") == -1) {
-			return false;
-		} else {
-			return true;
-		}
-	}
-	
-	function pwValid(pw, pwConfirm) {
-		if(pw == "" || pwConfirm == "" || pw != pwConfirm){
-			return false;
-		} else {
-			return true;
-		}
-	}
-	
 });
+
+function nameValid(name) {
+	if(name == "") {
+		return false;
+	} else {
+		return true;
+	}
+}
+	
+function emailValid(email) {
+	if(email.indexOf("@") == -1) {
+		return false;
+	} else {
+		return true;
+	}
+}
+	
+function pwValid(pw, pwConfirm) {
+	if(pw == "" || pwConfirm == "" || pw != pwConfirm){
+		return false;
+	} else {
+		return true;
+	}
+}
 
 function signup() {
 	var name = $('#nameInputSignUp').val();
@@ -75,17 +76,25 @@ function signup() {
 	var pw = $('#pwInputSignUp').val();
 	var pwConfirm = $('#pwConfirmInputSignUp').val();
 	
-	//var everythingValid = nameValid(name) && emailValid(email) && pwValid(pw, pwConfirm);
+	var everythingValid = nameValid(name) && emailValid(email) && pwValid(pw, pwConfirm);
+
+	if(!everythingValid) {
+		alert("Überprüfe bitte deine Eingabe");
+		return;
+	}
+
+	var hashedPw = CryptoJS.SHA1(pw).toString();
 	
 	var signupData = {
 		'name' : name,
 		'email' : email,
-		'pw' : pw
+		'pw' : hashedPw
 	}
-		
+	
 	$.ajax({
 		type: "POST",
 		url: "php/signup.php",
+		// url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/signup.php",
 		data: signupData,
 		success:	function(signupResult) {
 						alert(signupResult);
