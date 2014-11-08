@@ -19,8 +19,8 @@ function setProfilIdtoView(id){
 								name: JSON.parse(localStorage.getItem('userdata')).name, 
 								email: JSON.parse(localStorage.getItem('userdata')).email, 
 								tel: JSON.parse(localStorage.getItem('userdata')).tel, 
-								picid: JSON.parse(localStorage.getItem('userdata')).picID, 
-								carid: JSON.parse(localStorage.getItem('userdata')).carID,
+								picid: JSON.parse(localStorage.getItem('userdata')).picid, 
+								carid: JSON.parse(localStorage.getItem('userdata')).carid,
 								descriptionUser: JSON.parse(localStorage.getItem('userdata')).descriptionUser,
 								fb_id: JSON.parse(localStorage.getItem('userdata')).fb_id,
 								modelName: JSON.parse(localStorage.getItem('userdata')).modelName,
@@ -29,6 +29,7 @@ function setProfilIdtoView(id){
 								constructionYear: JSON.parse(localStorage.getItem('userdata')).constructionYear,
 								descriptionCar: JSON.parse(localStorage.getItem('userdata')).descriptionCar,
 								colourCar: JSON.parse(localStorage.getItem('userdata')).colourCar,
+								carPicID: JSON.parse(localStorage.getItem('userdata')).carPicID,
 								viewProfileId: id}));
 }
 
@@ -81,8 +82,8 @@ function postProfileChanges() {
 								name: nametext, 
 								email: emailtext, 
 								tel: teltext, 
-								picid: JSON.parse(localStorage.getItem('userdata')).picID, 
-								carid: JSON.parse(localStorage.getItem('userdata')).carID,
+								picid: JSON.parse(localStorage.getItem('userdata')).picid, 
+								carid: JSON.parse(localStorage.getItem('userdata')).carid,
 								descriptionUser: descriptiontext,
 								fb_id: JSON.parse(localStorage.getItem('userdata')).fb_id,
 								modelName: JSON.parse(localStorage.getItem('userdata')).modelName,
@@ -91,6 +92,7 @@ function postProfileChanges() {
 								constructionYear: JSON.parse(localStorage.getItem('userdata')).constructionYear,
 								descriptionCar: JSON.parse(localStorage.getItem('userdata')).descriptionCar,
 								colourCar: JSON.parse(localStorage.getItem('userdata')).colourCar,
+								carPicID: JSON.parse(localStorage.getItem('userdata')).carPicID,
 								viewProfileId: JSON.parse(localStorage.getItem('userdata')).viewProfileId}));
 
 	if(nametext.length==0) {
@@ -135,8 +137,8 @@ function postCarChanges() {
 								name: JSON.parse(localStorage.getItem('userdata')).name, 
 								email: JSON.parse(localStorage.getItem('userdata')).email, 
 								tel: JSON.parse(localStorage.getItem('userdata')).tel, 
-								picid: JSON.parse(localStorage.getItem('userdata')).picID, 
-								carid: JSON.parse(localStorage.getItem('userdata')).carID,
+								picid: JSON.parse(localStorage.getItem('userdata')).picid, 
+								carid: JSON.parse(localStorage.getItem('userdata')).carid,
 								descriptionUser: JSON.parse(localStorage.getItem('userdata')).descriptionUser,
 								fb_id: JSON.parse(localStorage.getItem('userdata')).fb_id,
 								modelName: carmodeltext,
@@ -145,6 +147,7 @@ function postCarChanges() {
 								constructionYear: caryeartext,
 								descriptionCar: cardescriptiontext,
 								colourCar: carcolortext,
+								carPicID: JSON.parse(localStorage.getItem('userdata')).carPicID,
 								viewProfileId: JSON.parse(localStorage.getItem('userdata')).viewProfileId}));
 		
 		var postData = {
@@ -155,7 +158,8 @@ function postCarChanges() {
 			'carseats' : carseatstext,
 			'cardescription' : cardescriptiontext,
 			'carlicenseplate' : carlicenseplatetext,
-		}			
+		}	
+				
 		$.ajax({
 			type: "POST",
 			url: "php/changeCar.php",
@@ -165,7 +169,7 @@ function postCarChanges() {
 							window.location.href="car.html"
 						},
 		});
-	
+	window.location.href="car.html"
 }
 //
 //
@@ -174,12 +178,12 @@ function postCarChanges() {
 //
 function postCarAddition() { 
 
-	var carmodeltext 		= $('#carmodelfieldInput').val();
-	var carcolortext 		= $('#carcolorfieldInput').val();
-	var caryeartext 		= $('#caryearfieldInput').val();
-	var carlicenseplatetext = $('#carlicenseplateInput').val();
-	var carseatstext 		= $('#carseatsInput').val();
-	var cardescriptiontext  = $('#cardescriptionInput').val();
+	var carmodeltext 		= $('#carmodelfieldInputAdd').val();
+	var carcolortext 		= $('#carcolorfieldInputAdd').val();
+	var caryeartext 		= $('#caryearfieldInputAdd').val();
+	var carlicenseplatetext = $('#carlicenseplateInputAdd').val();
+	var carseatstext 		= $('#carseatsInputAdd').val();
+	var cardescriptiontext  = $('#cardescriptionInputAdd').val();
 	var loginID = JSON.parse(localStorage.getItem('userdata')).id;
 
 	localStorage.setItem("userdata", JSON.stringify({
@@ -187,8 +191,8 @@ function postCarAddition() {
 								name: JSON.parse(localStorage.getItem('userdata')).name, 
 								email: JSON.parse(localStorage.getItem('userdata')).email, 
 								tel: JSON.parse(localStorage.getItem('userdata')).tel, 
-								picid: JSON.parse(localStorage.getItem('userdata')).picID, 
-								carid: JSON.parse(localStorage.getItem('userdata')).carID,
+								picid: JSON.parse(localStorage.getItem('userdata')).picid, 
+								carid: JSON.parse(localStorage.getItem('userdata')).id,
 								descriptionUser: JSON.parse(localStorage.getItem('userdata')).descriptionUser,
 								fb_id: JSON.parse(localStorage.getItem('userdata')).fb_id,
 								modelName: carmodeltext,
@@ -197,6 +201,7 @@ function postCarAddition() {
 								constructionYear: caryeartext,
 								descriptionCar: cardescriptiontext,
 								colourCar: carcolortext,
+								carPicID: "0",
 								viewProfileId: JSON.parse(localStorage.getItem('userdata')).viewProfileId}));
 		
 		var postData = {
@@ -365,7 +370,12 @@ function lookintoWall(myCommentEntries){
 											       //var wImgSrc="http://images.fotocommunity.de/bilder/natur/tiere/pfau-hochformat-357029dc-d282-4a87-a9d3-01e9ec2600e8.jpg" 
 											       //var wImgSrc="http://st.depositphotos.com/1003368/1944/i/950/depositphotos_19448249-business-woman-in-glasses.jpg";
 											       //var wImgSrc ="http://us.123rf.com/400wm/400/400/malopes/malopes0901/malopes090100089/4185805-schone-fr-hling-landschaft-mit-gras-und-sky--hochformat.jpg"
-											       var wImgSrc="http://newtroy.integra-technologies.co.uk/static/images/unknown_user.png" 
+											       var wImgSrc="";
+											       if(myWallEntries[j].picID.length>5){
+											       	wImgSrc=myWallEntries[j].picID;//"http://newtroy.integra-technologies.co.uk/static/images/unknown_user.png" 
+											   		}else{
+											   		wImgSrc="http://newtroy.integra-technologies.co.uk/static/images/unknown_user.png"; 	
+											   		}
 											       //var wImgSrc="http://us.cdn282.fansshare.com/photos/kateupton/kate-upton-terry-richardson-outtakes-jpeg-model-302939606.jpg"
 											       $("#ulWallHeader").append(
 											       	$("<li style='min-height:66px'>").append(
@@ -448,7 +458,14 @@ function lookintoWall(myCommentEntries){
 															        //alert(date2+"\n"+date1);
 
 											       						//var cImgSrc ="http://st.depositphotos.com/1003368/1944/i/950/depositphotos_19448249-business-woman-in-glasses.jpg"	
-											       						var cImgSrc ="http://newtroy.integra-technologies.co.uk/static/images/unknown_user.png" 
+											       						
+											       						var cImgSrc="";
+																       if(myCommentEntries[i].picID.length>5){
+																       	cImgSrc=myCommentEntries[i].picID;//"http://newtroy.integra-technologies.co.uk/static/images/unknown_user.png" 
+																   		}else{
+																   		cImgSrc="http://newtroy.integra-technologies.co.uk/static/images/unknown_user.png"; 	
+																   		}
+
 											       						//var cImgSrc ="http://us.123rf.com/400wm/400/400/malopes/malopes0901/malopes090100089/4185805-schone-fr-hling-landschaft-mit-gras-und-sky--hochformat.jpg"								       					
 											       						$("#ulWallHeader").append(
 																	       	$("<li style='border-color: #D8D8D8 ; border-left:0px; border-right:0px; background-color:#E8E8E8 ; min-height:94px; margin-left:30px'>").append(
@@ -554,6 +571,9 @@ function lookintoWall(myCommentEntries){
 	        var myDiv4 = document.getElementById("carfield");
 	        myDiv4.innerHTML = JSON.parse(localStorage.getItem('userdata')).modelName;
 
+			if(JSON.parse(localStorage.getItem('userdata')).picid.length>5){
+				document.getElementById("profile_picture").src=JSON.parse(localStorage.getItem('userdata')).picid;
+			}
 
 	        if(isEmpty(JSON.parse(localStorage.getItem('userdata')).modelName)==true){
 	        	//alert("Sie haben bisher noch kein Auto angelegt!")
@@ -583,6 +603,12 @@ function lookintoWall(myCommentEntries){
 							        myDiv4.innerHTML = viewProfileResult.modelName;	
 							        var myDiv5 = document.getElementById("userdescription");
 							        myDiv5.innerHTML = "<h3>Beschreibung</h3>" + viewProfileResult.descriptionUser;	
+
+							        if(viewProfileResult.picID.length>5){
+							        	document.getElementById("profile_picture").src=viewProfileResult.picID;
+							    	}
+							    	
+							       //document.getElementById("profile_picture").src=
 							},
 				});	
 	    }
@@ -718,6 +744,11 @@ $(document).on('pageinit', '#car', function() {
         var myDiv6 = document.getElementById("cardescription");
         myDiv6.innerHTML = "<h3>Beschreibung</h3>" + JSON.parse(localStorage.getItem('userdata')).descriptionCar;
 
+		if(JSON.parse(localStorage.getItem('userdata')).carPicID.length>5){
+			document.getElementById("car_picture").src=JSON.parse(localStorage.getItem('userdata')).carPicID;
+		}
+
+
 	    }else{
 	    	remove("editButton");
 	    	$.ajax({
@@ -727,7 +758,7 @@ $(document).on('pageinit', '#car', function() {
 							dataType: "json",			
 							success:	function(viewProfileResult) {									
 							        var myDiv1 = document.getElementById("carmodelfield");
-							        myDiv1.innerHTML = viewProfileResult.modelName;	
+							        myDiv1.innerHTML = viewProfileResult.modelName  +  " ("+viewProfileResult.colourCar+")";	
 							        var myDiv2 = document.getElementById("caryearfield");
 							        myDiv2.innerHTML = "Baujahr " + viewProfileResult.constructionYear;	
 							        var myDiv3 = document.getElementById("carlicenseplate");
@@ -738,6 +769,12 @@ $(document).on('pageinit', '#car', function() {
 							        myDiv5.innerHTML = viewProfileResult.name;	
 							        var myDiv6 = document.getElementById("cardescription");
 							        myDiv6.innerHTML = "<h3>Beschreibung</h3>" + viewProfileResult.descriptionCar;	
+
+									if(viewProfileResult.carPicID.length>5){
+							        	document.getElementById("car_picture").src=viewProfileResult.carPicID;
+							    	}
+
+
 							},
 				});	
 	    }
@@ -803,7 +840,7 @@ $(document).on('pageinit', '#car', function() {
  //+++++++++++++++++++++++++++/////////////////////////////////////////PROFILEEDIT.HTML///////////////////////////////////////////+++++++++++++++++++++++++++++//
     $(document).on('pageinit', '#profileEdit', function(){   	
  		////////////////////////////////////////AUTO RESIZE IMAGE///////////////////////////////////////////////
-		if($(window).width()<430){
+		/*if($(window).width()<430){
 			 $("#profileEdit_block_a").css({ // resize the image     			
 	     			'width': 'calc(98%)'
 			   	});
@@ -818,7 +855,7 @@ $(document).on('pageinit', '#car', function() {
 			   $("#profileEdit_block_b").css({ // resize the image     			
 	     			'width': 'calc(60%)'
 			   	});
-			}
+			}*/
 		////////////////////////////////////////FILL PROFILE DATA///////////////////////////////////////////////
 			var myDiv1 = document.getElementById("namefieldInput");
 	        myDiv1.value = JSON.parse(localStorage.getItem('userdata')).name;	       				   
@@ -829,7 +866,7 @@ $(document).on('pageinit', '#car', function() {
 	        var myDiv5 = document.getElementById("userdescriptionInput");
 	        myDiv5.value = JSON.parse(localStorage.getItem('userdata')).descriptionUser;
 	    ///////////////////////////////////RESIZE PICTURE ON CLICK/////////////////////////////////////////////////
-		$("#profileEdit_picture").on("click", function(e3) {
+		/*$("#profileEdit_picture").on("click", function(e3) {
 			var bodywidth = $(window).width();//document.getElementById("description").offsetWidth
 			if(bodywidth>800){bodywidth=800}
 			if(e3.handled !== true) // This will prevent event triggering more then once
@@ -874,7 +911,7 @@ $(document).on('pageinit', '#car', function() {
 				}
 			e4.handled = true;
         	}
-		});
+		});*/
 	});	
 
 //
@@ -885,7 +922,7 @@ $(document).on('pageinit', '#car', function() {
 //+++++++++++++++++++++++++++/////////////////////////////////////////CAREDIT.HTML///////////////////////////////////////////+++++++++++++++++++++++++++++//
     $(document).on('pageinit', '#carEdit', function(){   	
  		////////////////////////////////////////AUTO RESIZE IMAGE///////////////////////////////////////////////
-		if($(window).width()<430){
+		/*if($(window).width()<430){
 			 $("#carEdit_block_a").css({ // resize the image     			
 	     			'width': 'calc(98%)'
 			   	});
@@ -900,7 +937,7 @@ $(document).on('pageinit', '#car', function() {
 			   $("#carEdit_block_b").css({ // resize the image     			
 	     			'width': 'calc(60%)'
 			   	});
-			}
+			}*/
 		////////////////////////////////////////FILL PROFILE DATA///////////////////////////////////////////////
 		var myDiv1 = document.getElementById("carmodelfieldInput");
         myDiv1.value = JSON.parse(localStorage.getItem('userdata')).modelName; //+  " (
@@ -918,7 +955,7 @@ $(document).on('pageinit', '#car', function() {
         var myDiv6 = document.getElementById("cardescriptionInput");
         myDiv6.value = JSON.parse(localStorage.getItem('userdata')).descriptionCar;
 		///////////////////////////////////RESIZE PICTURE ON CLICK/////////////////////////////////////////////////
-		$("#carEdit_picture").on("click", function(e3) {
+		/*$("#carEdit_picture").on("click", function(e3) {
 			var bodywidth = $(window).width();//document.getElementById("description").offsetWidth
 			if(bodywidth>800){bodywidth=800}
 			if(e3.handled !== true) // This will prevent event triggering more then once
@@ -963,7 +1000,7 @@ $(document).on('pageinit', '#car', function() {
 				}
 			e4.handled = true;
         	}
-		});
+		});*/
 	});	
 
 
