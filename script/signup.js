@@ -94,9 +94,11 @@ function signup() {
 		url: "php/signup.php",
 		// url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/signup.php",
 		data: signupData,
+		dataType: "json",
 		success:	function(signupResult) {
-						alert(signupResult);
-						$.mobile.changePage("index.html");
+						alert(signupResult.message);
+						if(signupResult.successful)
+							$.mobile.changePage("index.html");
 					},
 	});
 }
