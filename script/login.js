@@ -31,18 +31,15 @@ function loginAs(email, hashedPw) {
 		'email' : email,
 		'pw' : hashedPw
 	}
-
-	alert("1");
 	
 	$.ajax({
 		type: "POST",
-		url: "php/login.php",
+		url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/login.php",
+		//url: "php/login.php",
 		data: loginData,
-		dataType: "json",
+		dataType: "jsonp",
 		success:	function(loginResult) {
-			alert("2");
 			if(loginResult.successful){
-				alert("3");
 				localStorage.setItem("userdata", JSON.stringify({
 					id: loginResult.id, 
 					name: loginResult.name, 
@@ -61,7 +58,6 @@ function loginAs(email, hashedPw) {
 					colourCar: loginResult.colourCar,
 					viewProfileId: loginResult.id})); //loginResult.id
 				localStorage.setItem('hashedPw', hashedPw);
-				alert("4");
 				$.mobile.changePage("menu.html");
 			}else {
 				alert("Falscher Benutzername oder falsches Passwort!");

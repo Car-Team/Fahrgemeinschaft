@@ -90,11 +90,11 @@ function signup() {
 	}
 	
 	$.ajax({
-		type: "POST",
-		url: "php/signup.php",
-		// url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/signup.php",
+		type: "GET",
+		//url: "php/signup.php",
+		url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/signup.php",
 		data: signupData,
-		dataType: "json",
+		dataType: "jsonp",
 		success:	function(signupResult) {
 						alert(signupResult.message);
 						if(signupResult.successful)
