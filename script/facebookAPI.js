@@ -1,8 +1,8 @@
 $(document).ready(function() {
 
-  if(JSON.parse(localStorage.getItem('userdata')) != undefined) {
-    $.mobile.changePage("menu.html");
-  }
+  //if(JSON.parse(localStorage.getItem('userdata')) != undefined) {
+  //  $.mobile.changePage("menu.html");
+  //}
   //checkConnection();
 
   // function checkConnection() {
