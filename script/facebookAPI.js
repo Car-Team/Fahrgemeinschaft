@@ -1,9 +1,9 @@
 $(document).ready(function() {
 
-  //if(JSON.parse(localStorage.getItem('userdata')) != undefined) {
-  //  $.mobile.changePage("menu.html");
-  //}
-  // checkConnection();
+  if(JSON.parse(localStorage.getItem('userdata')) != undefined) {
+    $.mobile.changePage("menu.html");
+  }
+  //checkConnection();
 
   // function checkConnection() {
   //           var networkState = navigator.connection.type;
@@ -94,7 +94,7 @@ $(document).ready(function() {
       type: "POST",
       url: "php/loginFB.php",
       data: fbid_data,
-      dataType: "json",
+      dataType: "jsonp",
       success:  function(loginResult) {
               if(loginResult.successful){
                 localStorage.setItem("userdata", JSON.stringify({
