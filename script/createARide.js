@@ -35,20 +35,26 @@ function saveInDB(){
 	var price = $('#price').val();
 	var carName = $('#carName').val();
 	var rideInfos = $('#info').val();
+	var userName = JSON.parse(localStorage.getItem('userdata')).name;
+	var userID = JSON.parse(localStorage.getItem('userdata')).id;
 
 	// VALIDATION
 	var numbers = /[0-9]/;
 	var letters = /[a-zA-Z]/;
-	if (departure.match(numbers) != null){
+	if (departure.match(numbers) != null && departure.length > 0){
 		alert("Bitte \u00fcberpr\u00fcfen Sie Ihren Startort!");
 		return;
 	}
-	if (destination.match(numbers) != null){
+	if (destination.match(numbers) != null && destination.length > 0){
 		alert("Bitte \u00fcberpr\u00fcfen Sie Ihren Zielort!");
 		return;
 	}
-	if (price.match(letters) != null){
+	if (price.match(letters && price.length > 0) != null){
 		alert("Bitte \u00fcberpr\u00fcfen Sie Ihre Preisangabe!");
+		return;
+	}
+	if (date.length == 0){
+		alert("Bitte geben Sie ein Datum an!");
 		return;
 	}
 
@@ -62,6 +68,8 @@ function saveInDB(){
 		'price' : price,
 		'carName' : carName,
 		'rideInfos' : rideInfos,
+		'userName' : userName,
+		'userID' : userID
 	}
 	
 	$.ajax({
@@ -70,7 +78,9 @@ function saveInDB(){
 		//dataType: 'jsonp',
 		data: requestData,
 		success: function(resultData) {
-			alert(resultData);
+			if (resultData == 1) {
+				alert('Datensatz wurde erfolgreich eingetragen');
+			}
 		},
 	});
 }
