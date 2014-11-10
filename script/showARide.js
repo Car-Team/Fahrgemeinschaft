@@ -1,23 +1,22 @@
-$(document).ready(function() {
-
-	alert('js läuft an');
-    $.ajax({
+$(document).on("pagebeforeshow", "#showARide", function(event) {
+	alert("1");
+	$.ajax({
 		type: "GET",
+		dataType: "jsonp",
+		//http://87.230.14.183/showARide.php
 		url: "php/showARide.php",
 		success: function(resultData) {
-			alert("result data" + resultData['destination']);
+			alert("result data" + resultData.departure);
 
-			$("#date").html(resultData['date']);
-			$("#departureTime").html(resultData['departure_time']);
-			$("#departure").html(resultData['departure']);
-			$("#destination").html(resultData['destination']);
-			$("#freePlaces").html(resultData['freePlaces']);
-			$("#price").html(resultData['price']);
-			$("#carName").html(resultData['car_name']);
-			$("#info").html(resultData['ride_infos']);
-			$("#driverName").html(resultData['driver_name']);
-
-		},
+			$("#date").value = resultData.date;
+			$("#departureTime").value = resultData.departure_time;
+			$("#departure").value = resultData.departure;
+			$("#destination").value = resultData.destination;
+			$("#freePlaces").value = resultData.freePlaces;
+			$("#price").value = resultData.price;
+			$("#carName").value = resultData.car_name;
+			$("#info").value = resultData.ride_infos;
+			$("#driverName").value = resultData.driver_name;
+		}
 	});
-    
 });
