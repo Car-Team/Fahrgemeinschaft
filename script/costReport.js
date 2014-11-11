@@ -23,9 +23,27 @@ function fillCollapsibles() {
 		data: data,
 		dataType: "jsonp",
 		success:	function(persons) {
+			mergePersons(persons.debtors, persons.creditors);
 			fillPage(persons.debtors, persons.creditors);
 		}
 	});
+}
+
+function mergePersons(debtors, creditors) {
+	for (var i = 0; i < debtors.length; i++) {
+		var debtor = debtors[i];
+		var index = getIndex(creditors, debtor.id);
+		if(index != -1){
+			var saldo = debtor.debt + creditors[index].debt;
+			debtor.debt = saldo;
+			debtors.splice(i, 1);
+			creditors.splice(index, 1);
+			if (saldo > 0)
+				debtors.push(debtor);
+			else if (saldo < 0)
+				debtors.push(debtor);
+		}
+	}
 }
 
 function fillPage(debtors, creditors) {
@@ -90,5 +108,14 @@ function calcColoredHtml(value) {
 
 function getColoredHtml(value, color) {
 	return "<font color='" + color + "'>" + value + "</font> Euro";
+}
+
+function getIndex(array, id) {
+	for (var i = 0; i < array.length; i++) {
+			if (array[i].id == id) {
+					return i;
+			}
+	}
+	return -1;
 }
 
