@@ -91,8 +91,8 @@ $(document).ready(function() {
     }
 
     $.ajax({
-      type: "POST",
-      url: "php/loginFB.php",
+      type: "GET",
+      url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/loginFB.php",
       data: fbid_data,
       dataType: "jsonp",
       success:  function(loginResult) {
@@ -137,18 +137,20 @@ $(document).ready(function() {
     }
     
     $.ajax({
-      type: "POST",
-      url: "php/signupFB.php",
+      type: "GET",
+      url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/signupFB.php",
       data: signupData,
+      dataType: "jsonp",
       success:  function(signupResult) {
                   alert(signupResult);
-                  $.mobile.changePage("index.html");
+                  $.mobile.changePage("menu.html");
                 },
       });
   }
+});
 
   //Logout
-  $('#fb-logout').click ( function() {
+  function logout() {
 
     //get Userdata
     var fbUserId = JSON.parse(localStorage.getItem('userdata')).fb_id;
@@ -167,6 +169,4 @@ $(document).ready(function() {
     } 
       window.localStorage.clear();
       console.log('localStorage gelöscht'); 
-  });
-
-});
+  };

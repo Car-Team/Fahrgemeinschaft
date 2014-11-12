@@ -1,7 +1,9 @@
 <?php
-$name = $_POST['name'];
-$email = $_POST['email'];
-$pw = $_POST['pw'];
+header('Content-Type: text/javascript; charset=UTF-8');
+
+$name = $_GET['name'];
+$email = $_GET['email'];
+$pw = $_GET['pw'];
 
 $signupResult = array(
         'successful'   		=> false,
@@ -13,7 +15,7 @@ if(!$db)
 {
 	$signupResult['successful'] = false;
 	$signupResult['message'] = "Verbindungsfehler: ".mysqli_connect_error();
-	exit(json_encode($signupResult));
+	echo $_GET['callback'].'('.json_encode($signupResult) .')';
 }
 
 $emailCheck = "SELECT * FROM Users WHERE Email = '$email'";
@@ -23,7 +25,7 @@ $emailAlreadyExists = $emailCheckResult->num_rows != 0;
 if($emailAlreadyExists){
 	$signupResult['successful'] = false;
 	$signupResult['message'] = "Die angegebene Email-Adresse existiert bereits!";
-	exit(json_encode($signupResult));
+	echo $_GET['callback'].'('.json_encode($signupResult) .')';
 }
 
 $sqlQuery = "INSERT INTO `Users`(`LoginPW`, `Name`, `Email`, `PicID`, `CarID`) VALUES ('$pw','$name','$email',0,0);";
@@ -32,5 +34,5 @@ mysqli_query($db, $sqlQuery);
 
 $signupResult['successful'] = true;
 $signupResult['message'] = "Registrierung erfolgreich!";
-exit(json_encode($signupResult));
+echo $_GET['callback'].'('.json_encode($signupResult) .')';
 ?>

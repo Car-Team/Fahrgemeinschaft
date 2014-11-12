@@ -1,12 +1,14 @@
 <?php
-$email = $_POST['email'];
-$pw = $_POST['pw'];
+header('Content-Type: text/javascript; charset=UTF-8');
+
+$email = $_GET['email'];
+$pw = $_GET['pw'];
 
 $db = mysqli_connect("87.230.14.183", "car", "car", "car");
 mysqli_query($db, "SET NAMES 'utf8'");
 if(!$db)
 {
-  exit("Verbindungsfehler: ".mysqli_connect_error());
+  echo "Verbindungsfehler: ".mysqli_connect_error();
 }
 
 $sqlQuery = "SELECT * FROM Users u LEFT JOIN Cars c ON CarID = c.ID WHERE Email = '$email' AND LoginPW = '$pw'";
@@ -36,8 +38,8 @@ if($successful) {
 		'descriptionCar'	=> $resultData[15],//PicID
 		'colourCar'			=> $resultData[16]//PicID
 	);
-	exit(json_encode($loginResult));
+	echo  $_GET['callback'].'('.json_encode($loginResult) .')';
 } else {
-	exit(json_encode(array('successful' => false)));
+	echo  $_GET['callback'].'('.json_encode(array('successful' => false)) .')';
 }
 ?>

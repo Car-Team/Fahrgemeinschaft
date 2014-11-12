@@ -26,15 +26,6 @@
 <div id="menu" data-role="page">
   <div data-role="header">
     <h1>drive2gether</h1>
-    <ul data-role="menu" id="menu-right" class="dropdown-right" style="z-index:1">
-      <li>
-        <span data-role="button"class="ui-btn btn-only-icon dropdown-btn fa fa-gears"></span>
-        <ul data-role="listview" data-inset="true">
-          <li><a href="options.html" data-transition="slide" class="ui-btn">Einstellungen</a></li>
-          <li><a class="ui-btn btn-red" id="fb-logout">Logout</a></li>
-        </ul>
-      </li>
-    </ul>
   </div>
 
   <div data-role="main" class="ui-content">
@@ -61,6 +52,11 @@
 		  <li><a href="costReport.html" data-transition="slide" class="ui-btn fa fa-money">Meine Abrechnungen</a></li>   
     	<li><a href="javascript: void(0);" data-transition="slide" class="ui-btn fa fa-user" onClick="openMyProfil();">Mein Profil</a></li>
       <!--<li><a href="allUsers.html" data-transition="slide" class="ui-btn fa fa-users">Alle Profile - "Proof of Concept"</a></li>-->
+    </ul>
+    <ul data-role="listview" data-inset="true">
+      <li>   
+        <a class="ui-btn fa fa-sign-out" onclick="logout();"> Logout</a>
+      </li>
     </ul>
 <!--     <ul data-role="listview" data-inset="true">
         <li><a href="car.html" data-transition="slide" class="ui-btn fa fa-automobile">Fahrzeug</a></li>
