@@ -88,6 +88,7 @@ function saveInDB(){
 
 <!-- STARTING MAP DEFINITION -->
 function showMap(pDestination) {
+
 	var rendererOptions = {
 	    draggable: true
 	};
@@ -112,7 +113,7 @@ function showMap(pDestination) {
 	 
 	// Collect entered data and open Google Maps in a new browser tab
 	function showRoute() {
-	    var start = document.Formular.departure.value;
+	    var start = document.getElementById("departure").value;
 	    var dest_url = {
 	            origin:start, 
 	            destination: destination,
@@ -128,7 +129,7 @@ function showMap(pDestination) {
 	// Change custom parameters starting from here:
 	var zoom = 13; // map zoom
 	var destination = pDestination; // destination
-	document.getElementById('map_canvas').style.width = document.Formular.width; // map width
+	document.getElementById('map_canvas').style.width = $(window).width(); // map width
 	document.getElementById('map_canvas').style.height = '400px'; // map height
 	initialize();
 	showRoute();

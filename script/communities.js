@@ -89,6 +89,7 @@ function fillCommunitiyList(resultData){
 		$(a).on("click", function(){
 			localStorage.setItem('openCommunityID', value['community_id']);
 			$.mobile.changePage("community.html");
+
 									});
 
 	});
