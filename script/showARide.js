@@ -1,4 +1,4 @@
-$(document).on("pagebeforeshow", "#showARide", function(event) {
+$(document).on("pagebeforeshow", "#showARide", function() {
 	//alert("1");
 
 
@@ -35,6 +35,11 @@ $.ajax({
 			document.getElementById("carName").value = 			viewRideResult.car_name;
 			document.getElementById("info").value = 			viewRideResult.ride_infos;
 			document.getElementById("driverName").value = 		viewRideResult.name;
+
+
+			showMap(document.getElementById("destination").value)
+
 		}
 	});
 });
+
