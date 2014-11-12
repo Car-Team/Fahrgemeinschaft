@@ -117,7 +117,12 @@ function fillCommunityInfo(resultData){
 		var li = document.createElement("li");
 		var a = document.createElement("a");
 		var img = document.createElement("img");
-		img.src = "media/img/bengel1.jpg";
+		var imgpicsrc= value['PicID']
+		if(imgpicsrc.length<5){
+			img.src="http://newtroy.integra-technologies.co.uk/static/images/unknown_user.png"
+		}else{
+			img.src = imgpicsrc;
+		}
 		a.appendChild(img);
 		a.appendChild(document.createTextNode(value['Name']));
 
