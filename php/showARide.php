@@ -1,11 +1,11 @@
 <?php
-
+$viewRideID = $_POST['viewRideID'];
 $db = mysqli_connect("87.230.14.183", "car", "car", "car");
 if(!$db)
 {
   exit("Verbindungsfehler: ".mysqli_connect_error());
 }
-$sqlQuery = "SELECT `ID`,`group`,`driver_id`,`price`,`date`,`departure_time`,`departure`,`destination`,`free_places`,`car_name`,`ride_infos` FROM `Rides` WHERE `ID` = 9";
+$sqlQuery = "SELECT r.ID,r.group,r.driver_id,r.price,r.date,r.departure_time,r.departure,r.destination,r.free_places,r.car_name,r.ride_infos,u.name FROM Rides r, Users u WHERE  r.ID = '$viewRideID' AND r.driver_id = u.ID";
 	
 
 $result = mysqli_query($db, $sqlQuery);
@@ -27,7 +27,8 @@ if($successful) {
 		'destination'			=> $resultData[7],//FBID
 		'free_places'			=> $resultData[8],//ModelName
 		'car_name'				=> $resultData[9],//LicensePlate
-		'ride_infos'			=> $resultData[10]//Seats
+		'ride_infos'			=> $resultData[10],//Seats
+		'name'					=> $resultData[11]//Seats
 
 	);
 	exit(json_encode($viewRideResult));

@@ -2,11 +2,15 @@ $(document).on("pagebeforeshow", "#showARide", function(event) {
 	//alert("1");
 
 
-
-
+viewRideID = 9;
+var viewRideData = {
+			'viewRideID' : viewRideID
+		}
+		
 $.ajax({
 		type: "POST",
-		url: "php/showARide.php",		
+		url: "php/showARide.php",	
+		data: viewRideData,	
 		dataType: "json",	
 		success:	function(viewRideResult) {
 			
@@ -20,7 +24,7 @@ $.ajax({
 			document.getElementById("price").value = 			viewRideResult.price;
 			document.getElementById("carName").value = 			viewRideResult.car_name;
 			document.getElementById("info").value = 			viewRideResult.ride_infos;
-			document.getElementById("driverName").value = 		viewRideResult.driver_name;
+			document.getElementById("driverName").value = 		viewRideResult.name;
 		}
 	});
 });
