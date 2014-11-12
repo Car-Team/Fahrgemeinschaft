@@ -834,7 +834,7 @@ function lookintoWallRides(myCommentEntries){
 		}
 
 		//alert(viewProfileID)
-		if(userLoggedInDataloginID===viewProfileID){
+		if(userLoggedInDataloginID==viewProfileID){
 			var myDiv1 = document.getElementById("namefield");
 	        myDiv1.innerHTML = JSON.parse(localStorage.getItem('userdata')).name;	       				   
 	        var myDiv2 = document.getElementById("emailfield");
@@ -858,8 +858,10 @@ function lookintoWallRides(myCommentEntries){
 
 	        var myDiv5 = document.getElementById("userdescription");
 	        myDiv5.innerHTML = "<h3>Beschreibung</h3>" + JSON.parse(localStorage.getItem('userdata')).descriptionUser;
+	        document.getElementById("profilTitle").innerHTML="Mein Profil"
 	    }else{
-	    	remove("editButton");
+	    	//alert(userLoggedInDataloginID + " / " + viewProfileID)
+	    	remove("editButton");	    	
 	    	$.ajax({
 							type: "POST",
 							url: "php/viewProfile.php",
