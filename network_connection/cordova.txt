@@ -1,2 +1,0 @@
- $ cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-network-information.git
-    $ cordova plugin rm org.apache.cordova.core.network-information
