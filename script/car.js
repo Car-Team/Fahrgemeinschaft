@@ -30,7 +30,8 @@ function setProfilIdtoView(id){
 								descriptionCar: JSON.parse(localStorage.getItem('userdata')).descriptionCar,
 								colourCar: JSON.parse(localStorage.getItem('userdata')).colourCar,
 								carPicID: JSON.parse(localStorage.getItem('userdata')).carPicID,
-								viewProfileId: id}));
+								viewProfileId: id,
+							    viewRideId: JSON.parse(localStorage.getItem('userdata')).viewRideId}));
 }
 
 
@@ -93,7 +94,8 @@ function postProfileChanges() {
 								descriptionCar: JSON.parse(localStorage.getItem('userdata')).descriptionCar,
 								colourCar: JSON.parse(localStorage.getItem('userdata')).colourCar,
 								carPicID: JSON.parse(localStorage.getItem('userdata')).carPicID,
-								viewProfileId: JSON.parse(localStorage.getItem('userdata')).viewProfileId}));
+								viewProfileId: JSON.parse(localStorage.getItem('userdata')).viewProfileId,
+							    viewRideId: JSON.parse(localStorage.getItem('userdata')).viewRideId}));
 
 	if(nametext.length==0) {
 		alert("JUNGE, gib wenigstens 1 Gottverdammtes Zeichen ein!");	
@@ -148,7 +150,8 @@ function postCarChanges() {
 								descriptionCar: cardescriptiontext,
 								colourCar: carcolortext,
 								carPicID: JSON.parse(localStorage.getItem('userdata')).carPicID,
-								viewProfileId: JSON.parse(localStorage.getItem('userdata')).viewProfileId}));
+								viewProfileId: JSON.parse(localStorage.getItem('userdata')).viewProfileId,
+							    viewRideId: JSON.parse(localStorage.getItem('userdata')).viewRideId}));
 		
 		var postData = {
 			'carmodel' : carmodeltext,
@@ -202,7 +205,8 @@ function postCarAddition() {
 								descriptionCar: cardescriptiontext,
 								colourCar: carcolortext,
 								carPicID: "0",
-								viewProfileId: JSON.parse(localStorage.getItem('userdata')).viewProfileId}));
+								viewProfileId: JSON.parse(localStorage.getItem('userdata')).viewProfileId,
+							    viewRideId: JSON.parse(localStorage.getItem('userdata')).viewRideId}));
 		
 		var postData = {
 			'carmodel' : carmodeltext,
@@ -537,7 +541,7 @@ function postTWRides() {
 	var text = $('#postTextRides').val();
 	document.getElementById('postTextRides').value ="";
 	var loginID = JSON.parse(localStorage.getItem('userdata')).id;	
-	var viewRideID = 1;//JSON.parse(localStorage.getItem('userdata')).viewProfileId;
+	var viewRideID = JSON.parse(localStorage.getItem('userdata')).viewRideId;//JSON.parse(localStorage.getItem('userdata')).viewProfileId;
 	if(text.length==0) {
 		alert("JUNGE, gib wenigstens 1 Gottverdammtes Zeichen ein!");	
 	}else{	
@@ -568,7 +572,7 @@ function postCORides() {
 	var text = $('#commentTextToPostRides').val();
 	document.getElementById('commentTextToPostRides').value ="";
 	var loginID = JSON.parse(localStorage.getItem('userdata')).id;	
-	var viewRideID = 1;//JSON.parse(localStorage.getItem('userdata')).viewProfileId;	
+	var viewRideID = JSON.parse(localStorage.getItem('userdata')).viewRideId;//JSON.parse(localStorage.getItem('userdata')).viewProfileId;	
 	if(text.length==0) {
 		alert("JUNGE, gib wenigstens 1 Gottverdammtes Zeichen ein!");	
 		$( "#popupCommentRides" ).popup( "close" );
@@ -602,7 +606,7 @@ function lookintoWallRides(myCommentEntries){
 			//'loginName' : userLoggedInDataloginName,
 			'loginID' : userLoggedInDataloginID
 		}
-		var viewRideID = 1;//JSON.parse(localStorage.getItem('userdata')).viewProfileId;
+		var viewRideID = JSON.parse(localStorage.getItem('userdata')).viewRideId;//JSON.parse(localStorage.getItem('userdata')).viewProfileId;
 
 		var viewRideData = {
 			'viewRideID' : viewRideID
@@ -1301,7 +1305,7 @@ $(document).on('pageinit', '#car', function() {
 		
 		////////////////////////////////////////FILL PROFILE DATA///////////////////////////////////////////////
 		var userLoggedInDataloginID = JSON.parse(localStorage.getItem('userdata')).id;
-		var viewRideID = 1; //JSON.parse(localStorage.getItem('userdata')).viewProfileId
+		var viewRideID = JSON.parse(localStorage.getItem('userdata')).viewRideId; //JSON.parse(localStorage.getItem('userdata')).viewProfileId
 		var userLoggedInData = {
 			//'loginName' : userLoggedInDataloginName,
 			'loginID' : userLoggedInDataloginID

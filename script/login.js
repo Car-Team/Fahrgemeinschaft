@@ -56,7 +56,8 @@ function loginAs(email, hashedPw) {
 					carPicID: loginResult.carPicID,
 					descriptionCar: loginResult.descriptionCar,
 					colourCar: loginResult.colourCar,
-					viewProfileId: loginResult.id})); //loginResult.id
+					viewProfileId: loginResult.id,
+					viewRideId: 1})); //loginResult.id
 				localStorage.setItem('hashedPw', hashedPw);
 				$.mobile.changePage("menu.html");
 			}else {

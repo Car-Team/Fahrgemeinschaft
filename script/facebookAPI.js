@@ -113,7 +113,8 @@ $(document).ready(function() {
                 constructionYear: loginResult.constructionYear,
                 descriptionCar: loginResult.descriptionCar,
                 colourCar: loginResult.colourCar,
-                viewProfileId: loginResult.id}));
+                viewProfileId: loginResult.id,
+                viewRideId: 1}));
 
                 console.log("FBID ist in Datenbank enthalten und Benutzerdaten sind geladen!");
                 console.log(localStorage);
