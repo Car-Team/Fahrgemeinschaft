@@ -1,22 +1,26 @@
 $(document).on("pagebeforeshow", "#showARide", function(event) {
-	alert("1");
-	$.ajax({
-		type: "GET",
-		dataType: "jsonp",
-		//http://87.230.14.183/showARide.php
-		url: "php/showARide.php",
-		success: function(resultData) {
-			alert("result data" + resultData.departure);
+	//alert("1");
 
-			$("#date").value = resultData.date;
-			$("#departureTime").value = resultData.departure_time;
-			$("#departure").value = resultData.departure;
-			$("#destination").value = resultData.destination;
-			$("#freePlaces").value = resultData.freePlaces;
-			$("#price").value = resultData.price;
-			$("#carName").value = resultData.car_name;
-			$("#info").value = resultData.ride_infos;
-			$("#driverName").value = resultData.driver_name;
+
+
+
+$.ajax({
+		type: "POST",
+		url: "php/showARide.php",		
+		dataType: "json",	
+		success:	function(viewRideResult) {
+			
+			alert("result data der ID: " + viewRideResult.ID);
+//`ID`,`group`,`driver_id`,`price`,`date`,`departure_time`,`departure`,`destination`,`free_places`,`car_name`,`ride_infos` 
+			document.getElementById("date").value = 			viewRideResult.date;
+			document.getElementById("departureTime").value = 	viewRideResult.departure_time;
+			document.getElementById("departure").value = 		viewRideResult.departure;
+			document.getElementById("destination").value = 		viewRideResult.destination;
+			document.getElementById("freePlaces").value = 		viewRideResult.free_places;
+			document.getElementById("price").value = 			viewRideResult.price;
+			document.getElementById("carName").value = 			viewRideResult.car_name;
+			document.getElementById("info").value = 			viewRideResult.ride_infos;
+			document.getElementById("driverName").value = 		viewRideResult.driver_name;
 		}
 	});
 });
