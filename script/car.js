@@ -49,6 +49,10 @@ function openProfil(){
 	window.location.href="profile.html"
 }
 
+function openProfilByID(id){
+	setProfilIdtoView(id)
+	window.location.href="profile.html"
+}
 
 function openMyProfil(){
 	var id = JSON.parse(localStorage.getItem('userdata')).id;

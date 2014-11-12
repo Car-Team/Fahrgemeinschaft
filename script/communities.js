@@ -120,7 +120,15 @@ function fillCommunityInfo(resultData){
 		img.src = "media/img/bengel1.jpg";
 		a.appendChild(img);
 		a.appendChild(document.createTextNode(value['Name']));
+
+		///////// Connect to Profil
+		a.addEventListener( 'click', function(){
+			openProfilByID(value['ID']);
+		});
+		/////////////////////////////////
+
 		li.appendChild(a);
+
 		//Admin prüfung einfügen
 			var remove = document.createElement("a");
 			remove.appendChild(document.createTextNode(value['Name'] + " aus der Fahrgemeinschaft entfernen"));
