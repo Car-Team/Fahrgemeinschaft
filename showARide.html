@@ -52,6 +52,51 @@
 	    <div id="map_canvas"></div>
 	    <!--<div id="map_direction"><h4>Wegbeschreibung: <span id="total"></span></h4></div>-->
 
+
+
+
+
+
+
+
+	    <!-- <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"PINNWAND" aka Wall >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+		<div class="ui-grid-solo" id="WallRides">
+		    <div class="ui-block-a" style="text-align:center"><label> </label></div>  
+		 
+		 	<div style="text-align:center"><label> </label></div>	 		
+			<div style="text-align:center"><label><h3>Pinnwand</h3></label></div>			
+			<div style="text-align:center"><label> </label></div>  
+			<ul align="justify" data-role='listview' data-inset='true'>
+			 		<li>
+			 			<form>
+					   				<h3>Neuer Pinnwandeintrag:</h3>
+					    			<textarea id="postTextRides" style="color='#ACACAC'" name="textarea-1"></textarea>
+					    			<!--<button style="Color:white; Background-Color:#6d88b7; text-shadow: none;" class="ui-btn">Absenden</button>-->
+					    			<div style="margin-right:34px"><a id="postToWallRides" class="ui-btn ui-corner-all fa fa-send-o" style="text-align:center; Color:white; Background-Color:#6d88b7; text-shadow: none; width:100%" onClick="postTWRides();">Posten</a></div>
+						</form>
+						<!--<a id="postToWall" class="ui-btn fa fa-send" style="text-align:center;" onClick="postTW();">Posten</a>-->
+					</li>
+		 		</ul>	 	  
+		 	<div style="text-align:center"><label> </label></div> 
+		 	<ul id="ulWallHeaderRides" align="justify" data-role='listview' data-inset='true'>
+		 	</ul>
+
+
+			<!--<a href="#popupComment" data-rel="popup" data-position-to="window" class="ui-btn fa fa-send-o" data-transition="pop">Kommentieren</a>-->
+			<div data-role="popup" id="popupCommentRides" data-theme="a" class="ui-corner-all">
+			    <form>
+			        <div style="padding:8px 12px; width:280px">
+			            <h3>Eintrag kommentieren</h3>
+			           <!-- <label for="un" class="ui-hidden-accessible">Username:</label>-->
+			            <textarea type="text" name="user" id="commentTextToPostRides" value="" placeholder="Kommentar" data-theme="a"></textarea>
+			             <!-- <button type="submit" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-check">kommentieren</button>-->
+			            <div style="margin-right:34px"><a id="postCommentToWallRides" class="ui-btn ui-corner-all fa fa-send-o" style="text-align:center; Color:white; Background-Color:#6d88b7; text-shadow: none; width:100%" onClick="postCORides();">Kommentieren</a></div>
+			        </div>
+			    </form>
+			</div>
+		</div>
+
+
     </div>
 
     <div data-role="footer">
