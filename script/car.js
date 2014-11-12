@@ -372,7 +372,7 @@ function lookintoWall(myCommentEntries){
 											        //alert(date2+"\n"+date1);
 											     
 											       $("#ulWallHeader").append(
-											      	$("<li data-role='list-divider' style='font-size:1.1em'>").append(			//+"."+date.substring(0,4)	      		
+											      	$("<li data-role='list-divider' style='font-size:1.1em'  onClick='openProfilByID("+myWallEntries[j].SenderID+");'>").append(			//+"."+date.substring(0,4)	      		
 											       	 myWallEntries[j].name+"<span class='ui-li-count'>"+date.substring(8,10)+"."+date.substring(5,7)+" - "+(myWallEntries[j].Timestamp).substring(11,16)+"</span>" //myWallEntries.length+
 											       )).listview("refresh");
 
@@ -389,7 +389,7 @@ function lookintoWall(myCommentEntries){
 											       $("#ulWallHeader").append(
 											       	$("<li style='min-height:66px'>").append(
 												       	"<div class='commentPicFrameWall'>"+
-												       		"<img id='wPic"+myWallEntries[j].ID+"' class='wallpic' src='"+wImgSrc+"'></img>"+
+												       		"<img id='wPic"+myWallEntries[j].ID+"' class='wallpic' src='"+wImgSrc+"' onClick='openProfilByID("+myWallEntries[j].SenderID+");'></img>"+
 												       	"</div>"+
 												       	"<div id='wTimeDiv"+myWallEntries[j].ID+"' style='position: absolute; margin-left:90px; margin-top:4px'>"+
 												       		"<label class='timeGone'>"+timeDifference(date1,date2)+"</label>"+
@@ -479,9 +479,9 @@ function lookintoWall(myCommentEntries){
 											       						$("#ulWallHeader").append(
 																	       	$("<li style='border-color: #D8D8D8 ; border-left:0px; border-right:0px; background-color:#E8E8E8 ; min-height:94px; margin-left:30px'>").append(
 																	       		"<div class='commentPicFrameWall' style='margin-top:30px;'>"+
-																	       			"<img id='cPic"+myCommentEntries[i].ID+"' class='wallpic' src='"+cImgSrc+"'></img>"+
+																	       			"<img id='cPic"+myCommentEntries[i].ID+"' class='wallpic' src='"+cImgSrc+"'  onClick='openProfilByID("+myCommentEntries[i].SenderID+");'></img>"+
 																	       		"</div>"+
-																	       		"<h2 style='position: absolute; left:7; top:0;'>"+ myCommentEntries[i].name+"</h2>"+
+																	       		"<h2 style='position: absolute; left:7; top:0;' onClick='openProfilByID("+myCommentEntries[i].SenderID+");'>"+ myCommentEntries[i].name+"</h2>"+
 																	       		"<div id='cTimeDiv"+myCommentEntries[i].ID+"' style='position: absolute; margin-left:90px; margin-top:24px;'>"+
 												       								"<label class='timeGone'>"+timeDifference(cdate1,cdate2)+"</label>"+
 												       							"</div>"+
@@ -637,7 +637,7 @@ function lookintoWallRides(myCommentEntries){
 											        //alert(date2+"\n"+date1);
 											     
 											       $("#ulWallHeaderRides").append(
-											      	$("<li data-role='list-divider' style='font-size:1.1em'>").append(			//+"."+date.substring(0,4)	      		
+											      	$("<li data-role='list-divider' style='font-size:1.1em'  onClick='openProfilByID("+myWallEntries[j].SenderID+");'>").append(			//+"."+date.substring(0,4)	      		
 											       	 myWallEntries[j].name+"<span class='ui-li-count'>"+date.substring(8,10)+"."+date.substring(5,7)+" - "+(myWallEntries[j].Timestamp).substring(11,16)+"</span>" //myWallEntries.length+
 											       )).listview("refresh");
 
@@ -654,7 +654,7 @@ function lookintoWallRides(myCommentEntries){
 											       $("#ulWallHeaderRides").append(
 											       	$("<li style='min-height:66px'>").append(
 												       	"<div class='commentPicFrameWall'>"+
-												       		"<img id='wPicRides"+myWallEntries[j].ID+"' class='wallpic' src='"+wImgSrc+"'></img>"+
+												       		"<img id='wPicRides"+myWallEntries[j].ID+"' class='wallpic' src='"+wImgSrc+"'  onClick='openProfilByID("+myWallEntries[j].SenderID+");'></img>"+
 												       	"</div>"+
 												       	"<div id='wTimeDivRides"+myWallEntries[j].ID+"' style='position: absolute; margin-left:90px; margin-top:4px'>"+
 												       		"<label class='timeGone'>"+timeDifference(date1,date2)+"</label>"+
@@ -744,9 +744,9 @@ function lookintoWallRides(myCommentEntries){
 											       						$("#ulWallHeaderRides").append(
 																	       	$("<li style='border-color: #D8D8D8 ; border-left:0px; border-right:0px; background-color:#E8E8E8 ; min-height:94px; margin-left:30px'>").append(
 																	       		"<div class='commentPicFrameWall' style='margin-top:30px;'>"+
-																	       			"<img id='cPicRides"+myCommentEntries[i].ID+"' class='wallpic' src='"+cImgSrc+"'></img>"+
+																	       			"<img id='cPicRides"+myCommentEntries[i].ID+"' class='wallpic' src='"+cImgSrc+"'  onClick='openProfilByID("+myCommentEntries[i].SenderID+");'></img>"+
 																	       		"</div>"+
-																	       		"<h2 style='position: absolute; left:7; top:0;'>"+ myCommentEntries[i].name+"</h2>"+
+																	       		"<h2 style='position: absolute; left:7; top:0;'  onClick='openProfilByID("+myCommentEntries[i].SenderID+");'>"+ myCommentEntries[i].name+"</h2>"+
 																	       		"<div id='cTimeDivRides"+myCommentEntries[i].ID+"' style='position: absolute; margin-left:90px; margin-top:24px;'>"+
 												       								"<label class='timeGone'>"+timeDifference(cdate1,cdate2)+"</label>"+
 												       							"</div>"+
