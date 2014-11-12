@@ -47,7 +47,7 @@ $(document).ready(function() {
   $('#fb-login').click ( function() { 
     FB.login(function(response) {
       statusChangeCallback(response);
-    }, {scope: 'public_profile,email'});
+    }, {scope: 'public_profile'});
 
   });
 
@@ -56,6 +56,7 @@ $(document).ready(function() {
     FB.api('/me', function(response) {
       console.log('FBID: ' + response.id);
       console.log('Name: ' + response.name);
+      console.log(response);
 
       checkFB_ID(response);
     });
@@ -143,7 +144,7 @@ $(document).ready(function() {
       dataType: "jsonp",
       success:  function(signupResult) {
                   alert(signupResult);
-                  $.mobile.changePage("menu.html");
+                  $.mobile.changePage("emailRequest.html");
                 },
       });
   }
@@ -170,3 +171,23 @@ $(document).ready(function() {
       window.localStorage.clear();
       console.log('localStorage gelöscht'); 
   };
+
+  function emailRequest() {
+
+    var email = $('#emailRequest').val();
+
+    var signupData = {
+      'email' : email
+    }
+
+    $.ajax({
+      type: "GET",
+      url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/emailRequest.php",
+      data: signupData,
+      dataType: "jsonp",
+      success:  function(signupResult) {
+                  alert(signupResult);
+                  $.mobile.changePage("menu.html");
+                },
+      });
+  }
