@@ -33,29 +33,75 @@
     </div>
 
   	<div data-role="main" class="ui-content">
-	    <div class="ui-grid-a">
-	        
-	        <div class="ui-block-a"><label>Fahrer:</label></div>
-	        <div class="ui-block-b"><input id="driverName" type="text"></div>
-	        <div class="ui-block-a"><label>Datum:</label></div>
-	        <div class="ui-block-b"><input id="date" type="text"></div>
-	        <div class="ui-block-a"><label>Abfahrtszeit:</label></div>
-	        <div class="ui-block-b"><input id="departureTime" type="text"></div>
-	        <div class="ui-block-a"><label>Start:</label></div>
-	        <div class="ui-block-b"><input id="departure" type="text"></div>
-	        <div class="ui-block-a"><label>Ziel:</label></div>
-	        <div class="ui-block-b"><input id="destination" name="destination" type="text"></div>
-	        <div class="ui-block-a"><label>freie Pl&auml;tze:</label></div>
-	        <div class="ui-block-b"><input id="freePlaces" type="text"></div>
-	        <div class="ui-block-a"><label>Fahrtgesamtkosten in &euro;:</label></div>
-	        <div class="ui-block-b"><input id="price" type="text"></div>
-	        <div class="ui-block-a"><label>Fahrzeug:</label></div>
-	        <div class="ui-block-b"><input id="carName" type="text"></div>
-	        <div class="ui-block-a"><label>Infos zur Fahrt:</label></div>
-	        <div class="ui-block-b"><input id="info" type="text"></div>
-	        <div class="ui-block-a"></div>
-	        <div class="ui-block-b"><input type="button" onclick="showMap(document.Formular.destination.value)" value="Karte anzeigen"></div>
+	    <div class="ui-grid-solo">	         
+	        <div class="ui-block-a">
+	       		<ul data-role="listview" data-inset="true">
+	        		<li>
+	        		 	<div class="ui-grid-a" style="margin-top:-10px; margin-bottom:-10px">
+	        				<div class="ui-block-a"><label style="text-align:right">Fahrer:</label></div>
+	        				<div class="ui-block-b"><input id="driverName"></input></div>
+	        			</div>
+	        		</li>
+	        		<li>
+	        		 	<div class="ui-grid-a" style="margin-top:-10px; margin-bottom:-10px">
+	        				<div class="ui-block-a"><label style="text-align:right">Datum:</label></div>
+	        				<div class="ui-block-b"><input id="date"></input></div>
+	        			</div>
+	        		</li>
+	        		<li>
+	        		 	<div class="ui-grid-a" style="margin-top:-10px; margin-bottom:-10px">
+	        				<div class="ui-block-a"><label style="text-align:right">Abfahrtszeit:</label></div>
+	        				<div class="ui-block-b"><input id="departureTime"></input></div>
+	        			</div>
+	        		</li>
+	        		<li>
+	        		 	<div class="ui-grid-a" style="margin-top:-10px; margin-bottom:-10px">
+	        				<div class="ui-block-a"><label style="text-align:right">Start:</label></div>
+	        				<div class="ui-block-b"><input id="departure"></input></div>
+	        			</div>
+	        		</li>
+	        		<li>
+	        		 	<div class="ui-grid-a" style="margin-top:-10px; margin-bottom:-10px">
+	        				<div class="ui-block-a"><label style="text-align:right">Ziel:</label></div>
+	        				<div class="ui-block-b"><input id="destination"></input></div>
+	        			</div>
+	        		</li>
+	        		<li>
+	        		 	<div class="ui-grid-a" style="margin-top:-10px; margin-bottom:-10px">
+	        				<div class="ui-block-a"><label style="text-align:right">freie Plaetze:</label></div>
+	        				<div class="ui-block-b"><input id="freePlaces"></input></div>
+	        			</div>
+	        		</li>
+	        		<li>
+	        		 	<div class="ui-grid-a" style="margin-top:-10px; margin-bottom:-10px">
+	        				<div class="ui-block-a"><label style="text-align:right">Fahrtgesamtkosten:</label></div>
+	        				<div class="ui-block-b"><input id="price"></input></div>
+	        			</div>
+	        		</li>
+	        		<li>
+	        		 	<div class="ui-grid-a" style="margin-top:-10px; margin-bottom:-10px">
+	        				<div class="ui-block-a"><label style="text-align:right">Fahrzeug:</label></div>
+	        				<div class="ui-block-b"><input id="carName"></input></div>
+	        			</div>
+	        		</li>
+	        		<li>
+	        		 	<div class="ui-grid-a" style="margin-top:-10px; margin-bottom:-10px">
+	        				<div class="ui-block-a"><label style="text-align:right">Infos zur Fahrt:</label></div>
+	        				<div class="ui-block-b"><input id="info"></input></div>
+	        			</div>
+	        		</li>
+	        	</ul>
+	        </div>         
 	    </div>
+
+		<div class="ui-grid-solo">	
+	    	<div class="ui-block-a">	
+	        	<div style="margin-right:34px"><a type="button" class="ui-btn ui-corner-all fa fa-map-marker" style="text-align:center; Color:white; Background-Color:#6d88b7; text-shadow: none; width:100%" onclick="showMap(document.Formular.destination.value)">Karte Anzeigen</a></div>
+	        	 <label type="button" onclick="showMap(document.Formular.destination.value)" value="Karte anzeigen"></label>
+	        </div>  
+	     </div>    
+
+
 
 	    <!-- MAP IMPLEMENTATION -->
 	    <div id="wrapper">
