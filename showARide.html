@@ -24,6 +24,7 @@
 </head>
 
 <body>
+
 <form name="Formular">
 <div id="showARide" data-role="page">
 
@@ -86,7 +87,7 @@
 	        		<li>
 	        		 	<div class="ui-grid-a" style="margin-top:-10px; margin-bottom:-10px">
 	        				<div class="ui-block-a"><label style="text-align:right">Infos zur Fahrt:</label></div>
-	        				<div class="ui-block-b"><input id="info"></input></div>
+	        				<div class="ui-block-b"><textarea id="info" class="min-textarea"></textarea></div>
 	        			</div>
 	        		</li>
 	        	</ul>
@@ -94,7 +95,7 @@
 
 		<div class="ui-grid-solo">	
 	    	<div class="ui-block-a">	
-	        	<div style="margin-right:34px"><a type="button" class="ui-btn ui-corner-all fa fa-map-marker" style="text-align:center; Color:white; Background-Color:#6d88b7; text-shadow: none; width:100%" onclick="showMap(document.getElementById('destination').value)">Karte Anzeigen</a></div>
+	        	<div style="margin-right:34px"><a type="button" class="ui-btn ui-corner-all fa fa-map-marker" style="text-align:center; Color:white; Background-Color:#6d88b7; text-shadow: none; width:100%" onclick="showMap()">Karte Anzeigen</a></div>
 	        	 <!--<label type="button" onclick="showMap(document.Formular.destination.value)" value="Karte anzeigen"></label>-->
 	        </div>  
 	     </div>    

@@ -1,12 +1,12 @@
 <?php
 
-$loginID = $_POST['loginID'];
-$carmodel = $_POST['carmodel'];
-$carcolor = $_POST['carcolor'];
-$caryear = $_POST['caryear'];
-$carlicenseplate = $_POST['carlicenseplate'];
-$carseats = $_POST['carseats'];
-$cardescription = $_POST['cardescription'];
+$loginID = $_GET['loginID'];
+$carmodel = $_GET['carmodel'];
+$carcolor = $_GET['carcolor'];
+$caryear = $_GET['caryear'];
+$carlicenseplate = $_GET['carlicenseplate'];
+$carseats = $_GET['carseats'];
+$cardescription = $_GET['cardescription'];
 
 
 $db = mysqli_connect("87.230.14.183", "car", "car", "car");
@@ -28,5 +28,5 @@ mysqli_query($db, $sqlQuery2);
 
 
 
-exit("Post erfolgreich verschickt");
+echo $_GET['callback'].'('.json_encode("Post erfolgreich verschickt").')';
 ?>

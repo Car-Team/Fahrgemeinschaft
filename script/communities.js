@@ -14,19 +14,10 @@ $( document ).on( "pageinit", "#menu", function( event ) {
 
 });
 
-///////////// Check if there are invites in list
-function checkInviteListVisibility(){
-	alert(document.getElementById('myInvitesList').getElementsByTagName('li').length);
-	if(document.getElementById('myInvitesList').getElementsByTagName('li').length > 0){
-		$("#myInvites").show();
-	}else{
-		$("#myInvites").hide();	
-	}
-}
-
 ///////////// Fill Invitelist
 function fillInviteList(resultData){
 	var ul = document.getElementById("myInvitesList");
+	$(ul).empty();
 	$.each(resultData, function(key, value){
 		var li = document.createElement("li");
 		var a = document.createElement("a");
@@ -46,6 +37,14 @@ function fillInviteList(resultData){
 
 	});
 	$(ul).listview("refresh");
+
+	alert(document.getElementById('myInvitesList').getElementsByTagName('li').length);
+	if(document.getElementById('myInvitesList').getElementsByTagName('li').length > 0){
+		$("#myInvites").show();
+	}else{
+		$("#myInvites").hide();	
+	}
+
 };
 
 ///////////// Accept Invite
@@ -94,6 +93,7 @@ function fillCommunitiyList(resultData){
 
 	});
 	$(ul).listview("refresh");
+
 };
 
 ///////////////////////////////////////////////////////////////////////////// community.html
@@ -139,31 +139,46 @@ function fillCommunityInfo(resultData){
 			remove.appendChild(document.createTextNode(value['Name'] + " aus der Fahrgemeinschaft entfernen"));
 			li.appendChild(remove);
 		ul.appendChild(li);
-
-		// $(a).on("click", function(){
-		// 	localStorage.setItem('openCommunityID', value['community_id']);
-		// 	$.mobile.changePage("community.html");
-		// 							});
-
 	});
 	$(ul).listview("refresh");
 
 ////////InviteList
-	var ul = document.getElementById("inviteList");
-	$.each(resultData['invites'], function(key, value){
-		var li = document.createElement("li");
-		var a = document.createElement("a");
-		a.appendChild(document.createTextNode(value['Email']));
-		li.appendChild(a);
-		ul.appendChild(li);
+	if(resultData['invites']){
+		var ul = document.getElementById("inviteList");
+		$.each(resultData['invites'], function(key, value){
+			var li = document.createElement("li");
+			var a = document.createElement("a");
+			a.appendChild(document.createTextNode(value['Email']));
+			li.appendChild(a);
+			ul.appendChild(li);
+		});
+		$(ul).listview("refresh");
+	}
 
-		// $(a).on("click", function(){
-		// 	localStorage.setItem('openCommunityID', value['community_id']);
-		// 	$.mobile.changePage("community.html");
-		// 							});
+////////RideList
+	if(resultData['rides']){
+		var ul = document.getElementById("rideList");
+		$.each(resultData['rides'], function(key, value){
+			var li = document.createElement("li");
+			var a = document.createElement("a");
+			a.appendChild(document.createTextNode(value['date']));
+			li.appendChild(a);
+			ul.appendChild(li);
 
-	});
-	$(ul).listview("refresh");
+			$(a).on("click", function(){
+				localStorage.setItem('openCommunityID', value['community_id']);
+				var userData = JSON.parse(localStorage.getItem('userdata'));
+				userData['viewRideId'] = value['ID'];
+				localStorage.setItem("userdata", JSON.stringify(userData));
+
+
+				window.location.href="showARide.html";
+										});
+
+		});
+		$(ul).listview("refresh");
+	}
+
 }
 
 ///////////////////////////////////////////////////////////////////////////// community_create.html
@@ -241,11 +256,12 @@ function databaseRequest(requestData){
 						    case "acceptInvite":
 						    	if(resultData){
 						    		alert("Fahrgemeinschaft beigetreten!");
+						    		//bla hier mblasad
+						    		// fillInviteList();
 						    	}else {
 						    		alert("Error");
 						    	}
-					    		checkInviteListVisibility();
-						    	break;
+					    		break;
 						} 
 					},
 		});

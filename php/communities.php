@@ -45,7 +45,7 @@
 	    	$sqlQuery = "SELECT name FROM Community WHERE ID = '".$communityID."'";
 	    	$result = mysqli_query($db, $sqlQuery);
 	    	$resultData = $result->fetch_assoc();
-	    	$sqlQuery = "SELECT Users.Name, Users.PicID, Users.ID, Users.PicID
+	    	$sqlQuery = "SELECT Users.Name, Users.PicID, Users.ID
 						FROM Communities
 						INNER JOIN Users
 						ON Communities.user_id=Users.ID
@@ -62,6 +62,13 @@
 	    	$result = mysqli_query($db, $sqlQuery);
 	    	while($row = $result->fetch_assoc()){
 				$resultData['invites'][] = $row;
+			};
+	    	$sqlQuery = "SELECT Rides.ID, Rides.date
+						FROM Rides
+						WHERE groupID = $communityID";
+	    	$result = mysqli_query($db, $sqlQuery);
+	    	while($row = $result->fetch_assoc()){
+				$resultData['rides'][] = $row;
 			};
 	    	break;
 	    case "inviteMember":

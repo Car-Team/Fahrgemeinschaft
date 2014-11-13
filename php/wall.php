@@ -1,5 +1,6 @@
 <?php
-	$viewProfileID = $_POST['viewProfileID'];
+header('Content-Type: text/javascript; charset=UTF-8');
+	$viewProfileID = $_GET['viewProfileID'];
 	$db = mysqli_connect("87.230.14.183", "car", "car", "car");
 	mysqli_query($db, "SET NAMES 'utf8'");
 	$sqlQuery = "SELECT w.ID, w.ReceiverID, w.SenderID, w.Textinput, w.Timestamp, u.name, u.picID FROM Walls w, Users u WHERE w.ReceiverID = '$viewProfileID' AND w.SenderID = u.ID ORDER BY w.Timestamp DESC";
@@ -12,5 +13,5 @@
 	while( $row = mysqli_fetch_assoc( $result ) ) {
 	    $wallentries[] = $row;
 	}
-	echo json_encode($wallentries);
+	echo $_GET['callback'].'('.json_encode($wallentries).')';
 ?>

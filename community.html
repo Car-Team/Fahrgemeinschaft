@@ -9,6 +9,8 @@
 <link rel="stylesheet" href="libs/datepicker/jquery.mobile.datepicker.css" />
 <script src="libs/jquery/jquery-1.11.1.min.js"></script>
 <script src="libs/jquery_mobile/jquery.mobile-1.4.4.min.js"></script>
+<script src="libs/jqueryUi/datepicker.js"></script>
+<script src="libs/datepicker/jquery.mobile.datepicker.js"></script>
 <script src="libs/cryptoJS/sha1.js"></script>
 <script src="script/car.js"></script> 
 <script src="script/communities.js"></script>
@@ -46,27 +48,13 @@
       <ul data-role="listview" data-inset="true">
         <li><a href="community_invite.html">Person einladen</a></li>
       </ul>
-    <h3>Aktuelle Fahrten:</h3>
-      <ul data-role="listview" data-inset="true">
-          <li>
-              <a href="showARide.html">
-                29.09.2019 - Citty Park
-              </a>
-          </li>
-          <li>
-              <a href="#">
-                30.09.2019 - Citty Park
-              </a>
-          </li>
-          <li>
-              <a href="#">
-                31.09.2019 - Citty Park
-              </a>
-          </li>
-      </ul>
     <ul data-role="listview" data-inset="true">
       <li><a href="createARide.html">Fahrt erstellen</a></li>
     </ul>
+    <h3>Fahrten:</h3>
+      <ul data-role="listview" data-inset="true" id="rideList">
+            <!--Getting filled by JS -->
+      </ul>
   </div>
 
   <div data-role="footer">

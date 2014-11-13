@@ -29,7 +29,7 @@
 
   <div data-role="main" class="ui-content">
     <!-- Only if open invites -->
-      <div data-role="collapsible" data-collapsed="true" id="myInvites">
+      <div data-role="collapsible" data-collapsed="true" id="myInvites" style="display:none">
           <h4>Meine offenen Einladungen</h4>
           <ul data-role="listview" data-icon="action" id="myInvitesList">
             <!--Getting filled by JS -->
@@ -53,6 +53,9 @@
       <!--<li><a href="allUsers.html" data-transition="slide" class="ui-btn fa fa-users">Alle Profile - "Proof of Concept"</a></li>-->
     </ul>
     <ul data-role="listview" data-inset="true">
+      <li>   
+        <a class="ui-btn fa fa-cogs" href="options.html"> Optionen</a>
+      </li>
       <li>   
         <a class="ui-btn fa fa-sign-out" onclick="logout();"> Logout</a>
       </li>
