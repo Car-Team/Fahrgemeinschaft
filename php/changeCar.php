@@ -20,5 +20,5 @@ $sqlQuery = "UPDATE `Cars` SET `ModelName`='$carmodel', `LicensePlate`='$carlice
 
 mysqli_query($db, $sqlQuery);
 
-echo $_GET['callback'].'('."Post erfolgreich verschickt".')';
+echo $_GET['callback'].'('.json_encode("Post erfolgreich verschickt").')';
 ?>

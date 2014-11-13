@@ -1,4 +1,5 @@
 <?php
+header('Content-Type: text/javascript; charset=UTF-8');
 $loginID = $_GET['loginID'];
 $viewProfileID = $_GET['viewProfileID'];
 $text = $_GET['text'];
@@ -14,5 +15,5 @@ $sqlQuery = "INSERT INTO `Walls`(`ReceiverID`, `SenderID`, `Textinput`) VALUES (
 
 mysqli_query($db, $sqlQuery);
 
-echo $_GET['callback'].'('."Post erfolgreich verschickt".')';
+echo $_GET['callback'].'('.json_encode("Post erfolgreich verschickt").')';
 ?>

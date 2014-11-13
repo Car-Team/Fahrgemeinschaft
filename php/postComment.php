@@ -1,4 +1,5 @@
 <?php
+header('Content-Type: text/javascript; charset=UTF-8');
 $loginID = $_GET['loginID'];
 $wallID = $_GET['wallID'];
 $viewProfileID = $_GET['viewProfileID'];
@@ -15,5 +16,5 @@ $sqlQuery = "INSERT INTO `Comments`(`WallID`, `ReceiverID`, `SenderID`, `Textinp
 
 mysqli_query($db, $sqlQuery);
 
-echo $_GET['callback'].'('."Post erfolgreich verschickt".')';
+echo $_GET['callback'].'('.json_encode("Post erfolgreich verschickt").')';
 ?>

@@ -15,5 +15,5 @@ $sqlQuery = "INSERT INTO `CommentsRides`(`WallID`, `ReceiverID`, `SenderID`, `Te
 
 mysqli_query($db, $sqlQuery);
 
-echo $_GET['callback'].'('."Post erfolgreich verschickt".')';
+echo $_GET['callback'].'('.json_encode("Post erfolgreich verschickt").')';
 ?>

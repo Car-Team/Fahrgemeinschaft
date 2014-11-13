@@ -1,9 +1,10 @@
 <?php
-$loginID = $_POST['loginID'];
-$name = $_POST['name'];
-$email = $_POST['email'];
-$tel = $_POST['tel'];
-$description = $_POST['description'];
+header('Content-Type: text/javascript; charset=UTF-8');
+$loginID = $_GET['loginID'];
+$name = $_GET['name'];
+$email = $_GET['email'];
+$tel = $_GET['tel'];
+$description = $_GET['description'];
 $db = mysqli_connect("87.230.14.183", "car", "car", "car");
 if(!$db)
 {
@@ -15,5 +16,5 @@ $sqlQuery = "UPDATE `Users` SET `Name`='$name', `Email`='$email', `Tel`='$tel', 
 
 mysqli_query($db, $sqlQuery);
 
-echo $_GET['callback'].'('."Post erfolgreich verschickt".')';
+echo $_GET['callback'].'('.json_encode("Post erfolgreich verschickt").')';
 ?>

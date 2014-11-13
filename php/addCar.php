@@ -28,5 +28,5 @@ mysqli_query($db, $sqlQuery2);
 
 
 
-echo $_GET['callback'].'('."Post erfolgreich verschickt".')';
+echo $_GET['callback'].'('.json_encode("Post erfolgreich verschickt").')';
 ?>

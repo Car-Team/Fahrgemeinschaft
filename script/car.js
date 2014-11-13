@@ -114,9 +114,10 @@ function postProfileChanges() {
 			
 		$.ajax({
 			type: "GET",
-			url: "http://87.230.14.183/changeProfile.php",
+			url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/changeProfile.php",
 			data: postData,
-			success:	function(postResult) {
+			dataType: "jsonp",
+			success:	function() {
 							//alert(postResult);
 							window.location.href="profile.html"
 						},
@@ -169,8 +170,9 @@ function postCarChanges() {
 				
 		$.ajax({
 			type: "GET",
-			url: "http://87.230.14.183/changeCar.php",
+			url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/changeCar.php",
 			data: postData,
+			dataType: "jsonp",
 			success:	function(postResult) {
 							//alert(postResult);
 							window.location.href="car.html"
@@ -223,8 +225,9 @@ function postCarAddition() {
 		}			
 		$.ajax({
 			type: "GET",
-			url: "http://87.230.14.183/addCar.php",
+			url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/addCar.php",
 			data: postData,
+			dataType: "jsonp",
 			success:	function(postResult) {
 							//alert(postResult);
 							window.location.href="car.html"
@@ -253,9 +256,10 @@ function postTW() {
 			
 		$.ajax({
 			type: "GET",
-			url: "http://87.230.14.183/postToWall.php",
+			url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/postToWall.php",
 			data: postData,
-			success:	function(postResult) {
+			dataType: "jsonp",
+			success:	function() {
 							//alert(postResult);
 							window.location.href=window.location.href
 						},
@@ -287,9 +291,10 @@ function postCO() {
 			$( "#popupComment" ).popup( "close" );
 		$.ajax({
 			type: "GET",
-			url: "http://87.230.14.183/postComment.php",
+			url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/postComment.php",
 			data: postData,
-			success:	function(postResult) {
+			dataType: "jsonp",
+			success:	function() {
 							//alert(postResult);
 							
 							window.location.href="profile.html"//window.location.href
@@ -354,7 +359,7 @@ function lookintoWall(myCommentEntries){
 
 									$.ajax({
 										type: "GET",
-										url: "http://87.230.14.183/wall.php",
+										url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/wall.php",
 										data: viewProfileData,
 										dataType: "jsonp",			
 										success:	function(wallentries) {	
@@ -557,8 +562,9 @@ function postTWRides() {
 			
 		$.ajax({
 			type: "GET",
-			url: "http://87.230.14.183/postToWallRides.php",
+			url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/postToWallRides.php",
 			data: postData,
+			dataType: "jsonp",
 			success:	function(postResult) {
 							//alert(postResult);
 							window.location.href=window.location.href
@@ -591,8 +597,9 @@ function postCORides() {
 			$( "#popupComment" ).popup( "close" );
 		$.ajax({
 			type: "GET",
-			url: "http://87.230.14.183/postCommentRides.php",
+			url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/postCommentRides.php",
 			data: postData,
+			dataType: "jsonp",
 			success:	function(postResult) {
 							//alert(postResult);
 							
@@ -619,7 +626,7 @@ function lookintoWallRides(myCommentEntries){
 
 									$.ajax({
 										type: "GET",
-										url: "http://87.230.14.183/wallRides.php",
+										url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/wallRides.php",
 										data: viewRideData,
 										dataType: "jsonp",			
 										success:	function(wallentries) {	
@@ -864,7 +871,7 @@ function lookintoWallRides(myCommentEntries){
 	    	remove("editButton");	    	
 	    	$.ajax({
 							type: "GET",
-							url: "http://87.230.14.183/viewProfile.php",
+							url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/viewProfile.php",
 							data: viewProfileData,
 							dataType: "jsonp",			
 							success:	function(viewProfileResult) {									
@@ -895,7 +902,7 @@ function lookintoWallRides(myCommentEntries){
 				
 				$.ajax({
 							type: "GET",
-							url: "http://87.230.14.183/comments.php",
+							url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/comments.php",
 							data: viewProfileData,
 							dataType: "jsonp",			
 							success:	function(commententries) {									
@@ -1042,7 +1049,7 @@ $(document).on('pageinit', '#car', function() {
 	    	remove("editButton");
 	    	$.ajax({
 							type: "GET",
-							url: "http://87.230.14.183/viewProfile.php",
+							url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/viewProfile.php",
 							data: viewProfileData,
 							dataType: "jsonp",			
 							success:	function(viewProfileResult) {									
@@ -1329,7 +1336,7 @@ $(document).on('pageinit', '#car', function() {
 				
 				$.ajax({
 							type: "GET",
-							url: "http://87.230.14.183/commentsRides.php",
+							url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/commentsRides.php",
 							data: viewRideData,
 							dataType: "jsonp",			
 							success:	function(commententries) {									
