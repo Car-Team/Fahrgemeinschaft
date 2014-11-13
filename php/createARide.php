@@ -26,8 +26,8 @@
 	$result = mysqli_query($db, $sqlQuery) or die (mysql_error());
 	
 	if (!$result) {
-    echo "DB Fehler, konnte die Datenbank nicht abfragen\n";
-    echo 'MySQL Error: ' . mysql_error();
+    echo $_GET['callback'].'('."DB Fehler, konnte die Datenbank nicht abfragen\n".')';
+    echo $_GET['callback'].'('.MySQL Error: ' . mysql_error().')';
     exit;
 	}
 	mysqli_close($db);

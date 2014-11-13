@@ -1,5 +1,5 @@
 <?php
-$viewProfileID = $_POST['viewProfileID'];
+$viewProfileID = $_GET['viewProfileID'];
 
 $db = mysqli_connect("87.230.14.183", "car", "car", "car");
 mysqli_query($db, "SET NAMES 'utf8'");
@@ -35,8 +35,8 @@ if($successful) {
 		'descriptionCar'	=> $resultData[15],//PicID
 		'colourCar'			=> $resultData[16]//PicID
 	);
-	exit(json_encode($viewProfileResult));
+	echo $_GET['callback'].'('.json_encode($viewProfileResult));
 } else {
-	exit(json_encode(array('successful' => false)));
+	echo $_GET['callback'].'('.json_encode(array('successful' => false)).')';
 }
 ?>

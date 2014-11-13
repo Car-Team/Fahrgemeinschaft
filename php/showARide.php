@@ -1,5 +1,5 @@
 <?php
-$viewRideID = $_POST['viewRideID'];
+$viewRideID = $_GET['viewRideID'];
 $db = mysqli_connect("87.230.14.183", "car", "car", "car");
 if(!$db)
 {
@@ -32,9 +32,9 @@ if($successful) {
 		'name'					=> $resultData[11]//Seats
 
 	);
-	exit(json_encode($viewRideResult));
+	echo $_GET['callback'].'('.json_encode($viewRideResult).')';
 } else {
-	exit(json_encode(array('successful' => false)));
+	echo $_GET['callback'].'('.json_encode(array('successful' => false)).')';
 }
 	
 ?>
