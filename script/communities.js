@@ -172,7 +172,7 @@ function fillCommunityInfo(resultData){
 				localStorage.setItem("userdata", JSON.stringify(userData));
 
 
-				$.mobile.changePage("showARide.html");
+				window.location.href="showARide.html";
 										});
 
 		});

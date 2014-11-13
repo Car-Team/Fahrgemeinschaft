@@ -4,7 +4,7 @@ $(document).on("pagebeforeshow", "#showARide", function() {
 //alert(group);
 
 viewRideID = JSON.parse(localStorage.getItem('userdata')).viewRideId;
-alert("RideID: "+viewRideID)
+//alert("RideID: "+viewRideID)
 var viewRideData = {
 			'viewRideID' : viewRideID
 		}
