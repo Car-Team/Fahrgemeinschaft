@@ -14,7 +14,7 @@
 
 	$db = mysqli_connect("87.230.14.183", "car", "car", "car");
 	mysqli_query($db, "SET NAMES 'utf8'");
-	$sqlQuery = "INSERT INTO `Rides` (`price`, `date`, `departure_time`, `departure`, `destination`, `free_places`, `car_name`, `ride_infos`, `driver_id`, `group`) 
+	$sqlQuery = "INSERT INTO `Rides` (`price`, `date`, `departure_time`, `departure`, `destination`, `free_places`, `car_name`, `ride_infos`, `driver_id`, `groupID`) 
 		VALUES ('$price','$date','$time','$departure','$destination','$freePlaces', '$carName','$rideInfos','$userID','$groupID')";
 	
 
