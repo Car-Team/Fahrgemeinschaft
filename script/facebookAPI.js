@@ -43,13 +43,14 @@ $(document).ready(function() {
       statusChangeCallback(response);
     });
   };
+});
 
-  $('#fb-login').click ( function() { 
+  function fblogin() { 
     FB.login(function(response) {
       statusChangeCallback(response);
     }, {scope: 'public_profile'});
 
-  });
+  };
 
     // Daten aus FB auslesen
   function getUserData() {
@@ -148,7 +149,7 @@ $(document).ready(function() {
                 },
       });
   }
-});
+
 
   //Logout
   function logout() {
@@ -176,6 +177,8 @@ $(document).ready(function() {
 
     var email = $('#emailRequest').val();
 
+    if(email.search('@') != -1) {
+
     var signupData = {
       'email' : email
     }
@@ -190,4 +193,8 @@ $(document).ready(function() {
                   $.mobile.changePage("menu.html");
                 },
       });
+  }
+  else {
+    alert("Bitte geben Sie eine gültige E-Mail Adresse an.")
+  }
   }
