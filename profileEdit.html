@@ -10,6 +10,15 @@
 <script src="script/car.js"></script> 
 <script src="script/login.js"></script>
 </head>
+
+<script type='text/javascript'>
+  function setID()
+  {
+  	var id = JSON.parse(localStorage.getItem('userdata')).id;
+    document.getElementById('uploadBtn').data=id;  
+  }
+</script>
+
 <body>
 <div data-role="page" id="profileEdit">
   <div data-role="header">
@@ -19,9 +28,9 @@
   <div data-role="main" class="ui-content"></div>
 
   			<div class="ui-grid-solo" style="text-align:center">
-				<form action="php/upload.php" method="post" enctype="multipart/form-data">
+				<form action="http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/upload.php" method="post" enctype="multipart/form-data">
 					<input type="file" name="fileToUpload" id="fileToUpload">
-					<input type="submit" value="Bild hochladen" name="Hochladen">
+					<input type="submit" id="uploadBtn" value="Bild hochladen" name="submit" data="empty" onClick="setID()">
 				</form>
 			</div>
 
