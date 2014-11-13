@@ -1,9 +1,4 @@
 $(document).ready(function() {
-
-  //automatischer Login mit facebook
-  if(JSON.parse(localStorage.getItem('userdata')) != undefined) {
-    $.mobile.changePage("menu.html");
-  }
   
   //Internetverbindung überprüfen
   var online = navigator.onLine;
