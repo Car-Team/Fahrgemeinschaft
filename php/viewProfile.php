@@ -35,7 +35,7 @@ if($successful) {
 		'descriptionCar'	=> $resultData[15],//PicID
 		'colourCar'			=> $resultData[16]//PicID
 	);
-	echo $_GET['callback'].'('.json_encode($viewProfileResult));
+	echo $_GET['callback'].'('.json_encode($viewProfileResult).')';
 } else {
 	echo $_GET['callback'].'('.json_encode(array('successful' => false)).')';
 }
