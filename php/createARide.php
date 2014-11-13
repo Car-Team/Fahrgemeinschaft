@@ -9,13 +9,20 @@
 	$rideInfos = $_GET['rideInfos'];
 	$userName = $_GET['userName'];
 	$userID = $_GET['userID'];
+	$groupID = $_GET['groupID'];
+
 
 	$db = mysqli_connect("87.230.14.183", "car", "car", "car");
-
-	$sqlQuery = "INSERT INTO Rides (price, date, departure_time, departure, destination, free_places, car_name, ride_infos, user_name, user_id ) 
-		VALUES ('".$price."','".$date."','".$time."','".$departure."','".$destination."',
-			'".$freePlaces."', '".$carName."','".$rideInfos."','".$userName."','".$userID."')";
+	mysqli_query($db, "SET NAMES 'utf8'");
+	$sqlQuery = "INSERT INTO `Rides` (`price`, `date`, `departure_time`, `departure`, `destination`, `free_places`, `car_name`, `ride_infos`, `driver_id`, `group`) 
+		VALUES ('$price','$date','$time','$departure','$destination','$freePlaces', '$carName','$rideInfos','$userID','$groupID')";
 	
+
+	//$sqlQuery = "INSERT INTO `Rides` (`group`) VALUES ('$groupID')";
+	//$sqlQuery = "INSERT INTO `Walls`(`ReceiverID`, `SenderID`, `Textinput`) VALUES ('$viewProfileID','$loginID','$text')"; //, `Timestamp`
+
+
+
 	$result = mysqli_query($db, $sqlQuery) or die (mysql_error());
 	
 	if (!$result) {
