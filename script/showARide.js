@@ -3,16 +3,16 @@ $(document).on("pagebeforeshow", "#showARide", function() {
 //var group = localStorage.getItem('openCommunityID');
 //alert(group);
 
-viewRideID = 9;
+viewRideID = JSON.parse(localStorage.getItem('userdata')).viewRideId;
 var viewRideData = {
 			'viewRideID' : viewRideID
 		}
 
 $.ajax({
-		type: "POST",
-		url: "php/showARide.php",	
+		type: "GET",
+		url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/showARide.php",	
 		data: viewRideData,	
-		dataType: "json",	
+		dataType: "jsonp",	
 		success:	function(viewRideResult) {			
 			//alert("result data der ID: " + viewRideResult.ID);
 			// Names of Columns in Database:`ID`,`group`,`driver_id`,`price`,`date`,`departure_time`,`departure`,`destination`,`free_places`,`car_name`,`ride_infos` 

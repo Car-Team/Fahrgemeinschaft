@@ -363,6 +363,7 @@ function lookintoWall(myCommentEntries){
 										data: viewProfileData,
 										dataType: "jsonp",			
 										success:	function(wallentries) {	
+
 											var i = 0;
 											myWallEntries=wallentries;
 											var j = 0;
@@ -630,12 +631,13 @@ function lookintoWallRides(myCommentEntries){
 										data: viewRideData,
 										dataType: "jsonp",			
 										success:	function(wallentries) {	
+											//alert(wallentries[0].name)
 											var i = 0;
 											myWallEntries=wallentries;
 											var j = 0;
 											for (;myWallEntries[j];) {		        // Create the list item:
 
-
+												//alert(myWallEntries[j].name)
 											        var date = (myWallEntries[j].Timestamp).substring(0,11);		
 
 											        var date1=new Date().getTime()- (new Date().getTimezoneOffset() * 60000);										       
@@ -1318,7 +1320,7 @@ $(document).on('pageinit', '#car', function() {
 		
 		////////////////////////////////////////FILL PROFILE DATA///////////////////////////////////////////////
 		var userLoggedInDataloginID = JSON.parse(localStorage.getItem('userdata')).id;
-		var viewRideID = JSON.parse(localStorage.getItem('userdata')).viewRideId; //JSON.parse(localStorage.getItem('userdata')).viewProfileId
+		var viewRideID = 9;//JSON.parse(localStorage.getItem('userdata')).viewRideId; //JSON.parse(localStorage.getItem('userdata')).viewProfileId
 		var userLoggedInData = {
 			//'loginName' : userLoggedInDataloginName,
 			'loginID' : userLoggedInDataloginID
@@ -1339,12 +1341,14 @@ $(document).on('pageinit', '#car', function() {
 							url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/commentsRides.php",
 							data: viewRideData,
 							dataType: "jsonp",			
-							success:	function(commententries) {									
+							success:	function(commententries) {	
+							//alert("jo")								
 									myCommentEntries=commententries;
 									lookintoWallRides(myCommentEntries);
 									
 							},
-							error:	function() {					
+							error:	function() {	
+							//alert("nope")				
 									myCommentEntries={'ID':0, 'WallID':0, 'ReceiverID':0, 'SenderID':0, 'Textinput':0, 'Timestamp':0, 'name':0} //give empty commentlist into function to avoid errors
 									lookintoWallRides(myCommentEntries);
 									

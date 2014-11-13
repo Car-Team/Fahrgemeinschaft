@@ -1,4 +1,5 @@
 <?php
+header('Content-Type: text/javascript; charset=UTF-8');
 	$viewProfileID = $_GET['viewRideID'];
 	
 	$db = mysqli_connect("87.230.14.183", "car", "car", "car");
