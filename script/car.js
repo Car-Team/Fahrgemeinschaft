@@ -399,8 +399,8 @@ function lookintoWall(myCommentEntries){
 												       	 		"<label style='white-space:normal'>" + 
 												       	 			myWallEntries[j].Textinput + 												       	 			
 												       	 		"</label>"+	
-												       	 		"<a href='#popupComment' data-rel='popup' data-position-to='window' class='ui-btn ui-corner-all fa fa-keyboard-o' data-transition='pop' style='Color:white; Background-Color:#6d88b7; text-shadow: none; position: absolute; margin-right:6px; right:8px; top: 2px;' onClick='openCommentInput("+myWallEntries[j].ID+");'>"+	
-												       	 		 "<"+//"ID:"+myWallEntries[j].ID+
+												       	 		"<a href='#popupComment' data-rel='popup' data-position-to='window' class='ui-btn ui-corner-all btn-only-icon fa fa-comment' data-transition='pop' style='Color:white; Background-Color:#6d88b7; text-shadow: none; position: absolute; margin-right:6px; right:8px; top: 2px;' onClick='openCommentInput("+myWallEntries[j].ID+");'>"+	
+												       	 		 ""+//"ID:"+myWallEntries[j].ID+
 												       	 		"</a>"+		
 												       	 											       		
 												       	"</div>"
@@ -664,8 +664,8 @@ function lookintoWallRides(myCommentEntries){
 												       	 		"<label style='white-space:normal'>" + 
 												       	 			myWallEntries[j].Textinput + 												       	 			
 												       	 		"</label>"+	
-												       	 		"<a href='#popupCommentRides' data-rel='popup' data-position-to='window' class='ui-btn ui-corner-all fa fa-keyboard-o' data-transition='pop' style='Color:white; Background-Color:#6d88b7; text-shadow: none; position: absolute; margin-right:6px; right:8px; top: 2px;' onClick='openCommentInput("+myWallEntries[j].ID+");'>"+	
-												       	 		 "<"+//"ID:"+myWallEntries[j].ID+
+												       	 		"<a href='#popupCommentRides' data-rel='popup' data-position-to='window' class='ui-btn ui-corner-all btn-only-icon fa fa-comment' data-transition='pop' style='Color:white; Background-Color:#6d88b7; text-shadow: none; position: absolute; margin-right:6px; right:8px; top: 2px;' onClick='openCommentInput("+myWallEntries[j].ID+");'>"+	
+												       	 		 ""+//"ID:"+myWallEntries[j].ID+
 												       	 		"</a>"+		
 												       	 											       		
 												       	"</div>"
