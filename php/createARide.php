@@ -27,7 +27,7 @@
 	
 	if (!$result) {
     echo $_GET['callback'].'('.json_encode("DB Fehler, konnte die Datenbank nicht abfragen\n").')';
-    echo $_GET['callback'].'('.MySQL Error: ' . mysql_error().')';
+    //echo $_GET['callback'].'('.MySQL Error: ' . mysql_error().')';
     exit;
 	}
 	mysqli_close($db);
