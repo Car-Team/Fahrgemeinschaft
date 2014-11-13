@@ -15,5 +15,5 @@ $sqlQuery = "UPDATE `Users` SET `Name`='$name', `Email`='$email', `Tel`='$tel', 
 
 mysqli_query($db, $sqlQuery);
 
-exit("Post erfolgreich verschickt");
+echo $_GET['callback'].'('."Post erfolgreich verschickt".')';
 ?>

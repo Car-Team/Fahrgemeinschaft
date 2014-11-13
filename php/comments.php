@@ -1,5 +1,5 @@
 <?php
-	$viewProfileID = $_POST['viewProfileID'];
+	$viewProfileID = $_GET['viewProfileID'];
 	
 	$db = mysqli_connect("87.230.14.183", "car", "car", "car");
 	mysqli_query($db, "SET NAMES 'utf8'");
@@ -14,5 +14,5 @@
 	    $commententries[] = $row;
 	}
 
-	echo json_encode($commententries);
+	echo $_GET['callback'].'('.json_encode($commententries).')';
 ?>

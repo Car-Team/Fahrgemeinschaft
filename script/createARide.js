@@ -1,8 +1,8 @@
-$(document).ready(function() {
+/*$(document).ready(function() { //html
 
     document.getElementById("car").value = JSON.parse(localStorage.getItem('userdata')).modelName;
     
-});
+});*/
 
 $(function() {
     $( ".date-input-css" ).datepicker();
@@ -33,10 +33,12 @@ function saveInDB(){
 	var destination = $('#destination').val();
 	var freePlaces = $('#freePlaces').val();
 	var price = $('#price').val();
-	var carName = $('#carName').val();
+	var carName = JSON.parse(localStorage.getItem('userdata')).id;
 	var rideInfos = $('#info').val();
 	var userName = JSON.parse(localStorage.getItem('userdata')).name;
 	var userID = JSON.parse(localStorage.getItem('userdata')).id;
+	var group = localStorage.getItem('openCommunityID');
+//alert(group);
 
 	// VALIDATION
 	var numbers = /[0-9]/;
@@ -69,7 +71,8 @@ function saveInDB(){
 		'carName' : carName,
 		'rideInfos' : rideInfos,
 		'userName' : userName,
-		'userID' : userID
+		'userID' : userID,
+		'groupID' : group
 	}
 	
 	$.ajax({
@@ -77,18 +80,17 @@ function saveInDB(){
 		url: "php/createARide.php",
 		//dataType: 'jsonp',
 		data: requestData,
-		success: function(resultData) {
-			if (resultData == 1) {
-				alert('Datensatz wurde erfolgreich eingetragen');
-			}
+		success: function(resultData) {			
+			alert('Datensatz wurde erfolgreich eingetragen.');
+			window.location.href="community.html";
 		},
 	});
 }
 
 
 <!-- STARTING MAP DEFINITION -->
-function showMap(pDestination) {
-
+function showMap() {
+//alert("in showmap")
 	var rendererOptions = {
 	    draggable: true
 	};
@@ -128,7 +130,7 @@ function showMap(pDestination) {
 
 	// Change custom parameters starting from here:
 	var zoom = 13; // map zoom
-	var destination = pDestination; // destination
+	var destination = document.getElementById("destination").value; // destination
 	document.getElementById('map_canvas').style.width = $(window).width(); // map width
 	document.getElementById('map_canvas').style.height = '400px'; // map height
 	initialize();

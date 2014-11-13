@@ -1,6 +1,7 @@
 $(document).on("pagebeforeshow", "#showARide", function() {
 	//alert("1");
-
+//var group = localStorage.getItem('openCommunityID');
+//alert(group);
 
 viewRideID = 9;
 var viewRideData = {
@@ -12,20 +13,9 @@ $.ajax({
 		url: "php/showARide.php",	
 		data: viewRideData,	
 		dataType: "json",	
-		success:	function(viewRideResult) {
-			
-			alert("result data der ID: " + viewRideResult.ID);
-//`ID`,`group`,`driver_id`,`price`,`date`,`departure_time`,`departure`,`destination`,`free_places`,`car_name`,`ride_infos` 
-			/*document.getElementById("date").innerHTML = 			viewRideResult.date;
-			document.getElementById("departureTime").innerHTML = 	viewRideResult.departure_time;
-			document.getElementById("departure").innerHTML = 		viewRideResult.departure;
-			document.getElementById("destination").innerHTML = 		viewRideResult.destination;
-			document.getElementById("freePlaces").innerHTML = 		viewRideResult.free_places;
-			document.getElementById("price").innerHTML = 			viewRideResult.price;
-			document.getElementById("carName").innerHTML = 			viewRideResult.car_name;
-			document.getElementById("info").innerHTML = 			viewRideResult.ride_infos;
-			document.getElementById("driverName").innerHTML = 		viewRideResult.name;*/
-
+		success:	function(viewRideResult) {			
+			//alert("result data der ID: " + viewRideResult.ID);
+			// Names of Columns in Database:`ID`,`group`,`driver_id`,`price`,`date`,`departure_time`,`departure`,`destination`,`free_places`,`car_name`,`ride_infos` 
 			document.getElementById("date").value = 			viewRideResult.date;
 			document.getElementById("departureTime").value = 	viewRideResult.departure_time;
 			document.getElementById("departure").value = 		viewRideResult.departure;
@@ -34,10 +24,19 @@ $.ajax({
 			document.getElementById("price").value = 			viewRideResult.price;
 			document.getElementById("carName").value = 			viewRideResult.car_name;
 			document.getElementById("info").value = 			viewRideResult.ride_infos;
-			document.getElementById("driverName").value = 		viewRideResult.name;
+			document.getElementById("driverName").value = 		viewRideResult.name;			
 
+			document.getElementById("date").readOnly = true;
+			document.getElementById("departureTime").readOnly = true;
+			document.getElementById("departure").readOnly = true;
+			document.getElementById("destination").readOnly = true;
+			document.getElementById("freePlaces").readOnly = true;
+			document.getElementById("price").readOnly = true;
+			document.getElementById("carName").readOnly = true;
+			document.getElementById("info").readOnly = true;
+			document.getElementById("driverName").readOnly = true;
 
-			showMap(document.getElementById("destination").value)
+			//showMap(document.getElementById("destination").value)
 
 		}
 	});

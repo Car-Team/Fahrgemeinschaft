@@ -1,7 +1,7 @@
 <?php
-$loginID = $_POST['loginID'];
-$viewRideID = $_POST['viewRideID'];
-$text = $_POST['text'];
+$loginID = $_GET['loginID'];
+$viewRideID = $_GET['viewRideID'];
+$text = $_GET['text'];
 
 $db = mysqli_connect("87.230.14.183", "car", "car", "car");
 if(!$db)
@@ -14,5 +14,5 @@ $sqlQuery = "INSERT INTO `WallsRides`(`ReceiverID`, `SenderID`, `Textinput`) VAL
 
 mysqli_query($db, $sqlQuery);
 
-exit("Post erfolgreich verschickt");
+echo $_GET['callback'].'('.("Post erfolgreich verschickt".')';
 ?>

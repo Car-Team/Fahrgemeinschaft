@@ -1,8 +1,8 @@
 <?php
-$loginID = $_POST['loginID'];
-$wallID = $_POST['wallID'];
-$viewRideID = $_POST['viewRideID'];
-$text = $_POST['text'];
+$loginID = $_GET['loginID'];
+$wallID = $_GET['wallID'];
+$viewRideID = $_GET['viewRideID'];
+$text = $_GET['text'];
 
 $db = mysqli_connect("87.230.14.183", "car", "car", "car");
 if(!$db)
@@ -15,5 +15,5 @@ $sqlQuery = "INSERT INTO `CommentsRides`(`WallID`, `ReceiverID`, `SenderID`, `Te
 
 mysqli_query($db, $sqlQuery);
 
-exit("Post erfolgreich verschickt");
+echo $_GET['callback'].'('."Post erfolgreich verschickt".')';
 ?>

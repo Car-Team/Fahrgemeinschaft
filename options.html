@@ -14,15 +14,26 @@
 
 <div data-role="page">
   <div data-role="header">
-  	<h1>Einstellungen</h1>
+  	<h1>Optionen</h1>
   	<a href="menu.html" data-transition="slide" data-direction="reverse" class="ui-btn btn-only-icon fa fa-arrow-left"></a>
   </div>
 
   <div data-role="main" class="ui-content">
-  	<div class="ui-grid-a">
-  		<div class="ui-block-a"><label for="push" id="push">Push-Nachrichten</label></div>
-  		<div class="ui-block-b"><input type="checkbox" data-role="flipswitch" name="switch" id="switch"></div>
-		</div>
+  	
+    <div class="ui-grid-solo">
+      <div class="ui-block-a">
+        <ul data-role="listview" data-inset="true">
+          <div data-role="collapsible">
+            <h1>Account löschen<span id="saldo" style="float:right"></span></h1>
+            <ul data-role="listview" data-inset="true">
+              <li><form><input id="pwRequest" placeholder="Passwort" type="password"></form></li>
+              <li><form><input id="pwProof" placeholder="Passwort bestätigen" type="password"></form></li>
+              <li><a onclick="" style="text-align:center" >Account unwiderruflich löschen</a></li>
+            </ul>
+          </div>
+        </ul>
+      </div>
+    </div>
   </div>
 
   <div data-role="footer">

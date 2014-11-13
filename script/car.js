@@ -113,8 +113,8 @@ function postProfileChanges() {
 		}
 			
 		$.ajax({
-			type: "POST",
-			url: "php/changeProfile.php",
+			type: "GET",
+			url: "http://87.230.14.183/changeProfile.php",
 			data: postData,
 			success:	function(postResult) {
 							//alert(postResult);
@@ -168,8 +168,8 @@ function postCarChanges() {
 		}	
 				
 		$.ajax({
-			type: "POST",
-			url: "php/changeCar.php",
+			type: "GET",
+			url: "http://87.230.14.183/changeCar.php",
 			data: postData,
 			success:	function(postResult) {
 							//alert(postResult);
@@ -222,8 +222,8 @@ function postCarAddition() {
 			'carlicenseplate' : carlicenseplatetext,
 		}			
 		$.ajax({
-			type: "POST",
-			url: "php/addCar.php",
+			type: "GET",
+			url: "http://87.230.14.183/addCar.php",
 			data: postData,
 			success:	function(postResult) {
 							//alert(postResult);
@@ -252,8 +252,8 @@ function postTW() {
 		}
 			
 		$.ajax({
-			type: "POST",
-			url: "php/postToWall.php",
+			type: "GET",
+			url: "http://87.230.14.183/postToWall.php",
 			data: postData,
 			success:	function(postResult) {
 							//alert(postResult);
@@ -286,8 +286,8 @@ function postCO() {
 		}
 			$( "#popupComment" ).popup( "close" );
 		$.ajax({
-			type: "POST",
-			url: "php/postComment.php",
+			type: "GET",
+			url: "http://87.230.14.183/postComment.php",
 			data: postData,
 			success:	function(postResult) {
 							//alert(postResult);
@@ -353,10 +353,10 @@ function lookintoWall(myCommentEntries){
 
 
 									$.ajax({
-										type: "POST",
-										url: "php/wall.php",
+										type: "GET",
+										url: "http://87.230.14.183/wall.php",
 										data: viewProfileData,
-										dataType: "json",			
+										dataType: "jsonp",			
 										success:	function(wallentries) {	
 											var i = 0;
 											myWallEntries=wallentries;
@@ -556,8 +556,8 @@ function postTWRides() {
 		}
 			
 		$.ajax({
-			type: "POST",
-			url: "php/postToWallRides.php",
+			type: "GET",
+			url: "http://87.230.14.183/postToWallRides.php",
 			data: postData,
 			success:	function(postResult) {
 							//alert(postResult);
@@ -590,8 +590,8 @@ function postCORides() {
 		}
 			$( "#popupComment" ).popup( "close" );
 		$.ajax({
-			type: "POST",
-			url: "php/postCommentRides.php",
+			type: "GET",
+			url: "http://87.230.14.183/postCommentRides.php",
 			data: postData,
 			success:	function(postResult) {
 							//alert(postResult);
@@ -618,10 +618,10 @@ function lookintoWallRides(myCommentEntries){
 
 
 									$.ajax({
-										type: "POST",
-										url: "php/wallRides.php",
+										type: "GET",
+										url: "http://87.230.14.183/wallRides.php",
 										data: viewRideData,
-										dataType: "json",			
+										dataType: "jsonp",			
 										success:	function(wallentries) {	
 											var i = 0;
 											myWallEntries=wallentries;
@@ -863,10 +863,10 @@ function lookintoWallRides(myCommentEntries){
 	    	//alert(userLoggedInDataloginID + " / " + viewProfileID)
 	    	remove("editButton");	    	
 	    	$.ajax({
-							type: "POST",
-							url: "php/viewProfile.php",
+							type: "GET",
+							url: "http://87.230.14.183/viewProfile.php",
 							data: viewProfileData,
-							dataType: "json",			
+							dataType: "jsonp",			
 							success:	function(viewProfileResult) {									
 									var myDiv1 = document.getElementById("namefield");
 							        myDiv1.innerHTML = viewProfileResult.name;	       				   
@@ -894,10 +894,10 @@ function lookintoWallRides(myCommentEntries){
 		var myCommentEntries;	
 				
 				$.ajax({
-							type: "POST",
-							url: "php/comments.php",
+							type: "GET",
+							url: "http://87.230.14.183/comments.php",
 							data: viewProfileData,
-							dataType: "json",			
+							dataType: "jsonp",			
 							success:	function(commententries) {									
 									myCommentEntries=commententries;
 									lookintoWall(myCommentEntries);
@@ -1041,10 +1041,10 @@ $(document).on('pageinit', '#car', function() {
 	    }else{
 	    	remove("editButton");
 	    	$.ajax({
-							type: "POST",
-							url: "php/viewProfile.php",
+							type: "GET",
+							url: "http://87.230.14.183/viewProfile.php",
 							data: viewProfileData,
-							dataType: "json",			
+							dataType: "jsonp",			
 							success:	function(viewProfileResult) {									
 							        var myDiv1 = document.getElementById("carmodelfield");
 							        myDiv1.innerHTML = viewProfileResult.modelName  +  " ("+viewProfileResult.colourCar+")";	
@@ -1328,10 +1328,10 @@ $(document).on('pageinit', '#car', function() {
 		var myCommentEntries;	
 				
 				$.ajax({
-							type: "POST",
-							url: "php/commentsRides.php",
+							type: "GET",
+							url: "http://87.230.14.183/commentsRides.php",
 							data: viewRideData,
-							dataType: "json",			
+							dataType: "jsonp",			
 							success:	function(commententries) {									
 									myCommentEntries=commententries;
 									lookintoWallRides(myCommentEntries);
