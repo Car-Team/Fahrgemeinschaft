@@ -3,7 +3,7 @@ $(document).on("pagebeforeshow", "#showARide", function() {
 //var group = localStorage.getItem('openCommunityID');
 //alert(group);
 
-viewRideID = 20;
+viewRideID = 9;
 var viewRideData = {
 			'viewRideID' : viewRideID
 		}
