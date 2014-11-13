@@ -2,6 +2,7 @@
 header('Content-Type: text/javascript; charset=UTF-8');
 
 $email = $_GET['email'];
+$fb_id = $_GET['fb_id'];
 
 $signupResult = array(
         'successful'   		=> false,
@@ -26,11 +27,11 @@ if($emailAlreadyExists){
 	echo $_GET['callback'].'('.json_encode($signupResult) .')';
 }
 
-$sqlQuery = "INSERT INTO `Users`(`Email`) VALUES ('$email');";
+$sqlQuery = "UPDATE `Users` SET `Email`='$email' Where `FBID`='$fb_id';";
 
 mysqli_query($db, $sqlQuery);
 
 $signupResult['successful'] = true;
-$signupResult['message'] = "Registrierung erfolgreich!";
+$signupResult['message'] = "E-Mail erfolgreich gespeichert!";
 echo $_GET['callback'].'('.json_encode($signupResult) .')';
 ?>
