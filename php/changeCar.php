@@ -1,5 +1,5 @@
 <?php
-
+header('Content-Type: text/javascript; charset=UTF-8');
 $loginID = $_GET['loginID'];
 $carmodel = $_GET['carmodel'];
 $carcolor = $_GET['carcolor'];

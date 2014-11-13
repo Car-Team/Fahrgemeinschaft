@@ -173,7 +173,7 @@ function postCarChanges() {
 			url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/changeCar.php",
 			data: postData,
 			dataType: "jsonp",
-			success:	function(postResult) {
+			success:	function() {
 							//alert(postResult);
 							window.location.href="car.html"
 						},
@@ -228,7 +228,7 @@ function postCarAddition() {
 			url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/addCar.php",
 			data: postData,
 			dataType: "jsonp",
-			success:	function(postResult) {
+			success:	function() {
 							//alert(postResult);
 							window.location.href="car.html"
 						},
@@ -565,7 +565,7 @@ function postTWRides() {
 			url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/postToWallRides.php",
 			data: postData,
 			dataType: "jsonp",
-			success:	function(postResult) {
+			success:	function() {
 							//alert(postResult);
 							window.location.href=window.location.href
 						},
@@ -600,7 +600,7 @@ function postCORides() {
 			url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/postCommentRides.php",
 			data: postData,
 			dataType: "jsonp",
-			success:	function(postResult) {
+			success:	function() {
 							//alert(postResult);
 							
 							window.location.href="showARide.html"//window.location.href
