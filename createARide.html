@@ -18,7 +18,7 @@
 </head>
 
 <body>
-<form name="Formular">
+<form>
 <div data-role="page">
 
     <div data-role="header">
@@ -27,12 +27,14 @@
     </div>
 
   	<div data-role="main" class="ui-content">
+	    <!-- For the extended Version
 		<form>
 	    	<label><input name="radio-choice" id="rideOnce" type="radio" onclick="rideOnceFunc();" checked="checked">einmalige Fahrt</label>
 		    <label><input name="radio-choice" id="rideMulti" class="custom" type="radio" onclick="rideMultiFunc();">regelm&auml;&szlig;ige Fahrt</label>
 	    </form>
+	    -->
 	    <div class="ui-grid-a">
-	    	
+	    	<!-- For the extended Version
 	    	<div class="ui-block-a" id="daysLabel" style="display:none"><label id="dayLabel">An den Tagen:</label></div>
 	        <div class="ui-block-b" id="daysCheckbox" style="display:none">
 	        	<form>
@@ -54,7 +56,7 @@
 				    </fieldset>
 				</form>
 			</div>
-	        
+	        -->
 	        <div class="ui-block-a" id="dateLabel"><label>Datum:</label></div>
 	        <div class="ui-block-b" id="datepickerLabel"><label><input type="text" data-role="date" id="datepicker"></label></div>
 	        <div class="ui-block-a"><label>Abfahrtszeit:</label></div>
@@ -64,7 +66,7 @@
 	        <div class="ui-block-a"><label>Ziel:</label></div>
 	        <div class="ui-block-b"><label><input type="text" id="destination" name="destination" value="Kiel"></label></div>
 	        <div class="ui-block-a"></div>
-	        <div class="ui-block-b"><input type="button" onclick="showMap(document.Formular.destination.value)" value="Karte anzeigen"></div>
+	        <div class="ui-block-b"><input type="button" onclick="showMap()" value="Karte anzeigen"></div>
 	        <div class="ui-block-a"><label>freie Pl&auml;tze:</label></div>
 	        <div class="ui-block-b"><input name="freePlaces" id="freePlaces" data-highlight="true" min="1" max="7" value="3" type="range"></div>
 	        <div class="ui-block-a"><label>Fahrtgesamtkosten in &euro;:</label></div>
