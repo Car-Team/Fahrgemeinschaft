@@ -21,15 +21,15 @@
 	//$sqlQuery = "INSERT INTO `Rides` (`group`) VALUES ('$groupID')";
 	//$sqlQuery = "INSERT INTO `Walls`(`ReceiverID`, `SenderID`, `Textinput`) VALUES ('$viewProfileID','$loginID','$text')"; //, `Timestamp`
 
-
-
-	$result = mysqli_query($db, $sqlQuery) or die (mysql_error());
+	mysqli_query($db, $sqlQuery);
+	echo $_GET['callback'].'('.json_encode("Post erfolgreich verschickt").')';
+	//$result = mysqli_query($db, $sqlQuery) or die (mysql_error());
 	
-	if (!$result) {
-    echo $_GET['callback'].'('.json_encode("DB Fehler, konnte die Datenbank nicht abfragen\n").')';
+	//if (!$result) {
+   // echo $_GET['callback'].'('.json_encode("DB Fehler, konnte die Datenbank nicht abfragen").')';
     //echo $_GET['callback'].'('.MySQL Error: ' . mysql_error().')';
-    exit;
-	}
-	mysqli_close($db);
+    //exit;
+	//}
+	//mysqli_close($db);
 	
 ?>

@@ -1,7 +1,7 @@
 
-$(document).on("pagebeforeshow", "#createARide", function() {
+/*$(document).on("pagebeforeshow", "#createARide", function() {
     $( ".date-input-css" ).datepicker();
-});
+});*/
 
 // VISINILITY OF RADIO BUTTONS        
 function rideOnceFunc() {
@@ -67,13 +67,13 @@ function saveInDB(){
 		'userID' : userID,
 		'groupID' : group
 	}
-	
+	//alert("hier")
 	$.ajax({
 		type: "GET",
-		url: "php/createARide.php",
-		//dataType: 'jsonp',
+		url: "php/createARide.php",		
 		data: requestData,
-		success: function(resultData) {			
+		dataType: "jsonp",
+		success: function() {			
 			alert('Datensatz wurde erfolgreich eingetragen.');
 			window.location.href="community.html";
 		},
