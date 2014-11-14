@@ -1,10 +1,5 @@
-/*$(document).ready(function() { //html
 
-    document.getElementById("car").value = JSON.parse(localStorage.getItem('userdata')).modelName;
-    
-});*/
-
-$(function() {
+$(document).on("pagebeforeshow", "#createARide", function() {
     $( ".date-input-css" ).datepicker();
 });
 
@@ -26,7 +21,6 @@ function rideMultiFunc() {
 
 ///////////////////////////////////////////////////////////////////////////// AJAX REQUEST
 function saveInDB(){
-
 	var date = $('#datepicker').val();
 	var time = $('#departureTime').val();
 	var departure = $('#departure').val();
@@ -38,7 +32,6 @@ function saveInDB(){
 	var userName = JSON.parse(localStorage.getItem('userdata')).name;
 	var userID = JSON.parse(localStorage.getItem('userdata')).id;
 	var group = localStorage.getItem('openCommunityID');
-//alert(group);
 
 	// VALIDATION
 	var numbers = /[0-9]/;
@@ -88,7 +81,7 @@ function saveInDB(){
 }
 
 
-<!-- STARTING MAP DEFINITION -->
+//<!-- STARTING MAP DEFINITION -->
 function showMap() {
 //alert("in showmap")
 	var rendererOptions = {
@@ -137,4 +130,4 @@ function showMap() {
 	showRoute();
 	
 }
-<!-- END OF MAP DEFINITION -->
+//<!-- END OF MAP DEFINITION -->

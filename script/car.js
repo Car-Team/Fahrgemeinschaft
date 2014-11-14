@@ -368,12 +368,12 @@ function lookintoWall(myCommentEntries){
 											       	var textMarginTop = imgHeight+6;	
 											       	
 											       	if(imgHeight>10){											       									       						
-												       	$("#wTextDiv"+myWallEntries[j].ID).css({ // resize the image     			
+												       	$("#wTextDiv"+myWallEntries[j].ID).css({ // place the elements of the wallentry acording to the size of the image     	     			
 			     												"margin-top": textMarginTop+"px"
 					  									});
 											       	}else{
 											       		textMarginTop=86;											       		
-											       		$("#wTextDiv"+myWallEntries[j].ID).css({ // resize the image     			
+											       		$("#wTextDiv"+myWallEntries[j].ID).css({ // place the elements of the wallentry acording to the size of the image     	   			
 		     												"margin-top": textMarginTop+"px"
 				  										});	
 											       	}
@@ -381,12 +381,12 @@ function lookintoWall(myCommentEntries){
 											       	var textMarginLeft = Math.round(imgWidth+10);
 											       						//alert(textMarginLeft);
 			  										if(imgWidth>10){											       									       						
-												     	 $("#wTimeDiv"+myWallEntries[j].ID).css({ // resize the image     			
+												     	 $("#wTimeDiv"+myWallEntries[j].ID).css({ // place the elements of the wallentry acording to the size of the image     	     			
 		     												"margin-left": textMarginLeft+"px"
 				  										});
 											       	}else{
 											       		textMarginLeft=84;											       		
-											       		$("#wTimeDiv"+myWallEntries[j].ID).css({ // resize the image     			
+											       		$("#wTimeDiv"+myWallEntries[j].ID).css({ // place the elements of the wallentry acording to the size of the image     	    			
 		     												"margin-left": textMarginLeft+"px"
 				  										});
 											       	}
@@ -425,12 +425,12 @@ function lookintoWall(myCommentEntries){
 											       						var imgHeight = $("#cPic"+myCommentEntries[i].ID).height() 
 											       						var textMarginTop = imgHeight + 26;											       					
 				  														if(imgHeight>10){											       									       						
-													     					 $("#cTextDiv"+myCommentEntries[i].ID).css({ // resize the image     			
+													     					 $("#cTextDiv"+myCommentEntries[i].ID).css({ // place the elements of the wallentry acording to the size of the image     	    			
 			     																"margin-top": textMarginTop+"px"
 					  														});
 												       					}else{
 												       						textMarginTop=84+26;											       		
-												       						$("#cTextDiv"+myCommentEntries[i].ID).css({ // resize the image     			
+												       						$("#cTextDiv"+myCommentEntries[i].ID).css({ // place the elements of the wallentry acording to the size of the image     	     			
 			     																"margin-top": textMarginTop+"px"
 					  														});
 												       					}
@@ -438,12 +438,12 @@ function lookintoWall(myCommentEntries){
 												       					var imgWidth = $("#cPic"+myCommentEntries[i].ID).width() 
 												       					var textMarginLeft = Math.round(imgWidth+10);												       					
 				  														if(imgWidth>10){											       									       						
-													     					 $("#cTimeDiv"+myCommentEntries[i].ID).css({ // resize the image     			
+													     					 $("#cTimeDiv"+myCommentEntries[i].ID).css({ /// place the elements of the wallentry acording to the size of the image     	     			
 			     																"margin-left": textMarginLeft+"px"
 					  														});
 												       					}else{
 												       						textMarginLeft=84;											       		
-												       						$("#cTimeDiv"+myCommentEntries[i].ID).css({ // resize the image     			
+												       						$("#cTimeDiv"+myCommentEntries[i].ID).css({ // place the elements of the wallentry acording to the size of the image          			
 			     																"margin-left": textMarginLeft+"px"
 					  														});
 												       					}
