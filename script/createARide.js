@@ -1,7 +1,8 @@
 
-/*$(document).on("pagebeforeshow", "#createARide", function() {
-    $( ".date-input-css" ).datepicker();
-});*/
+$(document).on("pagebeforeshow", "#createARide", function() {
+   // $( ".date-input-css" ).datepicker();
+   document.getElementById("datepicker").readOnly = true;
+});
 
 // VISINILITY OF RADIO BUTTONS        
 function rideOnceFunc() {
@@ -70,7 +71,7 @@ function saveInDB(){
 	//alert("hier")
 	$.ajax({
 		type: "GET",
-		url: "php/createARide.php",		
+		url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/createARide.php",	
 		data: requestData,
 		dataType: "jsonp",
 		success: function() {			
