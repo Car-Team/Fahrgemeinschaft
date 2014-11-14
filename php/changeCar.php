@@ -7,8 +7,6 @@ $caryear = $_GET['caryear'];
 $carlicenseplate = $_GET['carlicenseplate'];
 $carseats = $_GET['carseats'];
 $cardescription = $_GET['cardescription'];
-
-
 $db = mysqli_connect("87.230.14.183", "car", "car", "car");
 if(!$db)
 {

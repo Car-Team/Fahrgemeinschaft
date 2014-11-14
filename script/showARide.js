@@ -17,7 +17,9 @@ $.ajax({
 		success:	function(viewRideResult) {			
 			//alert("result data der ID: " + viewRideResult.ID);
 			// Names of Columns in Database:`ID`,`group`,`driver_id`,`price`,`date`,`departure_time`,`departure`,`destination`,`free_places`,`car_name`,`ride_infos` 
-			document.getElementById("date").value = 			viewRideResult.date;
+			
+			var datum=viewRideResult.date;
+			document.getElementById("date").value = 			datum.substring(3,5)+"."+datum.substring(0,2)+"."+datum.substring(6,10);
 			document.getElementById("departureTime").value = 	viewRideResult.departure_time;
 			document.getElementById("departure").value = 		viewRideResult.departure;
 			document.getElementById("destination").value = 		viewRideResult.destination;

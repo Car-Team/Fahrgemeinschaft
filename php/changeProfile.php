@@ -5,6 +5,8 @@ $name = $_GET['name'];
 $email = $_GET['email'];
 $tel = $_GET['tel'];
 $description = $_GET['description'];
+
+
 $db = mysqli_connect("87.230.14.183", "car", "car", "car");
 if(!$db)
 {

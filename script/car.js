@@ -178,7 +178,7 @@ function postCarChanges() {
 							window.location.href="car.html"
 						},
 		});
-	window.location.href="car.html"
+	//window.location.href="car.html"
 }
 //
 //

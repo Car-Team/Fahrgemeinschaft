@@ -23,10 +23,6 @@ $(document).ready(function() {
             xfbml      : true,  // parse social plugins on this page
             version    : 'v2.1' // use version 2.1
     });
-
-    FB.getLoginStatus(function(response) {
-      statusChangeCallback(response);
-    });
   };
 });
 
@@ -109,6 +105,8 @@ function checkFB_ID(fbResponse){
    });
 }
 
+var FBID;
+
 //Mit Facebook Daten Account anlegen
 function signUpWithFacebook(fbResponse) {
 
@@ -116,6 +114,7 @@ function signUpWithFacebook(fbResponse) {
     'fb_id' : fbResponse.id,
     'name' : fbResponse.name
   }
+  FBID = fbResponse;
  
   $.ajax({
     type: "GET",
@@ -123,9 +122,11 @@ function signUpWithFacebook(fbResponse) {
     data: signupData,
     dataType: "jsonp",
     success:  function(signupResult) {
-                alert(signupResult);
-                $.mobile.changePage("emailRequest.html");
-              },
+                alert(signupResult.message);
+                if(signupResult.successful) {                  
+                  $.mobile.changePage("emailRequest.html");
+                }
+          },
     });
 }
 
@@ -157,6 +158,7 @@ function emailRequest() {
   if(email.search('@') != -1) {
 
   var signupData = {
+    'fb_id' : FBID.id,
     'email' : email
   }
 
@@ -166,7 +168,8 @@ function emailRequest() {
     data: signupData,
     dataType: "jsonp",
     success:  function(signupResult) {
-                alert(signupResult);
+              if(signupResult.successful)
+                loadLocalStorage();
                 $.mobile.changePage("menu.html");
               },
     });
@@ -174,4 +177,40 @@ function emailRequest() {
   else {
     alert("Bitte geben Sie eine gültige E-Mail Adresse an.")
   }
+}
+
+//Localstorage laden
+function loadLocalStorage() {
+  var fbid_data = {
+    'fbid' : FBID.id
+  }
+
+  $.ajax({
+    type: "GET",
+    url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/loginFB.php",
+    data: fbid_data,
+    dataType: "jsonp",
+    success:  function(loginResult) {
+            if(loginResult.successful){
+              localStorage.setItem("userdata", JSON.stringify({
+              id: loginResult.id, 
+              loginname: loginResult.loginname,
+              name: loginResult.name, 
+              email: loginResult.email, 
+              tel: loginResult.tel, 
+              picid: loginResult.picID, 
+              carid: loginResult.carID,
+              descriptionUser: loginResult.descriptionUser,
+              fb_id: loginResult.fb_id,
+              modelName: loginResult.modelName,
+              licensePlate: loginResult.licensePlate,
+              seats: loginResult.seats,
+              constructionYear: loginResult.constructionYear,
+              descriptionCar: loginResult.descriptionCar,
+              colourCar: loginResult.colourCar,
+              viewProfileId: loginResult.id,
+              viewRideId: 1}));
+            }
+         },
+   });
 }

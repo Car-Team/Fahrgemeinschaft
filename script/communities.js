@@ -161,7 +161,9 @@ function fillCommunityInfo(resultData){
 		$.each(resultData['rides'], function(key, value){
 			var li = document.createElement("li");
 			var a = document.createElement("a");
-			a.appendChild(document.createTextNode(value['date']));
+			var datum=value['date']
+
+			a.appendChild(document.createTextNode(datum.substring(3,5)+"."+datum.substring(0,2)+"."+datum.substring(6,10)+" - Fahrt-ID:"+value['ID']));
 			li.appendChild(a);
 			ul.appendChild(li);
 
