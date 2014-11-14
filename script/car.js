@@ -164,6 +164,7 @@ function postCarChanges() {
 //Add new Car if you dont already have one--> send to DB
 function postCarAddition() { 
 
+	var carpicurladd		= $('#carpicurlInputAdd').val();
 	var carmodeltext 		= $('#carmodelfieldInputAdd').val();
 	var carcolortext 		= $('#carcolorfieldInputAdd').val();
 	var caryeartext 		= $('#caryearfieldInputAdd').val();
@@ -187,18 +188,19 @@ function postCarAddition() {
 								constructionYear: caryeartext,
 								descriptionCar: cardescriptiontext,
 								colourCar: carcolortext,
-								carPicID: "0",
+								carPicID: carpicurladd,
 								viewProfileId: JSON.parse(localStorage.getItem('userdata')).viewProfileId,
 							    viewRideId: JSON.parse(localStorage.getItem('userdata')).viewRideId}));
 		
 		var postData = {
+			'carpicurladd' : carpicurladd,
 			'carmodel' : carmodeltext,
 			'loginID' : loginID,
 			'carcolor' : carcolortext,
 			'caryear' : caryeartext,
 			'carseats' : carseatstext,
 			'cardescription' : cardescriptiontext,
-			'carlicenseplate' : carlicenseplatetext,
+			'carlicenseplate' : carlicenseplatetext
 		}			
 		$.ajax({
 			type: "GET",
