@@ -1,6 +1,6 @@
 //@author MHinzmann
 
-$(document).on("pagebeforeshow", "#costReport", function() {
+$(document).on("pagebeforeshow", "#accounting", function() {
 	clearCollapsibles();
 	fillCollapsibles();
 });
@@ -11,20 +11,20 @@ function clearCollapsibles() {
 }
 
 function fillCollapsibles() {
-	$id = JSON.parse(localStorage.getItem("userdata")).id;
+	var id = JSON.parse(localStorage.getItem("userdata")).id;
 	var data = {
-		'id' : $id,
+		'id' : id,
 	}
 	
 	$.ajax({
 		type: "GET",
-		// url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/costReport.php",
-		url: "php/costReport.php",
+		// url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/accounting.php",
+		url: "php/accounting.php",
 		data: data,
 		dataType: "jsonp",
 		success:	function(persons) {
 			mergePersons(persons.debtors, persons.creditors);
-			fillPage(persons.debtors, persons.creditors);
+			fillPage(persons.debtors, persons.creditors, id);
 		}
 	});
 }
@@ -46,18 +46,18 @@ function mergePersons(debtors, creditors) {
 	}
 }
 
-function fillPage(debtors, creditors) {
+function fillPage(debtors, creditors, userID) {
 	var liabilities = 0;
 	var receivables = 0;
 	
 	debtors.forEach(function(person) {
 		receivables += person.debt;
-		appendPerson($('#deptors'), person);
+		appendPerson($('#deptors'), person, userID);
 	});
 	
 	creditors.forEach(function(person) {
 		liabilities += person.debt;
-		appendPerson($('#creditors'), person);
+		appendPerson($('#creditors'), person, userID);
 	});
 	
 	var saldo = receivables + liabilities;
@@ -67,34 +67,65 @@ function fillPage(debtors, creditors) {
 	$("#saldo").html(calcColoredHtml(saldo));
 }
 
-function appendPerson(to, person) {
+function appendPerson(to, person, userID) {
 	var li = document.createElement("li");
 	{
 		var a = document.createElement("a");
 		{
-			$(a).click(function() {
-				localStorage.setItem("costReportUser", JSON.stringify(person));
-				$.mobile.changePage("costReportUser.html");
-			});
-			
 			var img = document.createElement("img");
 			$(img).attr("src", person.picid);
+			$(img).click(function() {
+				openProfilByID(person.id);
+			});
 		
 			var span1 = document.createElement("span");
 			$(span1).html(person.name);
+			$(span1).click(function() {
+				openProfilByID(person.id);
+			});
 			var span2 = document.createElement("span");
 			$(span2).attr("style", "float:right");
 			$(span2).html(calcColoredHtml(person.debt));
 		
+			var btn = document.createElement("a");
+			
+			$(btn).attr("class", "ui-btn");
+			$(btn).attr("width", "10%");
+			$(btn).html("Abrechnung anfordern");
+		
+			$(btn).click(function() {
+				alert("DIE ABRECHNUNG KOMMT");
+				sendMail(userID, person.id);
+			});
+		
 			a.appendChild(img);
 			a.appendChild(span1);
 			a.appendChild(span2);
+			a.appendChild(btn);
 		}
 		li.appendChild(a);
 	}	
 	to.append(li);
 	
 	$(to).listview("refresh");
+}
+
+function sendMail(userID, debtorID) {
+	
+	var data = {
+		'userID' : userID,
+		'debtorID' : debtorID
+	}
+	
+	$.ajax({
+		type: "GET",
+		url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/accountingMail.php",
+		data: data,
+		dataType: "jsonp",
+		success:	function(callback) {
+			alert(callback);
+		}
+	});
 }
 
 function calcColoredHtml(value) {

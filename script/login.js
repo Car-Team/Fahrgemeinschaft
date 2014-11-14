@@ -33,7 +33,7 @@ function loginAs(email, hashedPw) {
 	}
 	
 	$.ajax({
-		type: "POST",
+		type: "GET",
 		url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/login.php",
 		//url: "php/login.php",
 		data: loginData,

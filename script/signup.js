@@ -56,7 +56,17 @@ function emailValid(email) {
 	if(email.indexOf("@") == -1) {
 		return false;
 	} else {
-		return true;
+		$.ajax({
+			type: "GET",
+			url: "php/emailCheck.php",
+			// url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/signup.php",
+			data: signupData,
+			dataType: "jsonp",
+			async: false,
+			success:	function(signupResult) {
+				return true;
+			},
+		});
 	}
 }
 	
@@ -99,6 +109,6 @@ function signup() {
 						alert(signupResult.message);
 						if(signupResult.successful)
 							$.mobile.changePage("index.html");
-					},
+		},
 	});
 }

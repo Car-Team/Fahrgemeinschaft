@@ -9,37 +9,37 @@
 	}
 	
 	//get debtors
-	$debtorQuery = "SELECT u.id id, name, SUM(debt) debt, picid FROM Rides r, RidesUsers ru, Users u
+	$debtorQuery = "SELECT u.id id, name, SUM(price) debt, picid FROM Rides r, RidesUsers ru, Users u
 									WHERE ru.ride = r.id AND ru.user = u.id AND driver_id = '$userID'
 									GROUP BY user;";
 	$debtorResult = mysqli_query($db, $debtorQuery);
 	
 	$debtors = array();
 	while($row = $debtorResult->fetch_assoc()){
-		$debtor = array(
+		$person = array(
 			'id' 		=> intval($row['id']),
 			'name'	=> $row["name"],
 			'debt' 	=> floatval($row['debt']),
 			'picid'	=> $row['picid']
 		);
-		array_push($debtors, $debtor);
+		array_push($debtors, $person);
 	}
 	
 	// get creditors
-	$creditorQuery = "SELECT driver_id id, name, SUM(debt) debt, picid FROM Rides r, RidesUsers ru, Users u
+	$creditorQuery = "SELECT driver_id id, name, SUM(price) debt, picid FROM Rides r, RidesUsers ru, Users u
 										WHERE ru.ride = r.id AND r.driver_id = u.id AND ru.user = '$userID'
 										GROUP BY user;";
 	$creditorResult = mysqli_query($db, $creditorQuery);
 	
 	$creditors = array();
 	while($row = $creditorResult->fetch_assoc()){
-		$creditor = array(
+		$person = array(
 			'id' 		=> intval($row['id']),
 			'name'	=> $row['name'],
 			'debt' 	=> -floatval($row['debt']),
 			'picid'	=> $row['picid']
 		);
-		array_push($creditors, $creditor);
+		array_push($creditors, $person);
 	}
 	
 	$persons = array(

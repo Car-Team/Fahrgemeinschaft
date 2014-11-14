@@ -1,14 +1,14 @@
 <?php
 header('Content-Type: text/javascript; charset=UTF-8');
 
-$name = $_GET['name'];
-$email = $_GET['email'];
-$pw = $_GET['pw'];
+$name 	= $_GET['name'];
+$email 	= $_GET['email'];
+$pw 		= $_GET['pw'];
 
 $signupResult = array(
-        'successful'   		=> false,
-		'message'			=> ""
-	);
+	'successful'  => false,
+	'message'			=> ""
+);
 
 $db = mysqli_connect("87.230.14.183", "car", "car", "car");
 if(!$db)

@@ -15,13 +15,12 @@
 <script src="script/login.js"></script>
 <script src="script/signup.js"></script>
 <script src="script/dropdown.js"></script>
-<script src="script/costReport.js"></script>
-<script src="script/costReportUser.js"></script>
+<script src="script/accounting.js"></script>
 <script type="text/javascript" src="script/facebookAPI.js"></script>
 </head>
 <body>
 
-<div data-role="page" id="costReport">
+<div data-role="page" id="accounting">
   <div data-role="header">
     <h1>Finanzen: Übersicht</h1>
 		<a href="menu.html" data-transition="slide" data-direction="reverse" class="ui-btn btn-only-icon fa fa-arrow-left"></a>
@@ -31,23 +30,23 @@
 		<div class="ui-grid-solo">
 			<div class="ui-block-a">
 				<ul data-role="listview" data-inset="true">
-					<div data-role="collapsible">
-						<h1>Saldo:<span id="saldo" style="float:right"></span></h1>
+					<li><label>
+						<h3>Saldo:<span id="saldo" style="float:right"></span></h3>
 						<div data-role="collapsibleset">
 							<div data-role="collapsible">
 								<h1>Verbindlichkeiten:<span id="liabilities" style="float:right"></span></h1>
-								<ul id="creditors" data-role="listview" data-split-icon="arrow-r"  data-inset="true">
+								<ul id="creditors" data-role="listview">
 									<!--Wird durch costReport.js gefüllt.-->
 								</ul>
 							</div>
 							<div data-role="collapsible">
 								<h1>Forderungen:<span id="receivables" style="float:right"></span></h1>
-								<ul id="deptors" data-role="listview" data-split-icon="arrow-r"  data-inset="true">
+								<ul id="deptors" data-role="listview" data-inset="true">
 									<!--Wird durch costReport.js gefüllt.-->
 								</ul>
 							</div>
 						</div>
-					</div>
+					</label></li>
 				</ul>
 			</div>
 		</div>
