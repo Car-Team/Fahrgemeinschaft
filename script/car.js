@@ -56,6 +56,8 @@ function openCommentInput(id)
 
 //Edit Profil --> send changes to DB
 function postProfileChanges() {
+	var picurl = $('#picurlInput').val();
+	//alert(picurl)
 	var nametext = $('#namefieldInput').val();
 	var emailtext = $('#emailfieldInput').val();
 	var teltext = $('#telfieldInput').val();
@@ -67,7 +69,7 @@ function postProfileChanges() {
 								name: nametext, 
 								email: emailtext, 
 								tel: teltext, 
-								picid: JSON.parse(localStorage.getItem('userdata')).picid, 
+								picid: picurl, 
 								carid: JSON.parse(localStorage.getItem('userdata')).carid,
 								descriptionUser: descriptiontext,
 								fb_id: JSON.parse(localStorage.getItem('userdata')).fb_id,
@@ -85,11 +87,12 @@ function postProfileChanges() {
 		alert("JUNGE, gib wenigstens 1 Gottverdammtes Zeichen ein!");	
 	}else{	
 		var postData = {
+			'picurl' : picurl,
 			'name' : nametext,
 			'email' : emailtext,
 			'tel' : teltext,
 			'description' : descriptiontext,
-			'loginID' : loginID,
+			'loginID' : loginID
 		}
 			
 		$.ajax({
@@ -107,6 +110,7 @@ function postProfileChanges() {
 
 //Edit Car --> send changes to DB
 function postCarChanges() { 
+	var carpicurl 			= $('#carpicurlInput').val();
 	var carmodeltext 		= $('#carmodelfieldInput').val();
 	var carcolortext 		= $('#carcolorfieldInput').val();
 	var caryeartext 		= $('#caryearfieldInput').val();
@@ -130,18 +134,19 @@ function postCarChanges() {
 								constructionYear: caryeartext,
 								descriptionCar: cardescriptiontext,
 								colourCar: carcolortext,
-								carPicID: JSON.parse(localStorage.getItem('userdata')).carPicID,
+								carPicID: carpicurl,
 								viewProfileId: JSON.parse(localStorage.getItem('userdata')).viewProfileId,
 							    viewRideId: JSON.parse(localStorage.getItem('userdata')).viewRideId}));
 		
 		var postData = {
+			'carpicurl' : carpicurl,
 			'carmodel' : carmodeltext,
 			'loginID' : loginID,
 			'carcolor' : carcolortext,
 			'caryear' : caryeartext,
 			'carseats' : carseatstext,
 			'cardescription' : cardescriptiontext,
-			'carlicenseplate' : carlicenseplatetext,
+			'carlicenseplate' : carlicenseplatetext
 		}	
 				
 		$.ajax({
@@ -745,6 +750,8 @@ $(document).on('pageinit', '#car', function() {
  //+++++++++++++++++++++++++++/////////////////////////////////////////PROFILEEDIT.HTML///////////////////////////////////////////+++++++++++++++++++++++++++++//
     $(document).on('pageinit', '#profileEdit', function(){  	 	
 			////////////////////////////////////////FILL PROFILE DATA///////////////////////////////////////////////
+			var myDiv0 = document.getElementById("picurlInput");
+	        myDiv0.value = JSON.parse(localStorage.getItem('userdata')).picid;
 			var myDiv1 = document.getElementById("namefieldInput");
 	        myDiv1.value = JSON.parse(localStorage.getItem('userdata')).name;	       				   
 	        var myDiv2 = document.getElementById("emailfieldInput");
@@ -759,6 +766,8 @@ $(document).on('pageinit', '#car', function() {
 //+++++++++++++++++++++++++++/////////////////////////////////////////CAREDIT.HTML///////////////////////////////////////////+++++++++++++++++++++++++++++//
     $(document).on('pageinit', '#carEdit', function(){   	
 		////////////////////////////////////////FILL PROFILE DATA///////////////////////////////////////////////
+		var myDiv0 = document.getElementById("carpicurlInput");
+	    myDiv0.value = JSON.parse(localStorage.getItem('userdata')).carPicID;
 		var myDiv1 = document.getElementById("carmodelfieldInput");
         myDiv1.value = JSON.parse(localStorage.getItem('userdata')).modelName; //+  " (
         var myDiv2 = document.getElementById("caryearfieldInput");
