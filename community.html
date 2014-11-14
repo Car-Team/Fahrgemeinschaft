@@ -36,22 +36,46 @@
     <h3>Mitglieder:</h3>
       <ul data-role="listview" data-split-icon="delete" data-split-theme="a" data-filter="true" data-filter-placeholder="Person suchen..." data-inset="true" id="memberList">
           <!--Getting filled by JS -->
+            <!-- RemoveMember Popup -->
+            <div data-role="popup" id="removeMemberDialog" data-overlay-theme="b" style="max-width:400px;">
+                <div data-role="header">
+                <h1>Mitglied entfernen</h1>
+                </div>
+                <div role="main" class="ui-content" style="text-align: center">
+                  <h3 style="margin:5px" id="lblRemoveMember">#MEMBER entfernen?</h3>
+                  <a href="#" class="ui-btn ui-corner-all" data-rel="back" onclick="removeMember();">Entfernen</a>
+                  <a href="#" class="ui-btn ui-corner-all" data-rel="back" onclick="#">Abbrechen</a>
+                </div>
+            </div>
       </ul>
       <!-- Only if Admin -->
-      <div data-role="collapsible" data-collapsed="true">
-          <h4>Offene Einladungen</h4>
-          <ul data-role="listview" data-icon="delete" id="inviteList">
-            <!--Getting filled by JS -->
-          </ul>
+      <div id="inviteAdmin" style="display:none">
+        <div data-role="collapsible" data-collapsed="true">
+            <h4>Offene Einladungen</h4>
+            <ul data-role="listview" data-icon="delete" id="inviteList">
+              <!--Getting filled by JS -->
+                <!-- RemoveInvite Popup -->
+                <div data-role="popup" id="removeInviteDialog" data-overlay-theme="b" style="max-width:400px;">
+                    <div data-role="header">
+                    <h1>Einladung abbrechen</h1>
+                    </div>
+                    <div role="main" class="ui-content" style="text-align: center">
+                      <h3 style="margin:5px" id="lblRemoveInvite">Einladung an #MEMBER zur&uuml;ckziehen?</h3>
+                      <a href="#" class="ui-btn ui-corner-all" data-rel="back" onclick="removeInvite();">Zur&uuml;ckziehen</a>
+                      <a href="#" class="ui-btn ui-corner-all" data-rel="back" onclick="#">Abbrechen</a>
+                    </div>
+                </div>
+            </ul>
+        </div>
+        <!-- # -->
+        <ul data-role="listview" data-inset="true">
+          <li><a href="community_invite.html">Person einladen</a></li>
+        </ul>
       </div>
-      <!-- # -->
       <ul data-role="listview" data-inset="true">
-        <li><a href="community_invite.html">Person einladen</a></li>
+        <li><a href="createARide.html">Fahrt erstellen</a></li>
       </ul>
-    <ul data-role="listview" data-inset="true">
-      <li><a href="createARide.html">Fahrt erstellen</a></li>
-    </ul>
-    <h3>Fahrten:</h3>
+      <h3>Fahrten:</h3>
       <ul data-role="listview" data-inset="true" id="rideList">
             <!--Getting filled by JS -->
       </ul>

@@ -38,7 +38,6 @@ function fillInviteList(resultData){
 	});
 	$(ul).listview("refresh");
 
-	alert(document.getElementById('myInvitesList').getElementsByTagName('li').length);
 	if(document.getElementById('myInvitesList').getElementsByTagName('li').length > 0){
 		$("#myInvites").show();
 	}else{
@@ -60,7 +59,13 @@ function acceptInvite(){
 
 ///////////// Refuse Invite
 function refuseInvite(){
+	var requestData = {
+		'action' : "refuseInvite",
+		'userID' : JSON.parse(localStorage.getItem('userdata')).id,
+		'communityID' : localStorage.getItem('inviteCommunityID')
+	};
 
+	databaseRequest(requestData);
 };
 
 ///////////////////////////////////////////////////////////////////////////// communities.html
@@ -87,7 +92,7 @@ function fillCommunitiyList(resultData){
 
 		$(a).on("click", function(){
 			localStorage.setItem('openCommunityID', value['community_id']);
-			$.mobile.changePage("community.html");
+			window.location.href="community.html";
 
 									});
 
@@ -104,12 +109,21 @@ $( document ).on( "pageinit", "#community", function( event ) {
 		'communityID' : localStorage.getItem('openCommunityID')
 	};	
 	databaseRequest(requestData);
+
+	$("#removeMemberDialog").on({popupbeforeposition: function(){
+		$("#lblRemoveMember").html(localStorage.getItem('removeMemberName') + " aus der Gruppe entfernen?");
+	}});
+
+	$("#removeInviteDialog").on({popupbeforeposition: function(){
+		$("#lblRemoveInvite").html("Einladung an " + localStorage.getItem('removeMemberEmail') + " zur&uuml;ckziehen?");
+	}});
+
 });
 
 ///////////// Fill community page with DB values
 function fillCommunityInfo(resultData){
 	$("#lblCommunityName").html(resultData['name']);
-
+	var admin = (JSON.parse(localStorage.getItem('userdata')).id == resultData['creator_id']) ? true : false;
 
 ////////Memberlist
 	var ul = document.getElementById("memberList");
@@ -135,24 +149,50 @@ function fillCommunityInfo(resultData){
 		li.appendChild(a);
 
 		//Admin prüfung einfügen
+		if(admin){
 			var remove = document.createElement("a");
 			remove.appendChild(document.createTextNode(value['Name'] + " aus der Fahrgemeinschaft entfernen"));
+			remove.href="#removeMemberDialog";
+			remove.setAttribute("data-rel","popup");
+			remove.setAttribute("data-position-to", "window");
+			remove.setAttribute("data-transition", "pop");
+			$(remove).on("click", function(){
+				localStorage.setItem('removeMemberID', value['ID']);
+				localStorage.setItem('removeMemberName', value['Name']);
+										});
 			li.appendChild(remove);
+		}
 		ul.appendChild(li);
 	});
 	$(ul).listview("refresh");
 
-////////InviteList
-	if(resultData['invites']){
-		var ul = document.getElementById("inviteList");
-		$.each(resultData['invites'], function(key, value){
-			var li = document.createElement("li");
-			var a = document.createElement("a");
-			a.appendChild(document.createTextNode(value['Email']));
-			li.appendChild(a);
-			ul.appendChild(li);
-		});
-		$(ul).listview("refresh");
+////////InviteList/Inivte sichtbar wenn admin
+	admin ? $("#inviteAdmin").show() : $("#inviteAdmin").hide();
+
+////////InviteList laden
+	if(admin){
+		if(resultData['invites']){
+			var ul = document.getElementById("inviteList");
+			$.each(resultData['invites'], function(key, value){
+				var li = document.createElement("li");
+				var a = document.createElement("a");
+				a.appendChild(document.createTextNode(value['Email']));
+
+				a.href="#removeInviteDialog";
+				a.setAttribute("data-rel","popup");
+				a.setAttribute("data-position-to", "window");
+				a.setAttribute("data-transition", "pop");
+				$(a).on("click", function(){
+					localStorage.setItem('removeMemberID', value['ID']);
+					localStorage.setItem('removeMemberEmail', value['Email']);
+											});
+
+
+				li.appendChild(a);
+				ul.appendChild(li);
+			});
+			$(ul).listview("refresh");
+		}		
 	}
 
 ////////RideList
@@ -161,9 +201,9 @@ function fillCommunityInfo(resultData){
 		$.each(resultData['rides'], function(key, value){
 			var li = document.createElement("li");
 			var a = document.createElement("a");
-			var datum=value['date']
-
-			a.appendChild(document.createTextNode(datum.substring(3,5)+"."+datum.substring(0,2)+"."+datum.substring(6,10)+" - Fahrt-ID:"+value['ID']));
+			var rideDate = value['date'].substring(3,5)+"."+value['date'].substring(0,2)+"."+value['date'].substring(6,10); // codepfusch
+			var rideTime = value['departure_time'].substring(0,2) + ":" + value['departure_time'].substring(3,5) +  " Uhr"; // worst code ever
+			a.appendChild(document.createTextNode(rideDate + " - " + rideTime + " // " + value['departure'] +  " - " + value['destination']));
 			li.appendChild(a);
 			ul.appendChild(li);
 
@@ -183,7 +223,27 @@ function fillCommunityInfo(resultData){
 
 }
 
-///////////////////////////////////////////////////////////////////////////// community_create.html
+function removeMember(){
+	var requestData = {
+		'action' : "removeMember",
+		'userID' : localStorage.getItem('removeMemberID'),
+		'communityID' : localStorage.getItem('openCommunityID')
+	};
+
+	databaseRequest(requestData);
+};
+
+function removeInvite(){
+	var requestData = {
+		'action' : "removeInvite",
+		'userID' : localStorage.getItem('removeMemberID'),
+		'communityID' : localStorage.getItem('openCommunityID')
+	};
+
+	databaseRequest(requestData);
+};
+
+///////////////////////////////////////////////////////////////////////////// community_create.html ///////////////////////////////TODOOOOOOOOO
 function createCommunity() {
 
 	var communityName = $('#communityName').val();
@@ -205,18 +265,12 @@ function createCommunity() {
 function inviteMember() {
 
 	var inviteMail = $('#inviteMail').val();
-	var emailCheck = true;
-
-	if(emailCheck){
-		var requestData = {
-			'action' : "inviteMember",
-			'communityID' : localStorage.getItem('openCommunityID'),
-			'inviteMail' : inviteMail
-		};
-		databaseRequest(requestData);
-	}else{
-		alert("Bitte korrekte E-Mail eintragen!");
-	}
+	var requestData = {
+		'action' : "inviteMember",
+		'communityID' : localStorage.getItem('openCommunityID'),
+		'inviteMail' : inviteMail
+	};
+	databaseRequest(requestData);
 
 };
 
@@ -247,7 +301,7 @@ function databaseRequest(requestData){
 						    case "inviteMember":
 						    	if(resultData){
 						    		alert(requestData['inviteMail'] + " eingeladen!");
-						    		$.mobile.changePage("community.html");
+						    		window.location.href="community.html";
 						    	}else {
 						    		alert(requestData['inviteMail'] + " konnte nicht eingeladen werden!");
 						    	}
@@ -258,8 +312,30 @@ function databaseRequest(requestData){
 						    case "acceptInvite":
 						    	if(resultData){
 						    		alert("Fahrgemeinschaft beigetreten!");
-						    		//bla hier mblasad
-						    		// fillInviteList();
+						    		window.location.href="menu.html";
+						    	}else {
+						    		alert("Error");
+						    	}
+					    		break;
+						    case "refuseInvite":
+						    	if(resultData){
+						    		alert("Einladung abgelehnt!");
+						    		window.location.href="menu.html";
+						    	}else {
+						    		alert("Error");
+						    	}
+					    		break;
+					    	case "removeMember":
+						    	if(resultData){
+						    		alert("Mitglied entfernt!");
+						    		window.location.href="community.html";
+						    	}else {
+						    		alert("Error");
+						    	}
+					    		break;
+					    	case "removeInvite":
+						    	if(resultData){
+						    		window.location.href="community.html";
 						    	}else {
 						    		alert("Error");
 						    	}

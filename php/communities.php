@@ -2,6 +2,7 @@
 	$action = $_GET['action'];
 
 	$db = mysqli_connect("87.230.14.183", "car", "car", "car");
+	$db->set_charset("utf8");
 	if(!$db)
 	{
 	  exit("Verbindungsfehler: ".mysqli_connect_error());
@@ -42,7 +43,7 @@
 	    	break;
 	    case "loadCommunity":
 	    	$communityID = mysqli_real_escape_string($db, $_GET['communityID']);
-	    	$sqlQuery = "SELECT name FROM Community WHERE ID = '".$communityID."'";
+	    	$sqlQuery = "SELECT name, creator_id FROM Community WHERE ID = '".$communityID."'";
 	    	$result = mysqli_query($db, $sqlQuery);
 	    	$resultData = $result->fetch_assoc();
 	    	$sqlQuery = "SELECT Users.Name, Users.PicID, Users.ID
@@ -54,7 +55,7 @@
 	    	while($row = $result->fetch_assoc()){
 				$resultData['members'][] = $row;
 			};
-	    	$sqlQuery = "SELECT Users.Email
+	    	$sqlQuery = "SELECT Users.Email, Users.ID
 						FROM Invites
 						INNER JOIN Users
 						ON Invites.user_id=Users.ID
@@ -63,7 +64,7 @@
 	    	while($row = $result->fetch_assoc()){
 				$resultData['invites'][] = $row;
 			};
-	    	$sqlQuery = "SELECT Rides.ID, Rides.date
+	    	$sqlQuery = "SELECT Rides.ID, Rides.date, Rides.departure_time, Rides.departure, Rides.destination
 						FROM Rides
 						WHERE groupID = $communityID";
 	    	$result = mysqli_query($db, $sqlQuery);
@@ -110,6 +111,27 @@
 				if(!$resultData)
 					break;
 			$sqlQuery = "COMMIT";
+			$resultData = mysqli_query($db, $sqlQuery);
+			break;
+	    case "refuseInvite":
+	   		$userID = mysqli_real_escape_string($db, $_GET['userID']);
+	    	$communityID = mysqli_real_escape_string($db, $_GET['communityID']);
+
+			$sqlQuery = "DELETE FROM Invites WHERE user_id = '".$userID."' AND community_id = '".$communityID."'";
+			$resultData = mysqli_query($db, $sqlQuery);
+	    	break;
+	    case "removeMember":
+			$userID = mysqli_real_escape_string($db, $_GET['userID']);
+	    	$communityID = mysqli_real_escape_string($db, $_GET['communityID']);
+
+			$sqlQuery = "DELETE FROM Communities WHERE user_id = '".$userID."' AND community_id = '".$communityID."'";
+			$resultData = mysqli_query($db, $sqlQuery);
+	    	break;
+	    case "removeInvite":
+			$userID = mysqli_real_escape_string($db, $_GET['userID']);
+	    	$communityID = mysqli_real_escape_string($db, $_GET['communityID']);
+
+			$sqlQuery = "DELETE FROM Invites WHERE user_id = '".$userID."' AND community_id = '".$communityID."'";
 			$resultData = mysqli_query($db, $sqlQuery);
 	    	break;
 	};
