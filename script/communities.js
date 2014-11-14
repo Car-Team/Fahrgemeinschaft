@@ -278,8 +278,8 @@ function inviteMember() {
 function databaseRequest(requestData){
 	$.ajax({
 			type: "GET",
-			url: "php/communities.php",
-			// url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/communities.php",
+			//url: "php/communities.php",
+			url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/communities.php",
 			dataType: 'jsonp',
 			data: requestData,
 			success: function(resultData) {
