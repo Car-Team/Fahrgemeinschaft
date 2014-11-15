@@ -30,23 +30,39 @@
 		<div class="ui-grid-solo">
 			<div class="ui-block-a">
 				<ul data-role="listview" data-inset="true">
-					<li><label>
-						<h3>Saldo:<span id="saldo" style="float:right"></span></h3>
-						<div data-role="collapsibleset">
-							<div data-role="collapsible">
-								<h1>Verbindlichkeiten:<span id="liabilities" style="float:right"></span></h1>
-								<ul id="creditors" data-role="listview">
-									<!--Wird durch costReport.js gefüllt.-->
-								</ul>
+					<li>
+						<label>
+							<h3>Verbindlichkeiten:<span id="liabilities" style="float:right"></span></h3>
+							<h3>Forderungen:<span id="receivables" style="float:right"></span></h3>
+						</label>
+					</li>
+					<li>
+						<label>
+							<h3>Saldo:<span id="saldo" style="float:right"></span></h3>
+						</label>
+					</li>
+					<li>
+						<label>
+							<div data-role="collapsibleset">
+								<div data-role="collapsible">
+									<h1>Personen:<span id="receivables" style="float:right"></span></h1>
+									<ul id="persons" data-role="listview" data-inset="true">
+										<!--Wird durch accounting.js gefüllt.-->
+										<div data-role="popup" id="accountPopup" data-overlay-theme="b" style="max-width:400px;">
+											<div data-role="header">
+												<h1>Wirklich abrechnen?</h1>
+											</div>
+											<div role="main" class="ui-content" style="text-align: center">
+												<h3 style="margin:5px" id="lblAccountPopup">Möchten Sie wirklich abrechnen?</h3>
+												<a id="accountingAccept" href="#" class="ui-btn ui-corner-all" onClick="doAccounting();" data-rel="back">Annehmen</a>
+												<a id="accountingDecline" href="#" class="ui-btn ui-corner-all" data-rel="back">Ablehnen</a>
+											</div>
+										</div>
+									</ul>
+								</div>
 							</div>
-							<div data-role="collapsible">
-								<h1>Forderungen:<span id="receivables" style="float:right"></span></h1>
-								<ul id="deptors" data-role="listview" data-inset="true">
-									<!--Wird durch costReport.js gefüllt.-->
-								</ul>
-							</div>
-						</div>
-					</label></li>
+						</label>
+					</li>
 				</ul>
 			</div>
 		</div>

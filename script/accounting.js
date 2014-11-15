@@ -23,41 +23,25 @@ function fillCollapsibles() {
 		data: data,
 		dataType: "jsonp",
 		success:	function(persons) {
-			mergePersons(persons.debtors, persons.creditors);
-			fillPage(persons.debtors, persons.creditors, id);
+			// alert(JSON.stringify(persons));
+			fillPage(persons, id);
 		}
 	});
 }
 
-function mergePersons(debtors, creditors) {
-	for (var i = 0; i < debtors.length; i++) {
-		var debtor = debtors[i];
-		var index = getIndex(creditors, debtor.id);
-		if(index != -1){
-			var saldo = debtor.debt + creditors[index].debt;
-			debtor.debt = saldo;
-			debtors.splice(i, 1);
-			creditors.splice(index, 1);
-			if (saldo > 0)
-				debtors.push(debtor);
-			else if (saldo < 0)
-				debtors.push(debtor);
-		}
-	}
-}
-
-function fillPage(debtors, creditors, userID) {
+function fillPage(persons, userID) {
 	var liabilities = 0;
 	var receivables = 0;
+	var saldo = 0;
 	
-	debtors.forEach(function(person) {
-		receivables += person.debt;
-		appendPerson($('#deptors'), person, userID);
-	});
-	
-	creditors.forEach(function(person) {
-		liabilities += person.debt;
-		appendPerson($('#creditors'), person, userID);
+	persons.forEach(function(person) {
+		if(person.saldo > 0)
+			receivables += person.saldo;
+		else
+			liabilities += person.saldo;
+		
+		saldo += person.saldo;
+		appendPerson(person, userID);
 	});
 	
 	var saldo = receivables + liabilities;
@@ -67,7 +51,7 @@ function fillPage(debtors, creditors, userID) {
 	$("#saldo").html(calcColoredHtml(saldo));
 }
 
-function appendPerson(to, person, userID) {
+function appendPerson(person, userID) {
 	var li = document.createElement("li");
 	{
 		var a = document.createElement("a");
@@ -85,19 +69,25 @@ function appendPerson(to, person, userID) {
 			});
 			var span2 = document.createElement("span");
 			$(span2).attr("style", "float:right");
-			$(span2).html(calcColoredHtml(person.debt));
+			$(span2).html(calcColoredHtml(person.saldo));
 		
 			var btn = document.createElement("a");
 			
 			$(btn).attr("class", "ui-btn");
 			$(btn).attr("width", "10%");
 			$(btn).html("Abrechnung anfordern");
-		
+			
+			btn.setAttribute("data-rel","popup");
+			btn.setAttribute("data-position-to", "window");
+			btn.setAttribute("data-transition", "pop");
+			
+			//set link to popup
+			btn.href="#accountPopup";
 			$(btn).click(function() {
-				alert("DIE ABRECHNUNG KOMMT");
-				sendMail(userID, person.id);
+				sessionStorage.setItem("accountPersonID", person.id);
+				sessionStorage.setItem("accountPersonSaldo", person.saldo);
 			});
-		
+			
 			a.appendChild(img);
 			a.appendChild(span1);
 			a.appendChild(span2);
@@ -105,16 +95,25 @@ function appendPerson(to, person, userID) {
 		}
 		li.appendChild(a);
 	}	
-	to.append(li);
+	$('#persons').append(li);
 	
-	$(to).listview("refresh");
+	$('#persons').listview("refresh");
 }
 
-function sendMail(userID, debtorID) {
+function doAccounting() {
+	var userID = JSON.parse(localStorage.getItem("userdata")).id;
+	var debtorID = sessionStorage.getItem("accountPersonID");
+	var saldo = sessionStorage.getItem("accountPersonSaldo");
 	
+	sendMail(userID, debtorID, saldo);
+	//update database stuff
+}
+
+function sendMail(userID, debtorID, saldo) {
 	var data = {
 		'userID' : userID,
-		'debtorID' : debtorID
+		'debtorID' : debtorID,
+		'saldo' : saldo
 	}
 	
 	$.ajax({
