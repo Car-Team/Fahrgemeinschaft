@@ -5,25 +5,29 @@
 <link rel="stylesheet" href="libs/jquery_mobile/jquery.mobile-1.4.4.min.css">
 <link rel="stylesheet" href="libs/car/font-awesome/css/font-awesome.min.css">
 <link rel="stylesheet" href="libs/car/car.css">
+<link rel="stylesheet" href="libs/datepicker/jquery.mobile.datepicker.theme.css" />
+<link rel="stylesheet" href="libs/datepicker/jquery.mobile.datepicker.css" />
 <script src="libs/jquery/jquery-1.11.1.min.js"></script>
 <script src="libs/jquery_mobile/jquery.mobile-1.4.4.min.js"></script>
+<script src="libs/jqueryUi/datepicker.js"></script>
+<script src="libs/datepicker/jquery.mobile.datepicker.js"></script>
 <script src="libs/cryptoJS/sha1.js"></script>
+<script src="script/accounting.js"></script>
 <script src="script/car.js"></script> 
 <script src="script/communities.js"></script>
 <script src="script/createARide.js"></script>
-<script src="script/login.js"></script>
-<script src="script/signup.js"></script>
 <script src="script/dropdown.js"></script>
-<script src="script/accounting.js"></script>
-<script src="script/showARide.js"></script>
 <script type="text/javascript" src="script/facebookAPI.js"></script>
+<script src="script/login.js"></script>
+<script src="script/showARide.js"></script>
+<script src="script/signup.js"></script>
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true&language=de"></script>
 </head>
 <body>
 <div data-role="page" id="profile">
   <div data-role="header">
     <h1 id="profilTitle">Profil</h1>
-    <a href="menu.html" data-transition="slide" data-direction="reverse" class="ui-btn btn-only-icon fa fa-arrow-left"></a>
+    <a data-transition="slide" data-direction="reverse" data-rel="back" class="ui-btn btn-only-icon fa fa-arrow-left"></a>
     <a href="profileEdit.html" id="editButton" data-transition="slide" data-role="button" style="right:4px" class="ui-btn btn-only-icon dropdown-btn fa fa-edit"></a> 
   </div>
   <div data-role="main" class="ui-content"></div>
