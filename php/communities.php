@@ -64,9 +64,9 @@
 	    	while($row = $result->fetch_assoc()){
 				$resultData['invites'][] = $row;
 			};
-	    	$sqlQuery = "SELECT Rides.ID, Rides.date, Rides.departure_time, Rides.departure, Rides.destination
+	    	$sqlQuery = "SELECT Rides.ID, Rides.date, Rides.departure_time, Rides.departure, Rides.destination 
 						FROM Rides
-						WHERE groupID = $communityID";
+						WHERE groupID = $communityID Order By Rides.date";
 	    	$result = mysqli_query($db, $sqlQuery);
 	    	while($row = $result->fetch_assoc()){
 				$resultData['rides'][] = $row;

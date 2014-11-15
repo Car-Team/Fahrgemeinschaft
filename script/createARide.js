@@ -1,3 +1,7 @@
+function isEmpty(str) {
+   return (!str || 0 === str.length);
+}
+
 
 $(document).on("pagebeforeshow", "#createARide", function() {
    // $( ".date-input-css" ).datepicker();
@@ -37,11 +41,11 @@ function saveInDB(){
 	// VALIDATION
 	var numbers = /[0-9]/;
 	var letters = /[a-zA-Z]/;
-	if (departure.match(numbers) != null && departure.length > 0){
+	if (isEmpty(departure)){
 		alert("Bitte \u00fcberpr\u00fcfen Sie Ihren Startort!");
 		return;
 	}
-	if (destination.match(numbers) != null && destination.length > 0){
+	if (isEmpty(destination)){
 		alert("Bitte \u00fcberpr\u00fcfen Sie Ihren Zielort!");
 		return;
 	}
