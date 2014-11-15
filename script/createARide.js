@@ -31,7 +31,8 @@ function saveInDB(){
 	var departure = $('#departure').val();
 	var destination = $('#destination').val();
 	var freePlaces = $('#freePlaces').val();
-	var price = $('#price').val();
+	var pricekomma = $('#price').val();
+	var price = pricekomma.replace(",", ".");
 	var carName = JSON.parse(localStorage.getItem('userdata')).id;
 	var rideInfos = $('#info').val();
 	var userName = JSON.parse(localStorage.getItem('userdata')).name;
