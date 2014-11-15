@@ -91,6 +91,27 @@
 					</li>
 				</ul>
 		
+				<!--Mitfahrer-->
+				<div class="ui-grid-solo">	
+					<div class="ui-block-a">
+						<div data-role="collapsibleset">
+							<div data-role="collapsible">
+								<h1>Mitfahrer:</h1>
+								<ul id="rider" data-role="listview" data-inset="true">
+									<!--Wird von JS gefüllt-->
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<!--Mitfahren-Button-->
+				<div class="ui-grid-solo">	
+					<div class="ui-block-a">	
+						<div style="margin-right:34px"><a id="btnToggleRide" onClick="toggleRide();" type="button" class="ui-btn ui-corner-all" style="text-align:center; Color:white; Background-Color:#6d88b7; text-shadow: none; width:100%">Mitfahren</a></div>
+					</div>  
+				</div> 
+		
 				<div class="ui-grid-solo">	
 					<div class="ui-block-a">	
 						<div style="margin-right:34px"><a type="button" class="ui-btn ui-corner-all fa fa-map-marker" style="text-align:center; Color:white; Background-Color:#6d88b7; text-shadow: none; width:100%" onclick="showMap()">Karte Anzeigen</a></div>
@@ -102,7 +123,7 @@
 				<div id="wrapper"> </div>
 				<div id="map_canvas"></div>
 				<!--<div id="map_direction"><h4>Wegbeschreibung: <span id="total"></span></h4></div>-->
-
+				
 				<!-- <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"PINNWAND" aka Wall >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
 				<div class="ui-grid-solo" id="WallRides">
 					<div class="ui-block-a" style="text-align:center"><label> </label></div>  

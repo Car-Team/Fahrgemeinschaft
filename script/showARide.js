@@ -1,72 +1,161 @@
 $(document).on("pagebeforeshow", "#showARide", function() {
 	viewRideID = JSON.parse(localStorage.getItem('userdata')).viewRideId;//alert("RideID: "+viewRideID)
+
+	fillRideData(viewRideID);
+	fillRiders(viewRideID);
+	appendWall(viewRideID);
+});
+
+function fillRideData(viewRideID) {
 	var viewRideData = {
 		'viewRideID' : viewRideID
 	}
 	
 	$.ajax({
-			type: "GET",
-			url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/showARide.php",	
-			data: viewRideData,	
-			dataType: "jsonp",	
-			success:	function(viewRideResult) {			
-				//alert("result data der ID: " + viewRideResult.ID);
-				// Names of Columns in Database:`ID`,`group`,`driver_id`,`price`,`date`,`departure_time`,`departure`,`destination`,`free_places`,`car_name`,`ride_infos` 
-				//Paste info from DB				
-				var datum=viewRideResult.date;
-				document.getElementById("date").value = 			datum.substring(3,5)+"."+datum.substring(0,2)+"."+datum.substring(6,10);
-				document.getElementById("departureTime").value = 	viewRideResult.departure_time;
-				document.getElementById("departure").value = 		viewRideResult.departure;
-				document.getElementById("destination").value = 		viewRideResult.destination;
-				document.getElementById("freePlaces").value = 		viewRideResult.free_places;
-				document.getElementById("price").value = 			viewRideResult.price;
-				document.getElementById("carName").value = 			viewRideResult.car_name;
-				document.getElementById("info").value = 			viewRideResult.ride_infos;
-				document.getElementById("driverName").value = 		viewRideResult.name;		
+		type: "GET",
+		url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/showARide.php",	
+		data: viewRideData,	
+		dataType: "jsonp",	
+		success:	function(viewRideResult) {			
+			//alert("result data der ID: " + viewRideResult.ID);
+			// Names of Columns in Database:`ID`,`group`,`driver_id`,`price`,`date`,`departure_time`,`departure`,`destination`,`free_places`,`car_name`,`ride_infos` 
+			//Paste info from DB				
+			var datum=viewRideResult.date;
+			document.getElementById("date").value = 			datum.substring(3,5)+"."+datum.substring(0,2)+"."+datum.substring(6,10);
+			document.getElementById("departureTime").value = 	viewRideResult.departure_time;
+			document.getElementById("departure").value = 		viewRideResult.departure;
+			document.getElementById("destination").value = 		viewRideResult.destination;
+			document.getElementById("freePlaces").value = 		viewRideResult.free_places;
+			document.getElementById("price").value = 			viewRideResult.price;
+			document.getElementById("carName").value = 			viewRideResult.car_name;
+			document.getElementById("info").value = 			viewRideResult.ride_infos;
+			document.getElementById("driverName").value = 		viewRideResult.name;		
 
-				//users shouldnt be allowed to edit the rideoverview
-				document.getElementById("date").readOnly = true;
-				document.getElementById("departureTime").readOnly = true;
-				document.getElementById("departure").readOnly = true;
-				document.getElementById("destination").readOnly = true;
-				document.getElementById("freePlaces").readOnly = true;
-				document.getElementById("price").readOnly = true;
-				document.getElementById("carName").readOnly = true;
-				document.getElementById("info").readOnly = true;
-				document.getElementById("driverName").readOnly = true;
-				//showMap(document.getElementById("destination").value)
-			}
-		});
+			//users shouldnt be allowed to edit the rideoverview
+			document.getElementById("date").readOnly = true;
+			document.getElementById("departureTime").readOnly = true;
+			document.getElementById("departure").readOnly = true;
+			document.getElementById("destination").readOnly = true;
+			document.getElementById("freePlaces").readOnly = true;
+			document.getElementById("price").readOnly = true;
+			document.getElementById("carName").readOnly = true;
+			document.getElementById("info").readOnly = true;
+			document.getElementById("driverName").readOnly = true;
+			//showMap(document.getElementById("destination").value)
+		}
+	});
+}
+
+function fillRiders(viewRideID) {
+	$('#rider').empty();
+	
+	var userID = JSON.parse(localStorage.getItem("userdata")).id;
+	var rideID = {
+		'rideID' : viewRideID
+	}
+	
+	var isRider = false;
+	
+	$.ajax({
+		type: "GET",
+		// url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/fetchRider.php",
+		url: "php/fetchRider.php",
+		data: rideID,	
+		dataType: "jsonp",	
+		success:	function(riders) {
+			riders.forEach(function(rider) {
+				appendRider(rider);
+				if(rider.id == userID)
+					isRider = true;
+			});
+			if(isRider)
+				$('#btnToggleRide').html("Doch nicht mitfahren");
+			else
+				$('#btnToggleRide').html("Mitfahren");
+		}
+	});
+}
+
+function appendRider(rider) {
+	var li = document.createElement("li");
+	{
+		var a = document.createElement("a");
+		{
+			var img = document.createElement("img");
+			$(img).attr("src", rider.picid);
+			$(img).click(function() {
+				openProfilByID(rider.id);
+			});
 		
-			////////////////////////////////////////FILL Wall DATA///////////////////////////////////////////////
-			var userLoggedInDataloginID = JSON.parse(localStorage.getItem('userdata')).id;
-			var viewRideID = viewRideID;//JSON.parse(localStorage.getItem('userdata')).viewRideId;//JSON.parse(localStorage.getItem('userdata')).viewRideId; //JSON.parse(localStorage.getItem('userdata')).viewProfileId
-			var userLoggedInData = {
-				//'loginName' : userLoggedInDataloginName,
-				'loginID' : userLoggedInDataloginID
-			}
-			var viewRideData = {
-				'viewRideID' : viewRideID
-			}
-	 		//////////////////////////////CONNECT TO DB TO GET THE WALL / "PINNWAND EINTRAEGE"////////////////////////
-			//alert(userLoggedInDataloginID)	;
-			var myWallEntries;
-			var myCommentEntries;						
-					$.ajax({
-								type: "GET",
-								url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/commentsRides.php",
-								data: viewRideData,
-								dataType: "jsonp",			
-								success:	function(commententries) {																	
-										myCommentEntries=commententries;
-										lookintoWallRides(myCommentEntries);										
-								},
-								error:	function() {										
-										myCommentEntries={'ID':0, 'WallID':0, 'ReceiverID':0, 'SenderID':0, 'Textinput':0, 'Timestamp':0, 'name':0} //give empty commentlist into function to avoid errors
-										lookintoWallRides(myCommentEntries);										
-								},
-					});	
-});
+			var span1 = document.createElement("span");
+			$(span1).html(rider.name);
+			$(span1).click(function() {
+				openProfilByID(rider.id);
+			});
+			
+			a.appendChild(img);
+			a.appendChild(span1);
+		}
+		li.appendChild(a);
+	}	
+	$('#rider').append(li);
+	$('#rider').listview("refresh");
+}
+
+function toggleRide() {
+	//disable button to prevent bugs
+	$('#btnToggleRide').attr('onClick', '');
+	
+	var viewRideID = JSON.parse(localStorage.getItem('userdata')).viewRideId;
+	var userID = JSON.parse(localStorage.getItem('userdata')).id;
+
+	var toggleData = {
+		'rideID' : viewRideID,
+		'userID' : userID
+	}
+	
+	$.ajax({
+		type: "GET",
+		// url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/toggleRider.php",
+		url: "php/toggleRider.php",
+		data: toggleData,	
+		dataType: "jsonp",	
+		success:	function(message) {
+			fillRiders(viewRideID);
+			//enable the button again
+			$('#btnToggleRide').attr('onClick', 'toggleRide();');
+		},
+		error: function(message) {
+			//enable the button again
+			$('#btnToggleRide').attr('onClick', 'toggleRide();');
+		}
+	});
+}
+
+////////////////////////////////////////FILL Wall DATA///////////////////////////////////////////////
+function appendWall(viewRideID) {	
+	var viewRideData = {
+		'viewRideID' : viewRideID
+	}
+	//////////////////////////////CONNECT TO DB TO GET THE WALL / "PINNWAND EINTRAEGE"////////////////////////
+	//alert(userLoggedInDataloginID)	;
+	var myWallEntries;
+	var myCommentEntries;						
+		$.ajax({
+			type: "GET",
+			url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/commentsRides.php",
+			data: viewRideData,
+			dataType: "jsonp",			
+			success:	function(commententries) {																	
+				myCommentEntries=commententries;
+				lookintoWallRides(myCommentEntries);										
+			},
+			error:	function() {										
+				myCommentEntries={'ID':0, 'WallID':0, 'ReceiverID':0, 'SenderID':0, 'Textinput':0, 'Timestamp':0, 'name':0} //give empty commentlist into function to avoid errors
+				lookintoWallRides(myCommentEntries);										
+			},
+	});	
+}
 
 //Post Wallentry on Rideoverview
 function postTWRides() {
