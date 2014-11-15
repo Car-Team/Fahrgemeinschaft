@@ -1,5 +1,6 @@
 <?php
 
+$carpicurladd = $_GET['carpicurladd'];
 $loginID = $_GET['loginID'];
 $carmodel = $_GET['carmodel'];
 $carcolor = $_GET['carcolor'];
@@ -15,7 +16,7 @@ if(!$db)
   exit("Verbindungsfehler: ".mysqli_connect_error());
 }
 mysqli_query($db, "SET NAMES 'utf8'");
-$sqlQuery = "INSERT INTO `Cars`(`ID`, `ModelName`, `LicensePlate`, `Seats`, `ConstructionYear`, `Description`, `Colour`) VALUES ('$loginID','$carmodel','$carlicenseplate','$carseats','$caryear','$cardescription','$carcolor')";
+$sqlQuery = "INSERT INTO `Cars`(`ID`, `ModelName`, `LicensePlate`, `Seats`, `ConstructionYear`, `Description`, `Colour`, `PicID`) VALUES ('$loginID','$carmodel','$carlicenseplate','$carseats','$caryear','$cardescription','$carcolor','$carpicurladd')";
 mysqli_query($db, $sqlQuery);
 $sqlQuery2 = "UPDATE `Users` SET `CarID`='$loginID' WHERE `ID`='$loginID'"; //, `Timestamp` //, `Email`='$email', `Tel`='$tel', `Descritpion`='$description'
 mysqli_query($db, $sqlQuery2);

@@ -47,6 +47,7 @@
 	$toDebtor = $debtor['email'];
 	$subjectDebtor = "Abrechnung: $userName";
 	$txtDebtor = buildMail($userName, $saldo * -1, $creditRides, $debtRides);
+
 	
 	// configure headers
 	$headers = 'From: <noreply@carteam.com>';
@@ -57,8 +58,7 @@
 	mail($toUser, $subjectUser, $txtUser, $headers);
 	mail($toDebtor, $subjectDebtor, $txtDebtor, $headers);
 	
-	echo $_GET['callback'].'('.json_encode(count($creditRides)).')';	
-	// echo $_GET['callback'].'('.json_encode("Ihnen wurde die Abrechnung per E-Mail zugeschickt.").')';	
+	echo $_GET['callback'].'('.json_encode("Ihnen wurde die Abrechnung per E-Mail zugeschickt.").')';	
 
 	function fetchRides($ridesResult) {
 		$rides = array();
@@ -109,7 +109,8 @@
 		$txt .=
 	 "		<h3> Viele liebe Gruesse, Ihr CarTeam </h3>
 			</body>
-		</html>";
+		</html>
+	 ";
 		return $txt;
 	}
 	

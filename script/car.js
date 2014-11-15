@@ -1,18 +1,18 @@
 //////////////////////////////////////////////////////////////////// FUNCTIONS /////////////////////////////////////////////////////////// 
+
+//Function to Remove an Element by its ID --> Used to remove the editbutton from other peoples profil!
 function remove(id)
 {
     return (elem=document.getElementById(id)).parentNode.removeChild(elem);
 }
 
-
+//Function to check if a String is empty
 function isEmpty(str) {
     return (!str || 0 === str.length);
 }
-//
-//
-//
-//
-//
+
+//Function to Change the Profil View ID --> Changes before opening other peoples Profil. 
+//Overwriting Specific Data in Localstorage
 function setProfilIdtoView(id){
 		localStorage.setItem("userdata", JSON.stringify({
 								id: JSON.parse(localStorage.getItem('userdata')).id, 
@@ -34,48 +34,30 @@ function setProfilIdtoView(id){
 							    viewRideId: JSON.parse(localStorage.getItem('userdata')).viewRideId}));
 }
 
-
-
-//
-//
-//
-//
-//
-
-
-function openProfil(){
-	var id = $('#viewProfilIDInput').val();
-	setProfilIdtoView(id)
-	window.location.href="profile.html"
-}
-
+//open specific Profil
 function openProfilByID(id){
 	setProfilIdtoView(id)
 	window.location.href="profile.html"
 }
 
+//open my own Profil
 function openMyProfil(){
 	var id = JSON.parse(localStorage.getItem('userdata')).id;
 	setProfilIdtoView(id)
 	window.location.href="profile.html"
 }
-//
-//
-//
-//
-//
 
+//Function needed to give the "Commenty entry popup on the wall" the correct ID of that entry to comment on
 function openCommentInput(id)
 {
    // alert("kommentiere den eintrag "+id);
    window.commentIDInput=id;
 }
 
-
-
-
-
+//Edit Profil --> send changes to DB
 function postProfileChanges() {
+	var picurl = $('#picurlInput').val();
+	//alert(picurl)
 	var nametext = $('#namefieldInput').val();
 	var emailtext = $('#emailfieldInput').val();
 	var teltext = $('#telfieldInput').val();
@@ -87,7 +69,7 @@ function postProfileChanges() {
 								name: nametext, 
 								email: emailtext, 
 								tel: teltext, 
-								picid: JSON.parse(localStorage.getItem('userdata')).picid, 
+								picid: picurl, 
 								carid: JSON.parse(localStorage.getItem('userdata')).carid,
 								descriptionUser: descriptiontext,
 								fb_id: JSON.parse(localStorage.getItem('userdata')).fb_id,
@@ -105,11 +87,12 @@ function postProfileChanges() {
 		alert("JUNGE, gib wenigstens 1 Gottverdammtes Zeichen ein!");	
 	}else{	
 		var postData = {
+			'picurl' : picurl,
 			'name' : nametext,
 			'email' : emailtext,
 			'tel' : teltext,
 			'description' : descriptiontext,
-			'loginID' : loginID,
+			'loginID' : loginID
 		}
 			
 		$.ajax({
@@ -125,12 +108,9 @@ function postProfileChanges() {
 	}
 }
 
-//
-//
-//
-//
-//
+//Edit Car --> send changes to DB
 function postCarChanges() { 
+	var carpicurl 			= $('#carpicurlInput').val();
 	var carmodeltext 		= $('#carmodelfieldInput').val();
 	var carcolortext 		= $('#carcolorfieldInput').val();
 	var caryeartext 		= $('#caryearfieldInput').val();
@@ -138,7 +118,7 @@ function postCarChanges() {
 	var carseatstext 		= $('#carseatsInput').val();
 	var cardescriptiontext  = $('#cardescriptionInput').val();
 	var loginID = JSON.parse(localStorage.getItem('userdata')).id;
-
+	//Overwriting Specific Data in Localstorage
 	localStorage.setItem("userdata", JSON.stringify({
 								id: JSON.parse(localStorage.getItem('userdata')).id, 
 								name: JSON.parse(localStorage.getItem('userdata')).name, 
@@ -154,18 +134,19 @@ function postCarChanges() {
 								constructionYear: caryeartext,
 								descriptionCar: cardescriptiontext,
 								colourCar: carcolortext,
-								carPicID: JSON.parse(localStorage.getItem('userdata')).carPicID,
+								carPicID: carpicurl,
 								viewProfileId: JSON.parse(localStorage.getItem('userdata')).viewProfileId,
 							    viewRideId: JSON.parse(localStorage.getItem('userdata')).viewRideId}));
 		
 		var postData = {
+			'carpicurl' : carpicurl,
 			'carmodel' : carmodeltext,
 			'loginID' : loginID,
 			'carcolor' : carcolortext,
 			'caryear' : caryeartext,
 			'carseats' : carseatstext,
 			'cardescription' : cardescriptiontext,
-			'carlicenseplate' : carlicenseplatetext,
+			'carlicenseplate' : carlicenseplatetext
 		}	
 				
 		$.ajax({
@@ -178,15 +159,12 @@ function postCarChanges() {
 							window.location.href="car.html"
 						},
 		});
-	//window.location.href="car.html"
 }
-//
-//
-//
-//
-//
+
+//Add new Car if you dont already have one--> send to DB
 function postCarAddition() { 
 
+	var carpicurladd		= $('#carpicurlInputAdd').val();
 	var carmodeltext 		= $('#carmodelfieldInputAdd').val();
 	var carcolortext 		= $('#carcolorfieldInputAdd').val();
 	var caryeartext 		= $('#caryearfieldInputAdd').val();
@@ -194,7 +172,7 @@ function postCarAddition() {
 	var carseatstext 		= $('#carseatsInputAdd').val();
 	var cardescriptiontext  = $('#cardescriptionInputAdd').val();
 	var loginID = JSON.parse(localStorage.getItem('userdata')).id;
-
+	//Overwriting Specific Data in Localstorage
 	localStorage.setItem("userdata", JSON.stringify({
 								id: JSON.parse(localStorage.getItem('userdata')).id, 
 								name: JSON.parse(localStorage.getItem('userdata')).name, 
@@ -210,18 +188,19 @@ function postCarAddition() {
 								constructionYear: caryeartext,
 								descriptionCar: cardescriptiontext,
 								colourCar: carcolortext,
-								carPicID: "0",
+								carPicID: carpicurladd,
 								viewProfileId: JSON.parse(localStorage.getItem('userdata')).viewProfileId,
 							    viewRideId: JSON.parse(localStorage.getItem('userdata')).viewRideId}));
 		
 		var postData = {
+			'carpicurladd' : carpicurladd,
 			'carmodel' : carmodeltext,
 			'loginID' : loginID,
 			'carcolor' : carcolortext,
 			'caryear' : caryeartext,
 			'carseats' : carseatstext,
 			'cardescription' : cardescriptiontext,
-			'carlicenseplate' : carlicenseplatetext,
+			'carlicenseplate' : carlicenseplatetext
 		}			
 		$.ajax({
 			type: "GET",
@@ -235,11 +214,8 @@ function postCarAddition() {
 		});
 	
 }
-//
-//
-//
-//
-//
+
+//Post an Entry to the Profils Wall
 function postTW() {
 	var text = $('#postText').val();
 	document.getElementById('postText').value ="";
@@ -266,11 +242,8 @@ function postTW() {
 		});
 	}
 }
-//
-//
-//
-//
-//
+
+//Post a Comment on an Entry to the Profils Wall (aka Pinnwand)
 function postCO() {
 	 //alert("kommentiere den eintrag "+window.commentIDInput);
 	var text = $('#commentTextToPost').val();
@@ -303,11 +276,7 @@ function postCO() {
 	}
 }
 
-//
-//
-//
-//
-//
+//Calculate the Time that has passed since the entry on the Wall (aka Pinnwand) was created
 function timeDifference(date1,date2) {
         var difference = date1 - (date2)+10000;//-7200000
         var daysDifference = Math.floor(difference/1000/60/60/24);
@@ -337,11 +306,7 @@ function timeDifference(date1,date2) {
     return answer;
      }
 
-//
-//
-//
-//
-//
+//Load the Entries on the Wall and combine them with the correct Comments!
 function lookintoWall(myCommentEntries){
 		var userLoggedInDataloginID = JSON.parse(localStorage.getItem('userdata')).id;
 		var myWallEntries;
@@ -368,30 +333,23 @@ function lookintoWall(myCommentEntries){
 											myWallEntries=wallentries;
 											var j = 0;
 											for (;myWallEntries[j];) {		        // Create the list item:
-
-
-											        var date = (myWallEntries[j].Timestamp).substring(0,11);		
-
+											        var date = (myWallEntries[j].Timestamp).substring(0,11);	
 											        var date1=new Date().getTime()- (new Date().getTimezoneOffset() * 60000);										       
 													var dateb2= myWallEntries[j].Timestamp;
 													var date2 = new Date(dateb2.replace(' ', 'T')).getTime();
-											        //alert(date2+"\n"+date1);
 											     
 											       $("#ulWallHeader").append(
 											      	$("<li data-role='list-divider' style='font-size:1.1em'  onClick='openProfilByID("+myWallEntries[j].SenderID+");'>").append(			//+"."+date.substring(0,4)	      		
 											       	 myWallEntries[j].name+"<span class='ui-li-count'>"+date.substring(8,10)+"."+date.substring(5,7)+" - "+(myWallEntries[j].Timestamp).substring(11,16)+"</span>" //myWallEntries.length+
 											       )).listview("refresh");
 
-											       //var wImgSrc="http://images.fotocommunity.de/bilder/natur/tiere/pfau-hochformat-357029dc-d282-4a87-a9d3-01e9ec2600e8.jpg" 
-											       //var wImgSrc="http://st.depositphotos.com/1003368/1944/i/950/depositphotos_19448249-business-woman-in-glasses.jpg";
-											       //var wImgSrc ="http://us.123rf.com/400wm/400/400/malopes/malopes0901/malopes090100089/4185805-schone-fr-hling-landschaft-mit-gras-und-sky--hochformat.jpg"
 											       var wImgSrc="";
 											       if(myWallEntries[j].picID.length>5){
 											       	wImgSrc=myWallEntries[j].picID;//"http://newtroy.integra-technologies.co.uk/static/images/unknown_user.png" 
 											   		}else{
-											   		wImgSrc="http://newtroy.integra-technologies.co.uk/static/images/unknown_user.png"; 	
+											   			wImgSrc="http://newtroy.integra-technologies.co.uk/static/images/unknown_user.png"; 	
 											   		}
-											       //var wImgSrc="http://us.cdn282.fansshare.com/photos/kateupton/kate-upton-terry-richardson-outtakes-jpeg-model-302939606.jpg"
+
 											       $("#ulWallHeader").append(
 											       	$("<li style='min-height:66px'>").append(
 												       	"<div class='commentPicFrameWall'>"+
@@ -411,40 +369,18 @@ function lookintoWall(myCommentEntries){
 												       	 											       		
 												       	"</div>"
 
-
-
-
-												       //	"<a href='#popupComment' data-rel='popup' data-position-to='window' class='ui-btn fa fa-send-o' data-transition='pop'>Kommentieren</a>"+
-												       /*
-														"<div data-role='popup' id='popupComment' data-theme='a' class='ui-corner-all'>"+
-														    "<form>"+
-														        "<div style='padding:10px 20px;'>"+
-														            "<h3>Pinnwandeintrag kommentieren</h3>"+														          
-														            "<input type='text' name='user' id='commenttextv value='' placeholder='Kommentar' data-theme='a'>"+
-														            "<div style='margin-right:34px'><a id='postToWall' class='ui-btn ui-corner-all fa fa-send-o' style='text-align:center; Color:white; Background-Color:#6d88b7; text-shadow: none; width:100%' onClick='postTW();'>Kommentieren</a></div>"+
-														        "</div>"+
-														    "</form>"+
-														"</div>"*/
-
-
-
-
-
-
-
-
 											       	)).listview("refresh");
 
 											       	var imgHeight = $("#wPic"+myWallEntries[j].ID).height() 
 											       	var textMarginTop = imgHeight+6;	
 											       	
 											       	if(imgHeight>10){											       									       						
-												       	$("#wTextDiv"+myWallEntries[j].ID).css({ // resize the image     			
+												       	$("#wTextDiv"+myWallEntries[j].ID).css({ // place the elements of the wallentry acording to the size of the image     	     			
 			     												"margin-top": textMarginTop+"px"
 					  									});
 											       	}else{
 											       		textMarginTop=86;											       		
-											       		$("#wTextDiv"+myWallEntries[j].ID).css({ // resize the image     			
+											       		$("#wTextDiv"+myWallEntries[j].ID).css({ // place the elements of the wallentry acording to the size of the image     	   			
 		     												"margin-top": textMarginTop+"px"
 				  										});	
 											       	}
@@ -452,12 +388,12 @@ function lookintoWall(myCommentEntries){
 											       	var textMarginLeft = Math.round(imgWidth+10);
 											       						//alert(textMarginLeft);
 			  										if(imgWidth>10){											       									       						
-												     	 $("#wTimeDiv"+myWallEntries[j].ID).css({ // resize the image     			
+												     	 $("#wTimeDiv"+myWallEntries[j].ID).css({ // place the elements of the wallentry acording to the size of the image     	     			
 		     												"margin-left": textMarginLeft+"px"
 				  										});
 											       	}else{
 											       		textMarginLeft=84;											       		
-											       		$("#wTimeDiv"+myWallEntries[j].ID).css({ // resize the image     			
+											       		$("#wTimeDiv"+myWallEntries[j].ID).css({ // place the elements of the wallentry acording to the size of the image     	    			
 		     												"margin-left": textMarginLeft+"px"
 				  										});
 											       	}
@@ -466,14 +402,10 @@ function lookintoWall(myCommentEntries){
 											       		for (;myCommentEntries[i];) {	
 											       				if(myWallEntries[j].ID == myCommentEntries[i].WallID){
 											       					var cdate = (myCommentEntries[i].Timestamp).substring(0,11);
-
 											       					var cdate1=new Date().getTime() - (new Date().getTimezoneOffset() * 60000);												       
 																	var cdateb2= myCommentEntries[i].Timestamp;
 																	var cdate2 = new Date(cdateb2.replace(' ', 'T')).getTime();
-															        //alert(date2+"\n"+date1);
 
-											       						//var cImgSrc ="http://st.depositphotos.com/1003368/1944/i/950/depositphotos_19448249-business-woman-in-glasses.jpg"	
-											       						
 											       						var cImgSrc="";
 																       if(myCommentEntries[i].picID.length>5){
 																       	cImgSrc=myCommentEntries[i].picID;//"http://newtroy.integra-technologies.co.uk/static/images/unknown_user.png" 
@@ -481,7 +413,6 @@ function lookintoWall(myCommentEntries){
 																   		cImgSrc="http://newtroy.integra-technologies.co.uk/static/images/unknown_user.png"; 	
 																   		}
 
-											       						//var cImgSrc ="http://us.123rf.com/400wm/400/400/malopes/malopes0901/malopes090100089/4185805-schone-fr-hling-landschaft-mit-gras-und-sky--hochformat.jpg"								       					
 											       						$("#ulWallHeader").append(
 																	       	$("<li style='border-color: #D8D8D8 ; border-left:0px; border-right:0px; background-color:#E8E8E8 ; min-height:94px; margin-left:30px'>").append(
 																	       		"<div class='commentPicFrameWall' style='margin-top:30px;'>"+
@@ -499,32 +430,30 @@ function lookintoWall(myCommentEntries){
 																		       )).listview("refresh");
 
 											       						var imgHeight = $("#cPic"+myCommentEntries[i].ID).height() 
-											       						var textMarginTop = imgHeight + 26;
-											       						//alert(textMarginTop);
-			  														if(imgHeight>10){											       									       						
-												     					 $("#cTextDiv"+myCommentEntries[i].ID).css({ // resize the image     			
-		     																"margin-top": textMarginTop+"px"
-				  														});
-											       					}else{
-											       						textMarginTop=84+26;											       		
-											       						$("#cTextDiv"+myCommentEntries[i].ID).css({ // resize the image     			
-		     																"margin-top": textMarginTop+"px"
-				  														});
-											       					}
+											       						var textMarginTop = imgHeight + 26;											       					
+				  														if(imgHeight>10){											       									       						
+													     					 $("#cTextDiv"+myCommentEntries[i].ID).css({ // place the elements of the wallentry acording to the size of the image     	    			
+			     																"margin-top": textMarginTop+"px"
+					  														});
+												       					}else{
+												       						textMarginTop=84+26;											       		
+												       						$("#cTextDiv"+myCommentEntries[i].ID).css({ // place the elements of the wallentry acording to the size of the image     	     			
+			     																"margin-top": textMarginTop+"px"
+					  														});
+												       					}
 
-											       					var imgWidth = $("#cPic"+myCommentEntries[i].ID).width() 
-											       					var textMarginLeft = Math.round(imgWidth+10);
-											       						//alert(textMarginLeft);
-			  														if(imgWidth>10){											       									       						
-												     					 $("#cTimeDiv"+myCommentEntries[i].ID).css({ // resize the image     			
-		     																"margin-left": textMarginLeft+"px"
-				  														});
-											       					}else{
-											       						textMarginLeft=84;											       		
-											       						$("#cTimeDiv"+myCommentEntries[i].ID).css({ // resize the image     			
-		     																"margin-left": textMarginLeft+"px"
-				  														});
-											       					}
+												       					var imgWidth = $("#cPic"+myCommentEntries[i].ID).width() 
+												       					var textMarginLeft = Math.round(imgWidth+10);												       					
+				  														if(imgWidth>10){											       									       						
+													     					 $("#cTimeDiv"+myCommentEntries[i].ID).css({ /// place the elements of the wallentry acording to the size of the image     	     			
+			     																"margin-left": textMarginLeft+"px"
+					  														});
+												       					}else{
+												       						textMarginLeft=84;											       		
+												       						$("#cTimeDiv"+myCommentEntries[i].ID).css({ // place the elements of the wallentry acording to the size of the image          			
+			     																"margin-left": textMarginLeft+"px"
+					  														});
+												       					}
 
 											       						 
 											       				} //class='commentWall'
@@ -539,12 +468,7 @@ function lookintoWall(myCommentEntries){
 	}
 
 
-
-//
-//
-//
-//
-//
+  //Code Executed when the Profil.html is opened
  //+++++++++++++++++++++++++++/////////////////////////////////////////PROFILE.HTML///////////////////////////////////////////+++++++++++++++++++++++++++++//
   $(document).on('pageinit', '#profile', function(){   	
  		////////////////////////////////////////AUTO RESIZE IMAGE///////////////////////////////////////////////
@@ -575,8 +499,9 @@ function lookintoWall(myCommentEntries){
 			'viewProfileID' : viewProfileID
 		}
 
-		//alert(viewProfileID)
+		//check if its my own profil i want to visit
 		if(userLoggedInDataloginID==viewProfileID){
+			//if it is my own profil than load from localstorage
 			var myDiv1 = document.getElementById("namefield");
 	        myDiv1.innerHTML = JSON.parse(localStorage.getItem('userdata')).name;	       				   
 	        var myDiv2 = document.getElementById("emailfield");
@@ -585,24 +510,19 @@ function lookintoWall(myCommentEntries){
 	        myDiv3.innerHTML = JSON.parse(localStorage.getItem('userdata')).tel;	       				    
 	        var myDiv4 = document.getElementById("carfield");
 	        myDiv4.innerHTML = JSON.parse(localStorage.getItem('userdata')).modelName;
-
 			if(JSON.parse(localStorage.getItem('userdata')).picid.length>5){
 				document.getElementById("profile_picture").src=JSON.parse(localStorage.getItem('userdata')).picid;
 			}
-
 	        if(isEmpty(JSON.parse(localStorage.getItem('userdata')).modelName)==true){
 	        	//alert("Sie haben bisher noch kein Auto angelegt!")
 	        	 myDiv4.innerHTML = "AUTO ANLEGEN";
 	        	 document.getElementById("carLink").href = "carAddNew.html";
 	        }
-
-
-
 	        var myDiv5 = document.getElementById("userdescription");
 	        myDiv5.innerHTML = "<h3>Beschreibung</h3>" + JSON.parse(localStorage.getItem('userdata')).descriptionUser;
 	        document.getElementById("profilTitle").innerHTML="Mein Profil"
 	    }else{
-	    	//alert(userLoggedInDataloginID + " / " + viewProfileID)
+	    	//if it is not my own Profil, then load the Profildata like name from db etc.
 	    	remove("editButton");	    	
 	    	$.ajax({
 							type: "GET",
@@ -624,17 +544,13 @@ function lookintoWall(myCommentEntries){
 							        if(viewProfileResult.picID.length>5){
 							        	document.getElementById("profile_picture").src=viewProfileResult.picID;
 							    	}
-							    	
-							       //document.getElementById("profile_picture").src=
 							},
 				});	
 	    }
 
  		//////////////////////////////CONNECT TO DB TO GET THE WALL / "PINNWAND EINTRAEGE"////////////////////////
-		//alert(userLoggedInDataloginID)	;
 		var myWallEntries;
-		var myCommentEntries;	
-				
+		var myCommentEntries;				
 				$.ajax({
 							type: "GET",
 							url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/comments.php",
@@ -651,10 +567,8 @@ function lookintoWall(myCommentEntries){
 									
 							},
 				});	
-
-
 							
-		///////////////////////////////////////////ON_CLICK EVENTS///////////////////////////////////////////////
+		///////////////////////////////////////////ON_CLICK EVENTS - Resize the Profilpicture///////////////////////////////////////////////
 		$("#profile_picture").on("click", function(e1) {
 			var bodywidth = $(window).width();//document.getElementById("description").offsetWidth
 			if(bodywidth>800){bodywidth=800}
@@ -704,26 +618,7 @@ function lookintoWall(myCommentEntries){
 
 });
 
-
-//
-//
-//
-//
-//
-
-
-
-
-
-
-
-
-
-//
-//
-//
-//
-//
+//Code executed when opening car.html
 //+++++++++++++++++++++++++++++++////////////////////////////////////////CAR.HTML/////////////////////////////////////////////++++++++++++++++++++++++++++++//
 $(document).on('pageinit', '#car', function() {	
 		
@@ -745,11 +640,6 @@ $(document).on('pageinit', '#car', function() {
 		}
 		///////////////////////////////////////Paste Car Content//////////////////////////////////////////////////////////////////
 
-
-
-
-
-
 		var userLoggedInDataloginID = JSON.parse(localStorage.getItem('userdata')).id;
 		var viewProfileID = JSON.parse(localStorage.getItem('userdata')).viewProfileId;
 		var userLoggedInData = {
@@ -759,27 +649,25 @@ $(document).on('pageinit', '#car', function() {
 		var viewProfileData = {
 			'viewProfileID' : viewProfileID
 		}
-
-		//alert(viewProfileID)
+		//check if its my own profil i want to visit			
 		if(userLoggedInDataloginID===viewProfileID){
-		var myDiv1 = document.getElementById("carmodelfield");
-        myDiv1.innerHTML = JSON.parse(localStorage.getItem('userdata')).modelName +  " ("+JSON.parse(localStorage.getItem('userdata')).colourCar+")";
-        var myDiv2 = document.getElementById("caryearfield");
-        myDiv2.innerHTML = "Baujahr " + JSON.parse(localStorage.getItem('userdata')).constructionYear;
-        var myDiv3 = document.getElementById("carlicenseplate");
-        myDiv3.innerHTML = JSON.parse(localStorage.getItem('userdata')).licensePlate;
-        var myDiv4 = document.getElementById("carseats");
-        myDiv4.innerHTML = JSON.parse(localStorage.getItem('userdata')).seats + " Sitze";
-        var myDiv5= document.getElementById("carnamefield");
-        myDiv5.innerHTML = JSON.parse(localStorage.getItem('userdata')).name;
-        var myDiv6 = document.getElementById("cardescription");
-        myDiv6.innerHTML = "<h3>Beschreibung</h3>" + JSON.parse(localStorage.getItem('userdata')).descriptionCar;
+			//if it is my own profil than load from localstorage
+			var myDiv1 = document.getElementById("carmodelfield");
+	        myDiv1.innerHTML = JSON.parse(localStorage.getItem('userdata')).modelName +  " ("+JSON.parse(localStorage.getItem('userdata')).colourCar+")";
+	        var myDiv2 = document.getElementById("caryearfield");
+	        myDiv2.innerHTML = "Baujahr " + JSON.parse(localStorage.getItem('userdata')).constructionYear;
+	        var myDiv3 = document.getElementById("carlicenseplate");
+	        myDiv3.innerHTML = JSON.parse(localStorage.getItem('userdata')).licensePlate;
+	        var myDiv4 = document.getElementById("carseats");
+	        myDiv4.innerHTML = JSON.parse(localStorage.getItem('userdata')).seats + " Sitze";
+	        var myDiv5= document.getElementById("carnamefield");
+	        myDiv5.innerHTML = JSON.parse(localStorage.getItem('userdata')).name;
+	        var myDiv6 = document.getElementById("cardescription");
+	        myDiv6.innerHTML = "<h3>Beschreibung</h3>" + JSON.parse(localStorage.getItem('userdata')).descriptionCar;
 
-		if(JSON.parse(localStorage.getItem('userdata')).carPicID.length>5){
-			document.getElementById("car_picture").src=JSON.parse(localStorage.getItem('userdata')).carPicID;
-		}
-
-
+			if(JSON.parse(localStorage.getItem('userdata')).carPicID.length>5){
+				document.getElementById("car_picture").src=JSON.parse(localStorage.getItem('userdata')).carPicID;
+			}
 	    }else{
 	    	remove("editButton");
 	    	$.ajax({
@@ -809,10 +697,7 @@ $(document).on('pageinit', '#car', function() {
 							},
 				});	
 	    }
-
-
-
-		///////////////////////////////////////////ON_CLICK EVENTS///////////////////////////////////////////////
+		///////////////////////////////////////////ON_CLICK EVENTS - resize car picture ///////////////////////////////////////////////
 		$("#car_picture").on("click", function(e3) {
 			var bodywidth = $(window).width();//document.getElementById("description").offsetWidth
 			if(bodywidth>800){bodywidth=800}
@@ -864,30 +749,11 @@ $(document).on('pageinit', '#car', function() {
 });
 
 //
-//
-//
-//
-//
  //+++++++++++++++++++++++++++/////////////////////////////////////////PROFILEEDIT.HTML///////////////////////////////////////////+++++++++++++++++++++++++++++//
-    $(document).on('pageinit', '#profileEdit', function(){   	
- 		////////////////////////////////////////AUTO RESIZE IMAGE///////////////////////////////////////////////
-		/*if($(window).width()<430){
-			 $("#profileEdit_block_a").css({ // resize the image     			
-	     			'width': 'calc(98%)'
-			   	});
-			   	$("#profileEdit_block_b").css({ // resize the image     			
-	     			'width': 'calc(100%)'
-			   	});
-		}
-		 else {
-			   $("#profileEdit_block_a").css({ // resize the image     			
-	     			'width': 'calc(38%)'
-			   	});
-			   $("#profileEdit_block_b").css({ // resize the image     			
-	     			'width': 'calc(60%)'
-			   	});
-			}*/
-		////////////////////////////////////////FILL PROFILE DATA///////////////////////////////////////////////
+    $(document).on('pageinit', '#profileEdit', function(){  	 	
+			////////////////////////////////////////FILL PROFILE DATA///////////////////////////////////////////////
+			var myDiv0 = document.getElementById("picurlInput");
+	        myDiv0.value = JSON.parse(localStorage.getItem('userdata')).picid;
 			var myDiv1 = document.getElementById("namefieldInput");
 	        myDiv1.value = JSON.parse(localStorage.getItem('userdata')).name;	       				   
 	        var myDiv2 = document.getElementById("emailfieldInput");
@@ -895,142 +761,25 @@ $(document).on('pageinit', '#car', function() {
 	        var myDiv3 = document.getElementById("telfieldInput");
 	        myDiv3.value = JSON.parse(localStorage.getItem('userdata')).tel;	       				    
 	        var myDiv5 = document.getElementById("userdescriptionInput");
-	        myDiv5.value = JSON.parse(localStorage.getItem('userdata')).descriptionUser;
-	    ///////////////////////////////////RESIZE PICTURE ON CLICK/////////////////////////////////////////////////
-		/*$("#profileEdit_picture").on("click", function(e3) {
-			var bodywidth = $(window).width();//document.getElementById("description").offsetWidth
-			if(bodywidth>800){bodywidth=800}
-			if(e3.handled !== true) // This will prevent event triggering more then once
-        	{        	
-				if (document.getElementById("profileEdit_block_a").offsetWidth<(bodywidth/100)*80) {
-				    $("#profileEdit_block_a").css({ // resize the image     			
-		     			'width': 'calc(98%)'
-				   	});
-				   	$("#profileEdit_block_b").css({ // resize the image     			
-		     			'width': 'calc(100%)'
-				   	});
-				} else {
-				   $("#profileEdit_block_a").css({ // resize the image     			
-		     			'width': 'calc(38%)'
-				   	});
-				   $("#profileEdit_block_b").css({ // resize the image     			
-		     			'width': 'calc(60%)'
-				   	});
-				}
-			e3.handled = true;
-        	}
-		});
-		$("#profileEdit_picture_label").on("click", function(e4) {
-			var bodywidth = $(window).width();//document.getElementById("description").offsetWidth
-			if(bodywidth>800){bodywidth=800}	
-			if(e4.handled !== true) // This will prevent event triggering more then once
-        	{        		
-				if (document.getElementById("profileEdit_block_a").offsetWidth<(bodywidth/100)*80) {
-				    $("#profileEdit_block_a").css({ // resize the image     			
-		     			'width': 'calc(98%)'
-				   	});
-				   	$("#profileEdit_block_b").css({ // resize the image     			
-		     			'width': 'calc(100%)'
-				   	});
-				} else {
-				   $("#profileEdit_block_a").css({ // resize the image     			
-		     			'width': 'calc(38%)'
-				   	});
-				   $("#profileEdit_block_b").css({ // resize the image     			
-		     			'width': 'calc(60%)'
-				   	});
-				}
-			e4.handled = true;
-        	}
-		});*/
+	        myDiv5.value = JSON.parse(localStorage.getItem('userdata')).descriptionUser;	  
 	});	
 
 //
-//
-//
-//
-//
 //+++++++++++++++++++++++++++/////////////////////////////////////////CAREDIT.HTML///////////////////////////////////////////+++++++++++++++++++++++++++++//
     $(document).on('pageinit', '#carEdit', function(){   	
- 		////////////////////////////////////////AUTO RESIZE IMAGE///////////////////////////////////////////////
-		/*if($(window).width()<430){
-			 $("#carEdit_block_a").css({ // resize the image     			
-	     			'width': 'calc(98%)'
-			   	});
-			   	$("#carEdit_block_b").css({ // resize the image     			
-	     			'width': 'calc(100%)'
-			   	});
-		}
-		 else {
-			   $("#carEdit_block_a").css({ // resize the image     			
-	     			'width': 'calc(38%)'
-			   	});
-			   $("#carEdit_block_b").css({ // resize the image     			
-	     			'width': 'calc(60%)'
-			   	});
-			}*/
 		////////////////////////////////////////FILL PROFILE DATA///////////////////////////////////////////////
+		var myDiv0 = document.getElementById("carpicurlInput");
+	    myDiv0.value = JSON.parse(localStorage.getItem('userdata')).carPicID;
 		var myDiv1 = document.getElementById("carmodelfieldInput");
         myDiv1.value = JSON.parse(localStorage.getItem('userdata')).modelName; //+  " (
-
         var myDiv2 = document.getElementById("caryearfieldInput");
         myDiv2.value = JSON.parse(localStorage.getItem('userdata')).constructionYear;
         var myDiv3 = document.getElementById("carlicenseplateInput");
         myDiv3.value = JSON.parse(localStorage.getItem('userdata')).licensePlate;
         var myDiv4 = document.getElementById("carseatsInput");
         myDiv4.value = JSON.parse(localStorage.getItem('userdata')).seats;
-
 		var myDiv5 = document.getElementById("carcolorfieldInput");
 		myDiv5.value = JSON.parse(localStorage.getItem('userdata')).colourCar
-
         var myDiv6 = document.getElementById("cardescriptionInput");
-        myDiv6.value = JSON.parse(localStorage.getItem('userdata')).descriptionCar;
-		///////////////////////////////////RESIZE PICTURE ON CLICK/////////////////////////////////////////////////
-		/*$("#carEdit_picture").on("click", function(e3) {
-			var bodywidth = $(window).width();//document.getElementById("description").offsetWidth
-			if(bodywidth>800){bodywidth=800}
-			if(e3.handled !== true) // This will prevent event triggering more then once
-        	{        	
-				if (document.getElementById("carEdit_block_a").offsetWidth<(bodywidth/100)*80) {
-				    $("#carEdit_block_a").css({ // resize the image     			
-		     			'width': 'calc(98%)'
-				   	});
-				   	$("#carEdit_block_b").css({ // resize the image     			
-		     			'width': 'calc(100%)'
-				   	});
-				} else {
-				   $("#carEdit_block_a").css({ // resize the image     			
-		     			'width': 'calc(38%)'
-				   	});
-				   $("#carEdit_block_b").css({ // resize the image     			
-		     			'width': 'calc(60%)'
-				   	});
-				}
-			e3.handled = true;
-        	}
-		});
-		$("#carEdit_picture_label").on("click", function(e4) {
-			var bodywidth = $(window).width();//document.getElementById("description").offsetWidth
-			if(bodywidth>800){bodywidth=800}	
-			if(e4.handled !== true) // This will prevent event triggering more then once
-        	{        		
-				if (document.getElementById("carEdit_block_a").offsetWidth<(bodywidth/100)*80) {
-				    $("#carEdit_block_a").css({ // resize the image     			
-		     			'width': 'calc(98%)'
-				   	});
-				   	$("#carEdit_block_b").css({ // resize the image     			
-		     			'width': 'calc(100%)'
-				   	});
-				} else {
-				   $("#carEdit_block_a").css({ // resize the image     			
-		     			'width': 'calc(38%)'
-				   	});
-				   $("#carEdit_block_b").css({ // resize the image     			
-		     			'width': 'calc(60%)'
-				   	});
-				}
-			e4.handled = true;
-        	}
-		});*/
-
+        myDiv6.value = JSON.parse(localStorage.getItem('userdata')).descriptionCar;		
 	});	

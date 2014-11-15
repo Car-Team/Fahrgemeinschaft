@@ -1,11 +1,11 @@
-/*$(document).ready(function() { //html
+function isEmpty(str) {
+   return (!str || 0 === str.length);
+}
 
-    document.getElementById("car").value = JSON.parse(localStorage.getItem('userdata')).modelName;
-    
-});*/
 
-$(function() {
-    $( ".date-input-css" ).datepicker();
+$(document).on("pagebeforeshow", "#createARide", function() {
+   // $( ".date-input-css" ).datepicker();
+   document.getElementById("datepicker").readOnly = true;
 });
 
 // VISINILITY OF RADIO BUTTONS        
@@ -26,28 +26,27 @@ function rideMultiFunc() {
 
 ///////////////////////////////////////////////////////////////////////////// AJAX REQUEST
 function saveInDB(){
-
 	var date = $('#datepicker').val();
 	var time = $('#departureTime').val();
 	var departure = $('#departure').val();
 	var destination = $('#destination').val();
 	var freePlaces = $('#freePlaces').val();
-	var price = $('#price').val();
+	var pricekomma = $('#price').val();
+	var price = pricekomma.replace(",", ".");
 	var carName = JSON.parse(localStorage.getItem('userdata')).id;
 	var rideInfos = $('#info').val();
 	var userName = JSON.parse(localStorage.getItem('userdata')).name;
 	var userID = JSON.parse(localStorage.getItem('userdata')).id;
 	var group = localStorage.getItem('openCommunityID');
-//alert(group);
 
 	// VALIDATION
 	var numbers = /[0-9]/;
 	var letters = /[a-zA-Z]/;
-	if (departure.match(numbers) != null && departure.length > 0){
+	if (isEmpty(departure)){
 		alert("Bitte \u00fcberpr\u00fcfen Sie Ihren Startort!");
 		return;
 	}
-	if (destination.match(numbers) != null && destination.length > 0){
+	if (isEmpty(destination)){
 		alert("Bitte \u00fcberpr\u00fcfen Sie Ihren Zielort!");
 		return;
 	}
@@ -74,13 +73,13 @@ function saveInDB(){
 		'userID' : userID,
 		'groupID' : group
 	}
-	
+	//alert("hier")
 	$.ajax({
 		type: "GET",
-		url: "php/createARide.php",
-		//dataType: 'jsonp',
+		url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/createARide.php",	
 		data: requestData,
-		success: function(resultData) {			
+		dataType: "jsonp",
+		success: function() {			
 			alert('Datensatz wurde erfolgreich eingetragen.');
 			window.location.href="community.html";
 		},
@@ -88,7 +87,7 @@ function saveInDB(){
 }
 
 
-<!-- STARTING MAP DEFINITION -->
+//<!-- STARTING MAP DEFINITION -->
 function showMap() {
 //alert("in showmap")
 	var rendererOptions = {
@@ -137,4 +136,4 @@ function showMap() {
 	showRoute();
 	
 }
-<!-- END OF MAP DEFINITION -->
+//<!-- END OF MAP DEFINITION -->
