@@ -7,7 +7,10 @@ if(!$db)
   exit("Verbindungsfehler: ".mysqli_connect_error());
 }
 mysqli_query($db, "SET NAMES 'utf8'");
-$sqlQuery = "SELECT r.ID,r.groupID,r.driver_id,r.price,r.date,r.departure_time,r.departure,r.destination,r.free_places,c.ModelName,r.ride_infos,u.name FROM Rides r, Users u, Cars c WHERE  r.ID = '$viewRideID' AND r.driver_id = u.ID AND r.car_name = c.ID";
+$sqlQuery = "SELECT r.ID,r.groupID,r.driver_id,r.price,r.date,r.departure_time,r.departure,r.destination,r.free_places,c.ModelName,r.ride_infos,u.name 
+FROM Rides r 
+LEFT JOIN Users u ON r.driver_id = u.ID 
+LEFT JOIN Cars c ON r.car_name = c.ID WHERE  r.ID = '$viewRideID'";
 	
 
 $result = mysqli_query($db, $sqlQuery);
