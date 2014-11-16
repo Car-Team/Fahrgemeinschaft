@@ -23,7 +23,6 @@ function fillCollapsibles() {
 		data: data,
 		dataType: "jsonp",
 		success:	function(persons) {
-			// alert(JSON.stringify(persons));
 			fillPage(persons, id);
 		}
 	});
@@ -106,7 +105,6 @@ function doAccounting() {
 	var saldo = sessionStorage.getItem("accountPersonSaldo");
 	
 	sendMail(userID, debtorID, saldo);
-	//update database stuff
 }
 
 function sendMail(userID, debtorID, saldo) {

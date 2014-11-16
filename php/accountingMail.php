@@ -58,6 +58,9 @@
 	mail($toUser, $subjectUser, $txtUser, $headers);
 	mail($toDebtor, $subjectDebtor, $txtDebtor, $headers);
 	
+	//remove user and debtor from rides
+	updateRides();
+	
 	echo $_GET['callback'].'('.json_encode("Ihnen wurde die Abrechnung per E-Mail zugeschickt.").')';	
 
 	function fetchRides($ridesResult) {
@@ -134,5 +137,9 @@
 		}
 		$txt .="</ul>";
 		return $txt;
+	}
+	
+	function updateRides(userID, debtorID) {
+		
 	}
 ?>

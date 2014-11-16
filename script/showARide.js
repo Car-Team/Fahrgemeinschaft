@@ -1,8 +1,21 @@
 $(document).on("pagebeforeshow", "#showARide", function() {
-	viewRideID = JSON.parse(localStorage.getItem('userdata')).viewRideId;//alert("RideID: "+viewRideID)
+	viewRideID = JSON.parse(localStorage.getItem('userdata')).viewRideId;
+	userID = JSON.parse(localStorage.getItem("userdata")).id;
 
+	$('#btnToggleRide').hide();
+	$('#btnCancelRide').hide();
+	
+	$('#btnCancelRide').click(function() {
+		$('#cancelRidePopup').popup("open");
+	});
+	
+	$('#cancelRideAccept').click(function() {
+		cancelRide(viewRideID);
+	});
+	
 	fillRideData(viewRideID);
-	fillRiders(viewRideID);
+	fillRiders(viewRideID, userID);
+	configureButtons(viewRideID, userID);
 	appendWall(viewRideID);
 });
 
@@ -15,7 +28,7 @@ function fillRideData(viewRideID) {
 		type: "GET",
 		url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/showARide.php",	
 		data: viewRideData,	
-		dataType: "jsonp",	
+		dataType: "jsonp",
 		success:	function(viewRideResult) {			
 			//alert("result data der ID: " + viewRideResult.ID);
 			// Names of Columns in Database:`ID`,`group`,`driver_id`,`price`,`date`,`departure_time`,`departure`,`destination`,`free_places`,`car_name`,`ride_infos` 
@@ -41,17 +54,45 @@ function fillRideData(viewRideID) {
 			document.getElementById("carName").readOnly = true;
 			document.getElementById("info").readOnly = true;
 			document.getElementById("driverName").readOnly = true;
-			//showMap(document.getElementById("destination").value)
+			//showMap(document.getElementById("destination").value);
 		}
 	});
 }
 
-function fillRiders(viewRideID) {
+function configureButtons(rideID, userID) {
+	var rideIDContainer = {
+		'rideID' : rideID,
+	}
+
+	$.ajax({
+		type: "GET",
+		// url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/rideData.php",
+		url: "php/rideData.php",
+		data: rideIDContainer,	
+		dataType: "jsonp",
+		success:	function(answer) {
+			var departure = Date.parse(answer.date);
+			var rideHappenedYet = departure < new Date().getTime();
+			
+			//show "Mitfahren" button if ride did not happen yet and user is not driver		
+			if(answer.driverID != userID && !rideHappenedYet) 
+				$('#btnToggleRide').show();
+			
+			//show cancel-ride button if user is driver
+			if(answer.driverID == userID && !rideHappenedYet)
+				$('#btnCancelRide').show();
+		}
+	});
+
+
+	
+}
+
+function fillRiders(rideID, userID) {
 	$('#rider').empty();
 	
-	var userID = JSON.parse(localStorage.getItem("userdata")).id;
-	var rideID = {
-		'rideID' : viewRideID
+	var rideIDContainer = {
+		'rideID' : rideID
 	}
 	
 	var isRider = false;
@@ -60,7 +101,7 @@ function fillRiders(viewRideID) {
 		type: "GET",
 		// url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/fetchRider.php",
 		url: "php/fetchRider.php",
-		data: rideID,	
+		data: rideIDContainer,	
 		dataType: "jsonp",	
 		success:	function(riders) {
 			riders.forEach(function(rider) {
@@ -128,6 +169,24 @@ function toggleRide() {
 		error: function(message) {
 			//enable the button again
 			$('#btnToggleRide').attr('onClick', 'toggleRide();');
+		}
+	});
+}
+
+function cancelRide(rideID) {
+	var rideIDContainer = {
+		'rideID' : rideID
+	}
+
+	$.ajax({
+		type: "GET",
+		// url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/cancelRide.php",
+		url: "php/cancelRide.php",
+		data: rideIDContainer,	
+		dataType: "jsonp",	
+		success:	function(message) {
+			alert(message);
+			$.mobile.changePage( "/communities.html");
 		}
 	});
 }
