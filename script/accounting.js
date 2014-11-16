@@ -11,6 +11,9 @@ function clearCollapsibles() {
 }
 
 function fillCollapsibles() {
+	$('#persons').empty();
+	$('#persons').listview("refresh");
+	
 	var id = JSON.parse(localStorage.getItem("userdata")).id;
 	var data = {
 		'id' : id,
@@ -104,7 +107,6 @@ function doAccounting() {
 	var saldo = sessionStorage.getItem("accountPersonSaldo");
 	
 	sendMail(userID, debtorID, saldo);
-	fillCollapsibles();
 }
 
 function sendMail(userID, debtorID, saldo) {
@@ -121,6 +123,7 @@ function sendMail(userID, debtorID, saldo) {
 		dataType: "jsonp",
 		success:	function(callback) {
 			alert(callback);
+			fillCollapsibles();
 		}
 	});
 }

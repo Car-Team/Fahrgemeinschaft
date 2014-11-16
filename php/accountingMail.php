@@ -33,7 +33,7 @@
 										WHERE r.id = ru.ride AND c.id = r.groupID AND r.driver_id = $userID AND ru.user = $debtorID AND concat(r.date, ' ', r.departure_time) < now() AND Accounted = 0";
 	$creditRidesResult = mysqli_query($db, $creditsQuery);
 	$creditRides = fetchRides($creditRidesResult);
-	
+		
 	//build and send email
 	$userName = $user['name'];
 	$debtorName = $user['name'];
@@ -53,13 +53,13 @@
 	$headers = 'From: <noreply@carteam.com>';
 	$headers .= 'MIME-Version: 1.0' . "\r\n";
 	$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-	
+		
 	// send
 	mail($toUser, $subjectUser, $txtUser, $headers);
 	mail($toDebtor, $subjectDebtor, $txtDebtor, $headers);
 	
-	//remove user and debtor from rides
-	updateRides();
+	//set accounted flags
+	updateAccounting($db, $userID, $debtorID);
 	
 	echo $_GET['callback'].'('.json_encode("Ihnen wurde die Abrechnung per E-Mail zugeschickt.").')';	
 
@@ -139,7 +139,7 @@
 		return $txt;
 	}
 	
-	function updateAccounting(userID, debtorID) {
+	function updateAccounting($db, $userID, $debtorID) {
 		$queryUser = 		"UPDATE RidesUsers ru
 										INNER JOIN
 										Rides r
