@@ -18,8 +18,7 @@ function fillCollapsibles() {
 	
 	$.ajax({
 		type: "GET",
-		// url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/accounting.php",
-		url: "php/accounting.php",
+		url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/accounting.php",
 		data: data,
 		dataType: "jsonp",
 		success:	function(persons) {

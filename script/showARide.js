@@ -66,8 +66,7 @@ function configureButtons(rideID, userID) {
 
 	$.ajax({
 		type: "GET",
-		// url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/rideData.php",
-		url: "php/rideData.php",
+		url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/rideData.php",
 		data: rideIDContainer,	
 		dataType: "jsonp",
 		success:	function(answer) {
@@ -99,8 +98,7 @@ function fillRiders(rideID, userID) {
 	
 	$.ajax({
 		type: "GET",
-		// url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/fetchRider.php",
-		url: "php/fetchRider.php",
+		url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/fetchRider.php",
 		data: rideIDContainer,	
 		dataType: "jsonp",	
 		success:	function(riders) {
@@ -157,8 +155,7 @@ function toggleRide() {
 	
 	$.ajax({
 		type: "GET",
-		// url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/toggleRider.php",
-		url: "php/toggleRider.php",
+		url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/toggleRider.php",
 		data: toggleData,	
 		dataType: "jsonp",	
 		success:	function(message) {
@@ -180,8 +177,7 @@ function cancelRide(rideID) {
 
 	$.ajax({
 		type: "GET",
-		// url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/cancelRide.php",
-		url: "php/cancelRide.php",
+		url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/cancelRide.php",
 		data: rideIDContainer,	
 		dataType: "jsonp",	
 		success:	function(message) {

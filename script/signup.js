@@ -103,7 +103,6 @@ function signup() {
 	
 	$.ajax({
 		type: "GET",
-		// url: "php/signup.php",
 		url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/signup.php",
 		data: signupData,
 		dataType: "jsonp",

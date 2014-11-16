@@ -1,13 +1,3 @@
-// $(document).on("pageinit", "#index", function(event) {
-	//// check for logindata in localStorage
-	// var email = JSON.parse(localStorage.getItem('userdata')).email;
-	// var hashedPw = localStorage.getItem('hashedPw');
-
-	// if(email != "" && hashedPw != "")
-		// loginAs(email, hashedPw);
-	
-// });
-
 $(document).on("pageinit", "#index", function() {
 	$('#login').on("tap", function(){
 		login();
@@ -35,7 +25,6 @@ function loginAs(email, hashedPw) {
 	$.ajax({
 		type: "GET",
 		url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/login.php",
-		//url: "php/login.php",
 		data: loginData,
 		dataType: "jsonp",
 		success:	function(loginResult) {
