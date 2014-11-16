@@ -154,7 +154,7 @@ function postProfileChanges() {
 							    viewRideId: JSON.parse(localStorage.getItem('userdata')).viewRideId}));
 
 	if(nametext.length==0) {
-		alert("JUNGE, gib wenigstens 1 Gottverdammtes Zeichen ein!");	
+		alert("Leerer Name!");	
 	}else{	
 		var postData = {
 			'picurl' : picurl,
@@ -292,7 +292,7 @@ function postTW() {
 	var loginID = JSON.parse(localStorage.getItem('userdata')).id;	
 	var viewProfileID = JSON.parse(localStorage.getItem('userdata')).viewProfileId;	
 	if(text.length==0) {
-		alert("JUNGE, gib wenigstens 1 Gottverdammtes Zeichen ein!");	
+		alert("Leere Nachrichten werden nicht verschickt. Geben Sie mindestens 1 Zeichen ein!");	
 	}else{	
 		var postData = {
 			'text' : text,
@@ -321,7 +321,7 @@ function postCO() {
 	var loginID = JSON.parse(localStorage.getItem('userdata')).id;	
 	var viewProfileID = JSON.parse(localStorage.getItem('userdata')).viewProfileId;	
 	if(text.length==0) {
-		alert("JUNGE, gib wenigstens 1 Gottverdammtes Zeichen ein!");	
+		alert("Leere Kommentare werden nicht verschickt. Geben Sie mindestens 1 Zeichen ein!");	
 		$( "#popupComment" ).popup( "close" );
 
 	}else{	

@@ -219,7 +219,7 @@ function postTWRides() {
 	var loginID = JSON.parse(localStorage.getItem('userdata')).id;	
 	var viewRideID = JSON.parse(localStorage.getItem('userdata')).viewRideId;//JSON.parse(localStorage.getItem('userdata')).viewProfileId;
 	if(text.length==0) {
-		alert("JUNGE, gib wenigstens 1 Gottverdammtes Zeichen ein!");	
+		alert("Leere Nachrichten werden nicht verschickt. Geben Sie mindestens 1 Zeichen ein!");	
 	}else{	
 		var postData = {
 			'text' : text,
@@ -248,7 +248,7 @@ function postCORides() {
 	var loginID = JSON.parse(localStorage.getItem('userdata')).id;	
 	var viewRideID = JSON.parse(localStorage.getItem('userdata')).viewRideId;//JSON.parse(localStorage.getItem('userdata')).viewProfileId;	
 	if(text.length==0) {
-		alert("JUNGE, gib wenigstens 1 Gottverdammtes Zeichen ein!");	
+		alert("Leere Kommentare werden nicht verschickt. Geben Sie mindestens 1 Zeichen ein!");	
 		$( "#popupCommentRides" ).popup( "close" );
 
 	}else{	
