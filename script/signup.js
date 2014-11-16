@@ -32,11 +32,19 @@ $( document ).on( "pageinit", "#signup", function( event ) {
 	});
 	
 	function pwTest(pw, pwConfirm){
-		if(pwValid(pw, pwConfirm)){
-			$("#pwInputSignUp").parent().css({"border-color": "green"});
-			$("#pwConfirmInputSignUp").parent().css({"border-color": "green"});
-			$("#pwInputWarning").hide();
+		if(pwValidLength(pw)){
+			if(pwValidSimilar(pw, pwConfirm)){
+				$("#pwInputSignUp").parent().css({"border-color": "green"});
+				$("#pwConfirmInputSignUp").parent().css({"border-color": "green"});
+				$("#pwInputWarning").hide();
+			} else {
+				$("#pwInputWarning").html("Die Passwörter stimmen nicht überein");
+				$("#pwInputSignUp").parent().css({"border-color": "red"});
+				$("#pwConfirmInputSignUp").parent().css({"border-color": "red"});
+				$("#pwInputWarning").show();
+			}
 		} else {
+			$("#pwInputWarning").html("Das Passwort muss mindestens 3 Zeichen lang sein.");
 			$("#pwInputSignUp").parent().css({"border-color": "red"});
 			$("#pwConfirmInputSignUp").parent().css({"border-color": "red"});
 			$("#pwInputWarning").show();
@@ -53,29 +61,23 @@ function nameValid(name) {
 }
 	
 function emailValid(email) {
-	if(email.indexOf("@") == -1) {
-		return false;
+	var atIndex = email.indexOf("@");
+	var afterAt = email.substring(atIndex + 1, email.length);
+	var dotIndex = afterAt.indexOf(".") + atIndex + 1;
+	if(atIndex != -1 && dotIndex != -1 && dotIndex > atIndex) {
+		return true;
 	} else {
-		$.ajax({
-			type: "GET",
-			url: "php/emailCheck.php",
-			// url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/signup.php",
-			data: signupData,
-			dataType: "jsonp",
-			async: false,
-			success:	function(signupResult) {
-				return true;
-			},
-		});
+		return false;
 	}
 }
 	
-function pwValid(pw, pwConfirm) {
-	if(pw == "" || pwConfirm == "" || pw != pwConfirm){
-		return false;
-	} else {
-		return true;
-	}
+function pwValidSimilar(pw, pwConfirm) {
+	return pw == pwConfirm;
+
+}
+
+function pwValidLength(pw) {
+	return pw.length >= 3;
 }
 
 function signup() {
@@ -84,10 +86,10 @@ function signup() {
 	var pw = $('#pwInputSignUp').val();
 	var pwConfirm = $('#pwConfirmInputSignUp').val();
 	
-	var everythingValid = nameValid(name) && emailValid(email) && pwValid(pw, pwConfirm);
+	var everythingValid = nameValid(name) && emailValid(email) && pwValidLength(pw) && pwValidSimilar(pw, pwConfirm);
 
 	if(!everythingValid) {
-		alert("Überprüfe bitte deine Eingabe");
+		alert("Überprüfe bitte deine Eingaben!");
 		return;
 	}
 
@@ -101,10 +103,11 @@ function signup() {
 	
 	$.ajax({
 		type: "GET",
-		//url: "php/signup.php",
+		// url: "php/signup.php",
 		url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/signup.php",
 		data: signupData,
 		dataType: "jsonp",
+		async: false,
 		success:	function(signupResult) {
 						alert(signupResult.message);
 						if(signupResult.successful)
