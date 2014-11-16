@@ -24,13 +24,13 @@
 	
 	$debtsQuery = "	SELECT c.name communityName, r.driver_id driver, price, r.date, r.departure, r.destination
 									FROM RidesUsers ru, Rides r, Community c 
-									WHERE r.id = ru.ride AND c.id = r.groupID AND r.driver_id = $debtorID AND ru.user = $userID AND concat(r.date, ' ', r.departure_time) < now()";
+									WHERE r.id = ru.ride AND c.id = r.groupID AND r.driver_id = $debtorID AND ru.user = $userID AND concat(r.date, ' ', r.departure_time) < now() AND Accounted = 0";
 	$debtRidesResult = mysqli_query($db, $debtsQuery);
 	$debtRides = fetchRides($debtRidesResult);
 	
 	$creditsQuery = "	SELECT c.name communityName, r.driver_id driver, price, r.date, r.departure, r.destination
 										FROM RidesUsers ru, Rides r, Community c 
-										WHERE r.id = ru.ride AND c.id = r.groupID AND r.driver_id = $userID AND ru.user = $debtorID AND concat(r.date, ' ', r.departure_time) < now()";
+										WHERE r.id = ru.ride AND c.id = r.groupID AND r.driver_id = $userID AND ru.user = $debtorID AND concat(r.date, ' ', r.departure_time) < now() AND Accounted = 0";
 	$creditRidesResult = mysqli_query($db, $creditsQuery);
 	$creditRides = fetchRides($creditRidesResult);
 	
@@ -139,7 +139,24 @@
 		return $txt;
 	}
 	
-	function updateRides(userID, debtorID) {
-		
+	function updateAccounting(userID, debtorID) {
+		$queryUser = 		"UPDATE RidesUsers ru
+										INNER JOIN
+										Rides r
+										ON
+										ru.ride = r.id
+										SET Accounted = 1
+										WHERE r.driver_id = $debtorID AND ru.user = $userID 
+										AND concat(r.date, ' ', r.departure_time) < now() AND Accounted = 0";
+		$queryDebtor = 	"UPDATE RidesUsers ru
+										INNER JOIN
+										Rides r
+										ON
+										ru.ride = r.id
+										SET Accounted = 1
+										WHERE r.driver_id = $userID AND ru.user = $debtorID 
+										AND concat(r.date, ' ', r.departure_time) < now() AND Accounted = 0";
+		mysqli_query($db, $queryUser);
+		mysqli_query($db, $queryDebtor);
 	}
 ?>

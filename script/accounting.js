@@ -105,6 +105,7 @@ function doAccounting() {
 	var saldo = sessionStorage.getItem("accountPersonSaldo");
 	
 	sendMail(userID, debtorID, saldo);
+	fillCollapsibles();
 }
 
 function sendMail(userID, debtorID, saldo) {

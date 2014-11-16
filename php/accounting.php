@@ -11,7 +11,7 @@
 	
 	//get debtors
 	$debtorQuery = "SELECT u.id id, name, SUM(price) saldo, picid FROM Rides r, RidesUsers ru, Users u
-									WHERE ru.ride = r.id AND ru.user = u.id AND driver_id = '$userID' AND concat(r.date, ' ', r.departure_time) < now()
+									WHERE ru.ride = r.id AND ru.user = u.id AND driver_id = '$userID' AND concat(r.date, ' ', r.departure_time) < now() AND Accounted = 0
 									GROUP BY u.id;";
 	$debtorResult = mysqli_query($db, $debtorQuery);
 	
@@ -28,7 +28,7 @@
 	
 	// get creditors
 	$creditorQuery = "SELECT driver_id id, name, SUM(price)*-1 saldo, picid FROM Rides r, RidesUsers ru, Users u
-										WHERE ru.ride = r.id AND r.driver_id = u.id AND ru.user = '$userID' AND concat(r.date, ' ', r.departure_time) < now()
+										WHERE ru.ride = r.id AND r.driver_id = u.id AND ru.user = '$userID' AND concat(r.date, ' ', r.departure_time) < now() AND Accounted = 0
 										GROUP BY u.id;";
 	$creditorResult = mysqli_query($db, $creditorQuery);
 	
