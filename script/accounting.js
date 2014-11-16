@@ -55,14 +55,8 @@ function fillPage(persons, userID) {
 function appendPerson(person, userID) {
 	var li = document.createElement("li");
 	{
-		var a = document.createElement("a");
+		var a = document.createElement("label");
 		{
-			var img = document.createElement("img");
-			$(img).attr("src", person.picid);
-			$(img).click(function() {
-				openProfilByID(person.id);
-			});
-		
 			var span1 = document.createElement("span");
 			$(span1).html(person.name);
 			$(span1).click(function() {
@@ -89,7 +83,6 @@ function appendPerson(person, userID) {
 				sessionStorage.setItem("accountPersonSaldo", person.saldo);
 			});
 			
-			a.appendChild(img);
 			a.appendChild(span1);
 			a.appendChild(span2);
 			a.appendChild(btn);

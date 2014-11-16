@@ -10,7 +10,7 @@
 	}
 	
 	//get debtors
-	$debtorQuery = "SELECT u.id id, name, SUM(price) saldo, picid FROM Rides r, RidesUsers ru, Users u
+	$debtorQuery = "SELECT u.id id, name, SUM(price) saldo FROM Rides r, RidesUsers ru, Users u
 									WHERE ru.ride = r.id AND ru.user = u.id AND driver_id = '$userID' AND concat(r.date, ' ', r.departure_time) < now() AND Accounted = 0
 									GROUP BY u.id;";
 	$debtorResult = mysqli_query($db, $debtorQuery);
@@ -20,14 +20,13 @@
 			$person = array(
 				'id' 		=> intval($row['id']),
 				'name'	=> $row["name"],
-				'saldo' 	=> floatval($row['saldo']),
-				'picid'	=> $row['picid']
+				'saldo' => floatval($row['saldo'])
 			);
 			array_push($debtors, $person);
 	}
 	
 	// get creditors
-	$creditorQuery = "SELECT driver_id id, name, SUM(price)*-1 saldo, picid FROM Rides r, RidesUsers ru, Users u
+	$creditorQuery = "SELECT driver_id id, name, SUM(price)*-1 saldo FROM Rides r, RidesUsers ru, Users u
 										WHERE ru.ride = r.id AND r.driver_id = u.id AND ru.user = '$userID' AND concat(r.date, ' ', r.departure_time) < now() AND Accounted = 0
 										GROUP BY u.id;";
 	$creditorResult = mysqli_query($db, $creditorQuery);
@@ -37,12 +36,12 @@
 		$person = array(
 			'id' 		=> intval($row['id']),
 			'name'	=> $row['name'],
-			'saldo' => floatval($row['saldo']),
-			'picid'	=> $row['picid']
+			'saldo' => floatval($row['saldo'])
 		);
 		array_push($creditors, $person);
 	}
 	
+	//add the debt of the persons to get the saldo
 	$persons = merge($debtors, $creditors);
 	
 	echo  $_GET['callback'].'('.json_encode($persons).')';
