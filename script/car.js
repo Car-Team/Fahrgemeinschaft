@@ -1,5 +1,75 @@
 //////////////////////////////////////////////////////////////////// FUNCTIONS /////////////////////////////////////////////////////////// 
 
+// realign the wallentries time and text after the profilpicture of the wallentry is loaded
+function realignEntries(wID){
+	//alert(cID)
+	$("#wPic"+wID).one('load', function() {
+		//alert(cID + " loaded.")
+
+		var imgHeight = $("#wPic"+wID).height() 
+		var textMarginTop = imgHeight+6;	
+													       	
+		if(imgHeight>10){											       									       						
+			$("#wTextDiv"+wID).css({ // place the elements of the wallentry acording to the size of the image     	     			
+				"margin-top": textMarginTop+"px"
+			});
+		}else{
+			textMarginTop=86;											       		
+			$("#wTextDiv"+wID).css({ // place the elements of the wallentry acording to the size of the image     	   			
+				"margin-top": textMarginTop+"px"
+			});	
+		}
+		var imgWidth = $("#wPic"+wID).width() 
+		var textMarginLeft = Math.round(imgWidth+10);
+													       						//alert(textMarginLeft);
+		if(imgWidth>10){											       									       						
+			$("#wTimeDiv"+wID).css({ // place the elements of the wallentry acording to the size of the image     	     			
+				"margin-left": textMarginLeft+"px"
+			});
+		}else{
+			textMarginLeft=84;											       		
+			$("#wTimeDiv"+wID).css({ // place the elements of the wallentry acording to the size of the image     	    			
+				"margin-left": textMarginLeft+"px"
+			});
+		}
+												   
+
+	});
+}
+
+// realign the comments time and text after the profilpicture of the comment is loaded
+function realignComments(cID){
+	//alert(cID)
+	$("#cPic"+cID).one('load', function() {
+		//alert(cID + " loaded.")
+		var imgHeight = $("#cPic"+cID).height() 
+		var textMarginTop = imgHeight + 26;											       					
+		if(imgHeight>10){											       									       						
+			$("#cTextDiv"+cID).css({ // place the elements of the wallentry acording to the size of the image     	    			
+				 "margin-top": textMarginTop+"px"
+			});
+		}else{
+			textMarginTop=84+26;											       		
+			$("#cTextDiv"+cID).css({ // place the elements of the wallentry acording to the size of the image     	     			
+				  "margin-top": textMarginTop+"px"
+			});
+		}
+
+		var imgWidth = $("#cPic"+cID).width() 
+		var textMarginLeft = Math.round(imgWidth+10);												       					
+		if(imgWidth>10){											       									       						
+			$("#cTimeDiv"+cID).css({ /// place the elements of the wallentry acording to the size of the image     	     			
+				 "margin-left": textMarginLeft+"px"
+			});
+		}else{
+			textMarginLeft=84;											       		
+			$("#cTimeDiv"+cID).css({ // place the elements of the wallentry acording to the size of the image          			
+				  "margin-left": textMarginLeft+"px"
+			});
+		}
+	});
+}
+
 //Function to Remove an Element by its ID --> Used to remove the editbutton from other peoples profil!
 function remove(id)
 {
@@ -332,6 +402,8 @@ function lookintoWall(myCommentEntries){
 											var i = 0;
 											myWallEntries=wallentries;
 											var j = 0;
+											var cIDs = [];
+											var wIDs = [];
 											for (;myWallEntries[j];) {		        // Create the list item:
 											        var date = (myWallEntries[j].Timestamp).substring(0,11);	
 											        var date1=new Date().getTime()- (new Date().getTimezoneOffset() * 60000);										       
@@ -371,36 +443,11 @@ function lookintoWall(myCommentEntries){
 
 											       	)).listview("refresh");
 
-													$("#wPic"+myWallEntries[j].ID).ready(function(){
-												       	var imgHeight = $("#wPic"+myWallEntries[j].ID).height() 
-												       	var textMarginTop = imgHeight+6;	
-												       	
-												       	if(imgHeight>10){											       									       						
-													       	$("#wTextDiv"+myWallEntries[j].ID).css({ // place the elements of the wallentry acording to the size of the image     	     			
-				     												"margin-top": textMarginTop+"px"
-						  									});
-												       	}else{
-												       		textMarginTop=86;											       		
-												       		$("#wTextDiv"+myWallEntries[j].ID).css({ // place the elements of the wallentry acording to the size of the image     	   			
-			     												"margin-top": textMarginTop+"px"
-					  										});	
-												       	}
-												       	var imgWidth = $("#wPic"+myWallEntries[j].ID).width() 
-												       	var textMarginLeft = Math.round(imgWidth+10);
-												       						//alert(textMarginLeft);
-				  										if(imgWidth>10){											       									       						
-													     	 $("#wTimeDiv"+myWallEntries[j].ID).css({ // place the elements of the wallentry acording to the size of the image     	     			
-			     												"margin-left": textMarginLeft+"px"
-					  										});
-												       	}else{
-												       		textMarginLeft=84;											       		
-												       		$("#wTimeDiv"+myWallEntries[j].ID).css({ // place the elements of the wallentry acording to the size of the image     	    			
-			     												"margin-left": textMarginLeft+"px"
-					  										});
-												       	}
-												    });
 
+													wIDs.push(myWallEntries[j].ID);// for a later realign of the text components acording to the picture size
+										
 														i=0;	
+														
 											       		for (;myCommentEntries[i];) {	
 											       				if(myWallEntries[j].ID == myCommentEntries[i].WallID){
 											       					var cdate = (myCommentEntries[i].Timestamp).substring(0,11);
@@ -430,44 +477,32 @@ function lookintoWall(myCommentEntries){
 																		       	"<span class='ui-li-count commentDate'>"+ cdate.substring(8,10)+"."+cdate.substring(5,7)+" - "+(myCommentEntries[i].Timestamp).substring(11,16)+  "</span>"
 																	       
 																		       )).listview("refresh");
+																		
 
-																		$("#cPic"+myCommentEntries[i].ID).ready(function(){
-												       						var imgHeight = $("#cPic"+myCommentEntries[i].ID).height() 
-												       						var textMarginTop = imgHeight + 26;											       					
-					  														if(imgHeight>10){											       									       						
-														     					 $("#cTextDiv"+myCommentEntries[i].ID).css({ // place the elements of the wallentry acording to the size of the image     	    			
-				     																"margin-top": textMarginTop+"px"
-						  														});
-													       					}else{
-													       						textMarginTop=84+26;											       		
-													       						$("#cTextDiv"+myCommentEntries[i].ID).css({ // place the elements of the wallentry acording to the size of the image     	     			
-				     																"margin-top": textMarginTop+"px"
-						  														});
-													       					}
-
-													       					var imgWidth = $("#cPic"+myCommentEntries[i].ID).width() 
-													       					var textMarginLeft = Math.round(imgWidth+10);												       					
-					  														if(imgWidth>10){											       									       						
-														     					 $("#cTimeDiv"+myCommentEntries[i].ID).css({ /// place the elements of the wallentry acording to the size of the image     	     			
-				     																"margin-left": textMarginLeft+"px"
-						  														});
-													       					}else{
-													       						textMarginLeft=84;											       		
-													       						$("#cTimeDiv"+myCommentEntries[i].ID).css({ // place the elements of the wallentry acording to the size of the image          			
-				     																"margin-left": textMarginLeft+"px"
-						  														});
-													       					}
-													       				});
-
-											       						 
-											       				} //class='commentWall'
+																		
+																		cIDs.push(myCommentEntries[i].ID);// for a later realign of the text components acording to the picture size
+																											       						 
+											       				} 
 											       			  i++;
 															}
 											       j++;
-											}		
-											
+											}	
+
+											//alert(cIDs)	
+											//alert(wIDs)
+											var x=0;															
+											for (;cIDs[x];) {
+												realignComments(cIDs[x]);
+												x++;
+											}
+											var y=0;															
+											for (;wIDs[y];) {
+												realignEntries(wIDs[y]);
+												y++;
+											}
 										},
 									});	
+
  									
 	}
 

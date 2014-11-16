@@ -271,6 +271,77 @@ function postCORides() {
 	}
 }
 
+
+// realign the wallentries time and text after the profilpicture of the wallentry is loaded
+function realignEntriesRides(wID){
+	//alert(cID)
+	$("#wPicRides"+wID).one('load', function() {
+		//alert(cID + " loaded.")
+
+		var imgHeight = $("#wPicRides"+wID).height() 
+		var textMarginTop = imgHeight+6;	
+													       	
+		if(imgHeight>10){											       									       						
+			$("#wTextDivRides"+wID).css({ // place the elements of the wallentry acording to the size of the image     	     			
+				"margin-top": textMarginTop+"px"
+			});
+		}else{
+			textMarginTop=86;											       		
+			$("#wTextDivRides"+wID).css({ // place the elements of the wallentry acording to the size of the image     	   			
+				"margin-top": textMarginTop+"px"
+			});	
+		}
+		var imgWidth = $("#wPicRides"+wID).width() 
+		var textMarginLeft = Math.round(imgWidth+10);
+													       						//alert(textMarginLeft);
+		if(imgWidth>10){											       									       						
+			$("#wTimeDivRides"+wID).css({ // place the elements of the wallentry acording to the size of the image     	     			
+				"margin-left": textMarginLeft+"px"
+			});
+		}else{
+			textMarginLeft=84;											       		
+			$("#wTimeDivRides"+wID).css({ // place the elements of the wallentry acording to the size of the image     	    			
+				"margin-left": textMarginLeft+"px"
+			});
+		}
+												   
+
+	});
+}
+
+// realign the comments time and text after the profilpicture of the comment is loaded
+function realignCommentsRides(cID){
+	//alert(cID)
+	$("#cPicRides"+cID).one('load', function() {
+		//alert(cID + " loaded.")
+		var imgHeight = $("#cPicRides"+cID).height() 
+		var textMarginTop = imgHeight + 26;											       					
+		if(imgHeight>10){											       									       						
+			$("#cTextDivRides"+cID).css({ // place the elements of the wallentry acording to the size of the image     	    			
+				 "margin-top": textMarginTop+"px"
+			});
+		}else{
+			textMarginTop=84+26;											       		
+			$("#cTextDivRides"+cID).css({ // place the elements of the wallentry acording to the size of the image     	     			
+				  "margin-top": textMarginTop+"px"
+			});
+		}
+
+		var imgWidth = $("#cPicRides"+cID).width() 
+		var textMarginLeft = Math.round(imgWidth+10);												       					
+		if(imgWidth>10){											       									       						
+			$("#cTimeDivRides"+cID).css({ /// place the elements of the wallentry acording to the size of the image     	     			
+				 "margin-left": textMarginLeft+"px"
+			});
+		}else{
+			textMarginLeft=84;											       		
+			$("#cTimeDivRides"+cID).css({ // place the elements of the wallentry acording to the size of the image          			
+				  "margin-left": textMarginLeft+"px"
+			});
+		}
+	});
+}
+
 //Load Wall
 function lookintoWallRides(myCommentEntries){
 		var userLoggedInDataloginID = JSON.parse(localStorage.getItem('userdata')).id;
@@ -296,6 +367,8 @@ function lookintoWallRides(myCommentEntries){
 											var i = 0;
 											myWallEntries=wallentries;
 											var j = 0;
+											var cIDs = [];
+											var wIDs = [];
 
 											//ADD EACH WALLENTRY
 											for (;myWallEntries[j];) {		        // Create the list item:
@@ -335,34 +408,8 @@ function lookintoWallRides(myCommentEntries){
 												       	"</div>"
 											       	)).listview("refresh");
 
-													$("#wPicRides"+myWallEntries[j].ID).ready(function(){
-												       	var imgHeight = $("#wPicRides"+myWallEntries[j].ID).height() 
-												       	var textMarginTop = imgHeight+6;	
-												       	
-												       	if(imgHeight>10){											       									       						
-													       	$("#wTextDivRides"+myWallEntries[j].ID).css({ /// place the elements of the wallentry acording to the size of the image      			
-				     												"margin-top": textMarginTop+"px"
-						  									});
-												       	}else{
-												       		textMarginTop=86;											       		
-												       		$("#wTextDivRides"+myWallEntries[j].ID).css({ // place the elements of the wallentry acording to the size of the image    			
-			     												"margin-top": textMarginTop+"px"
-					  										});	
-												       	}
-												       	var imgWidth = $("#wPicRides"+myWallEntries[j].ID).width() 
-												       	var textMarginLeft = Math.round(imgWidth+10);
-												       						//alert(textMarginLeft);
-				  										if(imgWidth>10){											       									       						
-													     	 $("#wTimeDivRides"+myWallEntries[j].ID).css({ // place the elements of the wallentry acording to the size of the image    			
-			     												"margin-left": textMarginLeft+"px"
-					  										});
-												       	}else{
-												       		textMarginLeft=84;											       		
-												       		$("#wTimeDivRides"+myWallEntries[j].ID).css({ // place the elements of the wallentry acording to the size of the image     			
-			     												"margin-left": textMarginLeft+"px"
-					  										});
-												       	}
-												    });
+													wIDs.push(myWallEntries[j].ID);// for a later realign of the text components acording to the picture size
+													
 
 														i=0;	
 														//ADD THE COMMENTS
@@ -394,38 +441,23 @@ function lookintoWallRides(myCommentEntries){
 																	       
 																	)).listview("refresh");
 
-																	$("#cPicRides"+myCommentEntries[i].ID).ready(function(){
-												       					var imgHeight = $("#cPicRides"+myCommentEntries[i].ID).height() 
-												       					var textMarginTop = imgHeight + 26;											       					
-				  														if(imgHeight>10){											       									       						
-													     					 $("#cTextDivRides"+myCommentEntries[i].ID).css({ // place the elements of the wallentry acording to the size of the image     			
-			     																"margin-top": textMarginTop+"px"
-					  														});
-												       					}else{
-												       						textMarginTop=84+26;											       		
-												       						$("#cTextDivRides"+myCommentEntries[i].ID).css({ // place the elements of the wallentry acording to the size of the image     			
-			     																"margin-top": textMarginTop+"px"
-					  														});
-												       					}
-
-												       					var imgWidth = $("#cPicRides"+myCommentEntries[i].ID).width() 
-												       					var textMarginLeft = Math.round(imgWidth+10);											       					
-				  														if(imgWidth>10){											       									       						
-													     					 $("#cTimeDivRides"+myCommentEntries[i].ID).css({ // place the elements of the wallentry acording to the size of the image      			
-			     																"margin-left": textMarginLeft+"px"
-					  														});
-												       					}else{
-												       						textMarginLeft=84;											       		
-												       						$("#cTimeDivRides"+myCommentEntries[i].ID).css({ // place the elements of the wallentry acording to the size of the image      			
-			     																"margin-left": textMarginLeft+"px"
-					  														});
-												       					}
-												       				});											       						 
+																	cIDs.push(myCommentEntries[i].ID); // for a later realign of the text components acording to the picture size
+							       						 
 											       				} 
 											       			  i++;
 															}
 											       j++;
-											}		
+											}	
+											var x=0;															
+											for (;cIDs[x];) {
+												realignCommentsRides(cIDs[x]);
+												x++;
+											}
+											var y=0;															
+											for (;wIDs[y];) {
+												realignEntriesRides(wIDs[y]);
+												y++;
+											}	
 											
 										},
 									});	
