@@ -146,6 +146,7 @@ function logout() {
       $.mobile.changePage("index.html");
     });
   } 
+  $.mobile.changePage("index.html");
     window.localStorage.clear();
     console.log('localStorage gelöscht'); 
 };
