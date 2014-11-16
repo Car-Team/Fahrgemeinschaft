@@ -280,32 +280,34 @@ function lookintoWallRides(myCommentEntries){
 												       	"</div>"
 											       	)).listview("refresh");
 
-											       	var imgHeight = $("#wPicRides"+myWallEntries[j].ID).height() 
-											       	var textMarginTop = imgHeight+6;	
-											       	
-											       	if(imgHeight>10){											       									       						
-												       	$("#wTextDivRides"+myWallEntries[j].ID).css({ /// place the elements of the wallentry acording to the size of the image      			
+													$("#wPicRides"+myWallEntries[j].ID).ready(function(){
+												       	var imgHeight = $("#wPicRides"+myWallEntries[j].ID).height() 
+												       	var textMarginTop = imgHeight+6;	
+												       	
+												       	if(imgHeight>10){											       									       						
+													       	$("#wTextDivRides"+myWallEntries[j].ID).css({ /// place the elements of the wallentry acording to the size of the image      			
+				     												"margin-top": textMarginTop+"px"
+						  									});
+												       	}else{
+												       		textMarginTop=86;											       		
+												       		$("#wTextDivRides"+myWallEntries[j].ID).css({ // place the elements of the wallentry acording to the size of the image    			
 			     												"margin-top": textMarginTop+"px"
-					  									});
-											       	}else{
-											       		textMarginTop=86;											       		
-											       		$("#wTextDivRides"+myWallEntries[j].ID).css({ // place the elements of the wallentry acording to the size of the image    			
-		     												"margin-top": textMarginTop+"px"
-				  										});	
-											       	}
-											       	var imgWidth = $("#wPicRides"+myWallEntries[j].ID).width() 
-											       	var textMarginLeft = Math.round(imgWidth+10);
-											       						//alert(textMarginLeft);
-			  										if(imgWidth>10){											       									       						
-												     	 $("#wTimeDivRides"+myWallEntries[j].ID).css({ // place the elements of the wallentry acording to the size of the image    			
-		     												"margin-left": textMarginLeft+"px"
-				  										});
-											       	}else{
-											       		textMarginLeft=84;											       		
-											       		$("#wTimeDivRides"+myWallEntries[j].ID).css({ // place the elements of the wallentry acording to the size of the image     			
-		     												"margin-left": textMarginLeft+"px"
-				  										});
-											       	}
+					  										});	
+												       	}
+												       	var imgWidth = $("#wPicRides"+myWallEntries[j].ID).width() 
+												       	var textMarginLeft = Math.round(imgWidth+10);
+												       						//alert(textMarginLeft);
+				  										if(imgWidth>10){											       									       						
+													     	 $("#wTimeDivRides"+myWallEntries[j].ID).css({ // place the elements of the wallentry acording to the size of the image    			
+			     												"margin-left": textMarginLeft+"px"
+					  										});
+												       	}else{
+												       		textMarginLeft=84;											       		
+												       		$("#wTimeDivRides"+myWallEntries[j].ID).css({ // place the elements of the wallentry acording to the size of the image     			
+			     												"margin-left": textMarginLeft+"px"
+					  										});
+												       	}
+												    });
 
 														i=0;	
 														//ADD THE COMMENTS
@@ -336,31 +338,34 @@ function lookintoWallRides(myCommentEntries){
 																		       	"<span class='ui-li-count commentDate'>"+ cdate.substring(8,10)+"."+cdate.substring(5,7)+" - "+(myCommentEntries[i].Timestamp).substring(11,16)+  "</span>"
 																	       
 																	)).listview("refresh");
-											       					var imgHeight = $("#cPicRides"+myCommentEntries[i].ID).height() 
-											       					var textMarginTop = imgHeight + 26;											       					
-			  														if(imgHeight>10){											       									       						
-												     					 $("#cTextDivRides"+myCommentEntries[i].ID).css({ // place the elements of the wallentry acording to the size of the image     			
-		     																"margin-top": textMarginTop+"px"
-				  														});
-											       					}else{
-											       						textMarginTop=84+26;											       		
-											       						$("#cTextDivRides"+myCommentEntries[i].ID).css({ // place the elements of the wallentry acording to the size of the image     			
-		     																"margin-top": textMarginTop+"px"
-				  														});
-											       					}
 
-											       					var imgWidth = $("#cPicRides"+myCommentEntries[i].ID).width() 
-											       					var textMarginLeft = Math.round(imgWidth+10);											       					
-			  														if(imgWidth>10){											       									       						
-												     					 $("#cTimeDivRides"+myCommentEntries[i].ID).css({ // place the elements of the wallentry acording to the size of the image      			
-		     																"margin-left": textMarginLeft+"px"
-				  														});
-											       					}else{
-											       						textMarginLeft=84;											       		
-											       						$("#cTimeDivRides"+myCommentEntries[i].ID).css({ // place the elements of the wallentry acording to the size of the image      			
-		     																"margin-left": textMarginLeft+"px"
-				  														});
-											       					}											       						 
+																	$("#cPicRides"+myCommentEntries[i].ID).ready(function(){
+												       					var imgHeight = $("#cPicRides"+myCommentEntries[i].ID).height() 
+												       					var textMarginTop = imgHeight + 26;											       					
+				  														if(imgHeight>10){											       									       						
+													     					 $("#cTextDivRides"+myCommentEntries[i].ID).css({ // place the elements of the wallentry acording to the size of the image     			
+			     																"margin-top": textMarginTop+"px"
+					  														});
+												       					}else{
+												       						textMarginTop=84+26;											       		
+												       						$("#cTextDivRides"+myCommentEntries[i].ID).css({ // place the elements of the wallentry acording to the size of the image     			
+			     																"margin-top": textMarginTop+"px"
+					  														});
+												       					}
+
+												       					var imgWidth = $("#cPicRides"+myCommentEntries[i].ID).width() 
+												       					var textMarginLeft = Math.round(imgWidth+10);											       					
+				  														if(imgWidth>10){											       									       						
+													     					 $("#cTimeDivRides"+myCommentEntries[i].ID).css({ // place the elements of the wallentry acording to the size of the image      			
+			     																"margin-left": textMarginLeft+"px"
+					  														});
+												       					}else{
+												       						textMarginLeft=84;											       		
+												       						$("#cTimeDivRides"+myCommentEntries[i].ID).css({ // place the elements of the wallentry acording to the size of the image      			
+			     																"margin-left": textMarginLeft+"px"
+					  														});
+												       					}
+												       				});											       						 
 											       				} 
 											       			  i++;
 															}
