@@ -7,7 +7,7 @@ if(!$db)
   exit("Verbindungsfehler: ".mysqli_connect_error());
 }
 mysqli_query($db, "SET NAMES 'utf8'");
-$sqlQuery = "SELECT r.ID,r.groupID,r.driver_id,r.price,r.date,r.departure_time,r.departure,r.destination,r.free_places,c.ModelName,r.ride_infos,u.name 
+$sqlQuery = "SELECT r.ID,r.groupID,r.driver_id,r.price,r.date,r.departure_time,r.departure,r.destination,r.free_places,c.ModelName,r.ride_infos,u.name,u.ID 
 FROM Rides r 
 LEFT JOIN Users u ON r.driver_id = u.ID 
 LEFT JOIN Cars c ON r.car_name = c.ID WHERE  r.ID = '$viewRideID'";
@@ -33,7 +33,8 @@ if($successful) {
 		'free_places'			=> $resultData[8],//ModelName
 		'car_name'				=> $resultData[9],//LicensePlate
 		'ride_infos'			=> $resultData[10],//Seats
-		'name'					=> $resultData[11]//Seats
+		'name'					=> $resultData[11],//Seats
+       'userID'					=> $resultData[12]//Seats
 
 	);
 	echo $_GET['callback'].'('.json_encode($viewRideResult).')';

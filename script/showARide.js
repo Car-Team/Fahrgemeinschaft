@@ -44,6 +44,8 @@ function fillRideData(viewRideID) {
 			document.getElementById("info").value = 			viewRideResult.ride_infos;
 			document.getElementById("driverName").value = 		viewRideResult.name;		
 
+          document.getElementById("driverName").onclick=function(){openProfilByID(viewRideResult.userID)};		
+
 			//users shouldnt be allowed to edit the rideoverview
 			document.getElementById("date").readOnly = true;
 			document.getElementById("departureTime").readOnly = true;
