@@ -575,8 +575,15 @@ function lookintoWall(myCommentEntries){
 							        myDiv2.innerHTML = viewProfileResult.email;	      				    
 							        var myDiv3 = document.getElementById("telfield");
 							        myDiv3.innerHTML = viewProfileResult.tel;		       				    
-							        var myDiv4 = document.getElementById("carfield");
-							        myDiv4.innerHTML = viewProfileResult.modelName;	
+							       
+							        var carname=viewProfileResult.modelName;
+							        if(isEmpty(carname)){
+								        var myDiv4 = document.getElementById("carfield");
+								        myDiv4.innerHTML = "Kein Auto angegeben.";	
+							    	}else{
+							    		var myDiv4 = document.getElementById("carfield");
+								        myDiv4.innerHTML = viewProfileResult.modelName;	
+							    	}
 							        var myDiv5 = document.getElementById("userdescription");
 							        myDiv5.innerHTML = "<h3>Beschreibung</h3>" + viewProfileResult.descriptionUser;	
 
@@ -691,22 +698,42 @@ $(document).on('pageinit', '#car', function() {
 		//check if its my own profil i want to visit			
 		if(userLoggedInDataloginID===viewProfileID){
 			//if it is my own profil than load from localstorage
-			var myDiv1 = document.getElementById("carmodelfield");
-	        myDiv1.innerHTML = JSON.parse(localStorage.getItem('userdata')).modelName +  " ("+JSON.parse(localStorage.getItem('userdata')).colourCar+")";
-	        var myDiv2 = document.getElementById("caryearfield");
-	        myDiv2.innerHTML = "Baujahr " + JSON.parse(localStorage.getItem('userdata')).constructionYear;
-	        var myDiv3 = document.getElementById("carlicenseplate");
-	        myDiv3.innerHTML = JSON.parse(localStorage.getItem('userdata')).licensePlate;
-	        var myDiv4 = document.getElementById("carseats");
-	        myDiv4.innerHTML = JSON.parse(localStorage.getItem('userdata')).seats + " Sitze";
-	        var myDiv5= document.getElementById("carnamefield");
-	        myDiv5.innerHTML = JSON.parse(localStorage.getItem('userdata')).name;
-	        var myDiv6 = document.getElementById("cardescription");
-	        myDiv6.innerHTML = "<h3>Beschreibung</h3>" + JSON.parse(localStorage.getItem('userdata')).descriptionCar;
 
-			if(JSON.parse(localStorage.getItem('userdata')).carPicID.length>5){
-				document.getElementById("car_picture").src=JSON.parse(localStorage.getItem('userdata')).carPicID;
-			}
+			var carname = JSON.parse(localStorage.getItem('userdata')).modelName;
+
+			if(isEmpty(carname)){
+				var myDiv1 = document.getElementById("carmodelfield");
+		    	myDiv1.innerHTML = "Kein Auto angegeben.";
+		   	    var myDiv2 = document.getElementById("caryearfield");
+				myDiv2.innerHTML = "/";	
+				var myDiv3 = document.getElementById("carlicenseplate");
+				myDiv3.innerHTML = "/";	
+				var myDiv4 = document.getElementById("carseats");
+				myDiv4.innerHTML = "/";	
+				var myDiv5= document.getElementById("carnamefield");
+				myDiv5.innerHTML = "/";	
+				var myDiv6 = document.getElementById("cardescription");
+				myDiv6.innerHTML = "<h3>Beschreibung</h3>" + "/";	
+		    }else{
+				var myDiv1 = document.getElementById("carmodelfield");
+		        myDiv1.innerHTML = JSON.parse(localStorage.getItem('userdata')).modelName +  " ("+JSON.parse(localStorage.getItem('userdata')).colourCar+")";
+		        var myDiv2 = document.getElementById("caryearfield");
+		        myDiv2.innerHTML = "Baujahr " + JSON.parse(localStorage.getItem('userdata')).constructionYear;
+		        var myDiv3 = document.getElementById("carlicenseplate");
+		        myDiv3.innerHTML = JSON.parse(localStorage.getItem('userdata')).licensePlate;
+		        var myDiv4 = document.getElementById("carseats");
+		        myDiv4.innerHTML = JSON.parse(localStorage.getItem('userdata')).seats + " Sitze";
+		        var myDiv5= document.getElementById("carnamefield");
+		        myDiv5.innerHTML = JSON.parse(localStorage.getItem('userdata')).name;
+		        var myDiv6 = document.getElementById("cardescription");	        
+		        myDiv6.innerHTML = "<h3>Beschreibung</h3>" + JSON.parse(localStorage.getItem('userdata')).descriptionCar;
+		        if(JSON.parse(localStorage.getItem('userdata')).carPicID.length>5){
+					document.getElementById("car_picture").src=JSON.parse(localStorage.getItem('userdata')).carPicID;
+				}
+	    		    		
+	    	}
+
+			
 	    }else{
 	    	remove("editButton");
 	    	$.ajax({
@@ -714,24 +741,42 @@ $(document).on('pageinit', '#car', function() {
 							url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/viewProfile.php",
 							data: viewProfileData,
 							dataType: "jsonp",			
-							success:	function(viewProfileResult) {									
-							        var myDiv1 = document.getElementById("carmodelfield");
-							        myDiv1.innerHTML = viewProfileResult.modelName  +  " ("+viewProfileResult.colourCar+")";	
-							        var myDiv2 = document.getElementById("caryearfield");
-							        myDiv2.innerHTML = "Baujahr " + viewProfileResult.constructionYear;	
-							        var myDiv3 = document.getElementById("carlicenseplate");
-							        myDiv3.innerHTML = viewProfileResult.licensePlate;	
-							        var myDiv4 = document.getElementById("carseats");
-							        myDiv4.innerHTML = viewProfileResult.seats;	 + " Sitze";
-							        var myDiv5= document.getElementById("carnamefield");
-							        myDiv5.innerHTML = viewProfileResult.name;	
-							        var myDiv6 = document.getElementById("cardescription");
-							        myDiv6.innerHTML = "<h3>Beschreibung</h3>" + viewProfileResult.descriptionCar;	
+							success:	function(viewProfileResult) {
+									var carname = viewProfileResult.modelName
+									if(isEmpty(carname)){	
+										var myDiv1 = document.getElementById("carmodelfield");
+		     						    myDiv1.innerHTML = "Kein Auto angegeben.";
+		     						    var myDiv2 = document.getElementById("caryearfield");
+								        myDiv2.innerHTML = "/";	
+								        var myDiv3 = document.getElementById("carlicenseplate");
+								        myDiv3.innerHTML = "/";	
+								        var myDiv4 = document.getElementById("carseats");
+								        myDiv4.innerHTML = "/";	
+								        var myDiv5= document.getElementById("carnamefield");
+								        myDiv5.innerHTML = "/";	
+								        var myDiv6 = document.getElementById("cardescription");
+								        myDiv6.innerHTML = "<h3>Beschreibung</h3>" + "/";		
+	    							}else{								
+								        var myDiv1 = document.getElementById("carmodelfield");
+								        myDiv1.innerHTML = viewProfileResult.modelName  +  " ("+viewProfileResult.colourCar+")";	
+								        var myDiv2 = document.getElementById("caryearfield");
+								        myDiv2.innerHTML = "Baujahr " + viewProfileResult.constructionYear;	
+								        var myDiv3 = document.getElementById("carlicenseplate");
+								        myDiv3.innerHTML = viewProfileResult.licensePlate;	
+								        var myDiv4 = document.getElementById("carseats");
+								        myDiv4.innerHTML = viewProfileResult.seats;	 + " Sitze";
+								        var myDiv5= document.getElementById("carnamefield");
+								        myDiv5.innerHTML = viewProfileResult.name;	
+								        var myDiv6 = document.getElementById("cardescription");
+								        myDiv6.innerHTML = "<h3>Beschreibung</h3>" + viewProfileResult.descriptionCar;	
 
-									if(viewProfileResult.carPicID.length>5){
-							        	document.getElementById("car_picture").src=viewProfileResult.carPicID;
-							    	}
-
+										if(viewProfileResult.carPicID.length>5){
+								        	document.getElementById("car_picture").src=viewProfileResult.carPicID;
+								    	}
+							    	
+							    	
+	    								
+	    						}
 
 							},
 				});	
