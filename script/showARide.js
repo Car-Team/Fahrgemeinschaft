@@ -214,6 +214,44 @@ function appendWall(viewRideID) {
 	});	
 }
 
+//remove Comment
+function removeWallCommentRides(commentid){
+	var postData = {
+			'commentID' : commentid
+	}
+		//alert(postData.commentID)
+	if (confirm("Sicher, dass sie den Kommentar Nr. "+postData.commentID+ " löschen wollen?")) {
+		$.ajax({
+			type: "GET",
+			url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/removeCommentRides.php",
+			data: postData,
+			dataType: "jsonp",
+			success:	function() {							
+							window.location.href="showARide.html"//window.location.href
+						},
+		});
+	}
+}
+
+//remove Wallentry
+function removeWallEntryRides(wallid){
+	var postData = {
+		'wallID' : wallid
+	}
+	//alert(postData.wallID)
+	if (confirm("Sicher, dass sie den PinnwandEintrag Nr. "+postData.wallID+ " und alle damit verbundenen Kommentare löschen wollen?")) {
+		$.ajax({
+			type: "GET",
+			url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/removeEntryRides.php",
+			data: postData,
+			dataType: "jsonp",
+			success:	function() {							
+							window.location.href="showARide.html"//window.location.href
+						},
+		});
+	}
+}
+
 //Post Wallentry on Rideoverview
 function postTWRides() {
 	var text = $('#postTextRides').val();
@@ -384,13 +422,19 @@ function lookintoWallRides(myCommentEntries){
 											       	 myWallEntries[j].name+"<span class='ui-li-count'>"+date.substring(8,10)+"."+date.substring(5,7)+" - "+(myWallEntries[j].Timestamp).substring(11,16)+"</span>" //myWallEntries.length+
 											       )).listview("refresh");
 
-											       var wImgSrc="";
-											       if(myWallEntries[j].picID.length>5){
+											        var wImgSrc="";
+											        if(myWallEntries[j].picID.length>5){
 											       	wImgSrc=myWallEntries[j].picID;//"http://newtroy.integra-technologies.co.uk/static/images/unknown_user.png" 
 											   		}else{
 											   		wImgSrc="http://newtroy.integra-technologies.co.uk/static/images/unknown_user.png"; 	
 											   		}
 
+												   	var deleteString ="";
+											   		var einrueckPixel=0;
+											   		if(myWallEntries[j].SenderID==JSON.parse(localStorage.getItem('userdata')).id){
+											   			deleteString = "<a class='ui-btn ui-corner-all btn-only-icon fa fa-remove' style='Color:white; Background-Color:#FF6666; text-shadow: none; position: absolute; margin-right:6px; right:0px; top: -2px;' onClick='removeWallEntryRides("+myWallEntries[j].ID+");'>"+	"</a>";				 		
+											   			einrueckPixel=50;
+											   		}
 											       $("#ulWallHeaderRides").append(
 											       	$("<li style='min-height:66px'>").append(
 												       	"<div class='commentPicFrameWall'>"+
@@ -404,9 +448,10 @@ function lookintoWallRides(myCommentEntries){
 												       	 		"<label style='white-space:normal'>" + 
 												       	 			myWallEntries[j].Textinput + 												       	 			
 												       	 		"</label>"+	
-												       	 		"<a href='#popupCommentRides' data-rel='popup' data-position-to='window' class='ui-btn ui-corner-all btn-only-icon fa fa-comment' data-transition='pop' style='Color:white; Background-Color:#6d88b7; text-shadow: none; position: absolute; margin-right:6px; right:8px; top: 2px;' onClick='openCommentInput("+myWallEntries[j].ID+");'>"+	
+												       	 		"<a href='#popupCommentRides' data-rel='popup' data-position-to='window' class='ui-btn ui-corner-all btn-only-icon fa fa-comment' data-transition='pop' style='Color:white; Background-Color:#6d88b7; text-shadow: none; position: absolute; margin-right:6px; right:"+einrueckPixel+"px; top: -2px;' onClick='openCommentInput("+myWallEntries[j].ID+");'>"+	
 												       	 		 ""+//"ID:"+myWallEntries[j].ID+
-												       	 		"</a>"+													       	 											       		
+												       	 		"</a>"+	
+												       	 		deleteString+												       	 											       		
 												       	"</div>"
 											       	)).listview("refresh");
 
@@ -427,6 +472,11 @@ function lookintoWallRides(myCommentEntries){
 																   	}else{
 																   		cImgSrc="http://newtroy.integra-technologies.co.uk/static/images/unknown_user.png"; 	
 																   	}
+
+																   	var deleteString ="";									   		
+									   								if(myCommentEntries[i].SenderID==JSON.parse(localStorage.getItem('userdata')).id){
+									   									deleteString = "<a class='ui-btn ui-corner-all btn-only-icon fa fa-remove' style='Color:white; Background-Color:#FF6666; text-shadow: none; position: absolute; margin-right:6px; right:0px; top: 22px;' onClick='removeWallCommentRides("+myCommentEntries[i].ID+");'>"+	"</a>";				 		
+									   								}
 											       					$("#ulWallHeaderRides").append(
 																	    $("<li style='border-color: #D8D8D8 ; border-left:0px; border-right:0px; background-color:#E8E8E8 ; min-height:94px; margin-left:30px'>").append(
 																	       		"<div class='commentPicFrameWall' style='margin-top:30px;'>"+
@@ -440,7 +490,7 @@ function lookintoWallRides(myCommentEntries){
 																		       		"<label style='white-space:normal'>"+myCommentEntries[i].Textinput + "</label>"+
 																		       	"</div>"+			//+"."+date2.substring(0,4)								       	
 																		       	"<span class='ui-li-count commentDate'>"+ cdate.substring(8,10)+"."+cdate.substring(5,7)+" - "+(myCommentEntries[i].Timestamp).substring(11,16)+  "</span>"
-																	       
+																	       +deleteString
 																	)).listview("refresh");
 
 																	cIDs.push(myCommentEntries[i].ID); // for a later realign of the text components acording to the picture size
