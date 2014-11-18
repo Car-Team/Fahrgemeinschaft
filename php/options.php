@@ -1,11 +1,10 @@
 <?php
+
 header('Content-Type: text/javascript; charset=UTF-8');
 
 
 $id = $_GET['id'];
-var_dump($id);
-die();
-$pw = $_GET['pwConfirm'];
+$pw = $_GET['pw'];
 $fb_id = $_GET['fb_id'];
 
 $result = array(
