@@ -375,6 +375,43 @@ function postCO() {
 	}
 }
 
+//remove Comment
+function removeWallComment(commentid){
+	var postData = {
+			'commentID' : commentid
+	}
+		//alert(postData.commentID)
+	if (confirm("Sicher, dass sie den Kommentar Nr. "+postData.commentID+ " löschen wollen?")) {
+		$.ajax({
+			type: "GET",
+			url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/removeComment.php",
+			data: postData,
+			dataType: "jsonp",
+			success:	function() {							
+							window.location.href="profile.html"//window.location.href
+						},
+		});
+	}
+}
+
+//remove Wallentry
+function removeWallEntry(wallid){
+	var postData = {
+		'wallID' : wallid
+	}
+	//alert(postData.wallID)
+	if (confirm("Sicher, dass sie den PinnwandEintrag Nr. "+postData.wallID+ " und alle damit verbundenen Kommentare löschen wollen?")) {
+		$.ajax({
+			type: "GET",
+			url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/removeEntry.php",
+			data: postData,
+			dataType: "jsonp",
+			success:	function() {							
+							window.location.href="profile.html"//window.location.href
+						},
+		});
+	}
+}
 //Calculate the Time that has passed since the entry on the Wall (aka Pinnwand) was created
 function timeDifference(date1,date2) {
         var difference = date1 - (date2)+10000;//-7200000
@@ -451,6 +488,12 @@ function lookintoWall(myCommentEntries){
 				   			wImgSrc="http://newtroy.integra-technologies.co.uk/static/images/unknown_user.png"; 	
 				   		}
 
+				   		var deleteString ="";
+				   		var einrueckPixel=0;
+				   		if(myWallEntries[j].SenderID==JSON.parse(localStorage.getItem('userdata')).id){
+				   			deleteString = "<a class='ui-btn ui-corner-all btn-only-icon fa fa-remove' style='Color:white; Background-Color:#FF6666; text-shadow: none; position: absolute; margin-right:6px; right:0px; top: -2px;' onClick='removeWallEntry("+myWallEntries[j].ID+");'>"+	"</a>";				 		
+				   			einrueckPixel=50;
+				   		}
 				       $("#ulWallHeader").append(
 				       	$("<li style='min-height:66px'>").append(
 					       	"<div class='commentPicFrameWall'>"+
@@ -464,10 +507,10 @@ function lookintoWall(myCommentEntries){
 					       	 		"<label style='white-space:normal'>" + 
 					       	 			myWallEntries[j].Textinput + 												       	 			
 					       	 		"</label>"+	
-					       	 		"<a href='#popupComment' data-rel='popup' data-position-to='window' class='ui-btn ui-corner-all btn-only-icon fa fa-comment' data-transition='pop' style='Color:white; Background-Color:#6d88b7; text-shadow: none; position: absolute; margin-right:6px; right:8px; top: 2px;' onClick='openCommentInput("+myWallEntries[j].ID+");'>"+	
+					       	 		"<a href='#popupComment' data-rel='popup' data-position-to='window' class='ui-btn ui-corner-all btn-only-icon fa fa-comment' data-transition='pop' style='Color:white; Background-Color:#6d88b7; text-shadow: none; position: absolute; margin-right:6px; right:"+einrueckPixel+"px; top: -2px;' onClick='openCommentInput("+myWallEntries[j].ID+");'>"+	
 					       	 		 ""+//"ID:"+myWallEntries[j].ID+
-					       	 		"</a>"+		
-					       	 											       		
+					       	 		"</a>"+
+					       	 			deleteString+								       		
 					       	"</div>"
 
 				       	)).listview("refresh");
@@ -491,6 +534,11 @@ function lookintoWall(myCommentEntries){
 									   		cImgSrc="http://newtroy.integra-technologies.co.uk/static/images/unknown_user.png"; 	
 									   		}
 
+
+									   		var deleteString ="";									   		
+									   		if(myCommentEntries[i].SenderID==JSON.parse(localStorage.getItem('userdata')).id){
+									   			deleteString = "<a class='ui-btn ui-corner-all btn-only-icon fa fa-remove' style='Color:white; Background-Color:#FF6666; text-shadow: none; position: absolute; margin-right:6px; right:0px; top: 22px;' onClick='removeWallComment("+myCommentEntries[i].ID+");'>"+	"</a>";				 		
+									   		}
 				       						$("#ulWallHeader").append(
 										       	$("<li style='border-color: #D8D8D8 ; border-left:0px; border-right:0px; background-color:#E8E8E8 ; min-height:94px; margin-left:30px'>").append(
 										       		"<div class='commentPicFrameWall' style='margin-top:30px;'>"+
@@ -504,7 +552,7 @@ function lookintoWall(myCommentEntries){
 											       		"<label style='white-space:normal'>"+myCommentEntries[i].Textinput + "</label>"+
 											       	"</div>"+			//+"."+date2.substring(0,4)								       	
 											       	"<span class='ui-li-count commentDate'>"+ cdate.substring(8,10)+"."+cdate.substring(5,7)+" - "+(myCommentEntries[i].Timestamp).substring(11,16)+  "</span>"
-										       
+										       		+deleteString
 											       )).listview("refresh");
 											
 
