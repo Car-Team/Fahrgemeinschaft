@@ -34,7 +34,8 @@ function deleteAccount(){
 
 	//eingegebenes Passwort überprüfen auf gleichheit
 	if(pwConfirm == '' || pw == '' || pwConfirm != pw) {
-		alert("Die eingegebenen Passwörter sind falsch oder stimmen nicht überein!");
+		$('#wrongPWPopup').popup("open");
+		//alert("Die eingegebenen Passwörter sind falsch oder stimmen nicht überein!");
 		return;
 	}
 		
@@ -46,10 +47,12 @@ function deleteAccount(){
 		dataType: "jsonp",
 		success: function(result) {
 			if(result.successful){
+				$('#deleteAccPopup').popup("open");
 				$.mobile.changePage("index.html");
 			}
 			else {
-				alert("Die eingegebenen Passwörter sind falsch oder stimmen nicht überein!");
+				$('#wrongPWPopup').popup("open");
+				//alert("Die eingegebenen Passwörter sind falsch oder stimmen nicht überein!");
 			}
 		},
 	});

@@ -163,10 +163,12 @@ function logout() {
   } else {
     FB.logout(function(response) {
       console.log('Benutzer ist ausgeloggt');
+      $('#logoutPopup').popup("open");
       window.location.href="index.html";
       //$.mobile.changePage("index.html");
     });
   }
+  $('#logoutPopup').popup("open");
   window.location.href="index.html";
   //$.mobile.changePage("index.html");
     window.localStorage.clear();
@@ -193,13 +195,15 @@ function emailRequest() {
     success:  function(signupResult) {
               if(signupResult.successful)
                 loadLocalStorage();
+                $('#registerPopup').popup("open");
                 window.location.href="menu.html";
                 //$.mobile.changePage("menu.html");
               },
     });
   }
   else {
-    alert("Bitte geben Sie eine gültige E-Mail Adresse an.")
+      $('#emailRequestPopup').popup("open");
+    //alert("Bitte geben Sie eine gültige E-Mail Adresse an.")
   }
 }
 
