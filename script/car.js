@@ -490,7 +490,7 @@ function lookintoWall(myCommentEntries){
 
 				   		var deleteString ="";
 				   		var einrueckPixel=0;
-				   		if(myWallEntries[j].SenderID==JSON.parse(localStorage.getItem('userdata')).id  | JSON.parse(localStorage.getItem('userdata')).id===JSON.parse(localStorage.getItem('userdata')).viewProfileId){
+				   		if(myWallEntries[j].SenderID==JSON.parse(localStorage.getItem('userdata')).id  | JSON.parse(localStorage.getItem('userdata')).id==JSON.parse(localStorage.getItem('userdata')).viewProfileId){
 				   			deleteString = "<a class='ui-btn ui-corner-all btn-only-icon fa fa-remove' style='Color:white; Background-Color:#FF6666; text-shadow: none; position: absolute; margin-right:6px; right:0px; top: -2px;' onClick='removeWallEntry("+myWallEntries[j].ID+");'>"+	"</a>";				 		
 				   			einrueckPixel=50;
 				   		}
@@ -536,7 +536,7 @@ function lookintoWall(myCommentEntries){
 
 
 									   		var deleteString ="";									   		
-									   		if(myCommentEntries[i].SenderID==JSON.parse(localStorage.getItem('userdata')).id | JSON.parse(localStorage.getItem('userdata')).id===JSON.parse(localStorage.getItem('userdata')).viewProfileId){
+									   		if(myCommentEntries[i].SenderID==JSON.parse(localStorage.getItem('userdata')).id | JSON.parse(localStorage.getItem('userdata')).id==JSON.parse(localStorage.getItem('userdata')).viewProfileId){
 									   			deleteString = "<a class='ui-btn ui-corner-all btn-only-icon fa fa-remove' style='Color:white; Background-Color:#FF6666; text-shadow: none; position: absolute; margin-right:6px; right:0px; top: 22px;' onClick='removeWallComment("+myCommentEntries[i].ID+");'>"+	"</a>";				 		
 									   		}
 				       						$("#ulWallHeader").append(
