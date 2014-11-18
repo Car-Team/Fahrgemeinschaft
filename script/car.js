@@ -85,23 +85,24 @@ function isEmpty(str) {
 //Overwriting Specific Data in Localstorage
 function setProfilIdtoView(id){
 		localStorage.setItem("userdata", JSON.stringify({
-								id: JSON.parse(localStorage.getItem('userdata')).id, 
-								name: JSON.parse(localStorage.getItem('userdata')).name, 
-								email: JSON.parse(localStorage.getItem('userdata')).email, 
-								tel: JSON.parse(localStorage.getItem('userdata')).tel, 
-								picid: JSON.parse(localStorage.getItem('userdata')).picid, 
-								carid: JSON.parse(localStorage.getItem('userdata')).carid,
-								descriptionUser: JSON.parse(localStorage.getItem('userdata')).descriptionUser,
-								fb_id: JSON.parse(localStorage.getItem('userdata')).fb_id,
-								modelName: JSON.parse(localStorage.getItem('userdata')).modelName,
-								licensePlate: JSON.parse(localStorage.getItem('userdata')).licensePlate,
-								seats: JSON.parse(localStorage.getItem('userdata')).seats,
-								constructionYear: JSON.parse(localStorage.getItem('userdata')).constructionYear,
-								descriptionCar: JSON.parse(localStorage.getItem('userdata')).descriptionCar,
-								colourCar: JSON.parse(localStorage.getItem('userdata')).colourCar,
-								carPicID: JSON.parse(localStorage.getItem('userdata')).carPicID,
-								viewProfileId: id,
-							    viewRideId: JSON.parse(localStorage.getItem('userdata')).viewRideId}));
+			id: JSON.parse(localStorage.getItem('userdata')).id, 
+			name: JSON.parse(localStorage.getItem('userdata')).name, 
+			email: JSON.parse(localStorage.getItem('userdata')).email, 
+			tel: JSON.parse(localStorage.getItem('userdata')).tel, 
+			picid: JSON.parse(localStorage.getItem('userdata')).picid, 
+			carid: JSON.parse(localStorage.getItem('userdata')).carid,
+			descriptionUser: JSON.parse(localStorage.getItem('userdata')).descriptionUser,
+			fb_id: JSON.parse(localStorage.getItem('userdata')).fb_id,
+			modelName: JSON.parse(localStorage.getItem('userdata')).modelName,
+			licensePlate: JSON.parse(localStorage.getItem('userdata')).licensePlate,
+			seats: JSON.parse(localStorage.getItem('userdata')).seats,
+			constructionYear: JSON.parse(localStorage.getItem('userdata')).constructionYear,
+			descriptionCar: JSON.parse(localStorage.getItem('userdata')).descriptionCar,
+			colourCar: JSON.parse(localStorage.getItem('userdata')).colourCar,
+			carPicID: JSON.parse(localStorage.getItem('userdata')).carPicID,
+			viewProfileId: id,
+		    viewRideId: JSON.parse(localStorage.getItem('userdata')).viewRideId
+		}));
 }
 
 //open specific Profil
@@ -134,48 +135,55 @@ function postProfileChanges() {
 	var descriptiontext = $('#userdescriptionInput').val();
 	var loginID = JSON.parse(localStorage.getItem('userdata')).id;	
 
-	localStorage.setItem("userdata", JSON.stringify({
-								id: JSON.parse(localStorage.getItem('userdata')).id, 
-								name: nametext, 
-								email: emailtext, 
-								tel: teltext, 
-								picid: picurl, 
-								carid: JSON.parse(localStorage.getItem('userdata')).carid,
-								descriptionUser: descriptiontext,
-								fb_id: JSON.parse(localStorage.getItem('userdata')).fb_id,
-								modelName: JSON.parse(localStorage.getItem('userdata')).modelName,
-								licensePlate: JSON.parse(localStorage.getItem('userdata')).licensePlate,
-								seats: JSON.parse(localStorage.getItem('userdata')).seats,
-								constructionYear: JSON.parse(localStorage.getItem('userdata')).constructionYear,
-								descriptionCar: JSON.parse(localStorage.getItem('userdata')).descriptionCar,
-								colourCar: JSON.parse(localStorage.getItem('userdata')).colourCar,
-								carPicID: JSON.parse(localStorage.getItem('userdata')).carPicID,
-								viewProfileId: JSON.parse(localStorage.getItem('userdata')).viewProfileId,
-							    viewRideId: JSON.parse(localStorage.getItem('userdata')).viewRideId}));
-
-	if(nametext.length==0) {
-		alert("Leerer Name!");	
-	}else{	
-		var postData = {
-			'picurl' : picurl,
-			'name' : nametext,
-			'email' : emailtext,
-			'tel' : teltext,
-			'description' : descriptiontext,
-			'loginID' : loginID
-		}
-			
-		$.ajax({
-			type: "GET",
-			url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/changeProfile.php",
-			data: postData,
-			dataType: "jsonp",
-			success:	function() {
-							//alert(postResult);
-							window.location.href="profile.html"
-						},
-		});
+	if(isEmpty(nametext)) {
+		alert("Geben Sie bitte Ihren Namen an!");	
+		return;
+	}	
+	if(isEmpty(emailtext)) {
+		alert("Geben Sie bitte Ihre korrekte Emailadresse an!");	
+		return;
 	}
+
+	localStorage.setItem("userdata", JSON.stringify({
+		id: JSON.parse(localStorage.getItem('userdata')).id, 
+		name: nametext, 
+		email: emailtext, 
+		tel: teltext, 
+		picid: picurl, 
+		carid: JSON.parse(localStorage.getItem('userdata')).carid,
+		descriptionUser: descriptiontext,
+		fb_id: JSON.parse(localStorage.getItem('userdata')).fb_id,
+		modelName: JSON.parse(localStorage.getItem('userdata')).modelName,
+		licensePlate: JSON.parse(localStorage.getItem('userdata')).licensePlate,
+		seats: JSON.parse(localStorage.getItem('userdata')).seats,
+		constructionYear: JSON.parse(localStorage.getItem('userdata')).constructionYear,
+		descriptionCar: JSON.parse(localStorage.getItem('userdata')).descriptionCar,
+		colourCar: JSON.parse(localStorage.getItem('userdata')).colourCar,
+		carPicID: JSON.parse(localStorage.getItem('userdata')).carPicID,
+		viewProfileId: JSON.parse(localStorage.getItem('userdata')).viewProfileId,
+	    viewRideId: JSON.parse(localStorage.getItem('userdata')).viewRideId
+	}));
+
+	var postData = {
+		'picurl' : picurl,
+		'name' : nametext,
+		'email' : emailtext,
+		'tel' : teltext,
+		'description' : descriptiontext,
+		'loginID' : loginID
+	}
+		
+	$.ajax({
+		type: "GET",
+		url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/changeProfile.php",
+		data: postData,
+		dataType: "jsonp",
+		success:	function() {
+						//alert(postResult);
+						window.location.href="profile.html"
+					},
+	});
+	
 }
 
 //Edit Car --> send changes to DB
@@ -189,46 +197,57 @@ function postCarChanges() {
 	var cardescriptiontext  = $('#cardescriptionInput').val();
 	var loginID = JSON.parse(localStorage.getItem('userdata')).id;
 	//Overwriting Specific Data in Localstorage
+
+	if(isEmpty(carmodeltext)) {
+		alert("Geben Sie den Modell Namen des Autos an!");	
+		return;
+	}
+	if(isEmpty(carseatstext)) {
+		alert("Geben Sie bitte die Anzahl der Sitze an!");	
+		return;
+	}			
+
 	localStorage.setItem("userdata", JSON.stringify({
-								id: JSON.parse(localStorage.getItem('userdata')).id, 
-								name: JSON.parse(localStorage.getItem('userdata')).name, 
-								email: JSON.parse(localStorage.getItem('userdata')).email, 
-								tel: JSON.parse(localStorage.getItem('userdata')).tel, 
-								picid: JSON.parse(localStorage.getItem('userdata')).picid, 
-								carid: JSON.parse(localStorage.getItem('userdata')).carid,
-								descriptionUser: JSON.parse(localStorage.getItem('userdata')).descriptionUser,
-								fb_id: JSON.parse(localStorage.getItem('userdata')).fb_id,
-								modelName: carmodeltext,
-								licensePlate: carlicenseplatetext,
-								seats: carseatstext,
-								constructionYear: caryeartext,
-								descriptionCar: cardescriptiontext,
-								colourCar: carcolortext,
-								carPicID: carpicurl,
-								viewProfileId: JSON.parse(localStorage.getItem('userdata')).viewProfileId,
-							    viewRideId: JSON.parse(localStorage.getItem('userdata')).viewRideId}));
+		id: JSON.parse(localStorage.getItem('userdata')).id, 
+		name: JSON.parse(localStorage.getItem('userdata')).name, 
+		email: JSON.parse(localStorage.getItem('userdata')).email, 
+		tel: JSON.parse(localStorage.getItem('userdata')).tel, 
+		picid: JSON.parse(localStorage.getItem('userdata')).picid, 
+		carid: JSON.parse(localStorage.getItem('userdata')).carid,
+		descriptionUser: JSON.parse(localStorage.getItem('userdata')).descriptionUser,
+		fb_id: JSON.parse(localStorage.getItem('userdata')).fb_id,
+		modelName: carmodeltext,
+		licensePlate: carlicenseplatetext,
+		seats: carseatstext,
+		constructionYear: caryeartext,
+		descriptionCar: cardescriptiontext,
+		colourCar: carcolortext,
+		carPicID: carpicurl,
+		viewProfileId: JSON.parse(localStorage.getItem('userdata')).viewProfileId,
+	    viewRideId: JSON.parse(localStorage.getItem('userdata')).viewRideId
+	}));
 		
-		var postData = {
-			'carpicurl' : carpicurl,
-			'carmodel' : carmodeltext,
-			'loginID' : loginID,
-			'carcolor' : carcolortext,
-			'caryear' : caryeartext,
-			'carseats' : carseatstext,
-			'cardescription' : cardescriptiontext,
-			'carlicenseplate' : carlicenseplatetext
-		}	
-				
-		$.ajax({
-			type: "GET",
-			url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/changeCar.php",
-			data: postData,
-			dataType: "jsonp",
-			success:	function() {
-							//alert(postResult);
-							window.location.href="car.html"
-						},
-		});
+	var postData = {
+		'carpicurl' : carpicurl,
+		'carmodel' : carmodeltext,
+		'loginID' : loginID,
+		'carcolor' : carcolortext,
+		'caryear' : caryeartext,
+		'carseats' : carseatstext,
+		'cardescription' : cardescriptiontext,
+		'carlicenseplate' : carlicenseplatetext
+	}			
+	$.ajax({
+		type: "GET",
+		url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/changeCar.php",
+		data: postData,
+		dataType: "jsonp",
+		success:	function() {
+						//alert(postResult);
+						window.location.href="car.html"
+					},
+	});
+		
 }
 
 //Add new Car if you dont already have one--> send to DB
@@ -243,45 +262,55 @@ function postCarAddition() {
 	var cardescriptiontext  = $('#cardescriptionInputAdd').val();
 	var loginID = JSON.parse(localStorage.getItem('userdata')).id;
 	//Overwriting Specific Data in Localstorage
+	if(isEmpty(carmodeltext)) {
+		alert("Geben Sie den Modell Namen des Autos an!");	
+		return;
+	}
+	if(isEmpty(carseatstext)) {
+		alert("Geben Sie bitte die Anzahl der Sitze an!");	
+		return;
+	}
 	localStorage.setItem("userdata", JSON.stringify({
-								id: JSON.parse(localStorage.getItem('userdata')).id, 
-								name: JSON.parse(localStorage.getItem('userdata')).name, 
-								email: JSON.parse(localStorage.getItem('userdata')).email, 
-								tel: JSON.parse(localStorage.getItem('userdata')).tel, 
-								picid: JSON.parse(localStorage.getItem('userdata')).picid, 
-								carid: JSON.parse(localStorage.getItem('userdata')).id,
-								descriptionUser: JSON.parse(localStorage.getItem('userdata')).descriptionUser,
-								fb_id: JSON.parse(localStorage.getItem('userdata')).fb_id,
-								modelName: carmodeltext,
-								licensePlate: carlicenseplatetext,
-								seats: carseatstext,
-								constructionYear: caryeartext,
-								descriptionCar: cardescriptiontext,
-								colourCar: carcolortext,
-								carPicID: carpicurladd,
-								viewProfileId: JSON.parse(localStorage.getItem('userdata')).viewProfileId,
-							    viewRideId: JSON.parse(localStorage.getItem('userdata')).viewRideId}));
+		id: JSON.parse(localStorage.getItem('userdata')).id, 
+		name: JSON.parse(localStorage.getItem('userdata')).name, 
+		email: JSON.parse(localStorage.getItem('userdata')).email, 
+		tel: JSON.parse(localStorage.getItem('userdata')).tel, 
+		picid: JSON.parse(localStorage.getItem('userdata')).picid, 
+		carid: JSON.parse(localStorage.getItem('userdata')).id,
+		descriptionUser: JSON.parse(localStorage.getItem('userdata')).descriptionUser,
+		fb_id: JSON.parse(localStorage.getItem('userdata')).fb_id,
+		modelName: carmodeltext,
+		licensePlate: carlicenseplatetext,
+		seats: carseatstext,
+		constructionYear: caryeartext,
+		descriptionCar: cardescriptiontext,
+		colourCar: carcolortext,
+		carPicID: carpicurladd,
+		viewProfileId: JSON.parse(localStorage.getItem('userdata')).viewProfileId,
+	    viewRideId: JSON.parse(localStorage.getItem('userdata')).viewRideId
+	}));
 		
-		var postData = {
-			'carpicurladd' : carpicurladd,
-			'carmodel' : carmodeltext,
-			'loginID' : loginID,
-			'carcolor' : carcolortext,
-			'caryear' : caryeartext,
-			'carseats' : carseatstext,
-			'cardescription' : cardescriptiontext,
-			'carlicenseplate' : carlicenseplatetext
-		}			
-		$.ajax({
-			type: "GET",
-			url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/addCar.php",
-			data: postData,
-			dataType: "jsonp",
-			success:	function() {
-							//alert(postResult);
-							window.location.href="car.html"
-						},
-		});
+	var postData = {
+		'carpicurladd' : carpicurladd,
+		'carmodel' : carmodeltext,
+		'loginID' : loginID,
+		'carcolor' : carcolortext,
+		'caryear' : caryeartext,
+		'carseats' : carseatstext,
+		'cardescription' : cardescriptiontext,
+		'carlicenseplate' : carlicenseplatetext
+	}
+
+	$.ajax({
+		type: "GET",
+		url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/addCar.php",
+		data: postData,
+		dataType: "jsonp",
+		success:	function() {
+						//alert(postResult);
+						window.location.href="car.html"
+					},
+	});
 	
 }
 
@@ -373,7 +402,7 @@ function timeDifference(date1,date2) {
         	return "vor "+secondsDifference + " Sekunden";
         }
     	var answer = 'vor ' + daysDifference + ' Tagen ' + hoursDifference + ' Stunden ' + minutesDifference + ' Minuten ' + secondsDifference + ' Sekunden ';
-    return answer;
+    	return answer;
      }
 
 //Load the Entries on the Wall and combine them with the correct Comments!
@@ -392,116 +421,116 @@ function lookintoWall(myCommentEntries){
 		}
 
 
-									$.ajax({
-										type: "GET",
-										url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/wall.php",
-										data: viewProfileData,
-										dataType: "jsonp",			
-										success:	function(wallentries) {	
+		$.ajax({
+			type: "GET",
+			url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/wall.php",
+			data: viewProfileData,
+			dataType: "jsonp",			
+			success:	function(wallentries) {	
 
-											var i = 0;
-											myWallEntries=wallentries;
-											var j = 0;
-											var cIDs = [];
-											var wIDs = [];
-											for (;myWallEntries[j];) {		        // Create the list item:
-											        var date = (myWallEntries[j].Timestamp).substring(0,11);	
-											        var date1=new Date().getTime()- (new Date().getTimezoneOffset() * 60000);										       
-													var dateb2= myWallEntries[j].Timestamp;
-													var date2 = new Date(dateb2.replace(' ', 'T')).getTime();
-											     
-											       $("#ulWallHeader").append(
-											      	$("<li data-role='list-divider' style='font-size:1.1em'  onClick='openProfilByID("+myWallEntries[j].SenderID+");'>").append(			//+"."+date.substring(0,4)	      		
-											       	 myWallEntries[j].name+"<span class='ui-li-count'>"+date.substring(8,10)+"."+date.substring(5,7)+" - "+(myWallEntries[j].Timestamp).substring(11,16)+"</span>" //myWallEntries.length+
+				var i = 0;
+				myWallEntries=wallentries;
+				var j = 0;
+				var cIDs = [];
+				var wIDs = [];
+				for (;myWallEntries[j];) {		        // Create the list item:
+				        var date = (myWallEntries[j].Timestamp).substring(0,11);	
+				        var date1=new Date().getTime()- (new Date().getTimezoneOffset() * 60000);										       
+						var dateb2= myWallEntries[j].Timestamp;
+						var date2 = new Date(dateb2.replace(' ', 'T')).getTime();
+				     
+				       $("#ulWallHeader").append(
+				      	$("<li data-role='list-divider' style='font-size:1.1em'  onClick='openProfilByID("+myWallEntries[j].SenderID+");'>").append(			//+"."+date.substring(0,4)	      		
+				       	 myWallEntries[j].name+"<span class='ui-li-count'>"+date.substring(8,10)+"."+date.substring(5,7)+" - "+(myWallEntries[j].Timestamp).substring(11,16)+"</span>" //myWallEntries.length+
+				       )).listview("refresh");
+
+				       var wImgSrc="";
+				       if(myWallEntries[j].picID.length>5){
+				       	wImgSrc=myWallEntries[j].picID;//"http://newtroy.integra-technologies.co.uk/static/images/unknown_user.png" 
+				   		}else{
+				   			wImgSrc="http://newtroy.integra-technologies.co.uk/static/images/unknown_user.png"; 	
+				   		}
+
+				       $("#ulWallHeader").append(
+				       	$("<li style='min-height:66px'>").append(
+					       	"<div class='commentPicFrameWall'>"+
+					       		"<img id='wPic"+myWallEntries[j].ID+"' class='wallpic' src='"+wImgSrc+"' onClick='openProfilByID("+myWallEntries[j].SenderID+");'></img>"+
+					       	"</div>"+
+					       	"<div id='wTimeDiv"+myWallEntries[j].ID+"' style='position: absolute; margin-left:90px; margin-top:4px'>"+
+					       		"<label class='timeGone'>"+timeDifference(date1,date2)+"</label>"+
+					       	"</div>"+
+							"<div id='wTextDiv"+myWallEntries[j].ID+"' style='margin-top:75px' align='justify'>"+
+																																		       		
+					       	 		"<label style='white-space:normal'>" + 
+					       	 			myWallEntries[j].Textinput + 												       	 			
+					       	 		"</label>"+	
+					       	 		"<a href='#popupComment' data-rel='popup' data-position-to='window' class='ui-btn ui-corner-all btn-only-icon fa fa-comment' data-transition='pop' style='Color:white; Background-Color:#6d88b7; text-shadow: none; position: absolute; margin-right:6px; right:8px; top: 2px;' onClick='openCommentInput("+myWallEntries[j].ID+");'>"+	
+					       	 		 ""+//"ID:"+myWallEntries[j].ID+
+					       	 		"</a>"+		
+					       	 											       		
+					       	"</div>"
+
+				       	)).listview("refresh");
+
+
+						wIDs.push(myWallEntries[j].ID);// for a later realign of the text components acording to the picture size
+			
+							i=0;	
+							
+				       		for (;myCommentEntries[i];) {	
+				       				if(myWallEntries[j].ID == myCommentEntries[i].WallID){
+				       					var cdate = (myCommentEntries[i].Timestamp).substring(0,11);
+				       					var cdate1=new Date().getTime() - (new Date().getTimezoneOffset() * 60000);												       
+										var cdateb2= myCommentEntries[i].Timestamp;
+										var cdate2 = new Date(cdateb2.replace(' ', 'T')).getTime();
+
+				       						var cImgSrc="";
+									       if(myCommentEntries[i].picID.length>5){
+									       	cImgSrc=myCommentEntries[i].picID;//"http://newtroy.integra-technologies.co.uk/static/images/unknown_user.png" 
+									   		}else{
+									   		cImgSrc="http://newtroy.integra-technologies.co.uk/static/images/unknown_user.png"; 	
+									   		}
+
+				       						$("#ulWallHeader").append(
+										       	$("<li style='border-color: #D8D8D8 ; border-left:0px; border-right:0px; background-color:#E8E8E8 ; min-height:94px; margin-left:30px'>").append(
+										       		"<div class='commentPicFrameWall' style='margin-top:30px;'>"+
+										       			"<img id='cPic"+myCommentEntries[i].ID+"' class='wallpic' src='"+cImgSrc+"'  onClick='openProfilByID("+myCommentEntries[i].SenderID+");'></img>"+
+										       		"</div>"+
+										       		"<h2 style='position: absolute; left:7; top:0;' onClick='openProfilByID("+myCommentEntries[i].SenderID+");'>"+ myCommentEntries[i].name+"</h2>"+
+										       		"<div id='cTimeDiv"+myCommentEntries[i].ID+"' style='position: absolute; margin-left:90px; margin-top:24px;'>"+
+					       								"<label class='timeGone'>"+timeDifference(cdate1,cdate2)+"</label>"+
+					       							"</div>"+
+											       	"<div id='cTextDiv"+myCommentEntries[i].ID+"' style='margin-top:105px'><div align='justify'>" +	
+											       		"<label style='white-space:normal'>"+myCommentEntries[i].Textinput + "</label>"+
+											       	"</div>"+			//+"."+date2.substring(0,4)								       	
+											       	"<span class='ui-li-count commentDate'>"+ cdate.substring(8,10)+"."+cdate.substring(5,7)+" - "+(myCommentEntries[i].Timestamp).substring(11,16)+  "</span>"
+										       
 											       )).listview("refresh");
+											
 
-											       var wImgSrc="";
-											       if(myWallEntries[j].picID.length>5){
-											       	wImgSrc=myWallEntries[j].picID;//"http://newtroy.integra-technologies.co.uk/static/images/unknown_user.png" 
-											   		}else{
-											   			wImgSrc="http://newtroy.integra-technologies.co.uk/static/images/unknown_user.png"; 	
-											   		}
+											
+											cIDs.push(myCommentEntries[i].ID);// for a later realign of the text components acording to the picture size
+																				       						 
+				       				} 
+				       			  i++;
+								}
+				       j++;
+				}	
 
-											       $("#ulWallHeader").append(
-											       	$("<li style='min-height:66px'>").append(
-												       	"<div class='commentPicFrameWall'>"+
-												       		"<img id='wPic"+myWallEntries[j].ID+"' class='wallpic' src='"+wImgSrc+"' onClick='openProfilByID("+myWallEntries[j].SenderID+");'></img>"+
-												       	"</div>"+
-												       	"<div id='wTimeDiv"+myWallEntries[j].ID+"' style='position: absolute; margin-left:90px; margin-top:4px'>"+
-												       		"<label class='timeGone'>"+timeDifference(date1,date2)+"</label>"+
-												       	"</div>"+
-														"<div id='wTextDiv"+myWallEntries[j].ID+"' style='margin-top:75px' align='justify'>"+
-																																									       		
-												       	 		"<label style='white-space:normal'>" + 
-												       	 			myWallEntries[j].Textinput + 												       	 			
-												       	 		"</label>"+	
-												       	 		"<a href='#popupComment' data-rel='popup' data-position-to='window' class='ui-btn ui-corner-all btn-only-icon fa fa-comment' data-transition='pop' style='Color:white; Background-Color:#6d88b7; text-shadow: none; position: absolute; margin-right:6px; right:8px; top: 2px;' onClick='openCommentInput("+myWallEntries[j].ID+");'>"+	
-												       	 		 ""+//"ID:"+myWallEntries[j].ID+
-												       	 		"</a>"+		
-												       	 											       		
-												       	"</div>"
-
-											       	)).listview("refresh");
-
-
-													wIDs.push(myWallEntries[j].ID);// for a later realign of the text components acording to the picture size
-										
-														i=0;	
-														
-											       		for (;myCommentEntries[i];) {	
-											       				if(myWallEntries[j].ID == myCommentEntries[i].WallID){
-											       					var cdate = (myCommentEntries[i].Timestamp).substring(0,11);
-											       					var cdate1=new Date().getTime() - (new Date().getTimezoneOffset() * 60000);												       
-																	var cdateb2= myCommentEntries[i].Timestamp;
-																	var cdate2 = new Date(cdateb2.replace(' ', 'T')).getTime();
-
-											       						var cImgSrc="";
-																       if(myCommentEntries[i].picID.length>5){
-																       	cImgSrc=myCommentEntries[i].picID;//"http://newtroy.integra-technologies.co.uk/static/images/unknown_user.png" 
-																   		}else{
-																   		cImgSrc="http://newtroy.integra-technologies.co.uk/static/images/unknown_user.png"; 	
-																   		}
-
-											       						$("#ulWallHeader").append(
-																	       	$("<li style='border-color: #D8D8D8 ; border-left:0px; border-right:0px; background-color:#E8E8E8 ; min-height:94px; margin-left:30px'>").append(
-																	       		"<div class='commentPicFrameWall' style='margin-top:30px;'>"+
-																	       			"<img id='cPic"+myCommentEntries[i].ID+"' class='wallpic' src='"+cImgSrc+"'  onClick='openProfilByID("+myCommentEntries[i].SenderID+");'></img>"+
-																	       		"</div>"+
-																	       		"<h2 style='position: absolute; left:7; top:0;' onClick='openProfilByID("+myCommentEntries[i].SenderID+");'>"+ myCommentEntries[i].name+"</h2>"+
-																	       		"<div id='cTimeDiv"+myCommentEntries[i].ID+"' style='position: absolute; margin-left:90px; margin-top:24px;'>"+
-												       								"<label class='timeGone'>"+timeDifference(cdate1,cdate2)+"</label>"+
-												       							"</div>"+
-																		       	"<div id='cTextDiv"+myCommentEntries[i].ID+"' style='margin-top:105px'><div align='justify'>" +	
-																		       		"<label style='white-space:normal'>"+myCommentEntries[i].Textinput + "</label>"+
-																		       	"</div>"+			//+"."+date2.substring(0,4)								       	
-																		       	"<span class='ui-li-count commentDate'>"+ cdate.substring(8,10)+"."+cdate.substring(5,7)+" - "+(myCommentEntries[i].Timestamp).substring(11,16)+  "</span>"
-																	       
-																		       )).listview("refresh");
-																		
-
-																		
-																		cIDs.push(myCommentEntries[i].ID);// for a later realign of the text components acording to the picture size
-																											       						 
-											       				} 
-											       			  i++;
-															}
-											       j++;
-											}	
-
-											//alert(cIDs)	
-											//alert(wIDs)
-											var x=0;															
-											for (;cIDs[x];) {
-												realignComments(cIDs[x]);
-												x++;
-											}
-											var y=0;															
-											for (;wIDs[y];) {
-												realignEntries(wIDs[y]);
-												y++;
-											}
-										},
-									});	
+				//alert(cIDs)	
+				//alert(wIDs)
+				var x=0;															
+				for (;cIDs[x];) {
+					realignComments(cIDs[x]);
+					x++;
+				}
+				var y=0;															
+				for (;wIDs[y];) {
+					realignEntries(wIDs[y]);
+					y++;
+				}
+			},
+		});	
 
  									
 	}
@@ -540,79 +569,89 @@ function lookintoWall(myCommentEntries){
 
 		//check if its my own profil i want to visit
 		if(userLoggedInDataloginID==viewProfileID){
-			//if it is my own profil than load from localstorage
+			//if it is my own profil than load from localstorage			
+			var emailDB = JSON.parse(localStorage.getItem('userdata')).email;
+			if(isEmpty(emailDB)){emailDB="/";}
+			var telnumberDB = JSON.parse(localStorage.getItem('userdata')).tel;
+			if(isEmpty(telnumberDB)){telnumberDB="/";}
+			var carnameDB = JSON.parse(localStorage.getItem('userdata')).modelName;
+			if(isEmpty(carnameDB)){carnameDB="AUTO ANLEGEN";document.getElementById("carLink").href = "carAddNew.html";}
+			var descriptiontextDB = JSON.parse(localStorage.getItem('userdata')).descriptionUser;
+			if(isEmpty(descriptiontextDB)){descriptiontextDB="/";}
+
 			var myDiv1 = document.getElementById("namefield");
-	        myDiv1.innerHTML = JSON.parse(localStorage.getItem('userdata')).name;	       				   
-	        var myDiv2 = document.getElementById("emailfield");
-	        myDiv2.innerHTML = JSON.parse(localStorage.getItem('userdata')).email;	       				    
-	        var myDiv3 = document.getElementById("telfield");
-	        myDiv3.innerHTML = JSON.parse(localStorage.getItem('userdata')).tel;	       				    
-	        var myDiv4 = document.getElementById("carfield");
-	        myDiv4.innerHTML = JSON.parse(localStorage.getItem('userdata')).modelName;
+		 	myDiv1.innerHTML = JSON.parse(localStorage.getItem('userdata')).name;	       				   
+			var myDiv2 = document.getElementById("emailfield");
+			myDiv2.innerHTML = emailDB;							        
+			var myDiv3 = document.getElementById("telfield");							        							    	
+			myDiv3.innerHTML = telnumberDB;
+			var myDiv4 = document.getElementById("carfield");
+			myDiv4.innerHTML = carnameDB;	
+			var myDiv5 = document.getElementById("userdescription");							       
+			myDiv5.innerHTML = "<h3>Beschreibung</h3>" + descriptiontextDB;								       	
+
 			if(JSON.parse(localStorage.getItem('userdata')).picid.length>5){
 				document.getElementById("profile_picture").src=JSON.parse(localStorage.getItem('userdata')).picid;
 			}
-	        if(isEmpty(JSON.parse(localStorage.getItem('userdata')).modelName)==true){
-	        	//alert("Sie haben bisher noch kein Auto angelegt!")
-	        	 myDiv4.innerHTML = "AUTO ANLEGEN";
-	        	 document.getElementById("carLink").href = "carAddNew.html";
-	        }
-	        var myDiv5 = document.getElementById("userdescription");
-	        myDiv5.innerHTML = "<h3>Beschreibung</h3>" + JSON.parse(localStorage.getItem('userdata')).descriptionUser;
+
 	        document.getElementById("profilTitle").innerHTML="Mein Profil"
+
 	    }else{
 	    	//if it is not my own Profil, then load the Profildata like name from db etc.
 	    	remove("editButton");	    	
 	    	$.ajax({
-							type: "GET",
-							url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/viewProfile.php",
-							data: viewProfileData,
-							dataType: "jsonp",			
-							success:	function(viewProfileResult) {									
-									var myDiv1 = document.getElementById("namefield");
-							        myDiv1.innerHTML = viewProfileResult.name;	       				   
-							        var myDiv2 = document.getElementById("emailfield");
-							        myDiv2.innerHTML = viewProfileResult.email;	      				    
-							        var myDiv3 = document.getElementById("telfield");
-							        myDiv3.innerHTML = viewProfileResult.tel;		       				    
-							       
-							        var carname=viewProfileResult.modelName;
-							        if(isEmpty(carname)){
-								        var myDiv4 = document.getElementById("carfield");
-								        myDiv4.innerHTML = "Kein Auto angegeben.";	
-							    	}else{
-							    		var myDiv4 = document.getElementById("carfield");
-								        myDiv4.innerHTML = viewProfileResult.modelName;	
-							    	}
-							        var myDiv5 = document.getElementById("userdescription");
-							        myDiv5.innerHTML = "<h3>Beschreibung</h3>" + viewProfileResult.descriptionUser;	
+				type: "GET",
+				url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/viewProfile.php",
+				data: viewProfileData,
+				dataType: "jsonp",			
+				success:	function(viewProfileResult) {	
+						
+						var emailDB=viewProfileResult.email;
+						if(isEmpty(emailDB)){emailDB="/";}
+						var telnumberDB = viewProfileResult.tel;
+						if(isEmpty(telnumberDB)){telnumberDB="/";}
+						var carnameDB=viewProfileResult.modelName;
+						if(isEmpty(carnameDB)){carnameDB="Kein Auto angegeben.";}
+						var descriptiontextDB = viewProfileResult.descriptionUser;
+						if(isEmpty(descriptiontextDB)){descriptiontextDB="/";}
 
-							        if(viewProfileResult.picID.length>5){
-							        	document.getElementById("profile_picture").src=viewProfileResult.picID;
-							    	}
-							},
-				});	
+						var myDiv1 = document.getElementById("namefield");
+				        myDiv1.innerHTML = viewProfileResult.name;	       				   
+				        var myDiv2 = document.getElementById("emailfield");
+				        myDiv2.innerHTML = emailDB;							        
+				        var myDiv3 = document.getElementById("telfield");							        							    	
+				        myDiv3.innerHTML = telnumberDB;
+				        var myDiv4 = document.getElementById("carfield");
+				       	myDiv4.innerHTML = carnameDB;	
+				        var myDiv5 = document.getElementById("userdescription");							       
+				        myDiv5.innerHTML = "<h3>Beschreibung</h3>" + descriptiontextDB;								       	
+
+				        if(viewProfileResult.picID.length>5){
+				        	document.getElementById("profile_picture").src=viewProfileResult.picID;
+				    	}
+				},
+			});	
 	    }
 
  		//////////////////////////////CONNECT TO DB TO GET THE WALL / "PINNWAND EINTRAEGE"////////////////////////
 		var myWallEntries;
 		var myCommentEntries;				
-				$.ajax({
-							type: "GET",
-							url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/comments.php",
-							data: viewProfileData,
-							dataType: "jsonp",			
-							success:	function(commententries) {									
-									myCommentEntries=commententries;
-									lookintoWall(myCommentEntries);
-									
-							},
-							error:	function() {					
-									myCommentEntries={'ID':0, 'WallID':0, 'ReceiverID':0, 'SenderID':0, 'Textinput':0, 'Timestamp':0, 'name':0} //give empty commentlist into function to avoid errors
-									lookintoWall(myCommentEntries);
-									
-							},
-				});	
+			$.ajax({
+				type: "GET",
+				url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/comments.php",
+				data: viewProfileData,
+				dataType: "jsonp",			
+				success:	function(commententries) {									
+						myCommentEntries=commententries;
+						lookintoWall(myCommentEntries);
+						
+				},
+				error:	function() {					
+						myCommentEntries={'ID':0, 'WallID':0, 'ReceiverID':0, 'SenderID':0, 'Textinput':0, 'Timestamp':0, 'name':0} //give empty commentlist into function to avoid errors
+						lookintoWall(myCommentEntries);
+						
+				},
+			});	
 							
 		///////////////////////////////////////////ON_CLICK EVENTS - Resize the Profilpicture///////////////////////////////////////////////
 		$("#profile_picture").on("click", function(e1) {
@@ -711,7 +750,7 @@ $(document).on('pageinit', '#car', function() {
 				var myDiv4 = document.getElementById("carseats");
 				myDiv4.innerHTML = "/";	
 				var myDiv5= document.getElementById("carnamefield");
-				myDiv5.innerHTML = "/";	
+				myDiv5.innerHTML = JSON.parse(localStorage.getItem('userdata')).name;
 				var myDiv6 = document.getElementById("cardescription");
 				myDiv6.innerHTML = "<h3>Beschreibung</h3>" + "/";	
 		    }else{
@@ -741,42 +780,52 @@ $(document).on('pageinit', '#car', function() {
 							url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/viewProfile.php",
 							data: viewProfileData,
 							dataType: "jsonp",			
-							success:	function(viewProfileResult) {
-									var carname = viewProfileResult.modelName
-									if(isEmpty(carname)){	
-										var myDiv1 = document.getElementById("carmodelfield");
-		     						    myDiv1.innerHTML = "Kein Auto angegeben.";
-		     						    var myDiv2 = document.getElementById("caryearfield");
-								        myDiv2.innerHTML = "/";	
-								        var myDiv3 = document.getElementById("carlicenseplate");
-								        myDiv3.innerHTML = "/";	
-								        var myDiv4 = document.getElementById("carseats");
-								        myDiv4.innerHTML = "/";	
-								        var myDiv5= document.getElementById("carnamefield");
-								        myDiv5.innerHTML = "/";	
-								        var myDiv6 = document.getElementById("cardescription");
-								        myDiv6.innerHTML = "<h3>Beschreibung</h3>" + "/";		
-	    							}else{								
-								        var myDiv1 = document.getElementById("carmodelfield");
-								        myDiv1.innerHTML = viewProfileResult.modelName  +  " ("+viewProfileResult.colourCar+")";	
-								        var myDiv2 = document.getElementById("caryearfield");
-								        myDiv2.innerHTML = "Baujahr " + viewProfileResult.constructionYear;	
-								        var myDiv3 = document.getElementById("carlicenseplate");
-								        myDiv3.innerHTML = viewProfileResult.licensePlate;	
-								        var myDiv4 = document.getElementById("carseats");
-								        myDiv4.innerHTML = viewProfileResult.seats;	 + " Sitze";
-								        var myDiv5= document.getElementById("carnamefield");
-								        myDiv5.innerHTML = viewProfileResult.name;	
-								        var myDiv6 = document.getElementById("cardescription");
-								        myDiv6.innerHTML = "<h3>Beschreibung</h3>" + viewProfileResult.descriptionCar;	
+							success:	function(viewProfileResult) {									
+									
+									var carmodelDB = viewProfileResult.modelName;
+									if(isEmpty(carmodelDB)){
+										carmodelDB = "Kein Auto angegeben.";					
+									}else{
+										carmodelDB = carmodelDB +  " ("+viewProfileResult.colourCar+")";	 
+									}
+									var caryearDB = viewProfileResult.constructionYear;
+									if(isEmpty(caryearDB)){
+										caryearDB = "/";					
+									}else{
+										caryearDB = "Baujahr " + caryearDB;
+									}
+									var carlicenseDB = viewProfileResult.licensePlate;
+									if(isEmpty(carlicenseDB)){
+										carlicenseDB = "/";					
+									}
+									var carseatsDB = viewProfileResult.seats;
+									if(isEmpty(carseatsDB)){
+										carseatsDB = "/";					
+									}
+									var carnamefieldDB = viewProfileResult.name;
+									if(isEmpty(carnamefieldDB)){
+										carnamefieldDB = "/";					
+									}
+									var cardescriptionDB = viewProfileResult.descriptionCar;
+									if(isEmpty(cardescriptionDB)){
+										cardescriptionDB = "/";					
+									}															
+								    var myDiv1 = document.getElementById("carmodelfield");
+								    myDiv1.innerHTML = carmodelDB;	
+								    var myDiv2 = document.getElementById("caryearfield");
+								    myDiv2.innerHTML = caryearDB;	
+								    var myDiv3 = document.getElementById("carlicenseplate");
+								    myDiv3.innerHTML = carlicenseDB;	
+								    var myDiv4 = document.getElementById("carseats");
+								    myDiv4.innerHTML = carseatsDB;	 + " Sitze";
+								    var myDiv5= document.getElementById("carnamefield");
+								    myDiv5.innerHTML = carnamefieldDB;	
+								    var myDiv6 = document.getElementById("cardescription");
+								    myDiv6.innerHTML = "<h3>Beschreibung</h3>" + cardescriptionDB;	
 
-										if(viewProfileResult.carPicID.length>5){
-								        	document.getElementById("car_picture").src=viewProfileResult.carPicID;
-								    	}
-							    	
-							    	
-	    								
-	    						}
+									if(viewProfileResult.carPicID.length>5){
+								       	document.getElementById("car_picture").src=viewProfileResult.carPicID;
+								    }	
 
 							},
 				});	
