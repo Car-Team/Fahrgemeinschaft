@@ -41,7 +41,7 @@ function deleteAccount(){
 	//Anfrage an Datenbank ob das Passwort zu dem Account gehört
 	$.ajax({
 		type: "GET",
-		url: "php/options.php",
+		url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/options.php",
 		data: data,
 		dataType: "jsonp",
 		success: function(result) {

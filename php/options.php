@@ -20,14 +20,14 @@ if(!$db)
 }
 if($fb_id = "") {
 	$pwCheck = "SELECT * FROM Users WHERE ID = '$id' AND LoginPW = '$pw'";
-	$result = mysqli_query($db, $sqlQuery);
+	$result = mysqli_query($db, $pwCheck);
 	$rows = $result->num_rows;
 	$successful = ($rows == 1);
 }else {
 	$successful = true;
 }
 if($successful){
-	$sqlQuery = "UPDATE Users SET Email="", LoginPW ="",  Name ="Gelöschter Benutzer", Email = "", Tel = "", PicID = "0", Description="", CarID = "", FBID = ""  Where ID='$id'";
+	$sqlQuery = "UPDATE Users SET Email='', LoginPW ='',  Name ='Gelöschter Benutzer', Email = '', Tel = '', PicID = '0', Description='', CarID = '', FBID = ''  Where ID='$id'";
 
 	mysqli_query($db, $sqlQuery);
 
