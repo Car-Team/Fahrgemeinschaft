@@ -1,10 +1,10 @@
 $(document).ready(function() {
   
   //Internetverbindung überprüfen
-  var online = navigator.onLine;
-  if(online == false) {
-    alert("Bitte aktivieren Sie ihre Internetanbindung.");
-  }
+  //var online = window.navigator.onLine;
+  //if(online == false) {
+  //  checkConnection(); 
+  //}
 
   // SDK asynchron laden
   (function(d, s, id) {
@@ -25,6 +25,23 @@ $(document).ready(function() {
     });
   };
 });
+
+//Netzwerkverbindung überprüfen
+function checkConnection() {
+    var networkState = navigator.connection.type;
+
+    var states = {};
+    states[Connection.UNKNOWN]  = 'Unknown connection';
+    states[Connection.ETHERNET] = 'Ethernet connection';
+    states[Connection.WIFI]     = 'WiFi connection';
+    states[Connection.CELL_2G]  = 'Cell 2G connection';
+    states[Connection.CELL_3G]  = 'Cell 3G connection';
+    states[Connection.CELL_4G]  = 'Cell 4G connection';
+    states[Connection.CELL]     = 'Cell generic connection';
+    states[Connection.NONE]     = 'No network connection';
+
+    alert('Connection type: ' + states[networkState]);
+}
 
 //Facebook Login
 function fblogin() { 
@@ -96,7 +113,8 @@ function checkFB_ID(fbResponse){
 
               console.log("FBID ist in Datenbank enthalten und Benutzerdaten sind geladen!");
               console.log(localStorage);
-              $.mobile.changePage("menu.html");
+              window.location.href="menu.html";
+              //$.mobile.changePage("menu.html");
             }else {
               console.log("FBID ist nicht vorhanden und Account wird angelegt!");
               signUpWithFacebook(fbResponse);
@@ -123,8 +141,9 @@ function signUpWithFacebook(fbResponse) {
     dataType: "jsonp",
     success:  function(signupResult) {
                 alert(signupResult.message);
-                if(signupResult.successful) {                  
-                  $.mobile.changePage("emailRequest.html");
+                if(signupResult.successful) {
+                  window.location.href="emailRequest.html";                  
+                  //$.mobile.changePage("emailRequest.html");
                 }
           },
     });
@@ -139,14 +158,17 @@ function logout() {
   
   //check if fb_acc 
   if(fbUserId == "" || fbUserId == null) {
-    $.mobile.changePage("index.html");
+    window.location.href="emailRequest.html";
+    //$.mobile.changePage("index.html");
   } else {
     FB.logout(function(response) {
       console.log('Benutzer ist ausgeloggt');
-      $.mobile.changePage("index.html");
+      window.location.href="index.html";
+      //$.mobile.changePage("index.html");
     });
-  } 
-  $.mobile.changePage("index.html");
+  }
+  window.location.href="index.html";
+  //$.mobile.changePage("index.html");
     window.localStorage.clear();
     console.log('localStorage gelöscht'); 
 };
@@ -171,7 +193,8 @@ function emailRequest() {
     success:  function(signupResult) {
               if(signupResult.successful)
                 loadLocalStorage();
-                $.mobile.changePage("menu.html");
+                window.location.href="menu.html";
+                //$.mobile.changePage("menu.html");
               },
     });
   }
