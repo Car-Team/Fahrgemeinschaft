@@ -46,8 +46,8 @@ function deleteAccount(){
 		dataType: "jsonp",
 		success: function(result) {
 			if(result.successful){
-				$('#deleteAccPopup').popup("open");
 				$.mobile.changePage("index.html");
+				$('#deleteAccPopup').popup("open");
 			}
 			else {
 				$('#wrongPWPopup').popup("open");

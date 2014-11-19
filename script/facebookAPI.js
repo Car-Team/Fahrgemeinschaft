@@ -159,12 +159,12 @@ function logout() {
   } else {
     FB.logout(function(response) {
       console.log('Benutzer ist ausgeloggt');
-      $('#logoutPopup').popup("open");
       $.mobile.changePage("index.html");
+      $('#logoutPopup').popup("open");
     });
   }
-  $('#logoutPopup').popup("open");
     $.mobile.changePage("index.html");
+    $('#logoutPopup').popup("open");
     window.localStorage.clear();
     console.log('localStorage gelöscht'); 
 };
@@ -189,7 +189,6 @@ function emailRequest() {
     success:  function(signupResult) {
               if(signupResult.successful)
                 loadLocalStorage();
-                $('#registerPopup').popup("open");
                 $.mobile.changePage("menu.html");
               },
     });
