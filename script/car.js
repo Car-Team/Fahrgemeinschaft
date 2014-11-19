@@ -317,6 +317,9 @@ function postCarAddition() {
 //Post an Entry to the Profils Wall
 function postTW() {
 	var text = $('#postText').val();
+	text = text.replace("(((", "<br><br><img width=100% height=auto; src=\"");
+	text = text.replace(")))", "\">");
+	text = text.replace("'", "");
 	document.getElementById('postText').value ="";
 	var loginID = JSON.parse(localStorage.getItem('userdata')).id;	
 	var viewProfileID = JSON.parse(localStorage.getItem('userdata')).viewProfileId;	
@@ -346,6 +349,9 @@ function postTW() {
 function postCO() {
 	 //alert("kommentiere den eintrag "+window.commentIDInput);
 	var text = $('#commentTextToPost').val();
+	text = text.replace("(((", "<br><br><img width=100% height=auto; src=\"");
+	text = text.replace(")))", "\">");
+	text = text.replace("'", "");
 	document.getElementById('commentTextToPost').value ="";
 	var loginID = JSON.parse(localStorage.getItem('userdata')).id;	
 	var viewProfileID = JSON.parse(localStorage.getItem('userdata')).viewProfileId;	

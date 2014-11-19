@@ -255,6 +255,9 @@ function removeWallEntryRides(wallid){
 //Post Wallentry on Rideoverview
 function postTWRides() {
 	var text = $('#postTextRides').val();
+	text = text.replace("(((", "<br><br><img width=100% height=auto; src=\"");
+	text = text.replace(")))", "\">");
+	text = text.replace("'", "");
 	document.getElementById('postTextRides').value ="";
 	var loginID = JSON.parse(localStorage.getItem('userdata')).id;	
 	var viewRideID = JSON.parse(localStorage.getItem('userdata')).viewRideId;//JSON.parse(localStorage.getItem('userdata')).viewProfileId;
@@ -284,6 +287,9 @@ function postTWRides() {
 function postCORides() {
 	 //alert("kommentiere den eintrag "+window.commentIDInput);
 	var text = $('#commentTextToPostRides').val();
+	text = text.replace("(((", "<br><br><img width=100% height=auto; src=\"");
+	text = text.replace(")))", "\">");
+	text = text.replace("'", "");
 	document.getElementById('commentTextToPostRides').value ="";
 	var loginID = JSON.parse(localStorage.getItem('userdata')).id;	
 	var viewRideID = JSON.parse(localStorage.getItem('userdata')).viewRideId;//JSON.parse(localStorage.getItem('userdata')).viewProfileId;	
