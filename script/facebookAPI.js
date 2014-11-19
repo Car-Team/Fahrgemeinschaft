@@ -113,8 +113,7 @@ function checkFB_ID(fbResponse){
 
               console.log("FBID ist in Datenbank enthalten und Benutzerdaten sind geladen!");
               console.log(localStorage);
-              window.location.href="menu.html";
-              //$.mobile.changePage("menu.html");
+              $.mobile.changePage("menu.html");
             }else {
               console.log("FBID ist nicht vorhanden und Account wird angelegt!");
               signUpWithFacebook(fbResponse);
@@ -140,10 +139,8 @@ function signUpWithFacebook(fbResponse) {
     data: signupData,
     dataType: "jsonp",
     success:  function(signupResult) {
-                alert(signupResult.message);
-                if(signupResult.successful) {
-                  window.location.href="emailRequest.html";                  
-                  //$.mobile.changePage("emailRequest.html");
+                if(signupResult.successful) {                
+                  $.mobile.changePage("emailRequest.html");
                 }
           },
     });
@@ -158,19 +155,16 @@ function logout() {
   
   //check if fb_acc 
   if(fbUserId == "" || fbUserId == null) {
-    window.location.href="emailRequest.html";
-    //$.mobile.changePage("index.html");
+    $.mobile.changePage("index.html");
   } else {
     FB.logout(function(response) {
       console.log('Benutzer ist ausgeloggt');
       $('#logoutPopup').popup("open");
-      window.location.href="index.html";
-      //$.mobile.changePage("index.html");
+      $.mobile.changePage("index.html");
     });
   }
   $('#logoutPopup').popup("open");
-  window.location.href="index.html";
-  //$.mobile.changePage("index.html");
+    $.mobile.changePage("index.html");
     window.localStorage.clear();
     console.log('localStorage gelöscht'); 
 };
@@ -196,14 +190,12 @@ function emailRequest() {
               if(signupResult.successful)
                 loadLocalStorage();
                 $('#registerPopup').popup("open");
-                window.location.href="menu.html";
-                //$.mobile.changePage("menu.html");
+                $.mobile.changePage("menu.html");
               },
     });
   }
   else {
       $('#emailRequestPopup').popup("open");
-    //alert("Bitte geben Sie eine gültige E-Mail Adresse an.")
   }
 }
 

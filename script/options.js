@@ -12,9 +12,6 @@ var fbUserId = JSON.parse(localStorage.getItem('userdata')).fb_id;
   }
 });
 
-
-
-
 //Account des Benutzers löschen
 function deleteAccount(){
 
@@ -33,10 +30,12 @@ function deleteAccount(){
 	}
 
 	//eingegebenes Passwort überprüfen auf gleichheit
-	if(pwConfirm == '' || pw == '' || pwConfirm != pw) {
-		$('#wrongPWPopup').popup("open");
-		//alert("Die eingegebenen Passwörter sind falsch oder stimmen nicht überein!");
-		return;
+	if(fb_id == "") {
+		if(pwConfirm == '' || pw == '' || pwConfirm != pw) {
+			$('#wrongPWPopup').popup("open");
+			//alert("Die eingegebenen Passwörter sind falsch oder stimmen nicht überein!");
+			return;
+		}
 	}
 		
 	//Anfrage an Datenbank ob das Passwort zu dem Account gehört
