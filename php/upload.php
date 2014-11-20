@@ -49,6 +49,7 @@ if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg
 // Check if $uploadOk is set to 0 by an error
 if ($uploadOk == 0) {
     echo "Sorry, deine Datei wurde nicht hochgeladen.";
+}
 
 // Upload without compression
 if ($_FILES["fileToUpload"]["size"] <= 500000) {
