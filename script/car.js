@@ -644,11 +644,26 @@ function lookintoWall(myCommentEntries){
 			var myDiv5 = document.getElementById("userdescription");							       
 			myDiv5.innerHTML = "<h3>Beschreibung</h3>" + descriptiontextDB;								       	
 
-			if(JSON.parse(localStorage.getItem('userdata')).picid.length>5){
-				document.getElementById("profile_picture").src=JSON.parse(localStorage.getItem('userdata')).picid;
-			}
+			//before Picupload
+			//if(JSON.parse(localStorage.getItem('userdata')).picid.length>5){
+			//	document.getElementById("profile_picture").src=JSON.parse(localStorage.getItem('userdata')).picid;
+			//}
 
 	        document.getElementById("profilTitle").innerHTML="Mein Profil"
+
+	        //simply for a checkup if the picid is still valid after the picupload.....
+	        $.ajax({
+				type: "GET",
+				url: "http://www.carteam.lvps87-230-14-183.dedicated.hosteurope.de/viewProfile.php",
+				data: viewProfileData,
+				dataType: "jsonp",			
+				success:	function(viewProfileResult) {					       	
+
+				        if(viewProfileResult.picID.length>5){
+				        	document.getElementById("profile_picture").src=viewProfileResult.picID;
+				    	}
+				},
+			});	
 
 	    }else{
 	    	//if it is not my own Profil, then load the Profildata like name from db etc.
